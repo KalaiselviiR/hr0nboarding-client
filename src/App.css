@@ -40,3 +40,15 @@
 .read-the-docs {
   color: #888;
 }
+
+.custom-badge {
+  background-color: 
+  rgba(249, 250, 251, 1)
+  1px
+  Bottom side
+  Gray/200
+  rgba(234, 236, 240, 1)
+  Inner alignment
+   !important;
+  color: green;
+}
