@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import './App.css'
+
 import Login from './Components/Login/Login'
 import Dashboard from './Components/Dashboard/Dashboard'
 import { Navigate,Route, Routes } from "react-router-dom";
 import AddNewCandidate from './Components/AddNewCandidate/AddNewCandidate';
 import EditNewCandidate from './Components/EditNewCandidate/EditNewCandidate';
+
 
 function App() {
  
