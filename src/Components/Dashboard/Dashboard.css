@@ -1,10 +1,4 @@
-td{
-   
-    padding: 
-    12px, 24px, 12px, 24px;
-    gap: 12px;
-    
-}
+
 p{
 
     font-weight: 500;
@@ -17,7 +11,7 @@ p{
     border-radius: 8px;
     background-color: #7F56D9;
     color: white;
-    margin-left: 300%;
+    margin-left: 377%;
 }
 .btn:hover{
   font-size: 17px;
@@ -29,6 +23,18 @@ p{
 .btn-page{
     border-radius: 8px;
     margin-left: 240%;
+}
+button:hover{
+  transform: scale(1.03);
+  transition: transform 0.1s ease-in-out;
+}
+li:hover{
+  transform: scale(1.05);
+  transition: transform 0.1s ease-in-out;
+}
+.icon2:hover,.icon:hover {
+  transform: scale(1.2);
+
 }
 .violet {
     background-color: #f4eafa !important;

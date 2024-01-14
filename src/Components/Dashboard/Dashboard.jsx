@@ -21,11 +21,11 @@ function Dashboard() {
       <MDBTable style={{ boxShadow: "0 4px 4px 4px rgba(0,0,0,0.1)"}} align='middle' border={"1px"} responsive className='mt-3' >
         <MDBTableHead >
         <div className='row' >
-        <div className='col'>
-        <h5 className='text-start  mt-4 ms-5'>Team Members</h5>
+        <div className='col ms-4'>
+        <h5 className='text-start  mt-4 ' >Team Members</h5>
         </div>
         <div className='col '>
-        <button   className='btn mb-4 mt-2 '  >
+        <button   className='btn mb-4 mt-3 '  >
             Add new candidate
           </button>
           </div>
@@ -162,7 +162,7 @@ function Dashboard() {
 
             </td>
             <td>
-              <LuPen className="  icon"  />
+              <LuPen className="icon"  />
               <LuTrash2  className="icon2"  />
 
             </td>
