@@ -1,3 +1,130 @@
-.header{
-    background-color: red;
+.addMain {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 40px;
+    font-family: 'Inter', sans-serif;
+    border-radius: 16px;
+    background: #FFF;
+    box-shadow: 0px 4px 64px 0px rgba(0, 0, 0, 0.1);
+    margin: 26px 0px;
+}
+
+.addHeader p {
+    color: #464E5F;
+    font-family: Inter;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 22px;
+}
+
+.inputDiv p {
+    color: #344054;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px;
+    margin-bottom: 6px;
+}
+
+.addBody input {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    padding: 8px 12px;
+}
+
+.addBody input ::placeholder {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px;
+    color: #667085;
+}
+
+.inputDiv {
+    margin-bottom: 22px;
+}
+
+.checkBoxDiv {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.checkBoxDiv div {
+    display: flex;
+    align-items: center;
+}
+
+.checkBoxDiv p {
+    margin: 0;
+    margin-left: 4px;
+    color: #667085;
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.checkBoxDiv input {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    border: 1px solid #D0D5DD;
+    background: #FFF;
+}
+
+.submitDiv button {
+    display: flex;
+    padding: 10px 18px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    flex: 1 0 0;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #7F56D9;
+    background: #7F56D9;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    color: var(--White, #FFF);
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 24px;
+}
+
+.phoneInput {
+    display: flex;
+}
+
+.phoneInput select {
+    border-radius: 8px 0px 0px 8px;
+    border: 1px solid #D0D5DD;
+    background: #FFF;
+    box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+    padding: 10px 0px;
+    padding-left: 6px;
+    border-right: 0px;
+}
+
+/* .phoneInput select {
+    font-family: Inter;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 24px;
+    color: #101828;
+} */
+
+.phoneInput input {
+    border-radius: 0px 8px 8px 0px;
+    border-left: 0px;
 }

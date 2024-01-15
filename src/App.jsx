@@ -20,7 +20,6 @@ function App() {
 
         {/* Route for the Dashboard page */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/add" element={<AddNewCandidate />} />
         <Route path="/edit" element={<EditNewCandidate />} />
 
 
