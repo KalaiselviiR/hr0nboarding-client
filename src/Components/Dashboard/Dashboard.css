@@ -1,0 +1,101 @@
+p {
+
+  font-weight: 500;
+
+}
+
+.btn {
+  white-space: nowrap;
+  text-align: center;
+  font-size: 17px;
+  border-radius: 8px;
+  background-color: #7F56D9;
+  color: white;
+  margin-left: 377%;
+}
+
+.btn:hover {
+  font-size: 17px;
+  border-radius: 8px;
+  background-color: #7F56D9;
+  color: white;
+
+}
+
+.btn-page {
+  border-radius: 8px;
+  margin-left: 240%;
+}
+
+button:hover {
+  transform: scale(1.03);
+  transition: transform 0.1s ease-in-out;
+}
+
+li:hover {
+  transform: scale(1.05);
+  transition: transform 0.1s ease-in-out;
+}
+
+.icon2:hover,
+.icon:hover {
+  transform: scale(1.2);
+
+}
+
+.violet {
+  background-color: #f4eafa !important;
+  color: #7F56D9;
+
+}
+
+.green {
+  background-color: #e9f8ee !important;
+  color: rgb(12, 139, 12);
+}
+
+.orange {
+  background-color: rgb(250, 243, 230) !important;
+  color: orange;
+}
+
+.blue {
+  background-color: rgb(231, 231, 250) !important;
+  color: rgb(20, 85, 196);
+}
+
+.icon2 {
+  margin-left: 24px;
+}
+
+
+.addCandidateModal {
+  width: 400px;
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.blur {
+  filter: blur(5px); /* Adjust the blur intensity as needed */
+}
+
+
+
+
+
+@media(max-width: 500px) {
+  .btn {
+    margin-left: 100%;
+  }
+
+  .icon2 {
+    margin-left: 13px;
+  }
+
+  .btn-page {
+    border-radius: 8px;
+    margin-left: 260%;
+  }
+}
