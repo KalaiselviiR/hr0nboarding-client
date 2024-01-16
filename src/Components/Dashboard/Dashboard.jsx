@@ -3,24 +3,35 @@ import "./Dashboard.css"
 import { LuPen, LuTrash2 } from "react-icons/lu";
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import AddNewCandidate from '../AddNewCandidate/AddNewCandidate'
+import EditNewCandidate from '../EditNewCandidate/EditNewCandidate'
 function Dashboard() {
 
   const [allExp, SetAllexp] = useState([])
 
-  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [addModalIsOpen, setAddModalIsOpen] = useState(false)
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
-  const openModal = () => {
-    setModalIsOpen(true)
+  const openAddModal = () => {
+    setAddModalIsOpen(true)
   }
 
-  const closeModal = () => {
-    setModalIsOpen(false)
+  const closeAddModal = () => {
+    setAddModalIsOpen(false)
+  }
+
+  const openEditModal = () => {
+    setEditModalIsOpen(true)
+  }
+
+  const closeEditModal = () => {
+    setEditModalIsOpen(false)
   }
 
   useEffect(() => {
     const handleClickedOutside = (event) => {
-      if (modalIsOpen && !event.target.closest('.addCandidateModal')) {
-        closeModal()
+      if (addModalIsOpen ||editModalIsOpen && !event.target.closest('.addCandidateModal')) {
+        closeAddModal() 
+        closeEditModal()
       }
     }
 
@@ -30,7 +41,7 @@ function Dashboard() {
       document.removeEventListener('mousedown', handleClickedOutside)
     };
 
-  }, [modalIsOpen])
+  }, [addModalIsOpen,editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 4;
@@ -43,7 +54,7 @@ function Dashboard() {
   return (
     <div style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
 
-      <div className={` ${modalIsOpen ? 'blur' : ''}`} >
+      <div className={` ${addModalIsOpen || editModalIsOpen ? 'blur' : ''}`} >
         <MDBTable style={{ boxShadow: "0 4px 4px 4px rgba(0,0,0,0.1)" }} align='middle' border={"1px"} responsive className='mt-3' >
           <MDBTableHead >
             <div className='row' >
@@ -51,7 +62,7 @@ function Dashboard() {
                 <h5 className='text-start  mt-4 ' >Team Members</h5>
               </div>
               <div className='col '>
-                <button onClick={openModal} className='btn mb-4 mt-3 '  >
+                <button onClick={openAddModal} className='btn mb-4 mt-3 '  >
                   Add new candidate
                 </button>
               </div>
@@ -91,7 +102,7 @@ function Dashboard() {
 
               </td>
               <td>
-                <LuPen className="  icon" />
+                <LuPen onClick={openEditModal} className="  icon" />
                 <LuTrash2 className=" icon2" />
 
               </td>
@@ -219,9 +230,15 @@ function Dashboard() {
           </nav>
         </MDBTable>
       </div>
-      {modalIsOpen &&
+      {addModalIsOpen &&
         <div className='addCandidateModal'>
           <AddNewCandidate />
+        </div>
+      }
+
+      {editModalIsOpen &&
+        <div className="addCandidateModal">
+          <EditNewCandidate />
         </div>
       }
 
