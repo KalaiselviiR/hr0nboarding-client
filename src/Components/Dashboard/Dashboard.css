@@ -80,9 +80,12 @@ li:hover {
 .blur {
   filter: blur(5px); /* Adjust the blur intensity as needed */
 }
+.pagination{
+  display: flex;
+}
+.Center {
 
-
-
+}
 
 
 @media(max-width: 500px) {
