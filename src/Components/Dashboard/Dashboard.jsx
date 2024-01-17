@@ -29,8 +29,8 @@ function Dashboard() {
 
   useEffect(() => {
     const handleClickedOutside = (event) => {
-      if (addModalIsOpen ||editModalIsOpen && !event.target.closest('.addCandidateModal')) {
-        closeAddModal() 
+      if ((addModalIsOpen || editModalIsOpen) && !event.target.closest('.addCandidateModal')) {
+        closeAddModal()
         closeEditModal()
       }
     }
@@ -41,7 +41,7 @@ function Dashboard() {
       document.removeEventListener('mousedown', handleClickedOutside)
     };
 
-  }, [addModalIsOpen,editModalIsOpen])
+  }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 4;

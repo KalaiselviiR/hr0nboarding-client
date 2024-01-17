@@ -6,7 +6,7 @@
    
 }
 .container{
-    /* border-color: rgb(81, 81, 204); */
+  
     display : flex;
     flex-direction: column;
     margin: auto;
@@ -36,18 +36,13 @@
 }
 
 .text{
-    /* color: #3c009d; */
+    
     font-size: 100px;
     font-weight: 700;
     inline-size: auto;
 }
 
-/* .underline{
-    width: 61px;
-    height: 6px;
-    background: #3c009d;
-    border-radius: 9px;
-} */
+
 
 .inputs{
     margin-top: 100px;
@@ -72,9 +67,7 @@
     width: 400px;
     height: 100px;
     background: white;
-    /* border-radius: 50px;
-    border-color: #3c009d;
-    border-style: solid; */
+   
     background-color: white;
     font-size: 50px;
 }
@@ -99,8 +92,6 @@
     border-color: darkgray;
     border-width: 0.5px;
     gap: 5px;
-    /* border: 100px;
-    outline: black; */
     font-size: 15px;
     padding-left: 20px;
 }
