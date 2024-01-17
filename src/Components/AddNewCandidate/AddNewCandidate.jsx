@@ -1,21 +1,21 @@
+import styles from './AddNewCandidate.module.css'
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { addCandidate } from '../../service/allapi'
-import './AddNewCandidate.css'
 
 function AddNewCandidate() {
 
     //create an object to store datas from input
     const [userData, setUser] = useState({
-        fname:"",
-        lname:"",
-        email:"",
-        phno:"",
-        dsesignation:"",
-        jdate:"",
-        region:""
+        fname: "",
+        lname: "",
+        email: "",
+        phno: "",
+        dsesignation: "",
+        jdate: "",
+        region: ""
     })
     //object for useNavigate
     const navigate = useNavigate()
@@ -38,115 +38,137 @@ function AddNewCandidate() {
         e.preventDefault()
 
 
-            //api call
-            const response = await addCandidate(userData)
+        //api call
+        const response = await addCandidate(userData)
 
-            if (response.status == 200) {
-                toast.success(response.data.message);
-                setTimeout(() => {
-                    navigate('/dashboard')
-                }, 1500);
+        if (response.status == 200) {
+            toast.success(response.data.message);
+            setTimeout(() => {
+                navigate('/dashboard')
+            }, 1500);
 
-                //reset all states datas
-                setUser({
-                    fname:"",
-                    lname:"",
-                    email:"",
-                    phno:"",
-                    dsesignation:"",
-                    jdate:"",
-                    region:""
+            //reset all states datas
+            setUser({
+                fname: "",
+                lname: "",
+                email: "",
+                phno: "",
+                dsesignation: "",
+                jdate: "",
+                region: ""
 
-                })
+            })
 
-            } else {
-                toast.error(response.data.message)
-            }
+        } else {
+            // toast.error(response.data.message)
+        }
 
-     
+
     }
     return (
-        <div className="addMain">
-            <div className="addHeader">
-                <p> Add New Candidate</p>
-            </div>
-            <div className="addBody">
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>First Name</p>
-                    </div>
-                    <div className="input">
-                        <input name="fname" required onChange={userDetails} id='nam'
-                            type="text"
-                            placeholder='olivia'
-                        />
-                    </div>
+        <form >
+            <div className={styles.addMain}>
+                <div className={styles.addHeader}>
+                    <p> Add New Candidate</p>
                 </div>
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>Last Name</p>
+                <div className={styles.addBody}>
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>First Name</p>
+                        </div>
+                        <div className={styles.input}>
+                            <input name="fname" required onChange={userDetails} id='nam'
+                                type="text"
+                                placeholder='olivia'
+                            />
+                        </div>
                     </div>
-                    <div className="input">
-                        <input name='lname' type="text" required onChange={userDetails}
-                            placeholder='olivia'
-                        />
 
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>Last Name</p>
+                        </div>
+                        <div className={styles.input}>
+                            <input
+                                type="text"
+                                required onChange={userDetails}
+                                placeholder='olivia'
+                                name="lname"
+                            />
+
+                        </div>
                     </div>
-                </div>
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>Email</p>
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>Email</p>
+                        </div>
+                        <div className={styles.input}>
+                            <input
+                                type="email"
+                                placeholder='olivia@techjays.com'
+                                name="email"
+                                required onChange={userDetails}
+                            />
+                        </div>
                     </div>
-                    <div className="input">
-                        <input name='email' type="text" required onChange={userDetails}
-                            placeholder='olivia@techjays.com'
-                        />
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>Phone number</p>
+                        </div>
+                        <div className={styles.phoneInput}>
+                            <select className="country-code">
+                                <option value="+1">IN </option>
+                                <option value="+44">US</option>
+                            </select>
+                            <input type="text"
+                                placeholder='8845789956'
+                                name="phno"
+                                onChange={userDetails}
+                            />
+                        </div>
+                    </div >
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>Designation</p>
+                        </div>
+                        <div className={styles.input}>
+                            <input
+                                type="text"
+                                placeholder='Developer'
+                                name="designation"
+                                onChange={userDetails}
+                            />
+                        </div>
                     </div>
-                </div>
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>Phone number</p>
+
+                    <div className={styles.inputDiv}>
+                        <div className={styles.label}>
+                            <p>Date of joining</p>
+                        </div>
+                        <div className={styles.input}>
+                            <input
+                                id='date'
+                                type="date"
+                                name="jdate"
+                                onChange={userDetails}
+                            />
+
+                        </div>
+                    </div >
+                    <div className={styles.checkBoxDiv}>
+                        <div>
+                            <input name='region' type="checkbox" onChange={userDetails} />
+                        </div>
+                        <div>
+                            <p>Candidate is from outside india</p>
+                        </div>
                     </div>
-                    <div className="phoneInput">
-                        <select  class="country-code"  onChange={userDetails}>
-                           
-                        </select>
-                        <input name='phno' type="text"  onChange={userDetails}
-                            placeholder='8845789956'
-                        />
+                    <div className={styles.submitDiv}>
+                        <button onClick={handleSubmit}>Submit</button>
                     </div>
-                </div>
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>Designation</p>
-                    </div>
-                    <div className="input">
-                        <input name='dsesignation' type="text" required onChange={userDetails}
-                            placeholder='Developer'
-                        />
-                    </div>
-                </div>
-                <div className="inputDiv">
-                    <div className="label">
-                        <p>Date of joining</p>
-                    </div>
-                    <div className="input">
-                        <input name='jdate' id='date' type="date" required onChange={userDetails} />
-                    </div>
-                </div>
-                <div className="checkBoxDiv">
-                    <div>
-                        <input name='region' type="checkbox" onChange={userDetails} />
-                    </div>
-                    <div>
-                        <p>Candidate is from outside india</p>
-                    </div>
-                </div>
-                <div className="submitDiv">
-                    <button onClick={handleSubmit}>Submit</button>
-                </div>
+                </div >
             </div>
-        </div>
+        </form >
     )
 }
 
