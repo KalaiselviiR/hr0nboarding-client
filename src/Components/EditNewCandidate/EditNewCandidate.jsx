@@ -26,7 +26,6 @@ function EditNewCandidate() {
                         <input type="text"
                             placeholder='olivia'
                         />
-
                     </div>
                 </div>
                 <div className={styles.inputDiv}>
