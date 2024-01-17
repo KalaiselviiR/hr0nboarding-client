@@ -10,8 +10,15 @@
 .custom-width-datepicker {
     width: 100%;
   }
-  
-  
+ 
+  .FamilyDet{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px 10px 0px 0px;
+
+}
 
 
 
@@ -25,20 +32,14 @@
 
 .labelss{
     display: flex;
-    margin-top: 14px;
+    margin-top: 1px;
     font-size: 13px;
     color: black;
+
     line-height: 20px;
     font-weight: 500;
 }
-.FamilyDet{
-    display: flex;
-    justify-content: space-between;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px 10px 0px 0px;
 
-}
 .forms{
     display: flex;
     flex-direction: column;
@@ -52,13 +53,6 @@
     border-radius: 0px 0px 10px 10px;
 }
 
-/* body{
-    background-color: 
-    #EAECF0;
-     margin-left: 46px;
-    margin-right: 46px;
-    padding: 20px; 
-} */
 
 
 .buttonss{
@@ -89,3 +83,13 @@ body{
 }
 }
 
+
+
+.mt{
+    margin-top: -9px;
+   
+}
+.ms{
+    margin-left: -10px;
+    margin-bottom: 3px;
+}

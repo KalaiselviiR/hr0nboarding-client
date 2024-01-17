@@ -26,19 +26,23 @@ function Form2() {
   const handleChange = (e) => handleFieldChange(formik, e);
   return (
     
-    <div className='container-fluid'>
-      {/* Family details */}
-      <Container
-      className="mt-4"
-      style={{
-        background: "white",
-        borderRadius: "5px",
-        boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-        boxSizing: "border-box",
-      }}>
-      <div className='FamilyDet'>
-       
-        <h3 className='heading'>Family details</h3>
+    <div className=' margin-mobile' style={{width:"100%"}}>
+     
+    <Container
+        style={{
+          background: "white",
+         
+          marginBottom: "10px",
+          marginTop: "20px",
+         
+          width: "100%",
+          boxSizing: "border-box",
+          boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
+          borderRadius:"5px 5px 0px 0px",
+        }}
+      >
+         <div className='FamilyDet'>
+        <h3 className='heading'> Family details</h3>
         <div className='buttons'>
           <Button
             style={{ backgroundColor: '#7F56D9', border: 'none' }}
@@ -52,7 +56,19 @@ function Form2() {
           </Button>
         </div>
       </div>
-
+      </Container>
+      <Container
+      className="mt"
+      style={{
+        background: "white",
+        borderRadius: "0px 0px 5px 5px",
+        boxShadow: "0 0px 0px 2px rgba(0,0,0,0.1)",
+        boxSizing: "border-box",
+      
+       
+      }}>
+     
+     
       {/* Family details form */}
       <div >
       <Form className='forms'onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
@@ -63,7 +79,7 @@ function Form2() {
               <Form.Control
                 className='input-field'
                 type='text'
-                placeholder='oliva'
+                placeholder='olivia'
                 name='memberName'
                 onChange={handleChange}
                   onBlur={formik.handleBlur}
@@ -81,7 +97,7 @@ function Form2() {
               <Form.Control
                 className='input-field'
                 type='text'
-                placeholder='oliva'
+                placeholder='olivia'
                 name='relationship'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -158,7 +174,7 @@ function Form2() {
               <Form.Control
                 className='input-field'
                 type='email'
-                placeholder='oliva@untitledui.com'
+                placeholder='olivia@untitledui.com'
                 name='emailAddress'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -174,18 +190,21 @@ function Form2() {
       
       </div>
       </Container>
-      <br />
-
-      {/* Details of PF */}
+      {/* <br /> */}
       <Container
-      className="mt-4"
-      style={{
-        background: "white",
-        borderRadius: "5px",
-        boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-        boxSizing: "border-box",
-      }}>
-      <div className='FamilyDet'>
+        style={{
+          background: "white",
+         
+          marginBottom: "10px",
+          marginTop: "20px",
+         
+          width: "100%",
+          boxSizing: "border-box",
+          boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
+          borderRadius:"5px 5px 0px 0px",
+        }}
+      >
+         <div className='FamilyDet'>
         <h3 className='heading'>Details of PF</h3>
         <div className='buttons'>
           <Button
@@ -200,7 +219,20 @@ function Form2() {
           </Button>
         </div>
       </div>
+      </Container>
 
+      {/* Details of PF */}
+      <Container
+      className="mt"
+      style={{
+        background: "white",
+        borderRadius: "0px 0px 5px 5px",
+        boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
+        boxSizing: "border-box",
+      }}>
+        
+
+      
       {/* PF details form */}
       <div>
       <Form className='forms'>
@@ -209,7 +241,7 @@ function Form2() {
             <Form.Group controlId='epfoUan'>
               <Form.Label className='labelss'>EPFO UAN (If already allotted)</Form.Label>
               <Form.Control className='input-field' type='text'
-               placeholder='oliva' 
+               placeholder='olivia' 
                name='epfoUan'
                onChange={handleChange}
                onBlur={formik.handleBlur}
@@ -225,7 +257,7 @@ function Form2() {
             <Form.Group controlId='pfNo'>
               <Form.Label className='labelss'>PF NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-              placeholder='oliva' 
+              placeholder='olivia' 
               name='pfNo'
                onChange={handleChange}
                onBlur={formik.handleBlur}
@@ -237,10 +269,10 @@ function Form2() {
             </Form.Group>
           </Col>
           <Col xs={12} md={4}>
-            <Form.Group controlId='adharCard'>
+            <Form.Group controlId='adharCard' className='ms'>
               <Form.Label className='labelss'>AADHAR CARD NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-              placeholder='oliva' 
+              placeholder='olivia' 
               name='adharCard'
               onChange={handleChange}
               onBlur={formik.handleBlur}
@@ -256,7 +288,7 @@ function Form2() {
         <Form.Group className="mb-3" controlId="panCardNo">
                 <Form.Label className='labelss'>PAN CARD NO</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva" 
+                placeholder="olivia" 
                 name='panCard'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -268,10 +300,10 @@ function Form2() {
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="employeeName">
+        <Form.Group className="mb-3 ms-1" controlId="employeeName">
                 <Form.Label className='labelss'>Employee's name (As per Aadhar)</Form.Label>
-                <Form.Control  className='input-field' type="text"
-                 placeholder="oliva"
+                <Form.Control  className='input-field ' type="text"
+                 placeholder="olivia"
                  name='employeesName'
                  onChange={handleChange}
                  onBlur={formik.handleBlur}
@@ -284,9 +316,9 @@ function Form2() {
         </Col>
         <Col  xs={12} md={4}>
       
-      <Form.Group className="mb-3" controlId="dateOfBirthAs">
-                <Form.Label className='labelss' >Date of birth (As per the Aadhar)</Form.Label>
-                <InputGroup>
+      <Form.Group className="mb-3 " controlId="dateOfBirthAs">
+                <Form.Label className='labelss ms-1' >Date of birth (As per the Aadhar)</Form.Label>
+                <InputGroup className='ms-1'>
                   <InputGroup.Text>
                     <CiCalendar />
                   </InputGroup.Text>
@@ -307,10 +339,10 @@ function Form2() {
       </Row>
       <Row>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mb-3 " controlId="formGroupEmail">
                 <Form.Label className='labelss'>Gender</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva"
+                placeholder="olivia"
                 name='gender'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -322,10 +354,10 @@ function Form2() {
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mb-3 ms-2" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Marital status</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva" 
+                placeholder="olivia" 
                 name='maritalStatus'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -337,10 +369,10 @@ function Form2() {
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Father's name</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva" 
+                placeholder="olivia" 
                 name='fatherName'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -358,7 +390,7 @@ function Form2() {
         <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank A/C No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva"
+                placeholder="olivia"
                 name='accountNumber'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -371,10 +403,10 @@ function Form2() {
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank branch</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva" 
+                placeholder="olivia" 
                 name='branch'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -386,10 +418,10 @@ function Form2() {
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank IFSC No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="oliva" 
+                placeholder="olivia" 
                 name='ifsc'
                 onChange={handleChange}
                 onBlur={formik.handleBlur}
@@ -408,19 +440,21 @@ function Form2() {
       </Form>
       </div>
       </Container>
-      <br />
-
-      {/* Details of HROne */}
+     
       <Container
-      className="mt-4"
-      style={{
-        background: "white",
-        marginBottom: "50px",
-        borderRadius: "5px",
-        boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-        boxSizing: "border-box",
-      }}>
-      <div className='FamilyDet'>
+        style={{
+          background: "white",
+          
+          marginBottom: "10px",
+          marginTop: "20px",
+          borderRadius: "5px",
+          width: "100%",
+          boxSizing: "border-box",
+          boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
+          borderRadius:"5px 5px 0px 0px",
+        }}
+      >
+       <div className='FamilyDet'>
         <h3 className='heading'>Details of HROne</h3>
         <div className='buttons'>
           <Button
@@ -435,7 +469,33 @@ function Form2() {
           </Button>
         </div>
       </div>
-
+      </Container>
+      {/* Details of HROne */}
+      <Container
+      className="mt"
+      style={{
+        background: "white",
+        marginBottom: "50px",
+        borderRadius: "0px 0px 5px 5px",
+        boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
+        boxSizing: "border-box",
+      }}>
+      {/* <div className='FamilyDet'>
+        <h3 className='heading'>Details of HROne</h3>
+        <div className='buttons'>
+          <Button
+            style={{ backgroundColor: '#7F56D9', border: 'none' }}
+            className='buttonss'
+          >
+            <CiExport
+              className='me-2 icon'
+              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+            />
+            Export
+          </Button>
+        </div>
+      </div> */}
+     
       {/* HROne details form */}
       <div>
       <Form className='forms'>
@@ -444,7 +504,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="prefix">
             <Form.Label className='labelss'>Prefix</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="oliva" 
+             placeholder="olivia" 
              name='prefix'
              onChange={handleChange}
              onBlur={formik.handleBlur}
@@ -459,7 +519,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="firstName">
             <Form.Label className='labelss'>First name</Form.Label>
             <Form.Control className='input-field' type="text" 
-            placeholder="oliva" 
+            placeholder="olivia" 
             name='firstNamehr'
             onChange={handleChange}
             onBlur={formik.handleBlur}
@@ -474,7 +534,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="middleName">
             <Form.Label className='labelss'>Middle name</Form.Label>
             <Form.Control className='input-field' type="text" 
-            placeholder="oliva" 
+            placeholder="olivia" 
             name='middleName'
             onChange={handleChange}
             onBlur={formik.handleBlur}
@@ -492,7 +552,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="lastName">
             <Form.Label className='labelss'>Last name</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="oliva" 
+             placeholder="olivia" 
              name='lastNamehr'
              onChange={handleChange}
              onBlur={formik.handleBlur}
@@ -522,7 +582,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="nationality">
             <Form.Label className='labelss'>Nationality</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="oliva" 
+             placeholder="olivia" 
              name='nationality'
              onChange={handleChange}
              onBlur={formik.handleBlur}
@@ -540,11 +600,11 @@ function Form2() {
           <Form.Group className="mb-3" controlId="officialEmailAddress">
             <Form.Label className='labelss'>Official email address</Form.Label>
             <InputGroup>
-              <InputGroup.Text>
+              {/* <InputGroup.Text>
                 <MdOutlineMail  />
-              </InputGroup.Text>
+              </InputGroup.Text> */}
               <Form.Control className='input-field' type="email"
-               placeholder="oliva@untitledui.com" 
+               placeholder="✉️ olivia@untitleedui.com" 
                name='officialEmail'
              onChange={handleChange}
              onBlur={formik.handleBlur}
@@ -560,7 +620,7 @@ function Form2() {
           <Form.Group className="mb-3" controlId="employeeId">
             <Form.Label className='labelss'>Employee ID</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="oliva"
+             placeholder="olivia"
              name='employeeId'
              onChange={handleChange}
              onBlur={formik.handleBlur}
