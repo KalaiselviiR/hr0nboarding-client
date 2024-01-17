@@ -1,0 +1,134 @@
+.header1{
+    background: white;
+    height:100%;
+    width:100%;
+}
+.header2{
+    /* border-color: rgb(81, 81, 204); */
+    display : flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 15px;
+    background: white;
+    border-radius: 20px;
+    padding-bottom: 20px;
+    height: 450px;
+    width: 450px;
+    padding: 10px 30px;
+    border-color: rgb(106,90,205);
+    border-style: solid;
+    border-width: 1px;
+}
+.header3{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    gap: 30px;
+    width: 100%;
+    margin-top: 30px;
+    color: light black;
+}
+.subhead{
+    /* color: #3C009D; */
+    font-size: 100px;
+    font-weight: 700;
+    inline-size: auto;
+}
+/* .underline{
+    width: 61px;
+    height: 6px;
+    background: #3C009D;
+    border-radius: 9px;
+} */
+.labels{
+    margin-top: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    border-radius: 50px;
+    border-color: #5F15DF;
+    border-style: solid;
+    border-inline: thin;
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+    width: 300px;
+}
+.details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin: auto;
+    width: 400px;
+    height: 100px;
+    background: white;
+    /* border-radius: 50px;
+    border-color: #3C009D;
+    border-style: solid; */
+    background-color: white;
+    font-size: 50px;
+}
+.details img{
+    margin: 0px 5px;
+    height: 20px;
+    width: 25px;
+}
+.Logo img{
+    margin: 0px 20px;
+    height: 130px;
+    width: 230px;
+    align-items: center;
+}
+.details details{
+    height: 35px;
+    width: 500px;
+    align-items: center;
+    border-radius: 10px;
+    border-color: darkgray;
+    border-width: 0.5px;
+    gap: 5px;
+    /* border: 100px;
+    outline: black; */
+    font-size: 15px;
+    padding-left: 20px;
+}
+.forgot password{
+    align-items: end;
+    padding-left: 100px;
+}
+.forgot password span{
+    cursor: pointer;
+    gap: 100px;
+}
+.submit box {
+    display: flex;
+    gap: 100px;
+    margin: 80px 80px;
+}
+.Login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 220px;
+    height: 60px;
+    color: white;
+    background: #3C009D;
+    border-radius: 25px;
+    font-size: 19px;
+    font-weight: 700;
+    cursor: pointer;
+}
+.email{
+    text-align: left;
+    padding-left: 23px;
+    padding-bottom: -10px;
+    font-family: 'Inter', sans-serif;
+}
+.pswrd{
+    padding-bottom: -50px;
+    text-align: left;
+    padding-left: 23px;
+    padding-bottom: -10px;
+    font-family: 'Inter', sans-serif;
+}

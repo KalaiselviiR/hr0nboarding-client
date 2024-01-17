@@ -3,25 +3,20 @@ import "./Dashboard.css"
 import { LuPen, LuTrash2 } from "react-icons/lu";
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import AddNewCandidate from '../AddNewCandidate/AddNewCandidate'
-import {
-  MDBModal,
-  MDBModalDialog,
-  MDBModalContent,
-  MDBModalHeader,
-  MDBModalTitle,
-  MDBModalBody,
-  MDBModalFooter,
-} from 'mdb-react-ui-kit';
+import { Modal, Button } from 'react-bootstrap';
+
 import moment from 'moment';
 import { getallCandidates } from '../../service/allapi';
 function Dashboard() {
 
+  const [isShow, invokeModal] = useState(false);
+
+  const initModal = () => {
+    invokeModal(!isShow);
+  };
+
+
   const [allcandidate, SetAllCandidate] = useState([])
-
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const [modalIsOpen, setModalIsOpen] = useState(false)
 
@@ -75,18 +70,19 @@ function Dashboard() {
     <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
 
       <div className={` ${modalIsOpen ? 'blur' : ''}`} >
-        <MDBTable style={{ boxShadow: "0 4px 4px 4px rgba(0,0,0,0.1)" }} align='middle' border={"1px"} responsive className='mt-3' >
+      <div className=' d-flex mt-5  justify-content-between border bg-white'  >
+            
+            <h5 className='float-left  mt-4 '  style={{paddingLeft:"30px"}}>Team Members</h5>
+        
+         
+          <button onClick={openModal} id='b' className='btn mb-4 mt-4 float-right'  >
+              Add new candidate
+            </button>
+          </div>
+        <MDBTable  align='middle' border={"1px"} responsive className='mb-0' >
           <MDBTableHead >
-            <div className='row' >
-              <div className='col ms-4'>
-                <h5 className='text-start  mt-4 ' >Team Members</h5>
-              </div>
-              <div className='col '>
-                <button onClick={openModal} className='btn mb-4 mt-3 '  >
-                  Add new candidate
-                </button>
-              </div>
-            </div>
+           
+            
             <tr >
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }} scope='col' className='text-start '>Candidate</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
@@ -95,6 +91,7 @@ function Dashboard() {
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
             </tr>
+            
           </MDBTableHead>
           <MDBTableBody>
           {
@@ -125,78 +122,58 @@ function Dashboard() {
               </td>
               <td>
                 <LuPen className="  icon" />
-                <LuTrash2 className=" icon2" onClick={handleShow} />
+                <LuTrash2 className=" icon2"  onClick={initModal} />
 
               </td>
             </tr>
                 )
-                ):<p className='text-danger text-center ms-5'>No Data Present</p>
+                ):""
             }
 
 
           </MDBTableBody>
-          {/* <nav className='' style={{paddingLeft:"120%"}}  >
-    <ul className='pagination '>
-      <li className='page-item ' >
-        <a href='#' className='page-link bg-white text-dark border index'  onClick={prePage}>Prev</a>    
 
-      </li>
-      {
-        numbers.map((n, i)=>(
-          <li className={`page-item ${currentPage === n ? 'active' : ''}`}key={i}>
-            <a className='page-link bg-white border text-dark' onClick={()=>changeCpage(n)}>{n}</a>
-          </li>
+      
+        </MDBTable>
+        <nav className='border' style={{backgroundColor: " white"}} >
+            <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
 
-        ))
-      }
-        <li className='page-item'>
-        <a href='#' className='page-link bg-white text-dark border index' onClick={nextPage}>Next</a>    
+              <li className='page-item float-left ' style={{paddingLeft:'30px'}} >
+                <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
 
-      </li>
-    </ul>
-  </nav> */}
-          <nav className=' fs-5 p-4 '  >
-            <ul className='pagination' >
-
-              <li className='page-item'  >
-                <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white  text-dark border index float-left' onClick={prePage}> Previous</a>
-
-              </li>
-              {/* {
+              </li> 
+              {
                 numbers.map((n, i) => (
                  
-                  <li   className={`page-item  ${currentPage === n ? 'active' : ''}`} key={i}>
+                  <li   className={`page-item float-center ${currentPage === n ? 'active' : ''}`} key={i}>
                     <a className='page-link  border ' onClick={() => changeCpage(n)}>{n}</a>
                   </li>
                
 
                 ))
-              } */}
-              <li className='page-item btn-page '  >
-                <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark border index ' onClick={nextPage}>Next </a>
+              }
+              <li className='page-item float-right ' style={{paddingRight:'30px'}} >
+                <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index  ' onClick={nextPage}>Next </a>
 
               </li>
             </ul>
           </nav>
-        </MDBTable>
-        <MDBModal show={show} onHide={handleClose} tabIndex='-1'>
-      <MDBModalDialog>
-        <MDBModalContent>
-          <MDBModalHeader>
-            <MDBModalTitle>Delete Candidate</MDBModalTitle>
-            <MDBBtn className='btn-close' color='none' ></MDBBtn>
-          </MDBModalHeader>
-          <MDBModalBody>Are you sure you want to delete the candidate?</MDBModalBody>
+        <Modal show={isShow} onHide={initModal}>
+        <Modal.Header className="custom-modal-header" closeButton>
+          <Modal.Title>Delete Candidate</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to the delete ?</Modal.Body>
+        <Modal.Footer>
+        <Button className='btn-no' style={{ backgroundColor: '#A020F0', borderColor: '#A020F0' }} onClick={initModal}>
+            No
+          </Button>
+          <Button className='btn-yes' style={{ backgroundColor: '#A020F0', borderColor: '#A020F0' }} onClick={initModal}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
-          <MDBModalFooter>
-            <MDBBtn color='secondary' onClick={handleClose}>
-              NO
-            </MDBBtn>
-            <MDBBtn color='success' onClick={handleClose}>Yes</MDBBtn>
-          </MDBModalFooter>
-        </MDBModalContent>
-      </MDBModalDialog>
-    </MDBModal>
+
 
       </div>
       {modalIsOpen &&
