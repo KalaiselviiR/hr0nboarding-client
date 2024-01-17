@@ -9,12 +9,14 @@ p {
   text-align: center;
   font-size: 17px;
   border-radius: 8px;
-  background-color: #7F56D9;
-  color: white;
-  margin-left: 377%;
+  /* background-color: #7F56D9; */
+  /* color: white;
+  margin-right: 30px; */
+
+  
 }
 
-.btn:hover {
+#b:hover{
   font-size: 17px;
   border-radius: 8px;
   background-color: #7F56D9;
@@ -24,7 +26,7 @@ p {
 
 .btn-page {
   border-radius: 8px;
-  margin-left: 240%;
+
 }
 
 button:hover {
@@ -67,28 +69,73 @@ li:hover {
 .icon2 {
   margin-left: 24px;
 }
+.head{
+  border-bottom-style: none;
+}
 
 
 .addCandidateModal {
   width: 400px;
   position: absolute;
-  top: 70%;
+  top: 66%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .blur {
-  filter: blur(5px); /* Adjust the blur intensity as needed */
+  filter: blur(5px);
+}
+.pagination{
+  display: flex;
+}
+
+.btn-no,
+.btn-yes {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-no:hover,
+.btn-yes:hover {
+  background-color: white !important; 
+  border-color: white !important;    
+  color:#A020F0 !important;
+}
+
+.pagination > li > a:focus,
+.pagination > li > a:hover,
+.pagination > li > span:focus,
+.pagination > li > span:hover
+{
+    color: #5a5a5a;
+    background-color: #eee;
+   border: none;
+}
+
+.pagination{
+  color: black;
+  background-color: white;
+}
+
+.pagination > .active > a
+{
+    color: #7F56D9;
+    background-color: #f4eafa !Important;
+ 
+}
+
+.pagination > .active > a:hover
+{
+    background-color:#f4eafa !Important;
+    color: #7F56D9;
+}
+.page-item{
+  border: none;
 }
 
 
 
-
-
 @media(max-width: 500px) {
-  .btn {
-    margin-left: 100%;
-  }
+
 
   .icon2 {
     margin-left: 13px;
@@ -96,6 +143,6 @@ li:hover {
 
   .btn-page {
     border-radius: 8px;
-    margin-left: 260%;
+   
   }
 }

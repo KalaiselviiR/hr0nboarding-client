@@ -1,0 +1,91 @@
+.text-end{
+    background-color:rgb(207, 223, 248) ;
+    color: rgb(36, 81, 229);
+    width: fit-content;
+    border-radius: 12px;
+    padding: 5px;
+    font-size: 13px;
+}
+
+.custom-width-datepicker {
+    width: 100%;
+  }
+  
+  
+
+
+
+.error-message{
+    color: red;
+    margin-top: 10px;
+    font-size: 14px;
+   
+
+}
+
+.labelss{
+    display: flex;
+    margin-top: 14px;
+    font-size: 13px;
+    color: black;
+    line-height: 20px;
+    font-weight: 500;
+}
+.FamilyDet{
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px 10px 0px 0px;
+
+}
+.forms{
+    display: flex;
+    flex-direction: column;
+   
+    background-color:
+    #FFFFFF;
+  
+   
+    padding: 20px;
+    /* box-shadow: 1px 1px 3px 1px rgb(217, 215, 215); */
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* body{
+    background-color: 
+    #EAECF0;
+     margin-left: 46px;
+    margin-right: 46px;
+    padding: 20px; 
+} */
+
+
+.buttonss{
+   
+    background-color: 
+    #7F56D9;
+    border-color: white;
+    font-weight: 400;
+}
+.icon{
+    font-weight:bold;
+    width: 20px;
+    height: 20px;
+}
+.heading{
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+@media(max-width:750px){
+   Form  {
+        overflow: scroll;
+}
+body{
+    margin: 0;
+    padding: 0;
+}
+}
+

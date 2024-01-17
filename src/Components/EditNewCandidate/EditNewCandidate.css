@@ -1,13 +1,13 @@
 .addMain {
-    max-width: 400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     padding: 40px;
     font-family: 'Inter', sans-serif;
     border-radius: 16px;
     background: #FFF;
-    margin: auto;
     box-shadow: 0px 4px 64px 0px rgba(0, 0, 0, 0.1);
+    margin: 20px 0px;
 }
 
 .addHeader p {
@@ -17,7 +17,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 }
 
 .inputDiv p {
@@ -26,7 +26,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 20px;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .addBody input {
@@ -35,16 +35,17 @@
     border: 1px solid #D0D5DD;
     background: #FFF;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
-    padding: 8px 12px;
+    padding: 6px 10px;
 }
 
-.addBody input ::placeholder {
+.addBody input::placeholder {
+    color:  #667085;
     font-family: Inter;
     font-size: 16px;
     font-style: normal;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 24px;
-    color: #667085;
+
 }
 
 .inputDiv {
@@ -52,7 +53,7 @@
 }
 
 .checkBoxDiv {
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
 }
@@ -114,7 +115,6 @@
     padding-left: 6px;
     border-right: 0px;
 }
-
 
 
 .phoneInput input {
