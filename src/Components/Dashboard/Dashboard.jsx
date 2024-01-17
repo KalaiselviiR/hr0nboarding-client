@@ -5,7 +5,8 @@ import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-reac
 import AddNewCandidate from '../AddNewCandidate/AddNewCandidate'
 import EditNewCandidate from '../EditNewCandidate/EditNewCandidate'
 import { Modal, Button } from 'react-bootstrap';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import { getallCandidates } from '../../service/allapi';
 function Dashboard() {
@@ -83,7 +84,7 @@ function Dashboard() {
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
 
-          <button onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
+          <button style={{backgroundColor:"#7F56D9",color:"white",marginRight:"30px"}} onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
             Add new candidate
           </button>
         </div>
@@ -197,7 +198,7 @@ function Dashboard() {
         </div>
       }
 
-
+<ToastContainer autoClose={800}  position="top-center" />
 
     </div>
   )
