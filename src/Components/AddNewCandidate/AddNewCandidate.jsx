@@ -135,7 +135,7 @@ function AddNewCandidate() {
                             <input
                                 type="text"
                                 placeholder='Developer'
-                                name="designation"
+                                name="dsesignation"
                                 onChange={userDetails}
                             />
                         </div>

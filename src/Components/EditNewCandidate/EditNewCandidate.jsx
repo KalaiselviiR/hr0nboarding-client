@@ -166,6 +166,8 @@ function EditNewCandidate({UserToEdit}) {
                 </div >
 
             </div >
+            
+
         </div >
     )
 }

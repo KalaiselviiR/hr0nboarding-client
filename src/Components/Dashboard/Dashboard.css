@@ -130,9 +130,17 @@ li:hover {
   border: 1px solid 
   rgba(239, 241, 244, 1);
 }
+.na:hover{
+  color: black;
+}
+.n{
+  color: black;
+  border: 2px solid 
+  rgba(239, 241, 244, 1);
+}
 .na.active {
-  color: white;
-  background-color: red;
+  color: black;
+  background-color:  rgba(239, 241, 244, 1);
 }
 
 
