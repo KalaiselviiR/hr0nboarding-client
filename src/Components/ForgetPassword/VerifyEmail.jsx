@@ -52,16 +52,12 @@ const handleSubmit = async (e) => {
     console.log(response);
     if(response.status==200){
     
-      if(response.data.message === "login Successfull"){
+    
         toast.success(response.data.message);
       setTimeout(()=> {
         navigate('/')
       }, 1500);
        
-      }else{
-        toast.error(response.data.message);
-      }
-
     //reset all states datas
     setUser({
       email: ""

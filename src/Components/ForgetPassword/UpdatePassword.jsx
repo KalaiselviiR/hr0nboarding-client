@@ -12,8 +12,8 @@ import Logo from '../../assets/techjays.png'
 function UpdatePassword() {
          //create an object to store datas from input
   const [userData, setUser] = useState({
-    email: "",
-    psw: ""
+    psw: "",
+    cpsw: ""
 
   })
     //object for useNavigate
@@ -38,8 +38,11 @@ const handleSubmit = async (e) => {
   e.preventDefault()
   const { email } = userData
   
- if (email == "") {
-    toast.error('email requierd')
+ if (psw == "") {
+    toast.error('Password requierd')
+  }
+  else if (cpsw == "") {
+    toast.error('Confirm password requierd')
   }
 
  
@@ -50,25 +53,19 @@ const handleSubmit = async (e) => {
     const response = await Verifymail(userData)
     console.log(response);
     if(response.status==200){
-    
-      if(response.data.message === "login Successfull"){
+
         toast.success(response.data.message);
       setTimeout(()=> {
         navigate('/')
       }, 1500);
-       
-      }else{
-        toast.error(response.data.message);
-      }
 
     //reset all states datas
     setUser({
-      email: ""
-   
-    })
+        psw: "",
+        cpsw: ""
     
+    })
 
-    //redirection to home
       
     }else{
     
@@ -104,7 +101,7 @@ const handleSubmit = async (e) => {
             <Form.Label className='labelss'>Confirm Password</Form.Label>
             <InputGroup>
             
-              <Form.Control onChange={userDetails} name='psw' className='input-field' type="password" placeholder="Enter password" />
+              <Form.Control onChange={userDetails} name='cpsw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
   
