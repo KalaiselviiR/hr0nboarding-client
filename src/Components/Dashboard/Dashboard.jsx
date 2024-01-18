@@ -8,10 +8,12 @@ import { Modal, Button } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
+import Nav from 'react-bootstrap/Nav';
 import { getallCandidates } from '../../service/allapi';
 function Dashboard() {
 
   const [isShow, invokeModal] = useState(false);
+  const [UserToEdit, setUserToEdit] = useState(null);
 
   const initModal = () => {
     invokeModal(!isShow);
@@ -30,7 +32,9 @@ function Dashboard() {
   const closeAddModal = () => {
     setAddModalIsOpen(false)
   }
-  const openEditModal = () => {
+  const openEditModal = (user) => {
+    console.log(user);
+    setUserToEdit(user)
     setEditModalIsOpen(true)
   }
 
@@ -77,9 +81,17 @@ function Dashboard() {
 
   return (
     <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
-
+       <Nav className='p-4 border' variant="pills" defaultActiveKey="/home" >
+      <Nav.Item>
+        <Nav.Link className='na' href="/dashboard">All Candidates</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link className='na' eventKey="link-1">Rejected</Nav.Link>
+      </Nav.Item>
+   
+    </Nav>
       <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} >
-        <div className=' d-flex mt-5  justify-content-between border bg-white'  >
+        <div className=' d-flex   justify-content-between border bg-white'  >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
@@ -130,7 +142,7 @@ function Dashboard() {
 
                   </td>
                   <td>
-                    <LuPen onClick={openEditModal} className="  icon" />
+                    <LuPen onClick={() => openEditModal(i)} className="  icon" />
                     <LuTrash2 className=" icon2" onClick={initModal} />
 
                   </td>
@@ -155,7 +167,7 @@ function Dashboard() {
               numbers.map((n, i) => (
 
                 <li className={`page-item float-center ${currentPage === n ? 'active' : ''}`} key={i}>
-                  <a className='page-link  border ' onClick={() => changeCpage(n)}>{n}</a>
+                  <a className='page-link   ' onClick={() => changeCpage(n)}>{n}</a>
                 </li>
 
 
@@ -194,7 +206,7 @@ function Dashboard() {
 
       {editModalIsOpen &&
         <div className='addCandidateModal'>
-          <EditNewCandidate />
+          <EditNewCandidate  UserToEdit={UserToEdit} />
         </div>
       }
 

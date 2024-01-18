@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './EditNewCandidate.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -6,9 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { editCandidate, getSingleCandidate } from '../../service/allapi';
 import moment from 'moment';
 
-function EditNewCandidate() {
+function EditNewCandidate({UserToEdit}) {
         //create an object to store datas from input
-        const [userData, setUser] = useState({
+        const [editdata, setEditData] = useState({
             fname:"",
             lname:"",
             email:"",
@@ -18,7 +18,7 @@ function EditNewCandidate() {
             region:""
         })
     
-        const [editdata, setEditData] = useState({})
+        // const [editdata, setEditData] = useState({})
         //object for useNavigate
         const navigate = useNavigate()
         // a function to update userdata when user enter the input in html
@@ -30,30 +30,23 @@ function EditNewCandidate() {
             //access key to update in userData
             const key = e.target.name
             //update the data with existing data
-            setUser({ ...userData, [key]: value })
+            setEditData({ ...editdata, [key]: value })
     
         }
-        console.log(userData);
-    
-          //get details of the perticuler Candidate
-      const getoneCandidate=async()=>{
-        const {data}=await getSingleCandidate(id)
-        setEditData(data);
-    
-      }
+        console.log(editdata);
     
     
         const handleSubmit = async (e) => {
             e.preventDefault()
     
              //api call
-             const response = await editCandidate(id,userData)
+             const response = await editCandidate(editdata._id,editdata)
              // console.log(response);
              if (response.status == 200) {
                toast.success(response.data.message);
     
                     //reset all states datas
-                    setUser({
+                    setEditData({
                         fname:"",
                         lname:"",
                         email:"",
@@ -68,6 +61,17 @@ function EditNewCandidate() {
                     toast.error(response.data.message)
                 }
             }
+            useEffect(() => {
+                if(UserToEdit){
+                    setEditData(UserToEdit);
+                    
+                    
+                }else
+                {
+                    setEditData(UserToEdit)
+                }
+            },[UserToEdit])
+            // console.log(teamData);
     return (
         <div className={styles.addMain}>
             <div className={styles.addHeader}>

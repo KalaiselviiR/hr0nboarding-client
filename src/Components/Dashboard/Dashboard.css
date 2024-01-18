@@ -101,15 +101,7 @@ li:hover {
   color:#A020F0 !important;
 }
 
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover
-{
-    color: #5a5a5a;
-    background-color: #eee;
-   border: none;
-}
+
 
 .pagination{
   color: black;
@@ -128,10 +120,20 @@ li:hover {
     background-color:#f4eafa !Important;
     color: #7F56D9;
 }
-.page-item{
+.page-link{
   border: none;
+  color: black;
 }
 
+.na{
+  color: black;
+  border: 1px solid 
+  rgba(239, 241, 244, 1);
+}
+.na.active {
+  color: white;
+  background-color: red;
+}
 
 
 @media(max-width: 500px) {
