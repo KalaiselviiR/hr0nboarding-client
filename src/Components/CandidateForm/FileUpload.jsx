@@ -14,6 +14,7 @@ function FileUpload({ label }) {
    // Event handler for file input change
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
+    console.log(e.target.files)
 
       // Check if a file is selected
     if (!selectedFile) {
