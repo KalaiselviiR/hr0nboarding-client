@@ -11,19 +11,16 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { GoArrowLeft } from "react-icons/go";
-import "./candidateForm.css";
+import "../CandidateForm/CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
-import FileUpload from "./FileUpload";
-import { useFormik } from "formik";
-import {
-  handleFieldChange,
-  initialValues,
-  validationSchema,
-} from "./validation";
-import Form2 from "./Form2";
 
-const TopForm = () => {
-  //State management for document upload
+import { useFormik } from "formik";
+import RecruiterFileView from "./DocumentView";
+import BottomSection from "./bottomsection";
+
+
+
+const RecruiterForm = () => {
   const [photoFiles, setPhotoFiles] = useState([]);
   const [aadharCardFiles, setAadharCardFiles] = useState([]);
   const [educationCertificateFiles, setEducationCertificateFiles] = useState(
@@ -32,17 +29,6 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
-  //input form validation using formk and yup library
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission logic here
-      console.log(values);
-    },
-  });
-  // handle change function for validation errors
-  const handleChange = (e) => handleFieldChange(formik, e);
 
   return (
     <>
@@ -116,7 +102,7 @@ const TopForm = () => {
           boxSizing: "border-box",
         }}
       >
-        <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+        <Form>
           <Row>
             <Col
               md={12}
@@ -137,13 +123,8 @@ const TopForm = () => {
                   type="text"
                   placeholder="olivia"
                   name="firstName"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.firstName}
                 />
-                {formik.touched.firstName && formik.errors.firstName ? (
-                  <div className="text-danger">{formik.errors.firstName}</div>
-                ) : null}
+               
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -153,13 +134,9 @@ const TopForm = () => {
                   type="text"
                   placeholder="olivia"
                   name="lastName"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.lastName}
+                
                 />
-                {formik.touched.lastName && formik.errors.lastName ? (
-                  <div className="text-danger">{formik.errors.lastName}</div>
-                ) : null}
+               
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -169,13 +146,9 @@ const TopForm = () => {
                   type="email"
                   placeholder="✉️ olivia@untitleedui.com"
                   name="email"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
+                 
                 />
-                 {formik.touched.email && formik.errors.email ? (
-                  <div className="text-danger">{formik.errors.email}</div>
-                ) : null}
+                 
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -201,14 +174,9 @@ const TopForm = () => {
                   <Form.Control type="tel" 
                   placeholder="+91(555) 000-0000" 
                   name="phoneNumber"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.phoneNumber}
                 />
                 </InputGroup>
-                {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                  <div className="text-danger">{formik.errors.phoneNumber}</div>
-                ) : null}
+              
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -219,13 +187,7 @@ const TopForm = () => {
                 <Form.Control type="text" 
                 placeholder="Olivia" 
                 name="designation"
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.designation}
                 />
-                {formik.touched.designation && formik.errors.designation ? (
-                  <div className="text-danger">{formik.errors.designation}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -240,14 +202,8 @@ const TopForm = () => {
                   <Form.Control type="date" 
                   placeholder="Select date" 
                   name="dateOfJoining"
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.dateOfJoining}
                   />
                 </InputGroup>
-                {formik.touched.dateOfJoining && formik.errors.dateOfJoining ? (
-                  <div className="text-danger">{formik.errors.dateOfJoining}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -260,13 +216,7 @@ const TopForm = () => {
                   rows={4}
                   placeholder="Enter a description..."
                   name="presentAddress"
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.presentAddress}
                 />
-                {formik.touched.presentAddress && formik.errors.presentAddress ? (
-                  <div className="text-danger">{formik.errors.presentAddress}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -279,13 +229,7 @@ const TopForm = () => {
                   rows={4}
                   placeholder="Enter a description..."
                   name="permanentAddress"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.permanentAddress}
                 />
-                 {formik.touched.permanentAddress && formik.errors.permanentAddress ? (
-                  <div className="text-danger">{formik.errors.permanentAddress}</div>
-                ) : null}
               </Form.Group>
             </Col>
           </Row>
@@ -300,14 +244,8 @@ const TopForm = () => {
                   as="textarea"
                   rows={5}
                   placeholder="Enter a description..."
-                  name="aboutYourself"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.aboutYourself}
-                />
-                {formik.touched.aboutYourself && formik.errors.aboutYourself ? (
-                  <div className="text-danger">{formik.errors.aboutYourself}</div>
-                ) : null}
+                  name="aboutYourself" 
+                /> 
               </Form.Group>
             </Col>
           </Row>
@@ -321,13 +259,8 @@ const TopForm = () => {
                 <Form.Control type="text"
                  placeholder="Enter your Experience" 
                  name="experience"
-                 onChange={handleChange}
-                 onBlur={formik.handleBlur}
-                 value={formik.values.experience}
+                 
                  />
-                 {formik.touched.experience && formik.errors.experience ? (
-                  <div className="text-danger">{formik.errors.experience}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -338,14 +271,8 @@ const TopForm = () => {
                 <Form.Control
                   type="text"
                   placeholder="Enter your previous company name"
-                  name="company"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.company}
+                  name="company"   
                 />
-                {formik.touched.company && formik.errors.company ? (
-                  <div className="text-danger">{formik.errors.company}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -358,13 +285,7 @@ const TopForm = () => {
                   rows={4}
                   placeholder="Enter a description..."
                   name="enjoyment"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.enjoyment}
                 />
-                {formik.touched.enjoyment && formik.errors.enjoyment ? (
-                  <div className="text-danger">{formik.errors.enjoyment}</div>
-                ) : null}
               </Form.Group>
             </Col>
             <Col md={6} xs={12}>
@@ -377,67 +298,49 @@ const TopForm = () => {
                   rows={4}
                   placeholder="Enter a description..."
                   name="sneakpeek"
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.sneakpeek}
                 />
               </Form.Group>
-              {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
-                  <div className="text-danger">{formik.errors.sneakpeek}</div>
-                ) : null}
             </Col>
           </Row>
           <Row className="mt-4">
             <Col md={4}>
               <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
-              <FileUpload
+              <RecruiterFileView
                 label="Photo"
                 controlId="photo"
                 acceptedFiles={photoFiles}
                 setAcceptedFiles={setPhotoFiles}
               />
 
-              <FileUpload
+              <RecruiterFileView
                 label="Aadhar Card"
                 controlId="aadharCard"
                 acceptedFiles={aadharCardFiles}
                 setAcceptedFiles={setAadharCardFiles}
               />
 
-              <FileUpload
+              <RecruiterFileView
                 label="Education Certificate"
                 controlId="educationCertificate"
                 acceptedFiles={educationCertificateFiles}
                 setAcceptedFiles={setEducationCertificateFiles}
               />
 
-              <FileUpload
+              <RecruiterFileView
                 label="Relieving Letters from all your previous organizations"
                 controlId="relievingLetters"
                 acceptedFiles={relievingLettersFiles}
                 setAcceptedFiles={setRelievingLettersFiles}
               />
 
-              <FileUpload
+              <RecruiterFileView
                 label="3 Months Payslip"
                 controlId="payslip"
                 acceptedFiles={payslipFiles}
                 setAcceptedFiles={setPayslipFiles}
               />
 
-              <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "rgb(210, 164, 250)",
-                    color: "white",
-                    borderColor: "rgb(210, 164, 250)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Submit
-                </Button>
+              <div style={{ display: "flex",gap:"10px"}}>
                 <Button
                   style={{
                     height:"35px" ,
@@ -448,7 +351,34 @@ const TopForm = () => {
                     fontWeight: "500",
                   }}
                 >
-                  Save as draft
+                  Verify documents
+                </Button>
+                <Button
+                  style={{
+                    height:"35px" ,
+                    fontSize:"15px",
+                    backgroundColor: "white",
+                    color: "black",
+                    borderColor: "black",
+                    fontWeight: "500",
+                  }}
+                >
+                  Resend documents
+                </Button>
+              </div>
+              <div className="mt-5 mb-3">
+                <Button
+                style={{
+                    height:"35px" ,
+                    fontSize:"15px",
+                    backgroundColor: "rgb(236, 236, 237)",
+                    color: "rgb(147, 48, 233)",
+                    fontWeight: "500",
+                    opacity:"0.5",
+                    borderColor:"white"
+                  }}
+                >
+                    Good to go
                 </Button>
               </div>
             </Col>
@@ -457,10 +387,10 @@ const TopForm = () => {
         
       </Container>
          
-           <Form2/>
+           <BottomSection/>
            </div>
     </>
   );
 };
 
-export default TopForm;
+export default RecruiterForm;

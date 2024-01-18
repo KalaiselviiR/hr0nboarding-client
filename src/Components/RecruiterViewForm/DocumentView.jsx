@@ -1,7 +1,7 @@
 import { Button, Form, Image, ProgressBar } from "react-bootstrap";
 import React, { useRef, useState } from "react";
 
-function FileUpload({ label }) {
+function RecruiterFileView({ label }) {
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null); // New state for validation error
@@ -55,8 +55,8 @@ function FileUpload({ label }) {
         <div>
           <Button
             style={{
-              height:"35px" ,
-              fontSize:"15px",
+                height:"35px" ,
+                fontSize:"15px",
               backgroundColor: "white",
               color: "rgb(147, 48, 233)",
               borderColor: "rgb(147, 48, 233)",
@@ -123,4 +123,4 @@ function FileUpload({ label }) {
   );
 }
 
-export default FileUpload;
+export default RecruiterFileView;

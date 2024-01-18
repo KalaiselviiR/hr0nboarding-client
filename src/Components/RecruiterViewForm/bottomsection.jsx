@@ -1,29 +1,15 @@
 import React from 'react';
-import './CandidateForm.css'; // Assuming you have a custom CSS file for styling
+import '../CandidateForm/CandidateForm.css'; // Assuming you have a custom CSS file for styling
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form, Container } from 'react-bootstrap';
 import { MdOutlineMail } from "react-icons/md";
-import { useFormik } from "formik";
-import {
-  handleFieldChange,
-  initialValues,
-  validationSchema,
-} from "./validation";
 
 
-function Form2() {
 
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission logic here
-      console.log(values);
-    },
-  });
+function BottomSection() {
 
-  const handleChange = (e) => handleFieldChange(formik, e);
+
   return (
     
     <div className=' margin-mobile' style={{width:"100%"}}>
@@ -43,7 +29,18 @@ function Form2() {
       >
          <div className='FamilyDet'>
         <h3 className='heading'> Family details</h3>
-       
+        <div className='buttons'>
+          <Button
+            style={{ backgroundColor: '#7F56D9', border: 'none' }}
+            className='buttonss'
+          >
+            <CiExport
+              className='me-2 icon'
+              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+            />
+            Export
+          </Button>
+        </div>
       </div>
       </Container>
       <Container
@@ -60,7 +57,7 @@ function Form2() {
      
       {/* Family details form */}
       <div >
-      <Form className='forms'onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+      <Form className='forms'>
         <Row className='mb-3'>
           <Col xs={12} md={4}>
             <Form.Group controlId='formGroupEmail'>
@@ -70,28 +67,10 @@ function Form2() {
                 type='text'
                 placeholder='olivia'
                 name='memberName'
-                onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.memberName}
+               
                 />
-                {formik.touched.memberName && formik.errors.memberName ? (
-                  <div className="text-danger">{formik.errors.memberName}</div>
-                ) : null}
+               
             </Form.Group>
-            <Button
-                  style={{
-                    marginTop:"10px",
-                    marginBottom:"10px",
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
-                  }}
-                >
-                  + Add
-                </Button>
           </Col>
 
           <Col xs={12} md={4}>
@@ -102,13 +81,9 @@ function Form2() {
                 type='text'
                 placeholder='olivia'
                 name='relationship'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.relationship}
+               
               />
-              {formik.touched.relationship && formik.errors.relationship ? (
-                <div className="text-danger">{formik.errors.relationship}</div>
-              ) : null}
+             
             </Form.Group>
           </Col>
 
@@ -124,14 +99,10 @@ function Form2() {
                   type='date'
                   placeholder='Select date'
                   name='dateOfBirth'
-                  onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.dateOfBirth}
+                 
                 />
               </InputGroup>
-              {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
-                <div className="text-danger">{formik.errors.dateOfBirth}</div>
-              ) : null}
+             
             </Form.Group>
           </Col>
 
@@ -160,14 +131,10 @@ function Form2() {
                   type='tel'
                   placeholder='+91(555) 000-0000'
                   name='emergencyContactNumber'
-                  onChange={handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.emergencyContactNumber}
+                 
                 />
               </InputGroup>
-              {formik.touched.emergencyContactNumber && formik.errors.emergencyContactNumber ? (
-                <div className="text-danger">{formik.errors.emergencyContactNumber}</div>
-              ) : null}
+            
             </Form.Group>
           </Col>
 
@@ -179,42 +146,12 @@ function Form2() {
                 type='email'
                 placeholder='olivia@untitledui.com'
                 name='emailAddress'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.emailAddress}
+                
               />
-              {formik.touched.emailAddress && formik.errors.emailAddress ? (
-                <div className="text-danger">{formik.errors.emailAddress}</div>
-              ) : null}
+             
             </Form.Group>
           </Col>
         </Row>
-        <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "rgb(210, 164, 250)",
-                    color: "white",
-                    borderColor: "rgb(210, 164, 250)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Submit
-                </Button>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Save as draft
-                </Button>
-              </div>
       </Form>
       
       </div>
@@ -235,7 +172,18 @@ function Form2() {
       >
          <div className='FamilyDet'>
         <h3 className='heading'>Details of PF</h3>
-       
+        <div className='buttons'>
+          <Button
+            style={{ backgroundColor: '#7F56D9', border: 'none' }}
+            className='buttonss'
+          >
+            <CiExport
+              className='me-2 icon'
+              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+            />
+            Export
+          </Button>
+        </div>
       </div>
       </Container>
 
@@ -261,13 +209,9 @@ function Form2() {
               <Form.Control className='input-field' type='text'
                placeholder='olivia' 
                name='epfoUan'
-               onChange={handleChange}
-               onBlur={formik.handleBlur}
-               value={formik.values.epfoUan}
+              
              />
-             {formik.touched.epfoUan && formik.errors.epfoUan ? (
-               <div className="text-danger">{formik.errors.epfoUan}</div>
-             ) : null}
+            
                
             </Form.Group>
           </Col>
@@ -277,13 +221,9 @@ function Form2() {
               <Form.Control className='input-field' type='text' 
               placeholder='olivia' 
               name='pfNo'
-               onChange={handleChange}
-               onBlur={formik.handleBlur}
-               value={formik.values.pfNo}
+              
              />
-             {formik.touched.pfNo && formik.errors.pfNo ? (
-               <div className="text-danger">{formik.errors.pfNo}</div>
-             ) : null}
+             
             </Form.Group>
           </Col>
           <Col xs={12} md={4}>
@@ -292,13 +232,9 @@ function Form2() {
               <Form.Control className='input-field' type='text' 
               placeholder='olivia' 
               name='adharCard'
-              onChange={handleChange}
-              onBlur={formik.handleBlur}
-              value={formik.values.adharCard}
+             
             />
-            {formik.touched.adharCard && formik.errors.adharCard ? (
-              <div className="text-danger">{formik.errors.adharCard}</div>
-            ) : null}
+           
             </Form.Group>
           </Col>
           <Row>
@@ -308,13 +244,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='panCard'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.panCard}
+               
               />
-              {formik.touched.panCard && formik.errors.panCard ? (
-                <div className="text-danger">{formik.errors.panCard}</div>
-              ) : null}
+              
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
@@ -323,13 +255,9 @@ function Form2() {
                 <Form.Control  className='input-field ' type="text"
                  placeholder="olivia"
                  name='employeesName'
-                 onChange={handleChange}
-                 onBlur={formik.handleBlur}
-                 value={formik.values.employeesName}
+                
                />
-               {formik.touched.employeesName && formik.errors.employeesName ? (
-                 <div className="text-danger">{formik.errors.employeesName}</div>
-               ) : null}
+              
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
@@ -343,14 +271,10 @@ function Form2() {
                   <Form.Control  className='input-field' type="date"
                    placeholder="Select date" 
                    name='dateOfBirthAs'
-                   onChange={handleChange}
-                   onBlur={formik.handleBlur}
-                   value={formik.values.dateOfBirthAs}
+                  
                    />
                 </InputGroup>
-                {formik.touched.dateOfBirthAs && formik.errors.dateOfBirthAs ? (
-                 <div className="text-danger">{formik.errors.dateOfBirthAs}</div>
-               ) : null}
+               
               </Form.Group>
         </Col>
         
@@ -362,13 +286,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia"
                 name='gender'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.gender}
+                
               />
-              {formik.touched.gender && formik.errors.gender ? (
-                <div className="text-danger">{formik.errors.gender}</div>
-              ) : null}
+             
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
@@ -377,13 +297,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='maritalStatus'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.maritalStatus}
+                
               />
-              {formik.touched.maritalStatus && formik.errors.maritalStatus ? (
-                <div className="text-danger">{formik.errors.maritalStatus}</div>
-              ) : null}
+             
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
@@ -392,13 +308,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='fatherName'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.fatherName}
+              
               />
-              {formik.touched.fatherName && formik.errors.fatherName ? (
-                <div className="text-danger">{formik.errors.fatherName}</div>
-              ) : null}
+              
      </Form.Group>
         </Col>
         
@@ -410,13 +322,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia"
                 name='accountNumber'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.accountNumber}
+              
               />
-              {formik.touched.accountNumber && formik.errors.accountNumber ? (
-                <div className="text-danger">{formik.errors.accountNumber}</div>
-              ) : null}
+              
               
      </Form.Group>
         </Col>
@@ -426,13 +334,9 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='branch'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.branch}
+                
               />
-              {formik.touched.branch && formik.errors.branch ? (
-                <div className="text-danger">{formik.errors.branch}</div>
-              ) : null}
+             
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
@@ -441,50 +345,17 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='ifsc'
-                onChange={handleChange}
-                onBlur={formik.handleBlur}
-                value={formik.values.ifsc}
+               
               />
-              {formik.touched.ifsc && formik.errors.ifsc ? (
-                <div className="text-danger">{formik.errors.ifsc}</div>
-              ) : null}
+              
                 
      </Form.Group>
         </Col>
         
       </Row>
         </Row>
-
-        <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "rgb(210, 164, 250)",
-                    color: "white",
-                    borderColor: "rgb(210, 164, 250)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Submit
-                </Button>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Save as draft
-                </Button>
-              </div>
-     
+        {/* Continue adding more rows and columns as needed */}
       </Form>
-      
-      
       </div>
       </Container>
      
@@ -503,7 +374,18 @@ function Form2() {
       >
        <div className='FamilyDet'>
         <h3 className='heading'>Details of HROne</h3>
-        
+        <div className='buttons'>
+          <Button
+            style={{ backgroundColor: '#7F56D9', border: 'none' }}
+            className='buttonss'
+          >
+            <CiExport
+              className='me-2 icon'
+              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+            />
+            Export
+          </Button>
+        </div>
       </div>
       </Container>
       {/* Details of HROne */}
@@ -542,13 +424,9 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='prefix'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.prefix}
+             
            />
-           {formik.touched.prefix && formik.errors.prefix ? (
-             <div className="text-danger">{formik.errors.prefix}</div>
-           ) : null}
+           
           </Form.Group>
         </Col>
         <Col xs={12} md={4}>
@@ -557,13 +435,9 @@ function Form2() {
             <Form.Control className='input-field' type="text" 
             placeholder="olivia" 
             name='firstNamehr'
-            onChange={handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.firstNamehr}
+            
           />
-          {formik.touched.firstNamehr && formik.errors.firstNamehr ? (
-            <div className="text-danger">{formik.errors.firstNamehr}</div>
-          ) : null}
+          
           </Form.Group>
         </Col>
         <Col xs={12} md={4}>
@@ -572,13 +446,9 @@ function Form2() {
             <Form.Control className='input-field' type="text" 
             placeholder="olivia" 
             name='middleName'
-            onChange={handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.middleName}
+           
           />
-          {formik.touched.middleName && formik.errors.middleName ? (
-            <div className="text-danger">{formik.errors.middleName}</div>
-          ) : null}
+          
           </Form.Group>
         </Col>
       </Row>
@@ -590,13 +460,9 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='lastNamehr'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.lastNamehr}
+             
            />
-           {formik.touched.lastNamehr && formik.errors.lastNamehr ? (
-             <div className="text-danger">{formik.errors.lastNamehr}</div>
-           ) : null}
+           
           </Form.Group>
         </Col>
         <Col xs={12} md={4}>
@@ -605,13 +471,9 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="oliva" 
              name='bloodGroup'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.bloodGroup}
+            
            />
-           {formik.touched.bloodGroup && formik.errors.bloodGroup ? (
-             <div className="text-danger">{formik.errors.bloodGroup}</div>
-           ) : null}
+          
           </Form.Group>
         </Col>
         <Col xs={12} md={4}>
@@ -620,13 +482,9 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='nationality'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.nationality}
+            
            />
-           {formik.touched.nationality && formik.errors.nationality ? (
-             <div className="text-danger">{formik.errors.nationality}</div>
-           ) : null}
+          
           </Form.Group>
         </Col>
       </Row>
@@ -642,14 +500,10 @@ function Form2() {
               <Form.Control className='input-field' type="email"
                placeholder="✉️ olivia@untitleedui.com" 
                name='officialEmail'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.officialEmail}
+            
                />
             </InputGroup>
-            {formik.touched.officialEmail && formik.errors.officialEmail ? (
-             <div className="text-danger">{formik.errors.officialEmail}</div>
-           ) : null}
+           
           </Form.Group>
         </Col>
         <Col xs={12} md={4}>
@@ -658,43 +512,13 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia"
              name='employeeId'
-             onChange={handleChange}
-             onBlur={formik.handleBlur}
-             value={formik.values.employeeId}
+             
            />
-           {formik.touched.employeeId && formik.errors.employeeId ? (
-             <div className="text-danger">{formik.errors.employeeId}</div>
-           ) : null}
+          
           </Form.Group>
         </Col>
       
       </Row>
-      <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "rgb(210, 164, 250)",
-                    color: "white",
-                    borderColor: "rgb(210, 164, 250)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Submit
-                </Button>
-                <Button
-                  style={{
-                    height:"35px" ,
-                    fontSize:"15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
-                  }}
-                >
-                  Save as draft
-                </Button>
-              </div>
     </Form>
       </div>
       </Container>
@@ -702,4 +526,4 @@ function Form2() {
   );
 }
 
-export default Form2;
+export default BottomSection;
