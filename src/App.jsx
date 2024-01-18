@@ -20,8 +20,9 @@ function App() {
 
         {/* Route for the Dashboard page */}
         <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/edit" element={<EditNewCandidate />} />
         {/* Route for the candidate Form */}
+        <Route path="/edit" element={<EditNewCandidate />} />
+        <Route path="/add" element={<AddNewCandidate />} />
         <Route path="/candidateForm" element={<TopForm />} />
 
        

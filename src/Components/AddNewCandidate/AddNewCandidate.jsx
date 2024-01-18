@@ -60,13 +60,13 @@ function AddNewCandidate() {
             })
 
         } else {
-            // toast.error(response.data.message)
+            toast.error(response.data.message)
         }
 
 
     }
     return (
-        <form >
+        <form>
             <div className={styles.addMain}>
                 <div className={styles.addHeader}>
                     <p> Add New Candidate</p>
@@ -80,6 +80,10 @@ function AddNewCandidate() {
                             <input name="fname" required onChange={userDetails} id='nam'
                                 type="text"
                                 placeholder='olivia'
+                                pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
+                                title='First Name must be atleat 3 charecters long'
+                                
+
                             />
                         </div>
                     </div>
@@ -94,6 +98,8 @@ function AddNewCandidate() {
                                 required onChange={userDetails}
                                 placeholder='olivia'
                                 name="lname"
+                                pattern='^[a-zA-Z][a-zA-Z\s]*'
+                                title='Enter a valid Last Name'
                             />
 
                         </div>
@@ -107,7 +113,8 @@ function AddNewCandidate() {
                                 type="email"
                                 placeholder='olivia@techjays.com'
                                 name="email"
-                                required onChange={userDetails}
+                                required 
+                                onChange={userDetails}
                             />
                         </div>
                     </div>
@@ -124,6 +131,8 @@ function AddNewCandidate() {
                                 placeholder='8845789956'
                                 name="phno"
                                 onChange={userDetails}
+                                pattern='^[0-9]+$'
+                                title='Enter a valid phone number'
                             />
                         </div>
                     </div >
@@ -135,8 +144,10 @@ function AddNewCandidate() {
                             <input
                                 type="text"
                                 placeholder='Developer'
-                                name="designation"
+                                name="dsesignation"
                                 onChange={userDetails}
+                                pattern='^[a-zA-Z][a-zA-Z\s]*'
+                                title='Enter a valid Designation'
                             />
                         </div>
                     </div>

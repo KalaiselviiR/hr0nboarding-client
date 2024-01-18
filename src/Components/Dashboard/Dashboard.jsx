@@ -77,7 +77,7 @@ function Dashboard() {
   return (
     <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
 
-      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} >
+      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'black-shade' : ''}`} >
         <div className=' d-flex mt-5  justify-content-between border bg-white'  >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
@@ -184,6 +184,7 @@ function Dashboard() {
 
 
       </div>
+      {(addModalIsOpen||editModalIsOpen) && <div className="overlay"></div>}
 
       {addModalIsOpen &&
         <div className='addCandidateModal'>
