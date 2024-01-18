@@ -4,7 +4,7 @@ import { LuPen, LuTrash2 } from "react-icons/lu";
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import AddNewCandidate from '../AddNewCandidate/AddNewCandidate'
 import EditNewCandidate from '../EditNewCandidate/EditNewCandidate'
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button,Container,Navbar } from 'react-bootstrap';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
@@ -33,7 +33,6 @@ function Dashboard() {
     setAddModalIsOpen(false)
   }
   const openEditModal = (user) => {
-    console.log(user);
     setUserToEdit(user)
     setEditModalIsOpen(true)
   }
@@ -80,18 +79,54 @@ function Dashboard() {
   }, []);
 
   return (
-    <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
-       <Nav className='p-4 border' variant="pills" defaultActiveKey="/home" >
-      <Nav.Item>
-        <Nav.Link className='na' href="/dashboard">All Candidates</Nav.Link>
+    <div className='' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative'}} >
+       <Navbar
+        bg="white"
+        className='mb-0 n'
+        variant="black"
+        style={{
+          background: "white",
+          marginBottom: "10px",
+          width: "100%",
+          boxSizing: "border-box"
+      
+        }}
+      >
+        <Container style={{gap:"25px"}}>
+          <Navbar.Brand href="#home">
+            <img
+              alt="Techjays Logo"
+              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+              height="40"
+              className="d-inline-block align-top"
+            />
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home" className="d-none d-md-block" style={{ backgroundColor: " rgba(249, 250, 251, 1)" ,  
+            boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+            borderRadius:"5px",
+            fontWeight:"500"
+            }}
+            >
+              Dashboard
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+      
+       <Nav className=' p-3 border ' variant="black" defaultActiveKey="/home"  >
+      <Nav.Item style={{paddingLeft:"76px"}}>
+        <Nav.Link style={{  boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+            borderRadius:"5px",backgroundColor: " rgba(249, 250, 251, 1)",
+            fontWeight:"500"}} className='na' href="/dashboard">All Candidates</Nav.Link>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link className='na' eventKey="link-1">Rejected</Nav.Link>
+        <Nav.Link className='' href='/dashboard' eventKey="link-1" style={{color:"black"}}>Rejected</Nav.Link>
       </Nav.Item>
    
     </Nav>
-      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} >
-        <div className=' d-flex   justify-content-between border bg-white'  >
+      <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
+        <div className=' d-flex mt-4   justify-content-between border bg-white'  >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
@@ -100,7 +135,7 @@ function Dashboard() {
             Add new candidate
           </button>
         </div>
-        <MDBTable align='middle' border={"1px"} responsive className='mb-0' >
+        <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
           <MDBTableHead >
 
 
