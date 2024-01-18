@@ -54,6 +54,11 @@
     /* color: rgb(210, 164, 250); */
 }
 
+/* Custom progress bar color */
+.custom-progress-bar .progress-bar {
+    background-color: rgb(149, 89, 201);
+  }
+  
 
 
 .buttonss{
