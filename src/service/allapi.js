@@ -12,9 +12,13 @@ export const registerHr=async(body)=>{
 export const loginHr=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/hr-login`,body)
 }
+//Reset password
+export const Verifymail=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/hr-verify`,body)
+}
 
 //Reset password
-export const ResetPass=async(id,body)=>{
+export const ResetPassword=async(id,body)=>{
     return await commonRequest("PUT",`${BASE_URL}/api/hr-resetpass/${id}`,body)
 }
 
@@ -30,7 +34,7 @@ export const getSingleCandidate=async(id)=>{
 
 //Edit Candidate
 export const editCandidate=async(id,body)=>{
-    return await commonRequest("PUT",`${BASE_URL}/api/edit-candidate/${id}`,body)
+    return await commonRequest("POST",`${BASE_URL}/api/edit-candidate/${id}`,body)
 }
 
 //Delete a Candidate

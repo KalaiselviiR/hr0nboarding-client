@@ -2,20 +2,15 @@ import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import './Login.css'
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form } from 'react-bootstrap';
 import { MdOutlineMail } from "react-icons/md";
-
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
-import { loginHr } from '../../service/allapi';
 
-function Login() {
-
-  
-  //create an object to store datas from input
+function UpdatePassword() {
+         //create an object to store datas from input
   const [userData, setUser] = useState({
     email: "",
     psw: ""
@@ -41,28 +36,25 @@ const handleSubmit = async (e) => {
 
  
   e.preventDefault()
-  const { email, psw} = userData
+  const { email } = userData
   
  if (email == "") {
     toast.error('email requierd')
   }
-  else if (psw == "") {
-    toast.error('password requierd')
-  }
+
  
   else {
  
    
     //api call
-    const response = await loginHr(userData)
+    const response = await Verifymail(userData)
     console.log(response);
     if(response.status==200){
     
       if(response.data.message === "login Successfull"){
-        localStorage.setItem("email",email)
         toast.success(response.data.message);
       setTimeout(()=> {
-        navigate('/dashboard')
+        navigate('/')
       }, 1500);
        
       }else{
@@ -71,8 +63,7 @@ const handleSubmit = async (e) => {
 
     //reset all states datas
     setUser({
-      email: "",
-      psw: ""
+      email: ""
    
     })
     
@@ -86,7 +77,7 @@ const handleSubmit = async (e) => {
 
   }
 }
-
+    
   return (
     <div className='header1'>
     <div className='Logo  '>
@@ -97,51 +88,43 @@ const handleSubmit = async (e) => {
     </div>
      <div className='header2'>
       
-        <div className="subhead "><b>Log in to HR Portal</b>
+        <div className="subhead "><b>Update Password</b>
         </div>
        
       
       <div  >
-      <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss'>Email</Form.Label>
-            <InputGroup>
-              <InputGroup.Text>
-                <MdOutlineMail  />
-                </InputGroup.Text>
-              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="olivia@untitledui.com" />
-            </InputGroup>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="officialEmailAddress" >
+      <Form.Group className="mb-3" controlId="officialEmailAddress" >
             <Form.Label className='labelss'>Password</Form.Label>
             <InputGroup>
             
               <Form.Control onChange={userDetails} name='psw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
-          
-       
+          <Form.Group className="mb-3" controlId="officialEmailAddress" >
+            <Form.Label className='labelss'>Confirm Password</Form.Label>
+            <InputGroup>
+            
+              <Form.Control onChange={userDetails} name='psw' className='input-field' type="password" placeholder="Enter password" />
+            </InputGroup>
+          </Form.Group>
+  
       </div>
-      <div className="forgot-password">
-        <div className='password'>
-        <a className='Frgtpass' href="/verify" >Forgot password?</a>
-        </div>
-       
-        </div>
+
       <div className="submit-box">
       <Button
             style={{ backgroundColor: '#7F56D9', border: 'none' }}
             className='btn-login' onClick={handleSubmit}
           >
           
-            Login
+            Submit
           </Button>
       </div>
+
       </div>
       
       <ToastContainer autoClose={800}  position="top-center" />
       </div>
-
   )
 }
-export default Login
+
+export default UpdatePassword

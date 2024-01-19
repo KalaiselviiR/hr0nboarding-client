@@ -129,10 +129,10 @@ export const validationSchema = Yup.object().shape({
   .required("Prefix is required"),
   firstNamehr: Yup.string()
     .matches(/^[^\d]+$/, "First Name should not contain numbers")
-    .required("Middle Name is required"),
+    .required("First Name is required"),
   lastNamehr: Yup.string()
     .matches(/^[^\d]+$/, "Last Name should not contain numbers")
-    .required("Middle Name is required"),  
+    .required("Last Name is required"),  
   middleName: Yup.string()
     .matches(/^[^\d]+$/, "Middle Name should not contain numbers")
     .required("Middle Name is required"),

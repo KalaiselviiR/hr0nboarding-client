@@ -4,8 +4,9 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 import { addCandidate } from '../../service/allapi'
+import closeIcon from '../../assets/closeIcon.svg'
 
-function AddNewCandidate() {
+function AddNewCandidate({ close }) {
 
     //create an object to store datas from input
     const [userData, setUser] = useState({
@@ -65,11 +66,21 @@ function AddNewCandidate() {
 
 
     }
+
+
+    const handleClose = () => {
+        if (close) {
+            close()
+        }
+    }
     return (
         <form>
             <div className={styles.addMain}>
                 <div className={styles.addHeader}>
                     <p> Add New Candidate</p>
+                    <div>
+                        <img onClick={handleClose} src={closeIcon} alt="" />
+                    </div>
                 </div>
                 <div className={styles.addBody}>
                     <div className={styles.inputDiv}>
@@ -82,7 +93,7 @@ function AddNewCandidate() {
                                 placeholder='olivia'
                                 pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
                                 title='First Name must be atleat 3 charecters long'
-                                
+
 
                             />
                         </div>
@@ -113,7 +124,7 @@ function AddNewCandidate() {
                                 type="email"
                                 placeholder='olivia@techjays.com'
                                 name="email"
-                                required 
+                                required
                                 onChange={userDetails}
                             />
                         </div>

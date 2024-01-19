@@ -4,16 +4,20 @@ import { LuPen, LuTrash2 } from "react-icons/lu";
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import AddNewCandidate from '../AddNewCandidate/AddNewCandidate'
 import EditNewCandidate from '../EditNewCandidate/EditNewCandidate'
-import { Modal, Button } from 'react-bootstrap';
-
+import { Modal, Button, Container, Navbar } from 'react-bootstrap';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
-import { getallCandidates } from '../../service/allapi';
+import Nav from 'react-bootstrap/Nav';
+import { deleteCandidate, getallCandidates } from '../../service/allapi';
+
 function Dashboard() {
 
-  const [isShow, invokeModal] = useState(false);
+  const [isShow, setInvokeModal] = useState(false);
+  const [UserToEdit, setUserToEdit] = useState(null);
 
   const initModal = () => {
-    invokeModal(!isShow);
+    setInvokeModal(!isShow);
   };
 
 
@@ -22,6 +26,8 @@ function Dashboard() {
   const [addModalIsOpen, setAddModalIsOpen] = useState(false)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
+  const [deleteId, setDeleteId] = useState('')
+
   const openAddModal = () => {
     setAddModalIsOpen(true)
   }
@@ -29,7 +35,9 @@ function Dashboard() {
   const closeAddModal = () => {
     setAddModalIsOpen(false)
   }
-  const openEditModal = () => {
+  const openEditModal = (user) => {
+
+    setUserToEdit(user)
     setEditModalIsOpen(true)
   }
 
@@ -74,16 +82,83 @@ function Dashboard() {
     getAllCandidate();
   }, []);
 
-  return (
-    <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative' }} >
 
-      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'black-shade' : ''}`} >
-        <div className=' d-flex mt-5  justify-content-between border bg-white'  >
+  const handleDeleteClick = (id) => {
+    initModal()
+    setDeleteId(id)
+  }
+
+  const cancleDelete = () => {
+    setInvokeModal(false)
+    setDeleteId(null)
+  }
+
+  const confirmDelete = async () => {
+    // setInvokeModal(false)
+
+
+    const response = await deleteCandidate(deleteId)
+    console.log(response)
+  }
+
+
+  return (
+    <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative', minHeight: '100vh' }} >
+      <Navbar
+        bg="white"
+        className='mb-0 n'
+        variant="black"
+        style={{
+          background: "white",
+          marginBottom: "10px",
+          width: "100%",
+          boxSizing: "border-box"
+
+        }}
+      >
+        <Container style={{ gap: "25px" }}>
+          <Navbar.Brand href="#home">
+            <img
+              alt="Techjays Logo"
+              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+              height="40"
+              className="d-inline-block align-top"
+            />
+          </Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link href="#home" className="d-none d-md-block" style={{
+              backgroundColor: " rgba(249, 250, 251, 1)",
+              boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+              borderRadius: "5px",
+              fontWeight: "500"
+            }}
+            >
+              Dashboard
+            </Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar>
+
+      <Nav className=' p-3 border ' variant="black" defaultActiveKey="/home"  >
+        <Nav.Item style={{ paddingLeft: "76px" }}>
+          <Nav.Link style={{
+            boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+            borderRadius: "5px", backgroundColor: " rgba(249, 250, 251, 1)",
+            fontWeight: "500"
+          }} className='na' href="/dashboard">All Candidates</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link className='' href='/dashboard' eventKey="link-1" style={{ color: "black" }}>Rejected</Nav.Link>
+        </Nav.Item>
+
+      </Nav>
+      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} >
+        <div className=' d-flex mt-4   justify-content-between border bg-white'  >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
 
-          <button onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
+          <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
             Add new candidate
           </button>
         </div>
@@ -129,8 +204,8 @@ function Dashboard() {
 
                   </td>
                   <td>
-                    <LuPen onClick={openEditModal} className="  icon" />
-                    <LuTrash2 className=" icon2" onClick={initModal} />
+                    <LuPen onClick={() => openEditModal(i)} className="  icon" />
+                    <LuTrash2 className=" icon2" onClick={() => handleDeleteClick(i._id)} />
 
                   </td>
                 </tr>
@@ -154,7 +229,7 @@ function Dashboard() {
               numbers.map((n, i) => (
 
                 <li className={`page-item float-center ${currentPage === n ? 'active' : ''}`} key={i}>
-                  <a className='page-link  border ' onClick={() => changeCpage(n)}>{n}</a>
+                  <a className='page-link   ' onClick={() => changeCpage(n)}>{n}</a>
                 </li>
 
 
@@ -166,39 +241,43 @@ function Dashboard() {
             </li>
           </ul>
         </nav>
-        <Modal show={isShow} onHide={initModal}>
-          <Modal.Header className="custom-modal-header" closeButton>
-            <Modal.Title>Delete Candidate</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>Are you sure you want to the delete ?</Modal.Body>
-          <Modal.Footer>
-            <Button className='btn-no' style={{ backgroundColor: '#A020F0', borderColor: '#A020F0' }} onClick={initModal}>
-              No
-            </Button>
-            <Button className='btn-yes' style={{ backgroundColor: '#A020F0', borderColor: '#A020F0' }} onClick={initModal}>
-              Yes
-            </Button>
-          </Modal.Footer>
+        <Modal className='deleteModal' show={isShow} onHide={initModal}>
+
+          <div className="deleteModalBody">
+
+            <div className="deleteModalContent">
+              <h3>Delete Candidate</h3>
+              <p>Are you sure you want to delete the candidate?</p>
+            </div>
+
+            <div className="deleteModalButtons">
+              <button onClick={cancleDelete} className='deleteButtonNo'>No</button>
+              <button onClick={confirmDelete} className='deleteButtonYes'>Yes</button>
+            </div>
+
+          </div>
+
+
         </Modal>
 
 
 
       </div>
-      {(addModalIsOpen||editModalIsOpen) && <div className="overlay"></div>}
+      {(addModalIsOpen || editModalIsOpen) && <div className="overlay"></div>}
 
       {addModalIsOpen &&
         <div className='addCandidateModal'>
-          <AddNewCandidate />
+          <AddNewCandidate close={closeAddModal} />
         </div>
       }
 
       {editModalIsOpen &&
         <div className='addCandidateModal'>
-          <EditNewCandidate />
+          <EditNewCandidate close={closeEditModal} UserToEdit={UserToEdit} />
         </div>
       }
 
-
+      <ToastContainer autoClose={800} position="top-center" />
 
     </div>
   )

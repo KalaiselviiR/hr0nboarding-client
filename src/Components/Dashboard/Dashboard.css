@@ -13,10 +13,10 @@ p {
   /* background-color: #7F56D9; */
   /* color: white;
   margin-right: 30px; */
-  
+
 }
 
-#b:hover{
+#b:hover {
   font-size: 17px;
   border-radius: 8px;
   background-color: #7F56D9;
@@ -69,7 +69,8 @@ li:hover {
 .icon2 {
   margin-left: 24px;
 }
-.head{
+
+.head {
   border-bottom-style: none;
 }
 
@@ -77,17 +78,18 @@ li:hover {
 .addCandidateModal {
   width: 400px;
   position: absolute;
-  top: 66%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 11;
+  /* margin: 20px 0px; */
 }
 
-/* .black-shade {
-  filter: blur(10px); 
+.black-shade {
+  filter: blur(10px);
   background-color: #5a5a5a;
   z-index: 2;
-} */
+}
 
 .overlay {
   position: fixed;
@@ -99,7 +101,7 @@ li:hover {
   z-index: 10;
 }
 
-.pagination{
+.pagination {
   display: flex;
 }
 
@@ -110,43 +112,113 @@ li:hover {
 
 .btn-no:hover,
 .btn-yes:hover {
-  background-color: white !important; 
-  border-color: white !important;    
-  color:#A020F0 !important;
+  background-color: white !important;
+  border-color: white !important;
+  color: #A020F0 !important;
 }
 
-.pagination > li > a:focus,
-.pagination > li > a:hover,
-.pagination > li > span:focus,
-.pagination > li > span:hover
-{
-    color: #5a5a5a;
-    background-color: #eee;
-   border: none;
-}
 
-.pagination{
+
+.pagination {
   color: black;
   background-color: white;
 }
 
-.pagination > .active > a
-{
-    color: #7F56D9;
-    background-color: #f4eafa !Important;
- 
+.pagination>.active>a {
+  color: #7F56D9;
+  background-color: #f4eafa !Important;
+
 }
 
-.pagination > .active > a:hover
-{
-    background-color:#f4eafa !Important;
-    color: #7F56D9;
+.pagination>.active>a:hover {
+  background-color: #f4eafa !Important;
+  color: #7F56D9;
 }
-.page-item{
+
+.page-link {
   border: none;
+  color: black;
+}
+
+.na {
+  color: black;
+  border: 1px solid rgba(239, 241, 244, 1);
+}
+
+.na:hover {
+  color: black;
+}
+
+.n {
+  color: black;
+  border: 2px solid rgba(239, 241, 244, 1);
+}
+
+.na.active {
+  color: black;
+  background-color: rgba(239, 241, 244, 1);
 }
 
 
+.deleteModalBody {
+  padding: 18px;
+}
+
+.deleteModalContent h3 {
+  color: #344054;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+
+}
+
+.deleteModalContent p {
+  color: #4E5562;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+.deleteModalButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.deleteButtonNo {
+  border-radius: 8px;
+  padding: 10px 18px;
+  font-weight: 600;
+  line-height: 24px;
+  font-size: 16px;
+  color: #6941C6;
+  width: 40%;
+  border: 1px solid #6941C6;
+  background: #F9F5FF;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+.deleteButtonYes {
+  width: 40%;
+  padding: 10px 18px;
+  border-radius: 8px;
+  border: 1px solid var(--Brand-600, #7F56D9);
+  background: var(--Primary, #7F56D9);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  color: var(--White, #FFF);
+  font-family: Inter;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 24px;
+  border-radius: 8px;
+  border: 1px solid var(--Brand-600, #7F56D9);
+  background: var(--Primary, #7F56D9);
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
 
 @media(max-width: 500px) {
 
@@ -157,6 +229,11 @@ li:hover {
 
   .btn-page {
     border-radius: 8px;
-   
+
+  }
+
+  .addCandidateModal {
+    width: 100%;
+    height: 100%;
   }
 }

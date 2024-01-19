@@ -2,6 +2,7 @@
     background: white;
     height:100%;
     width:100%;
+
 }
 .header2{
     /* border-color: rgb(81, 81, 204); */
@@ -19,42 +20,23 @@
     border-style: solid;
     border-width: 1px;
 }
-.header3{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-size: 30px;
-    font-family: 'Inter', sans-serif;
-    gap: 30px;
-    width: 100%;
-    margin-top: 30px;
-    color: light black;
-}
+
 .subhead{
     /* color: #3C009D; */
-    font-size: 100px;
-    font-weight: 700;
-    inline-size: auto;
-}
-/* .underline{
-    width: 61px;
-    height: 6px;
-    background: #3C009D;
-    border-radius: 9px;
-} */
-.labels{
-    margin-top: 100px;
+    padding-top: 20px;
     display: flex;
-    flex-direction: column;
-    gap: 30px;
-    border-radius: 50px;
-    border-color: #5F15DF;
-    border-style: solid;
-    border-inline: thin;
-    padding: 10px;
-    font-family: 'Inter', sans-serif;
-    width: 300px;
+   justify-content: center;
+    width: 276px;
+    height: 38px;
+    line-height: 37.52px;
+    
+    font-size: 31px;
+    font-weight: 500;
+    inline-size: auto;
+    margin-bottom: 50px;
 }
+
+
 .details{
     display: flex;
     flex-direction: row;
@@ -72,13 +54,18 @@
 .details img{
     margin: 0px 5px;
     height: 20px;
-    width: 25px;
+
+   
 }
-.Logo img{
-    margin: 0px 20px;
-    height: 130px;
-    width: 230px;
-    align-items: center;
+.Logo{
+    display: flex;
+    justify-content: center;
+}
+.logo-img{
+   height: 130px;
+   
+  
+   
 }
 .details details{
     height: 35px;
@@ -88,21 +75,36 @@
     border-color: darkgray;
     border-width: 0.5px;
     gap: 5px;
+    /* border: 100px;
+    outline: black; */
     font-size: 15px;
     padding-left: 20px;
 }
-.forgot password{
-    align-items: end;
-    padding-left: 100px;
-}
-.forgot password span{
-    cursor: pointer;
-    gap: 100px;
-}
-.submit box {
+.forgot-password{
     display: flex;
-    gap: 100px;
-    margin: 80px 80px;
+    justify-content: right;
+}
+
+.Frgtpass{
+    text-decoration: none;
+    color:#4D4D4D ;
+    font-weight: 300;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 21px;
+    
+}
+.btn-login{
+    cursor: pointer;
+    background-color: 
+    #7F56D9;
+    border-radius: 20px;
+    border: none;
+    padding: 10px;
+    width:400px ;
+    margin-top: 20px;
+
+
 }
 .Login{
     display: flex;

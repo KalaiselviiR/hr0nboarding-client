@@ -9,7 +9,11 @@
     box-shadow: 0px 4px 64px 0px rgba(0, 0, 0, 0.1);
     margin: 20px 0px;
 }
+.addHeader{
+    display: flex;
+    justify-content: space-between;
 
+}
 .addHeader p {
     color: #464E5F;
     font-family: Inter;

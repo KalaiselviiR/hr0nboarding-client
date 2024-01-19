@@ -1,13 +1,21 @@
+
 .addMain {
     width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     padding: 40px;
     font-family: 'Inter', sans-serif;
     border-radius: 16px;
     background: #FFF;
     box-shadow: 0px 4px 64px 0px rgba(0, 0, 0, 0.1);
     margin: 20px 0px;
+}
+
+.addHeader{
+    display: flex;
+    justify-content: space-between;
+
 }
 
 .addHeader p {
