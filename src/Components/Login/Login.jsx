@@ -35,7 +35,7 @@ const userDetails = (e) => {
   setUser({ ...userData, [key]: value })
 
 }
-console.log(userData);
+
 
 const handleSubmit = async (e) => {
 
@@ -55,15 +55,21 @@ const handleSubmit = async (e) => {
    
     //api call
     const response = await loginHr(userData)
-    console.log(response);
+    console.log(response.data);
     if(response.status==200){
     
-      if(response.data.message === "login Successfull"){
+      if(response.data.message === "Login successful"){
+        console.log(response.data.message);
         localStorage.setItem("email",email)
+       
         toast.success(response.data.message);
       setTimeout(()=> {
         navigate('/dashboard')
       }, 1500);
+      let userId = response.data.session.userId;
+      let userToken = response.data.session.token
+      localStorage.setItem("userId",userId)
+      localStorage.setItem("userToken",userToken);
        
       }else{
         toast.error(response.data.message);
