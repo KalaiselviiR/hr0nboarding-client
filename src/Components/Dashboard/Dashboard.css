@@ -136,8 +136,11 @@ li:hover {
 }
 
 .page-link {
-  border: none;
+ 
   color: black;
+}
+.one{
+  border: none;
 }
 
 .na {
