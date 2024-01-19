@@ -1,22 +1,16 @@
-import React, { useRef, useState } from "react";
 import { Button, Form, Image, ProgressBar } from "react-bootstrap";
-import './CandidateForm.css'
+import React, { useRef, useState } from "react";
 
-// FileUpload component for handling file upload
-function FileUpload({ label }) {
-   // State variables for file, upload progress, and error messages
+function RecruiterFileView({ label }) {
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
-  const [error, setError] = useState(null);
-    // Reference for file input element
+  const [error, setError] = useState(null); // New state for validation error
   const fileInputRef = useRef(null);
 
-   // Event handler for file input change
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(e.target.files)
 
-      // Check if a file is selected
+    // Add your custom validation logic here
     if (!selectedFile) {
       setError("Please select a file");
     } else if (selectedFile.type !== "application/pdf") {
@@ -24,29 +18,31 @@ function FileUpload({ label }) {
     } else {
       setError(null);
       setFile(selectedFile);
-        // Initiate the file upload process
+      console.log(selectedFile)
       uploadFile(selectedFile);
     }
   };
 
-   // Event handler for triggering file input click
   const handleFileClick = (e) => {
     e.preventDefault();
     fileInputRef.current.click();
   };
 
-    // Simulates file upload progress
   const uploadFile = (file) => {
+    // Simulate file upload
     const totalSize = file.size;
     let uploadedSize = 0;
-  // Simulate progress by incrementing uploadedSize
+
     const interval = setInterval(() => {
-      uploadedSize += totalSize / 10;
-      const currentProgress = Math.min((uploadedSize / totalSize) * 100, 100);
+      uploadedSize += totalSize / 10; // Simulating 10% progress increments
+      console.log(uploadedSize)
+      // The Math.min function is used to find the minimum value between currentProgress and 100.
+      const currentProgress = Math.min((uploadedSize / totalSize) * 100, 100); // Ensure progress doesn't exceed 100%
       setProgress(currentProgress);
-  // Finish the simulation when progress reaches 100%
+
       if (currentProgress >= 100) {
         clearInterval(interval);
+        // Ensure progress is exactly 100% to trigger rendering of the bottom container
         setProgress(100);
       }
     }, 200);
@@ -59,8 +55,8 @@ function FileUpload({ label }) {
         <div>
           <Button
             style={{
-              height: "35px",
-              fontSize: "15px",
+                height:"35px" ,
+                fontSize:"15px",
               backgroundColor: "white",
               color: "rgb(147, 48, 233)",
               borderColor: "rgb(147, 48, 233)",
@@ -86,9 +82,8 @@ function FileUpload({ label }) {
               animated
               now={progress}
               label={`${progress}%`}
-              // variant="custom"
+              variant="violet"
               style={{ marginBottom: "10px" }}
-              className="custom-progress-bar"
             />
           )}
           {progress === 100 && (
@@ -106,7 +101,6 @@ function FileUpload({ label }) {
                 height: "70px",
               }}
             >
-            
               <div className="pdf-image" style={{ height: "50px" }}>
                 <Image
                   src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
@@ -116,56 +110,17 @@ function FileUpload({ label }) {
                 />
               </div>
               <div className="file-info">
-                <p style={{ margin: "0" }}>{file.name}        
-                  <img style={{width:"25px",height:"25px",borderRadius:"50%"}} 
-                  src="https://img.freepik.com/premium-vector/check-mark-icon-circle-isolated-green-background-vector-illustration_230920-1405.jpg?w=740">
-
-                  </img> </p>
+                <p style={{ margin: "0" }}>{file.name}</p>
                 <p style={{ margin: "0", fontSize: "10px" }}>
-                  {(file.size / 1024).toFixed(2)} KB 
+                  {(file.size / 1024).toFixed(2)} KB
                 </p>
-      
-                <ProgressBar
-                
-                now={progress}
-                label={`${progress}%`}
-                // variant="custom"
-                style={{ marginBottom: "10px",height:"10px",width:"250px" }}
-                className="custom-progress-bar"
-              />
               </div>
-              
             </div>
-            
           )}
-          <div>
-            <Button
-              style={{
-                height: "35px",
-                fontSize: "15px",
-                marginTop: "10px",
-                backgroundColor: "white",
-                color: "rgb(147, 48, 233)",
-                borderColor: "rgb(147, 48, 233)",
-                fontWeight: "600",
-              }}
-              onClick={handleFileClick}
-            >
-              Upload
-            </Button>
-            <input
-              type="file"
-              accept=".pdf"
-              ref={fileInputRef}
-              style={{ display: "none" }}
-              onChange={handleFileChange}
-            />
-            {error && <div className="text-danger">{error}</div>}
-          </div>
         </div>
       )}
     </Form.Group>
   );
 }
 
-export default FileUpload;
+export default RecruiterFileView;

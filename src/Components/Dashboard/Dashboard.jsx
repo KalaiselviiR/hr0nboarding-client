@@ -36,7 +36,6 @@ function Dashboard() {
     setAddModalIsOpen(false)
   }
   const openEditModal = (user) => {
-
     setUserToEdit(user)
     setEditModalIsOpen(true)
   }
@@ -162,7 +161,7 @@ function Dashboard() {
             Add new candidate
           </button>
         </div>
-        <MDBTable align='middle' border={"1px"} responsive className='mb-0' >
+        <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
           <MDBTableHead >
 
 

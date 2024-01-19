@@ -9,6 +9,7 @@ import EditNewCandidate from './Components/EditNewCandidate/EditNewCandidate';
 import Login from './Components/Login/Login';
 import VerifyEmail from './Components/ForgetPassword/VerifyEmail';
 import UpdatePassword from './Components/ForgetPassword/UpdatePassword';
+import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
 
 function App() {
  
@@ -27,6 +28,8 @@ function App() {
         <Route path="/edit" element={<EditNewCandidate />} />
         <Route path="/add" element={<AddNewCandidate />} />
         <Route path="/candidateForm" element={<TopForm />} />
+        {/* Route for the candidate Form Recruiter View*/}
+        <Route path="/recruiterView" element={<RecruiterForm />} />
 
        
 

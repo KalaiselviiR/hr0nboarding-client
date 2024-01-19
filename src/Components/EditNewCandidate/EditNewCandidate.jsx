@@ -73,124 +73,126 @@ function EditNewCandidate({ UserToEdit, close }) {
     }, [UserToEdit])
     // console.log(teamData);
 
-    const handleClose = () =>{
-        if(close){
+    const handleClose = () => {
+        if (close) {
             close()
         }
     }
 
     return (
-        <form>
-            <div className={styles.addMain}>
-                <div className={styles.addHeader}>
-                    <p> Add New Candidate</p>
-                    <div>
-                        <img onClick={handleClose} src={closeIcon} alt="" />
+
+        <div className={styles.addMain}>
+            <div className={styles.addHeader}>
+                <p> Add New Candidate</p>
+                <div>
+                    <img onClick={handleClose} src={closeIcon} alt="" />
+                </div>
+            </div>
+            <div className={styles.addBody}>
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>First Name</p>
+                    </div>
+                    <div className={styles.input}>
+                        <input
+                            type="text" name="fname" required onChange={userDetails}
+                            value={editdata.fname}
+                            placeholder='olivia'
+                            pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
+                            title='First Name must be atleat 3 charecters long'
+                        />
                     </div>
                 </div>
-                <div className={styles.addBody}>
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>First Name</p>
-                        </div>
-                        <div className={styles.input}>
-                            <input
-                                type="text" name="fname" required onChange={userDetails}
-                                value={editdata.fname}
-                                placeholder='olivia'
-                                pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
-                                title='First Name must be atleat 3 charecters long'
-                            />
-                        </div>
+
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>Last Name</p>
                     </div>
+                    <div className={styles.input}>
+                        <input
+                            type="text"
+                            required onChange={userDetails}
+                            placeholder='olivia'
+                            name="lname"
+                            pattern='^[a-zA-Z][a-zA-Z\s]*'
+                            title='Enter a valid Last Name'
+                        />
 
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>Last Name</p>
-                        </div>
-                        <div className={styles.input}>
-                            <input
-                                type="text"
-                                required onChange={userDetails}
-                                placeholder='olivia'
-                                name="lname"
-                                pattern='^[a-zA-Z][a-zA-Z\s]*'
-                                title='Enter a valid Last Name'
-                            />
-
-                        </div>
                     </div>
+                </div>
 
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>Email</p>
-                        </div>
-                        <div className={styles.input}>
-                            <input type="email" name='email' required onChange={userDetails}
-                                value={editdata.email}
-                                placeholder='olivia@techjays.com'
-                            />
-                        </div>
-                    </div >
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>Phone number</p>
-                        </div>
-                        <div className={styles.phoneInput}>
-                            <select className="country-code" onChange={userDetails}>
-                                <option value="+1">IN </option>
-                                <option value="+44">US</option>
-                            </select>
-                            <input name='phno' type="text" onChange={userDetails}
-                                value={editdata.phno}
-                                placeholder='8845789956'
-                            />
-                        </div>
-                    </div >
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>Designation</p>
-                        </div>
-                        <div className={styles.input}>
-                            <input name='dsesignation' type="text" required onChange={userDetails}
-                                value={editdata.dsesignation}
-                                placeholder='Developer'
-                            />
-                        </div>
-                    </div >
-                    <div className={styles.inputDiv}>
-                        <div className={styles.label}>
-                            <p>Date of joining</p>
-                        </div>
-                        <div className={styles.input}>
-                            <input id='date' type="date" name='jdate' onChange={userDetails}
-                                value={moment(editdata.jdate).format("DD/MM/YYYY")} />
-                        </div>
-                    </div >
-                    <div className={styles.checkBoxDiv} >
-                        <div>
-                            <input type="checkbox" name='region' onChange={userDetails} />
-                        </div>
-                        <div>
-                            <p>Candidate is from outside india</p>
-                        </div>
-                    </div >
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>Email</p>
+                    </div>
+                    <div className={styles.input}>
+                        <input type="email" name='email' required onChange={userDetails}
+                            value={editdata.email}
+                            placeholder='olivia@techjays.com'
+                        />
+                    </div>
+                </div >
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>Phone number</p>
+                    </div>
+                    <div className={styles.phoneInput}>
+                        <select className="country-code" onChange={userDetails}>
+                            <option value="+1">IN </option>
+                            <option value="+44">US</option>
+                        </select>
+                        <input name='phno' type="text" onChange={userDetails}
+                            value={editdata.phno}
+                            placeholder='8845789956'
+                        />
+                    </div>
+                </div >
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>Designation</p>
+                    </div>
+                    <div className={styles.input}>
+                        <input name='dsesignation' type="text" required onChange={userDetails}
+                            value={editdata.dsesignation}
+                            placeholder='Developer'
+                        />
+                    </div>
+                </div >
+                <div className={styles.inputDiv}>
+                    <div className={styles.label}>
+                        <p>Date of joining</p>
+                    </div>
+                    <div className={styles.input}>
+                        <input id='date' type="date" name='jdate' onChange={userDetails}
+                            value={moment(editdata.jdate).format("DD/MM/YYYY")} />
+                    </div>
+                </div >
+                <div className={styles.checkBoxDiv} >
+                    <div>
+                        <input type="checkbox" name='region' onChange={userDetails} />
+                    </div>
+                    <div>
+                        <p>Candidate is from outside india</p>
+                    </div>
+                </div >
 
-                    <div className={styles.buttonDiv} >
-                        <div className={styles.saveButton}>
-                            <button type='submit'>Save</button>
-                        </div >
-                        <div className={styles.resendLinkButton} >
-                            <button type='submit' >Resend Link</button>
-                        </div >
-
+                <div className={styles.buttonDiv} >
+                    <div className={styles.saveButton}>
+                        <button onClick={handleSubmit}>Save</button>
+                    </div >
+                    <div className={styles.resendLinkButton} >
+                        <button type='submit' >Resend Link</button>
                     </div >
 
                 </div >
+
             </div >
+        </div >
 
-        </form >
+
+
     )
-    }
+}
 
-    export default EditNewCandidate
+
+export default EditNewCandidate
