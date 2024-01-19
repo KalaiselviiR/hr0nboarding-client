@@ -84,7 +84,7 @@ const handleSubmit = async (e) => {
     </div>
      <div className='header2'>
       
-        <div className="subhead "><b>Verify Email</b>
+        <div className="subhead "><b>Forget Password</b>
         </div>
        
       
