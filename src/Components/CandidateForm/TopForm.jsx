@@ -32,6 +32,24 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
+   //create an object to store datas from input family details
+   const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    designation: "",
+    dateOfJoining: null,
+    presentAddress: "",
+    permanentAddress: "",
+    aboutYourself: "",
+    experience: "",
+    company: "",
+    enjoyment: "",
+    sneakpeek: "",
+  
+})
+
   //input form validation using formk and yup library
   const formik = useFormik({
     initialValues,
@@ -42,7 +60,28 @@ const TopForm = () => {
     },
   });
   // handle change function for validation errors
-  const handleChange = (e) => handleFieldChange(formik, e);
+  const handleChange = (e) =>{
+    handleFieldChange(formik, e);
+    //prevent the event
+    e.preventDefault()
+    //access vFormData
+    const { value } = e.target
+    //access key to update in userData
+    const key = e.target.name
+    //update the data with existing data
+    setFormData({ ...formData, [key]: value })
+
+  }
+  console.log(formData)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+console.log(formData)
+
+}
+
+
 
   return (
     <>
@@ -448,7 +487,7 @@ const TopForm = () => {
                     gap: "10px",
                   }}
                 >
-                  <Button
+                  <Button onClick={handleSubmit}
                     style={{
                       height: "35px",
                       fontSize: "15px",
