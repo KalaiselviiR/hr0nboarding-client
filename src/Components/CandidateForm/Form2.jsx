@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './CandidateForm.css'; // Assuming you have a custom CSS file for styling
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form, Container } from 'react-bootstrap';
@@ -13,6 +13,182 @@ import {
 
 function Form2() {
 
+      //create an object to store datas from input family details
+      const [familyData, setFamily] = useState({
+        memberName: "",
+        relationship: "",
+        dateOfBirth: "",
+        emergencyContactNumber: "",
+        emailAddress: ""
+      
+    })
+
+    const handleChange = (e) =>{
+      handleFieldChange(formik, e);
+             //prevent the event
+             e.preventDefault()
+             //access value to update in userData
+             const { value } = e.target
+             //access key to update in userData
+             const key = e.target.name
+             //update the data with existing data
+             setFamily({ ...familyData, [key]: value })
+  
+    }
+    console.log(familyData);
+
+       //create an object to store datas from input details of pf
+       const [pfData, setpfData] = useState({
+        epfoUan: "",
+        pfNo: "",
+        adharCard: "",
+        panCard: "",
+        employeesName: "",
+        dateOfBirthAs:"",
+        gender:"",
+        maritalStatus:"",
+        fatherName:"",
+        accountNumber:"",
+        branch:"",
+        ifsc:""
+      
+    })
+
+    
+    const handleChangeone = (e) =>{
+      handleFieldChange(formik, e);
+             //prevent the event
+             e.preventDefault()
+             //access value to update in userData
+             const { value } = e.target
+             //access key to update in userData
+             const key = e.target.name
+             //update the data with existing data
+             setpfData({ ...pfData, [key]: value })
+  
+    }
+    console.log(pfData);
+
+       //create an object to store datas from input details of Hrnoe
+       const [hroneData, setHroneData] = useState({
+        prefix: "",
+        firstNamehr: "",
+        middleName: "",
+        lastNamehr: "",
+        bloodGroup: "",
+        nationality:"",
+        officialEmail:"",
+        employeeId:""
+
+      
+    })
+      
+    const handleChangetwo = (e) =>{
+      handleFieldChange(formik, e);
+             //prevent the event
+             e.preventDefault()
+             //access value to update in userData
+             const { value } = e.target
+             //access key to update in userData
+             const key = e.target.name
+             //update the data with existing data
+             setHroneData({ ...hroneData, [key]: value })
+  
+    }
+    console.log(hroneData);
+    
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+
+        //api call
+        const response = await addCandidate(familyData)
+
+        if (response.status == 200) {
+            toast.success(response.data.message);
+
+            //reset all states datas
+            setFamily({
+              memberName: "",
+              relationship: "",
+              dateOfBirth: "",
+              emergencyContactNumber: "",
+              emailAddress: ""
+
+
+            })
+
+        } else {
+            toast.error(response.data.message)
+        }
+    }
+
+    
+    const handleSubmitOne = async (e) => {
+      e.preventDefault()
+
+
+      //api call
+      const response = await addCandidate(pfDataData)
+
+      if (response.status == 200) {
+          toast.success(response.data.message);
+
+          //reset all states datas
+          setpfData({
+            epfoUan: "",
+            pfNo: "",
+            adharCard: "",
+            panCard: "",
+            employeesName: "",
+            dateOfBirthAs:"",
+            gender:"",
+            maritalStatus:"",
+            fatherName:"",
+            accountNumber:"",
+            branch:"",
+            ifsc:""
+
+
+          })
+
+      } else {
+          toast.error(response.data.message)
+      }
+  }
+
+  
+  const handleSubmitTwo = async (e) => {
+    e.preventDefault()
+
+
+    //api call
+    const response = await addCandidate(hroneData)
+
+    if (response.status == 200) {
+        toast.success(response.data.message);
+
+        //reset all states datas
+        setHroneData({
+          prefix: "",
+          firstNamehr: "",
+          middleName: "",
+          lastNamehr: "",
+          bloodGroup: "",
+          nationality:"",
+          officialEmail:"",
+          employeeId:""
+
+
+        })
+
+    } else {
+        toast.error(response.data.message)
+    }
+}
+
+
 
   const formik = useFormik({
     initialValues,
@@ -23,7 +199,7 @@ function Form2() {
     },
   });
 
-  const handleChange = (e) => handleFieldChange(formik, e);
+
   return (
     
     <div className=' margin-mobile' style={{width:"100%"}}>
@@ -190,7 +366,7 @@ function Form2() {
           </Col>
         </Row>
         <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
+                <Button onClick={handleSubmit}
                   style={{
                     height:"35px" ,
                     fontSize:"15px",
@@ -261,7 +437,7 @@ function Form2() {
               <Form.Control className='input-field' type='text'
                placeholder='olivia' 
                name='epfoUan'
-               onChange={handleChange}
+               onChange={handleChangeone}
                onBlur={formik.handleBlur}
                value={formik.values.epfoUan}
              />
@@ -277,7 +453,7 @@ function Form2() {
               <Form.Control className='input-field' type='text' 
               placeholder='olivia' 
               name='pfNo'
-               onChange={handleChange}
+               onChange={handleChangeone}
                onBlur={formik.handleBlur}
                value={formik.values.pfNo}
              />
@@ -292,7 +468,7 @@ function Form2() {
               <Form.Control className='input-field' type='text' 
               placeholder='olivia' 
               name='adharCard'
-              onChange={handleChange}
+              onChange={handleChangeone}
               onBlur={formik.handleBlur}
               value={formik.values.adharCard}
             />
@@ -308,7 +484,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='panCard'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.panCard}
               />
@@ -323,7 +499,7 @@ function Form2() {
                 <Form.Control  className='input-field ' type="text"
                  placeholder="olivia"
                  name='employeesName'
-                 onChange={handleChange}
+                 onChange={handleChangeone}
                  onBlur={formik.handleBlur}
                  value={formik.values.employeesName}
                />
@@ -343,7 +519,7 @@ function Form2() {
                   <Form.Control  className='input-field' type="date"
                    placeholder="Select date" 
                    name='dateOfBirthAs'
-                   onChange={handleChange}
+                   onChange={handleChangeone}
                    onBlur={formik.handleBlur}
                    value={formik.values.dateOfBirthAs}
                    />
@@ -362,7 +538,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia"
                 name='gender'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.gender}
               />
@@ -377,7 +553,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='maritalStatus'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.maritalStatus}
               />
@@ -392,7 +568,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='fatherName'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.fatherName}
               />
@@ -410,7 +586,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia"
                 name='accountNumber'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.accountNumber}
               />
@@ -426,7 +602,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='branch'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.branch}
               />
@@ -441,7 +617,7 @@ function Form2() {
                 <Form.Control  className='input-field' type="text" 
                 placeholder="olivia" 
                 name='ifsc'
-                onChange={handleChange}
+                onChange={handleChangeone}
                 onBlur={formik.handleBlur}
                 value={formik.values.ifsc}
               />
@@ -456,7 +632,7 @@ function Form2() {
         </Row>
 
         <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
+                <Button onClick={handleSubmitOne}
                   style={{
                     height:"35px" ,
                     fontSize:"15px",
@@ -542,7 +718,7 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='prefix'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.prefix}
            />
@@ -557,7 +733,7 @@ function Form2() {
             <Form.Control className='input-field' type="text" 
             placeholder="olivia" 
             name='firstNamehr'
-            onChange={handleChange}
+            onChange={handleChangetwo}
             onBlur={formik.handleBlur}
             value={formik.values.firstNamehr}
           />
@@ -572,7 +748,7 @@ function Form2() {
             <Form.Control className='input-field' type="text" 
             placeholder="olivia" 
             name='middleName'
-            onChange={handleChange}
+            onChange={handleChangetwo}
             onBlur={formik.handleBlur}
             value={formik.values.middleName}
           />
@@ -590,7 +766,7 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='lastNamehr'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.lastNamehr}
            />
@@ -605,7 +781,7 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="oliva" 
              name='bloodGroup'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.bloodGroup}
            />
@@ -620,7 +796,7 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia" 
              name='nationality'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.nationality}
            />
@@ -642,7 +818,7 @@ function Form2() {
               <Form.Control className='input-field' type="email"
                placeholder="✉️ olivia@untitleedui.com" 
                name='officialEmail'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.officialEmail}
                />
@@ -658,7 +834,7 @@ function Form2() {
             <Form.Control className='input-field' type="text"
              placeholder="olivia"
              name='employeeId'
-             onChange={handleChange}
+             onChange={handleChangetwo}
              onBlur={formik.handleBlur}
              value={formik.values.employeeId}
            />
@@ -670,7 +846,7 @@ function Form2() {
       
       </Row>
       <div style={{ display: "flex", marginTop:"50px", marginBottom:"25px",gap:"10px" }}>
-                <Button
+                <Button onClick={handleSubmitTwo}
                   style={{
                     height:"35px" ,
                     fontSize:"15px",

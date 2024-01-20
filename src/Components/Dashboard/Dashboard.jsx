@@ -102,8 +102,8 @@ function Dashboard() {
 
 
   return (
-    <div className='container' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative', minHeight: '100vh' }} >
-      <Navbar
+    <div className='' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative'}} >
+       <Navbar
         bg="white"
         className='mb-0 n'
         variant="black"
@@ -115,7 +115,7 @@ function Dashboard() {
 
         }}
       >
-        <Container style={{ gap: "25px" }}>
+        <Container style={{gap:"25px"}}>
           <Navbar.Brand href="#home">
             <img
               alt="Techjays Logo"
@@ -125,11 +125,10 @@ function Dashboard() {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="d-none d-md-block" style={{
-              backgroundColor: " rgba(249, 250, 251, 1)",
-              boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-              borderRadius: "5px",
-              fontWeight: "500"
+            <Nav.Link href="#home" className="d-none d-md-block" style={{ backgroundColor: " rgba(249, 250, 251, 1)" ,  
+            boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+            borderRadius:"5px",
+            fontWeight:"500"
             }}
             >
               Dashboard
@@ -138,21 +137,20 @@ function Dashboard() {
         </Container>
       </Navbar>
 
-      <Nav className=' p-3 border ' variant="black" defaultActiveKey="/home"  >
-        <Nav.Item style={{ paddingLeft: "76px" }}>
-          <Nav.Link style={{
-            boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-            borderRadius: "5px", backgroundColor: " rgba(249, 250, 251, 1)",
-            fontWeight: "500"
-          }} className='na' href="/dashboard">All Candidates</Nav.Link>
+       <Nav className=' p-3 border ' variant="black" defaultActiveKey="/home"  >
+      <Nav.Item style={{paddingLeft:"76px"}}>
+        <Nav.Link style={{  boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+            borderRadius:"5px",backgroundColor: " rgba(249, 250, 251, 1)",
+            fontWeight:"500"}} className='na' href="/dashboard">All Candidates</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className='' href='/dashboard' eventKey="link-1" style={{ color: "black" }}>Rejected</Nav.Link>
         </Nav.Item>
 
       </Nav>
-      <div className={` ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} >
-        <div className=' d-flex mt-4   justify-content-between border bg-white'  >
+      <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
+        <div className=' d-flex mt-4   justify-content-between border bg-white'
+         style={{borderTopLeftRadius:"8px",borderTopRightRadius:"8px"}} >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
@@ -217,7 +215,8 @@ function Dashboard() {
 
 
         </MDBTable>
-        <nav className='border' style={{ backgroundColor: " white" }} >
+        <nav className='border' style={{ backgroundColor: " white",
+        borderBottomLeftRadius:"8px",borderBottomRightRadius:"8px" }}  >
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
 
             <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
@@ -228,7 +227,7 @@ function Dashboard() {
               numbers.map((n, i) => (
 
                 <li className={`page-item float-center ${currentPage === n ? 'active' : ''}`} key={i}>
-                  <a className='page-link   ' onClick={() => changeCpage(n)}>{n}</a>
+                  <a className='page-link  one ' onClick={() => changeCpage(n)}>{n}</a>
                 </li>
 
 

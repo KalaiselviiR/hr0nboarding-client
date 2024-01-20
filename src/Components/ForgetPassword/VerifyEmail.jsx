@@ -8,7 +8,7 @@ import { MdOutlineMail } from "react-icons/md";
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
-import { Verifymail } from '../../service/allapi';
+import { ResetPassword, Verifymail } from '../../service/allapi';
 
 function VerifyEmail() {
      //create an object to store datas from input
@@ -48,7 +48,7 @@ const handleSubmit = async (e) => {
  
    
     //api call
-    const response = await Verifymail(userData)
+    const response = await ResetPassword(userData)
     console.log(response);
     if(response.status==200){
     
@@ -84,7 +84,7 @@ const handleSubmit = async (e) => {
     </div>
      <div className='header2'>
       
-        <div className="subhead "><b>Verify Email</b>
+        <div className="subhead "><b>Forget Password</b>
         </div>
        
       

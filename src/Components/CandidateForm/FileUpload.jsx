@@ -14,7 +14,7 @@ function FileUpload({ label }) {
    // Event handler for file input change
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(e.target.files)
+    console.log(e.target.files[0])
 
       // Check if a file is selected
     if (!selectedFile) {
@@ -117,11 +117,11 @@ function FileUpload({ label }) {
               </div>
               <div className="file-info">
                 <p style={{ margin: "0" }}>{file.name}        
-                  <img style={{width:"25px",height:"25px",borderRadius:"50%"}} 
+                  <img className="ms-2 mt-4 " style={{width:"25px",height:"25px",borderRadius:"50%"}} 
                   src="https://img.freepik.com/premium-vector/check-mark-icon-circle-isolated-green-background-vector-illustration_230920-1405.jpg?w=740">
 
                   </img> </p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
+                <p  style={{ margin: "0", fontSize: "10px",marginTop:"-16px" }}>
                   {(file.size / 1024).toFixed(2)} KB 
                 </p>
       

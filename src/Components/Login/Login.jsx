@@ -18,7 +18,7 @@ function Login() {
   //create an object to store datas from input
   const [userData, setUser] = useState({
     email: "",
-    psw: ""
+    password: ""
 
   })
     //object for useNavigate
@@ -35,18 +35,18 @@ const userDetails = (e) => {
   setUser({ ...userData, [key]: value })
 
 }
-console.log(userData);
+
 
 const handleSubmit = async (e) => {
 
  
   e.preventDefault()
-  const { email, psw} = userData
+  const { email, password} = userData
   
  if (email == "") {
     toast.error('email requierd')
   }
-  else if (psw == "") {
+  else if (password == "") {
     toast.error('password requierd')
   }
  
@@ -55,15 +55,21 @@ const handleSubmit = async (e) => {
    
     //api call
     const response = await loginHr(userData)
-    console.log(response);
+    console.log(response.data);
     if(response.status==200){
     
-      if(response.data.message === "login Successfull"){
+      if(response.data.message === "Login successful"){
+        console.log(response.data.message);
         localStorage.setItem("email",email)
+       
         toast.success(response.data.message);
       setTimeout(()=> {
         navigate('/dashboard')
       }, 1500);
+      let userId = response.data.session.userId;
+      let userToken = response.data.session.token
+      localStorage.setItem("userId",userId)
+      localStorage.setItem("userToken",userToken);
        
       }else{
         toast.error(response.data.message);
@@ -72,7 +78,7 @@ const handleSubmit = async (e) => {
     //reset all states datas
     setUser({
       email: "",
-      psw: ""
+      password: ""
    
     })
     
@@ -116,7 +122,7 @@ const handleSubmit = async (e) => {
             <Form.Label className='labelss'>Password</Form.Label>
             <InputGroup>
             
-              <Form.Control onChange={userDetails} name='psw' className='input-field' type="password" placeholder="Enter password" />
+              <Form.Control onChange={userDetails} name='password' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
           
