@@ -1,9 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Image, ProgressBar } from "react-bootstrap";
 import './CandidateForm.css'
 
 // FileUpload component for handling file upload
-function FileUpload({ label }) {
+function FileUpload({ label,onFileChange, fileData }) {
    // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -26,6 +26,8 @@ function FileUpload({ label }) {
       setFile(selectedFile);
         // Initiate the file upload process
       uploadFile(selectedFile);
+    
+    
     }
   };
 
@@ -52,6 +54,11 @@ function FileUpload({ label }) {
     }, 200);
   };
 
+  
+  useEffect(() => {
+    onFileChange(file);
+  }, [file, onFileChange]);
+
   return (
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>
@@ -73,6 +80,7 @@ function FileUpload({ label }) {
           <input
             type="file"
             accept=".pdf"
+            required="true"
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
