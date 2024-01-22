@@ -84,7 +84,7 @@ function EditNewCandidate({ UserToEdit, close }) {
 
         <div className={styles.addMain}>
             <div className={styles.addHeader}>
-                <p> Add New Candidate</p>
+                <p> Edit Candidate</p>
                 <div>
                     <img onClick={handleClose} src={closeIcon} alt="" />
                 </div>

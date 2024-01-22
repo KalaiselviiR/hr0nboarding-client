@@ -63,7 +63,7 @@ function Dashboard() {
   }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const recordsPerPage = 2;
+  const recordsPerPage = 8;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allcandidate.slice(firstIndex, lastIndex);
@@ -97,14 +97,21 @@ function Dashboard() {
   const confirmDelete = async () => {
     // setInvokeModal(false)
 
-
     const response = await deleteCandidate(deleteId)
-    console.log(response)
+    if (response.status == 200) {
+      toast.success(response.data.message);
+      setInvokeModal(false)
+      getAllCandidate()
+
+  } else {
+      toast.error(response.data.message)
+  }
+ 
   }
 
 
   return (
-    <div className='' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative'}} >
+    <div className='' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative', minHeight: "100vh" }}>
        <Navbar
         bg="white"
         className='mb-0 n'
