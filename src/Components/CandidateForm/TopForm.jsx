@@ -47,7 +47,11 @@ const TopForm = () => {
     company: "",
     enjoyment: "",
     sneakpeek: "",
-  
+    photoFiles:null,
+    aadharCardFiles:null,
+    educationCertificateFiles:null, 
+    relievingLettersFiles:null, 
+    payslipFiles:null, 
 })
 
   //input form validation using formk and yup library
@@ -60,18 +64,31 @@ const TopForm = () => {
     },
   });
   // handle change function for validation errors
-  const handleChange = (e) =>{
-    handleFieldChange(formik, e);
-    //prevent the event
-    e.preventDefault()
-    //access vFormData
-    const { value } = e.target
-    //access key to update in userData
-    const key = e.target.name
-    //update the data with existing data
-    setFormData({ ...formData, [key]: value })
-
-  }
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value, type, files } = e.target;
+  
+    if (type === "file") {
+      // If the input is a file input, update the corresponding file name property
+      const fileNameProperty = `${name}FileName`;
+      setFormData((prevData) => ({
+        ...prevData,
+        [fileNameProperty]: files[0].name,
+      }));
+    }
+  
+    // Update both the form data and formik values
+    const key = name;
+    const updatedValue = type === "file" ? files[0] : value;
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [key]: updatedValue,
+    }));
+  
+    formik.handleChange(e); // Update formik values
+  };
+  
   console.log(formData)
 
   const handleSubmit = async (e) => {
@@ -79,7 +96,39 @@ const TopForm = () => {
 
 console.log(formData)
 
+const updatedFormData = {
+  ...formData, // Keep the existing formData properties
+  photoFiles:photoFiles || null,
+  aadharCardFiles:aadharCardFiles || null,
+  educationCertificateFiles: educationCertificateFiles || null,
+  relievingLettersFiles:relievingLettersFiles || null,
+  payslipFiles:payslipFiles || null,
+};
+
+console.log(updatedFormData);
 }
+
+const FileChange = (file, type) => {
+  switch (type) {
+    case "photo":
+      setPhotoFiles(file);
+      break;
+    case "aadharCard":
+      setAadharCardFiles(file);
+      break;
+    case "educationCertificate":
+      setEducationCertificateFiles(file);
+      break;
+    case "relievingLetters":
+      setRelievingLettersFiles(file);
+      break;
+    case "payslip":
+      setPayslipFiles(file);
+      break;
+    default:
+      break;
+  }
+};
 
 
 
@@ -449,6 +498,7 @@ console.log(formData)
                   controlId="photo"
                   acceptedFiles={photoFiles}
                   setAcceptedFiles={setPhotoFiles}
+                  onFileChange={(file) => FileChange(file, "photo")}
                 />
 
                 <FileUpload
@@ -456,6 +506,7 @@ console.log(formData)
                   controlId="aadharCard"
                   acceptedFiles={aadharCardFiles}
                   setAcceptedFiles={setAadharCardFiles}
+                  onFileChange={(file) => FileChange(file, "aadharCard")}
                 />
 
                 <FileUpload
@@ -463,6 +514,7 @@ console.log(formData)
                   controlId="educationCertificate"
                   acceptedFiles={educationCertificateFiles}
                   setAcceptedFiles={setEducationCertificateFiles}
+                  onFileChange={(file) => FileChange(file, "educationCertificate")}
                 />
 
                 <FileUpload
@@ -470,6 +522,7 @@ console.log(formData)
                   controlId="relievingLetters"
                   acceptedFiles={relievingLettersFiles}
                   setAcceptedFiles={setRelievingLettersFiles}
+                  onFileChange={(file) => FileChange(file, "relievingLetters")}
                 />
 
                 <FileUpload
@@ -477,6 +530,7 @@ console.log(formData)
                   controlId="payslip"
                   acceptedFiles={payslipFiles}
                   setAcceptedFiles={setPayslipFiles}
+                  onFileChange={(file) => FileChange(file, "payslip")}
                 />
 
                 <div
