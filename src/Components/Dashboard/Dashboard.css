@@ -125,6 +125,7 @@ li:hover {
 }
 
 .active{
+ 
   color: #7F56D9 !Important;
   border: none;
   background-color: #f4eafa !Important;

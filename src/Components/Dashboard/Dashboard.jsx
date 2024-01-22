@@ -9,6 +9,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import Nav from 'react-bootstrap/Nav';
+import { FiUser } from "react-icons/fi";
 import { deleteCandidate, getallCandidates } from '../../service/allapi';
 
 function Dashboard() {
@@ -143,6 +144,13 @@ function Dashboard() {
               Dashboard
             </Nav.Link>
           </Nav>
+          <Navbar.Brand href="#home">
+          <FiUser  className="d-inline-block align-top" style={{color:"#7F56D9"
+          ,height:"30px",width:'30px',borderRadius:"200px"
+          ,backgroundColor:" rgba(249, 245, 255, 1)",gap:"16px"}} />
+             
+
+          </Navbar.Brand>
         </Container>
       </Navbar>
 
