@@ -21,7 +21,7 @@ function App() {
       {/* Route for the Login page */}
       <Route path="/" element={<Login />} />
       <Route path="/verify" element={<VerifyEmail />} />
-      <Route path="/updatepass" element={<UpdatePassword />} />
+      <Route path="/updatepass/:id" element={<UpdatePassword />} />
         {/* Route for the Dashboard page */}
         <Route path="/dashboard" element={<Dashboard />} />
         {/* Route for the candidate Form */}
