@@ -95,7 +95,7 @@ const handleSubmit = async (e) => {
               <InputGroup.Text>
                 <MdOutlineMail  />
                 </InputGroup.Text>
-              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="olivia@untitledui.com" />
+              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="Enter email" />
             </InputGroup>
           </Form.Group>
   

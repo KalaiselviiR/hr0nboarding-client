@@ -41,16 +41,16 @@ const handleSubmit = async (e) => {
  if (psw == "") {
     toast.error('Password requierd')
   }
-  else if (cpsw == "") {
-    toast.error('Confirm password requierd')
-  }
+  // else if (cpsw == "") {
+  //   toast.error('Confirm password requierd')
+  // }
 
  
   else {
  
    
     //api call
-    const response = await Verifymail(userData)
+    const response = await Updatepass(userData)
     console.log(response);
     if(response.status==200){
 
@@ -94,17 +94,17 @@ const handleSubmit = async (e) => {
             <Form.Label className='labelss'>Password</Form.Label>
             <InputGroup>
             
-              <Form.Control onChange={userDetails} name='psw' className='input-field' type="password" placeholder="Enter password" />
+              <Form.Control onChange={userDetails}  name='psw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="officialEmailAddress" >
+          {/* <Form.Group className="mb-3" controlId="officialEmailAddress" >
             <Form.Label className='labelss'>Confirm Password</Form.Label>
             <InputGroup>
             
               <Form.Control onChange={userDetails} name='cpsw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
-  
+   */}
       </div>
 
       <div className="submit-box">
