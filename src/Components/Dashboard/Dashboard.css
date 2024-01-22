@@ -29,10 +29,6 @@ p {
 
 }
 
-/* button:hover {
-  transform: scale(1.03);
-  transition: transform 0.1s ease-in-out;
-} */
 
 li:hover {
   transform: scale(1.05);
@@ -117,30 +113,20 @@ li:hover {
   color: #A020F0 !important;
 }
 
-
-
-.pagination {
-  color: black;
-  background-color: white;
-}
-
-.pagination>.active>a {
-  color: #7F56D9;
-  background-color: #f4eafa !Important;
-
-}
-
-.pagination>.active>a:hover {
-  background-color: #f4eafa !Important;
-  color: #7F56D9;
-}
-
 .page-link {
  
   color: black;
 }
+
 .one{
   border: none;
+}
+
+.active{
+  color: #7F56D9;
+  border: none;
+  background-color: #f4eafa !Important;
+  border-radius: 8px;
 }
 
 .na {

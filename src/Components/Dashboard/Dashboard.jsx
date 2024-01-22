@@ -34,6 +34,7 @@ function Dashboard() {
 
   const closeAddModal = () => {
     setAddModalIsOpen(false)
+    getAllCandidate()
   }
   const openEditModal = (user) => {
     setUserToEdit(user)
@@ -42,6 +43,7 @@ function Dashboard() {
 
   const closeEditModal = () => {
     setEditModalIsOpen(false)
+    getAllCandidate()
   }
 
   useEffect(() => {
@@ -61,7 +63,7 @@ function Dashboard() {
   }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const recordsPerPage = 7;
+  const recordsPerPage = 2;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allcandidate.slice(firstIndex, lastIndex);
@@ -223,16 +225,19 @@ function Dashboard() {
               <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
 
             </li>
-            {
+ 
+               <div className='page-item d-flex'>
+               {
               numbers.map((n, i) => (
-
-                <li className={`page-item float-center ${currentPage === n ? 'active' : ''}`} key={i}>
-                  <a className='page-link  one ' onClick={() => changeCpage(n)}>{n}</a>
+                <li className="ms-2" key={i} >
+                  <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} onClick={() => changeCpage(n)}>{n}</a>
                 </li>
+                  ))
+                }
+                </div>
 
 
-              ))
-            }
+            
             <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
               <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index  ' onClick={nextPage}>Next </a>
 

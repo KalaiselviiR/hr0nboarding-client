@@ -45,6 +45,7 @@ function EditNewCandidate({ UserToEdit, close }) {
         // console.log(response);
         if (response.status == 200) {
             toast.success(response.data.message);
+            close()
 
             //reset all states datas
             setEditData({
@@ -116,6 +117,7 @@ function EditNewCandidate({ UserToEdit, close }) {
                             name="lname"
                             pattern='^[a-zA-Z][a-zA-Z\s]*'
                             title='Enter a valid Last Name'
+                            value={editdata.lname}
                         />
 
                     </div>
@@ -164,7 +166,7 @@ function EditNewCandidate({ UserToEdit, close }) {
                     </div>
                     <div className={styles.input}>
                         <input id='date' type="date" name='jdate' onChange={userDetails}
-                            value={moment(editdata.jdate).format("DD/MM/YYYY")} />
+                            value={moment(editdata.jdate).format("yyyy-MM-DD")} />
                     </div>
                 </div >
                 <div className={styles.checkBoxDiv} >

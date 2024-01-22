@@ -44,9 +44,7 @@ function AddNewCandidate({ close }) {
 
         if (response.status == 200) {
             toast.success(response.data.message);
-            setTimeout(() => {
-                navigate('/dashboard')
-            }, 1500);
+            close()
 
             //reset all states datas
             setUser({
