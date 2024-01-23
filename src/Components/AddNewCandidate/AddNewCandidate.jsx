@@ -17,7 +17,7 @@ function AddNewCandidate({ close }) {
         dsesignation: "",
         jdate: "",
         region: "",
-        status:""
+        status: ""
     })
     //object for useNavigate
     const navigate = useNavigate()
@@ -56,7 +56,7 @@ function AddNewCandidate({ close }) {
                 dsesignation: "",
                 jdate: "",
                 region: "",
-                status:""
+                status: ""
 
             })
 
@@ -74,12 +74,12 @@ function AddNewCandidate({ close }) {
         }
     }
     return (
-        <form>
+        <form onSubmit={handleSubmit} >
             <div className={styles.addMain}>
                 <div className={styles.addHeader}>
                     <p> Add New Candidate</p>
                     <div>
-                        <img onClick={handleClose} src={closeIcon} alt="" />
+                        <img onClick={handleClose} src={closeIcon} alt="close-icon" />
                     </div>
                 </div>
                 <div className={styles.addBody}>
@@ -90,7 +90,7 @@ function AddNewCandidate({ close }) {
                         <div className={styles.input}>
                             <input name="fname" required onChange={userDetails} id='nam'
                                 type="text"
-                                placeholder='olivia'
+                                placeholder='First Name'
                                 pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
                                 title='First Name must be atleat 3 charecters long'
 
@@ -107,7 +107,7 @@ function AddNewCandidate({ close }) {
                             <input
                                 type="text"
                                 required onChange={userDetails}
-                                placeholder='olivia'
+                                placeholder='Last Name'
                                 name="lname"
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
                                 title='Enter a valid Last Name'
@@ -122,10 +122,11 @@ function AddNewCandidate({ close }) {
                         <div className={styles.input}>
                             <input
                                 type="email"
-                                placeholder='olivia@techjays.com'
+                                placeholder='Email'
                                 name="email"
                                 required
                                 onChange={userDetails}
+                               
                             />
                         </div>
                     </div>
@@ -141,8 +142,9 @@ function AddNewCandidate({ close }) {
                             <input type="text"
                                 placeholder='8845789956'
                                 name="phno"
+                                required
                                 onChange={userDetails}
-                                pattern='^[0-9]+$'
+                                pattern='^\d{10,}$'
                                 title='Enter a valid phone number'
                             />
                         </div>
@@ -154,7 +156,8 @@ function AddNewCandidate({ close }) {
                         <div className={styles.input}>
                             <input
                                 type="text"
-                                placeholder='Developer'
+                                required
+                                placeholder='Designation'
                                 name="dsesignation"
                                 onChange={userDetails}
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
@@ -170,6 +173,7 @@ function AddNewCandidate({ close }) {
                         <div className={styles.input}>
                             <input
                                 id='date'
+                                required
                                 type="date"
                                 name="jdate"
                                 onChange={userDetails}
@@ -186,7 +190,7 @@ function AddNewCandidate({ close }) {
                         </div>
                     </div>
                     <div className={styles.submitDiv}>
-                        <button onClick={handleSubmit}>Submit</button>
+                        <button type='submit'>Submit</button>
                     </div>
                 </div >
             </div>

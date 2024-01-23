@@ -1,5 +1,5 @@
 import styles from './ResendDocument.module.css'
-
+import closeIcon from '../../assets/closeIcon.svg'
 
 
 function ResendDocument({ closeModal }) {
@@ -7,8 +7,14 @@ function ResendDocument({ closeModal }) {
 
     const handleSubmit = () => {
 
-        
+
         closeModal()
+    }
+
+    const handleClose = () => {
+        if (closeModal) {
+            closeModal()
+        }
     }
 
 
@@ -17,6 +23,9 @@ function ResendDocument({ closeModal }) {
             <div className={styles.main}>
                 <div className={styles.heading}>
                     <p>Resend Document</p>
+                    <div>
+                        <img onClick={handleClose} src={closeIcon} alt="closeIcon" />
+                    </div>
                 </div>
 
                 <div className={styles.checkBoxDiv}>

@@ -78,9 +78,10 @@ li:hover {
 .addCandidateModal {
   width: 400px;
   position: absolute;
-  top: 60%;
+  position: absolute;
+  top: 0;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
   z-index: 11;
   /* margin: 20px 0px; */
 }
