@@ -61,6 +61,10 @@ li:hover {
   background-color: rgb(231, 231, 250) !important;
   color: rgb(20, 85, 196);
 }
+.red {
+  background-color: rgb(251, 230, 230) !important;
+  color: red;
+}
 
 .icon2 {
   margin-left: 24px;
