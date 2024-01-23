@@ -16,7 +16,8 @@ function AddNewCandidate({ close }) {
         phno: "",
         dsesignation: "",
         jdate: "",
-        region: ""
+        region: "",
+        status:""
     })
     //object for useNavigate
     const navigate = useNavigate()
@@ -54,7 +55,8 @@ function AddNewCandidate({ close }) {
                 phno: "",
                 dsesignation: "",
                 jdate: "",
-                region: ""
+                region: "",
+                status:""
 
             })
 

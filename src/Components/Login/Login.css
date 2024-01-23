@@ -31,7 +31,7 @@
     line-height: 37.52px;
     
     font-size: 31px;
-    font-weight: 500;
+    font-weight: 300;
     inline-size: auto;
     margin-bottom: 50px;
 }
@@ -98,7 +98,7 @@
     cursor: pointer;
     background-color: 
     #7F56D9;
-    border-radius: 20px;
+    border-radius: 8px;
     border: none;
     padding: 10px;
     width:400px ;
@@ -114,7 +114,7 @@
     height: 60px;
     color: white;
     background: #3C009D;
-    border-radius: 25px;
+    border-radius: 8px;
     font-size: 19px;
     font-weight: 700;
     cursor: pointer;
