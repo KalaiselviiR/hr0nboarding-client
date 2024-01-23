@@ -44,8 +44,8 @@ const handleChange = async (e) => {
   const { email, password } = userData;
 
   // Email validation
-  const emailRegex = /\b@techjays\.com$/;
-  if (!emailRegex.test(email)) {
+  const allowedEmail = 'techjayshr@techjays.com';
+  if (email !== allowedEmail) {
     toast.error('Invalid email address');
     return;
   }
