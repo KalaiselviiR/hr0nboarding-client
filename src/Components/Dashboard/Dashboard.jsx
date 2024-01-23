@@ -64,7 +64,7 @@ function Dashboard() {
   }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const recordsPerPage = 8;
+  const recordsPerPage = 10;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allcandidate.slice(firstIndex, lastIndex);

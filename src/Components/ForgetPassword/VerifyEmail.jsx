@@ -8,7 +8,7 @@ import { MdOutlineMail } from "react-icons/md";
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
-import {  Updatepass } from '../../service/allapi';
+import { Verifymail } from '../../service/allapi';
 
 function VerifyEmail() {
      //create an object to store datas from input
