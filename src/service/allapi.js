@@ -22,6 +22,11 @@ export const ResetPassword=async(id,body)=>{
     return await commonRequest("PUT",`${BASE_URL}/api/hr-resetpass/${id}`,body)
 }
 
+//Update password
+export const Updatepass=async(id,body)=>{
+    return await commonRequest("PUT",`${BASE_URL}/api/updatepass/${uid}`,body)
+}
+
 //Add Candidate
 export const addCandidate=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/add-candidate`,body)
