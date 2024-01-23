@@ -139,7 +139,7 @@ const handleChange = async (e) => {
         </div>
       <div className="submit-box">
       <Button
-            style={{ backgroundColor: '#7F56D9', border: 'none' }}
+            style={{ backgroundColor: '#7F56D9', border: '10px' }}
             className='btn-login' onClick={handleChange}
           >
             Login
