@@ -55,7 +55,11 @@ export const validationSchema = Yup.object().shape({
   lastName: Yup.string()
     .matches(/^[^\d]+$/, "Last Name should not contain numbers")
     .required("Last Name is required"),
-  email: Yup.string().email("Invalid email").required("Email is required"),
+   email: Yup.string()
+    .email("Invalid email")
+    .required("Email is required")
+    .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
+  
   phoneNumber: Yup.string()
     .matches(/^\+?[0-9]+$/, "Invalid phone number")
     .required("Phone Number is required"),
@@ -84,8 +88,9 @@ export const validationSchema = Yup.object().shape({
     .matches(/^\+?[0-9]+$/, "Invalid phone number")
     .required("Phone Number is required"),
   emailAddress: Yup.string()
-    .email("Invalid email")
-    .required("Email is required"),
+  .email("Invalid email")
+  .required("Email is required")
+  .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
 
   // bottomForm-2
   epfoUan: Yup.string()
@@ -141,8 +146,9 @@ export const validationSchema = Yup.object().shape({
     .matches(/^[^\d]+$/, "Nationality should not contain numbers")
     .required("Nationality is required"),
   officialEmail: Yup.string()
-    .email("Invalid email")
-    .required("Email is required"),  
+  .email("Invalid email")
+  .required("Email is required")
+  .matches(/@techjays\.com$/, "Email must includes from @techjays.com domain"),  
   employeeId: Yup.string().required("Employee Id is Required"),
 });
 
@@ -179,11 +185,14 @@ export const handleFieldChange = (formik, e) => {
     case "officialEmail":  
       // Your custom email validation logic
       // For example, checking if it contains '@'
-      if (!value.includes("@")) {
-        formik.setFieldError(name, "Invalid email format");
+      const requiredDomain = "techjays";
+
+      if (!value.includes("@") || value.split("@")[1] !== requiredDomain) {
+        formik.setFieldError(name, "Invalid email must include @techjays");
       } else {
         formik.setFieldError(name, "");
       }
+      
       break;
 
     case "phoneNumber":

@@ -32,6 +32,14 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
+  
+  const [inputType, setInputType] = useState('text');
+  
+
+  const handleFocus = () => {
+    setInputType('date');
+  };
+
    //create an object to store datas from input family details
    const [formData, setFormData] = useState({
     firstName: "",
@@ -225,7 +233,7 @@ const FileChange = (file, type) => {
                   <Form.Label className="labelss">First Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="olivia"
+                    placeholder="First Name"
                     name="firstName"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -241,7 +249,7 @@ const FileChange = (file, type) => {
                   <Form.Label className="labelss">Last Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="olivia"
+                    placeholder="Last Name"
                     name="lastName"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -257,7 +265,7 @@ const FileChange = (file, type) => {
                   <Form.Label className="labelss">Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="✉️ olivia@untitleedui.com"
+                    placeholder="✉️ Email"
                     name="email"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -307,7 +315,7 @@ const FileChange = (file, type) => {
                   <Form.Label className="labelss">Designation</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Olivia"
+                    placeholder="Designation"
                     name="designation"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -328,8 +336,9 @@ const FileChange = (file, type) => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control
-                      type="date"
-                      placeholder="Select date"
+                      type={inputType}
+                      onFocus={handleFocus}
+                      placeholder="Date"
                       name="dateOfJoining"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
@@ -350,7 +359,7 @@ const FileChange = (file, type) => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                    placeholder="Present Address"
                     name="presentAddress"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -371,7 +380,7 @@ const FileChange = (file, type) => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                    placeholder="Permanent Address"
                     name="permanentAddress"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
