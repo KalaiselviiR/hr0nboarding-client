@@ -10,7 +10,7 @@ import { MdOutlineMail } from "react-icons/md";
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
-import { loginHr } from '../../service/allapi';
+import { loginHr, registerHr } from '../../service/allapi';
 
 function Login() {
   
@@ -56,8 +56,29 @@ const handleChange = async (e) => {
     return;
   }
 
-  // API call
   try {
+    // API call for registration
+    const register = await registerHr(userData);
+    console.log(register.data);
+
+    if (register.status === 201) {
+      if (register.data.message === "Signup Successfully") {
+        console.log(register.data.message);
+        localStorage.setItem("email", email);
+        
+
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1500);
+
+        let userId = register.data.session.userId;
+        let userToken = register.data.session.token;
+        localStorage.setItem("userId", userId);
+        localStorage.setItem("userToken", userToken);
+      }
+    }
+
+    // API call for login
     const response = await loginHr(userData);
     console.log(response.data);
 
@@ -75,25 +96,19 @@ const handleChange = async (e) => {
         let userToken = response.data.session.token;
         localStorage.setItem("userId", userId);
         localStorage.setItem("userToken", userToken);
-      } else {
+      } else if (response.data.message === "Invalid Credentials") {
         toast.error(response.data.message);
       }
-
-      // Reset all states data
-      setUser({
-        email: "",
-        password: ""
-      });
-
-      // Redirection to home
     } else {
       toast.error('Unexpected error occurred');
     }
   } catch (error) {
     console.error('API call failed', error);
-    toast.error('Failed to login. Please try again later.');
+    toast.error('Failed to perform the operation. Please try again later.');
   }
 };
+
+
 
 
   return (
@@ -121,7 +136,7 @@ const handleChange = async (e) => {
             </InputGroup>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="officialEmailAddress" >
+          <Form.Group className="mb-3" controlId="officialPassword" >
             <Form.Label className='labelss'>Password</Form.Label>
             <InputGroup>
             
