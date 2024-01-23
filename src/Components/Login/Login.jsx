@@ -127,7 +127,7 @@ const handleChange = async (e) => {
       
       <div  >
       <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss'>Email</Form.Label>
+            <Form.Label className='labelss' >Email </Form.Label>
             <InputGroup>
               <InputGroup.Text>
                 <MdOutlineMail  />
