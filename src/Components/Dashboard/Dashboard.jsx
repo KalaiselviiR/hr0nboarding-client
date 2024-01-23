@@ -212,8 +212,12 @@ function Dashboard() {
                   </td>
                   <td>{i.email}</td>
                   <td>
-                    <MDBBadge className="violet" pill>
-                      Active
+                    <MDBBadge className={` ${i.status === "Completed" ? 'green' : ""
+                     || i.status === "Active" ? 'violet' : ""
+                     || i.status === "Pending" ? 'orange' : ""
+                     || i.status === "Review pending" ? 'blue' : ""
+                     || i.status === "Rejected" ? 'red' : "" }`} pill>
+                     {i.status}
                     </MDBBadge>
 
                   </td>
