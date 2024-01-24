@@ -115,7 +115,7 @@ function FileUpload({ label,onFileChange, fileData }) {
               }}
             >
             
-              <div className="pdf-image" style={{ height: "50px" }}>
+              <div className="pdf-image" style={{ height: "50px",}}>
                 <Image
                   src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
                   alt="PDF"
@@ -123,24 +123,27 @@ function FileUpload({ label,onFileChange, fileData }) {
                   height="50px"
                 />
               </div>
-              <div className="file-info">
-                <p style={{ margin: "0" }}>{file.name}        
-                  <img className="ms-2 mt-4 " style={{width:"25px",height:"25px",borderRadius:"50%"}} 
-                  src="https://img.freepik.com/premium-vector/check-mark-icon-circle-isolated-green-background-vector-illustration_230920-1405.jpg?w=740">
-
-                  </img> </p>
-                <p  style={{ margin: "0", fontSize: "10px",marginTop:"-16px" }}>
+              <div className="file-info  ">
+                <p style={{ margin: "0" ,marginTop:"10px"}}>{file.name}   
+                    
+                  </p>
+                <p  style={{ margin: "0", fontSize: "10px",marginTop:"-1px" }}>
                   {(file.size / 1024).toFixed(2)} KB 
                 </p>
-      
+              <div className="Bar">
                 <ProgressBar
                 
                 now={progress}
                 label={`${progress}%`}
                 // variant="custom"
                 style={{ marginBottom: "10px",height:"10px",width:"250px" }}
-                className="custom-progress-bar"
+                className="custom-progress-bar "
               />
+               <img className="TicksImage  " style={{width:"25px",height:"25px",borderRadius:"50%"}} 
+                  src="https://img.freepik.com/premium-vector/check-mark-icon-circle-isolated-green-background-vector-illustration_230920-1405.jpg?w=740">
+
+                  </img>
+                  </div>
               </div>
               
             </div>

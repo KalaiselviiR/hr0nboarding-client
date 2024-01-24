@@ -99,3 +99,12 @@ body{
     margin-left: -10px;
     margin-bottom: 3px;
 }
+
+.TicksImage{
+    margin-top: -24px;
+    margin-left: -1px;
+}
+.Bar{
+    display: flex;
+
+}
