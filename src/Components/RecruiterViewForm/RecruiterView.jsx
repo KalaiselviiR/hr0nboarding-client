@@ -18,6 +18,8 @@ import { useFormik } from "formik";
 import RecruiterFileView from "./DocumentView";
 import BottomSection from "./bottomsection";
 import ResendDocument from '../ResendDocument/ResendDocument'
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -38,6 +40,18 @@ const RecruiterForm = () => {
 
   const closeResendModal = () => {
     setIsResendModalOpen(false)
+  }
+
+  const handleResendError = (error) => {
+    toast.error(error, {
+      position: "top-center"
+    });
+  }
+
+  const handleResendSuccess = (successMessage) => {
+    toast.success(successMessage, {
+      position: "top-center"
+    });
   }
 
 
@@ -403,7 +417,14 @@ const RecruiterForm = () => {
         <BottomSection />
       </div>
 
-      {isResendModalOpen && <ResendDocument closeModal={closeResendModal} />}
+      {isResendModalOpen &&
+       <ResendDocument closeModal={closeResendModal}
+       onApiError={handleResendError}
+       onApiSuccess={handleResendSuccess}
+       />}
+       <ToastContainer
+       autoClose={2000}
+       />
     </>
   );
 };

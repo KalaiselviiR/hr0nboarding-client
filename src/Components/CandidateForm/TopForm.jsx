@@ -32,9 +32,9 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
-  
-   //create an object to store datas from input family details
-   const [formData, setFormData] = useState({
+  //create an object to store datas from input family details
+  const [formData, setFormData] = useState({
+
     firstName: "",
     lastName: "",
     email: "",
@@ -48,12 +48,12 @@ const TopForm = () => {
     company: "",
     enjoyment: "",
     sneakpeek: "",
-    photoFiles:null,
-    aadharCardFiles:null,
-    educationCertificateFiles:null, 
-    relievingLettersFiles:null, 
-    payslipFiles:null, 
-})
+    photoFiles: null,
+    aadharCardFiles: null,
+    educationCertificateFiles: null,
+    relievingLettersFiles: null,
+    payslipFiles: null,
+  })
 
 const [form2Data, setForm2Data] = useState({
         memberName: "",
@@ -111,7 +111,7 @@ const [form2Data, setForm2Data] = useState({
   const handleChange = (e) => {
     e.preventDefault();
     const { name, value, type, files } = e.target;
-  
+
     if (type === "file") {
       // If the input is a file input, update the corresponding file name property
       const fileNameProperty = `${name}FileName`;
@@ -120,79 +120,87 @@ const [form2Data, setForm2Data] = useState({
         [fileNameProperty]: files[0].name,
       }));
     }
-  
+
     // Update both the form data and formik values
     const key = name;
     const updatedValue = type === "file" ? files[0] : value;
-  
+
     setFormData((prevData) => ({
       ...prevData,
       [key]: updatedValue,
     }));
-  
+
     formik.handleChange(e); // Update formik values
   };
-  
+
   console.log(formData)
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Trigger Formik's validation
     formik.handleSubmit();
 
-  
     // Check if there are any errors in the form
     // if (formik.isValid) {
     //   console.log("Form is valid. Proceeding with form submission.");
-  
-      // Create an updated form data object
-      const updatedFormData = {
-        ...formData,
-        photoFiles: photoFiles || null,
-        aadharCardFiles: aadharCardFiles || null,
-        educationCertificateFiles: educationCertificateFiles || null,
-        relievingLettersFiles: relievingLettersFiles || null,
-        payslipFiles: payslipFiles || null,
-      };
-  
-      // Log the updated form data
-      console.log(updatedFormData);
-  
-      // Perform any additional actions or API calls if needed
+
+    // Create an updated form data object
+    const updatedFormData = {
+      ...formData,
+      photoFiles: photoFiles || null,
+      aadharCardFiles: aadharCardFiles || null,
+      educationCertificateFiles: educationCertificateFiles || null,
+      relievingLettersFiles: relievingLettersFiles || null,
+      payslipFiles: payslipFiles || null,
+    };
+
+    // Log the updated form data
+    console.log(updatedFormData);
+
+    // Perform any additional actions or API calls if needed
     // } else {
     //   console.log("Form contains validation errors. Please fix them.");
     // }
   };
 
-  
-  
-
-const FileChange = (file, type) => {
-  switch (type) {
-    case "photo":
-      setPhotoFiles(file);
-      break;
-    case "aadharCard":
-      setAadharCardFiles(file);
-      break;
-    case "educationCertificate":
-      setEducationCertificateFiles(file);
-      break;
-    case "relievingLetters":
-      setRelievingLettersFiles(file);
-      break;
-    case "payslip":
-      setPayslipFiles(file);
-      break;
-    default:
-      break;
-  }
-};
 
 
+
+  const FileChange = (file, type) => {
+    switch (type) {
+      case "photo":
+        setPhotoFiles(file);
+        break;
+      case "aadharCard":
+        setAadharCardFiles(file);
+        break;
+      case "educationCertificate":
+        setEducationCertificateFiles(file);
+        break;
+      case "relievingLetters":
+        setRelievingLettersFiles(file);
+        break;
+      case "payslip":
+        setPayslipFiles(file);
+        break;
+      default:
+        break;
+    }
+  };
+
+  const handleSameAsPresentAddressChange = (e) => {
+    const isChecked = e.target.checked;
+
+    // If checkbox is checked, update permanentAddress with presentAddress
+    // If checkbox is unchecked, leave permanentAddress unchanged
+    formik.setValues({
+      ...formik.values, // Spread other form values
+      permanentAddress: isChecked ? formik.values.presentAddress : formik.values.permanentAddress,
+    });
+  };
 
   return (
     <>
@@ -399,7 +407,7 @@ const FileChange = (file, type) => {
                     />
                   </InputGroup>
                   {formik.touched.dateOfJoining &&
-                  formik.errors.dateOfJoining ? (
+                    formik.errors.dateOfJoining ? (
                     <div className="text-danger">
                       {formik.errors.dateOfJoining}
                     </div>
@@ -420,7 +428,7 @@ const FileChange = (file, type) => {
                   />
 
                   {formik.touched.presentAddress &&
-                  formik.errors.presentAddress ? (
+                    formik.errors.presentAddress ? (
                     <div className="text-danger">
                       {formik.errors.presentAddress}
                     </div>
@@ -438,14 +446,26 @@ const FileChange = (file, type) => {
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.permanentAddress}
+                    disabled={formik.values.sameAsPresentAddress}
                   />
                   <Form.Check
                     type="checkbox"
-                    label="same as present address"
-                 
+                    id="sameAsPresentAddress"
+                    label="Same as Present Address"
+                    name="sameAsPresentAddress"
+                    onChange={(e) => {
+                      const isChecked = e.target.checked;
+                      formik.setValues({
+                        ...formik.values,
+                        sameAsPresentAddress: isChecked,
+                        permanentAddress: isChecked
+                          ? formik.values.presentAddress
+                          : formik.values.permanentAddress,
+                      });
+                    }}
                   />
                   {formik.touched.permanentAddress &&
-                  formik.errors.permanentAddress ? (
+                    formik.errors.permanentAddress ? (
                     <div className="text-danger">
                       {formik.errors.permanentAddress}
                     </div>
@@ -467,7 +487,7 @@ const FileChange = (file, type) => {
                     value={formik.values.aboutYourself}
                   />
                   {formik.touched.aboutYourself &&
-                  formik.errors.aboutYourself ? (
+                    formik.errors.aboutYourself ? (
                     <div className="text-danger">
                       {formik.errors.aboutYourself}
                     </div>
@@ -638,28 +658,29 @@ const FileChange = (file, type) => {
         updateForm2Data={updateForm2Data}
         updateCandidateData={updateCandidateData}/>
 
-  <div style={{ display: "flex", 
-  justifyContent: "center",
-  marginBottom:"20px",
-  
-  }}>
-  <Button onClick={handleSubmit}
-    style={{
-      height: "35px",
-      fontSize: "15px",
-      backgroundColor: "rgb(210, 164, 250)",
-      color: "white",
-      borderColor: "rgb(210, 164, 250)",
-      fontWeight: "500",
-      marginRight: "10px",
-    }}
-  >
-    Submit
-  </Button>
- 
-</div>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
 
-               
+        }}>
+          <Button onClick={handleSubmit}
+            style={{
+              height: "35px",
+              fontSize: "15px",
+              backgroundColor: "rgb(210, 164, 250)",
+              color: "white",
+              borderColor: "rgb(210, 164, 250)",
+              fontWeight: "500",
+              marginRight: "10px",
+            }}
+          >
+            Submit
+          </Button>
+
+        </div>
+
+
       </div>
     </>
   );
