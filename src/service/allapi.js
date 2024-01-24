@@ -44,7 +44,7 @@ export const editCandidate=async(id,body)=>{
 
 //Delete a Candidate
 export const deleteCandidate=async(id)=>{
-    return await commonRequest("DELETE",`${BASE_URL}/api/delete-candidate/${id}`,"")
+    return await commonRequest("POST",`${BASE_URL}/api/delete-candidate/${id}`,"")
 }
 
 //get all Candidates to Display in table
