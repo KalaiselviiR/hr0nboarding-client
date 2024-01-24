@@ -44,15 +44,15 @@ const handleChange = async (e) => {
   const { email, password } = userData;
 
   // Email validation
-  const allowedEmail = 'techjayshr@techjays.com';
-  if (email !== allowedEmail) {
+  const emailRegex = /\b@techjays\.com$/;
+  if (!emailRegex.test(email)) {
     toast.error('Invalid email address');
     return;
   }
 
   // Password validation
   if (password.length < 8) {
-    toast.error('Password must be at least 8 characters long');
+    toast.error('Incorrect password');
     return;
   }
 
