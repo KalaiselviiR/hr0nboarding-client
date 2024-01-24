@@ -29,7 +29,7 @@ function App() {
         <Route path="/add" element={<AddNewCandidate />} />
         <Route path="/candidateForm" element={<TopForm />} />
         {/* Route for the candidate Form Recruiter View*/}
-        <Route path="/recruiterView" element={<RecruiterForm />} />
+        <Route path="/recruiterView/:id" element={<RecruiterForm />} />
 
        
 

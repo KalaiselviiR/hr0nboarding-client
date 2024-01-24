@@ -176,14 +176,16 @@ function Dashboard() {
         </Nav.Item>
 
       </Nav>
-      <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`} style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
+      <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`}
+       style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
         <div className=' d-flex mt-4   justify-content-between border bg-white'
          style={{borderTopLeftRadius:"8px",borderTopRightRadius:"8px"}} >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
 
 
-          <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
+          <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
+          onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
             Add new candidate
           </button>
         </div>
@@ -192,7 +194,8 @@ function Dashboard() {
 
 
             <tr >
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }} scope='col' className='text-start '>Candidate</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }}
+               scope='col' className='text-start '>Candidate</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
@@ -212,7 +215,9 @@ function Dashboard() {
                     <div className='d-flex align-items-center'>
 
                       <div className='ms-3'>
-                        <p style={{ padding: "12px" }} className='fw-normal mb-1'>{i.fname} {i.lname}</p>
+                        <p style={{ padding: "8px" }} className='fw-normal mb-1'>
+                          <a href={`/recruiterView/${i._id}`} style={{textDecoration:"none",color:'black'}}>
+                            {i.fname} {i.lname}</a></p>
 
                       </div>
                     </div>
@@ -253,7 +258,8 @@ function Dashboard() {
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
 
             <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
-              <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
+              <a href='#' style={{ borderRadius: "8px" }}
+               className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
 
             </li>
  
@@ -261,7 +267,8 @@ function Dashboard() {
                {
               numbers.map((n, i) => (
                 <li className="ms-2" key={i} >
-                  <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} onClick={() => changeCpage(n)}>{n}</a>
+                  <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} 
+                  onClick={() => changeCpage(n)}>{n}</a>
                 </li>
                   ))
                 }
@@ -270,7 +277,8 @@ function Dashboard() {
 
             
             <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
-              <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index  ' onClick={nextPage}>Next </a>
+              <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
+              onClick={nextPage}>Next </a>
 
             </li>
           </ul>
