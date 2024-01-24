@@ -43,6 +43,10 @@
     margin-bottom: 0;
 }
 
+.heading div img:hover {
+    cursor: pointer;
+}
+
 .checkBoxDiv div {
     display: flex;
     align-items: center;
@@ -57,7 +61,7 @@
     height: 16px;
 }
 
-.checkBoxDiv div p {
+.checkBoxDiv div label {
     margin-bottom: 0;
     margin-left: 10px;
     color: #4E5562;
@@ -116,3 +120,9 @@
     background: #FFF;
     box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
+
+.error {
+    color: #ff0000; 
+    font-size: 14px;
+    margin-top: 8px; 
+  }

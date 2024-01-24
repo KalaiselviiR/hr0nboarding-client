@@ -61,7 +61,16 @@ export const CreatePro=async(body,headers)=>{
 //Candidate Api
 
 
+export const createCandidateDetails=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/create-candidatedetails `,body)
+}
 
 
 
 
+
+//Resend Documents
+
+export const resendDocuments=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/resend-documents`,body)
+}
