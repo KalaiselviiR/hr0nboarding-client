@@ -8,6 +8,7 @@ import { MdOutlineMail } from "react-icons/md";
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
+import axios from 'axios'
 
 function UpdatePassword() {
          //create an object to store datas from input
@@ -36,23 +37,37 @@ const handleSubmit = async (e) => {
 
  
   e.preventDefault()
-  const { email } = userData
+  const { psw, cpsw } = userData
   
  if (psw == "") {
     toast.error('Password requierd')
   }
-  // else if (cpsw == "") {
-  //   toast.error('Confirm password requierd')
-  // }
+  if (cpsw == "") {
+    toast.error('Confirm password requierd')
+  }
+  else if (psw !== cpsw)
+  {
+    toast.error('Password does not match')
+  }
 
- 
+
   else {
- 
-   
+    
+    const newPassword = psw;
+
+    const userId = 'your user-id';
+
+    console.log(userData);
     //api call
-    const response = await Updatepass(userData)
+    const response =  axios.put('http:/localhost:4000/api/change-password/' +userId, {password : newPassword}) 
+    .then(response => {
+      console.log(response.data);
+    })
+    .catch(error => {
+      // console.error(error);
+    });
     console.log(response);
-    if(response.status==200){
+    if(response && response.status==200){
 
         toast.success(response.data.message);
       setTimeout(()=> {
@@ -69,7 +84,7 @@ const handleSubmit = async (e) => {
       
     }else{
     
-      toast.error(response.data.message)
+      // toast.error(response.data.message);
     }
 
   }
@@ -97,14 +112,14 @@ const handleSubmit = async (e) => {
               <Form.Control onChange={userDetails}  name='psw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
-          {/* <Form.Group className="mb-3" controlId="officialEmailAddress" >
+          <Form.Group className="mb-3" controlId="officialEmailAddress" >
             <Form.Label className='labelss'>Confirm Password</Form.Label>
             <InputGroup>
             
               <Form.Control onChange={userDetails} name='cpsw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
           </Form.Group>
-   */}
+  
       </div>
 
       <div className="submit-box">
