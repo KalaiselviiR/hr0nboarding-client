@@ -17,6 +17,7 @@ import {
   initialValues,
   validationSchema,
 } from "./validation";
+import { addCandidate } from "../../service/allapi";
 
 function Form2() {
   //create an object to store datas from input family details
@@ -371,7 +372,7 @@ function Form2() {
                 gap: "10px",
               }}
             >
-              <Button
+              {/* <Button
                 onClick={handleSubmit}
                 style={{
                   height: "35px",
@@ -395,7 +396,7 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
+              </Button> */}
             </div>
           </Form>
         </div>
@@ -679,7 +680,7 @@ function Form2() {
                 gap: "10px",
               }}
             >
-              <Button
+              {/* <Button
                 onClick={handleSubmitOne}
                 style={{
                   height: "35px",
@@ -703,7 +704,7 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
+              </Button> */}
             </div>
           </Form>
         </div>
@@ -929,7 +930,7 @@ function Form2() {
                 gap: "10px",
               }}
             >
-              <Button
+              {/* <Button
                 onClick={handleSubmitTwo}
                 style={{
                   height: "35px",
@@ -953,7 +954,7 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
+              </Button> */}
             </div>
           </Form>
         </div>
