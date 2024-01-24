@@ -33,13 +33,6 @@ const TopForm = () => {
   const [payslipFiles, setPayslipFiles] = useState([]);
 
   
-  const [inputType, setInputType] = useState('text');
-  
-
-  const handleFocus = () => {
-    setInputType('date');
-  };
-
    //create an object to store datas from input family details
    const [formData, setFormData] = useState({
     firstName: "",
@@ -62,6 +55,49 @@ const TopForm = () => {
     payslipFiles:null, 
 })
 
+const [form2Data, setForm2Data] = useState({
+        memberName: "",
+        relationship: "",
+        dateOfBirth: "",
+        emergencyContactNumber: "",
+        emailAddress: "",
+        epfoUan: "",
+        pfNo: "",
+        adharCard: "",
+        panCard: "",
+        employeesName: "",
+        dateOfBirthAs: "",
+        gender: "",
+        maritalStatus: "",
+        fatherName: "",
+        accountNumber: "",
+        branch: "",
+        ifsc: "",
+        prefix: "",
+        firstNamehr: "",
+        middleName: "",
+        lastNamehr: "",
+        bloodGroup: "",
+        nationality: "",
+        officialEmail: "",
+        employeeId: ""
+});
+
+  // Function to update form2 data
+  const updateForm2Data = (data) => {
+    setForm2Data(data);
+  };
+
+  // Function to update candidate data from Form2
+  const updateCandidateData = (data) => {
+    // Update formData with candidateData from Form2
+    setFormData((prevData) => ({
+      ...prevData,
+      ...data,
+    }));
+  };
+
+    
   //input form validation using formk and yup library
   const formik = useFormik({
     initialValues,
@@ -106,6 +142,7 @@ const TopForm = () => {
   
     // Trigger Formik's validation
     formik.handleSubmit();
+
   
     // Check if there are any errors in the form
     // if (formik.isValid) {
@@ -353,8 +390,7 @@ const FileChange = (file, type) => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control
-                      type={inputType}
-                      onFocus={handleFocus}
+                      type="date"
                       placeholder="Date"
                       name="dateOfJoining"
                       onChange={handleChange}
@@ -525,6 +561,7 @@ const FileChange = (file, type) => {
                   acceptedFiles={photoFiles}
                   setAcceptedFiles={setPhotoFiles}
                   onFileChange={(file) => FileChange(file, "photo")}
+                  
                 />
 
                 <FileUpload
@@ -597,7 +634,9 @@ const FileChange = (file, type) => {
           </Form>
         </Container>
 
-        <Form2 />
+        <Form2 
+        updateForm2Data={updateForm2Data}
+        updateCandidateData={updateCandidateData}/>
 
   <div style={{ display: "flex", 
   justifyContent: "center",
