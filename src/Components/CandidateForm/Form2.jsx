@@ -17,7 +17,8 @@ import {
   initialValues,
   validationSchema,
 } from "./validation";
-import { addCandidate } from "../../service/allapi";
+import {  createCandidateDetails } from "../../service/allapi";
+
 
 function Form2() {
   //create an object to store datas from input family details
@@ -74,7 +75,7 @@ function Form2() {
     e.preventDefault();
 
     //api call
-    const response = await addCandidate(candidateData);
+    const response = await createCandidateDetails(candidateData);
 
     if (response.status == 200) {
       toast.success(response.data.message);
