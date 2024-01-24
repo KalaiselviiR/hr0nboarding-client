@@ -17,7 +17,10 @@ function AddNewCandidate({ close }) {
         dsesignation: "",
         jdate: "",
         region: "",
-        status: ""
+        status: "Pending",
+        isDelete:"no"
+
+
     })
     //object for useNavigate
     const navigate = useNavigate()

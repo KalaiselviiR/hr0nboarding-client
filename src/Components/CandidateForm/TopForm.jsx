@@ -99,7 +99,39 @@ const TopForm = () => {
 
   console.log(formData)
 
+  
+
   const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    // Trigger Formik's validation
+    formik.handleSubmit();
+  
+    // Check if there are any errors in the form
+    // if (formik.isValid) {
+    //   console.log("Form is valid. Proceeding with form submission.");
+  
+      // Create an updated form data object
+      const updatedFormData = {
+        ...formData,
+        photoFiles: photoFiles || null,
+        aadharCardFiles: aadharCardFiles || null,
+        educationCertificateFiles: educationCertificateFiles || null,
+        relievingLettersFiles: relievingLettersFiles || null,
+        payslipFiles: payslipFiles || null,
+      };
+  
+      // Log the updated form data
+      console.log(updatedFormData);
+  
+      // Perform any additional actions or API calls if needed
+    // } else {
+    //   console.log("Form contains validation errors. Please fix them.");
+    // }
+  };
+
+  
+  
     e.preventDefault()
 
     console.log(formData)
@@ -565,7 +597,7 @@ const TopForm = () => {
                   onFileChange={(file) => FileChange(file, "payslip")}
                 />
 
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     marginTop: "50px",
@@ -597,13 +629,36 @@ const TopForm = () => {
                   >
                     Save as draft
                   </Button>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </Form>
         </Container>
 
         <Form2 />
+
+  <div style={{ display: "flex", 
+  justifyContent: "center",
+  marginBottom:"20px",
+  
+  }}>
+  <Button onClick={handleSubmit}
+    style={{
+      height: "35px",
+      fontSize: "15px",
+      backgroundColor: "rgb(210, 164, 250)",
+      color: "white",
+      borderColor: "rgb(210, 164, 250)",
+      fontWeight: "500",
+      marginRight: "10px",
+    }}
+  >
+    Submit
+  </Button>
+ 
+</div>
+
+               
       </div>
     </>
   );

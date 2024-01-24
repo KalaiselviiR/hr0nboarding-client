@@ -18,6 +18,11 @@ export const initialValues = {
   company: "",
   enjoyment: "",
   sneakpeek: "",
+  photoFiles:null,
+  aadharCardFiles:null,
+  educationCertificateFiles:null,
+  relievingLettersFiles:null,
+  payslipFiles:null,
   //bottom-1
   memberName: "",
   relationship: "",
@@ -76,6 +81,41 @@ export const validationSchema = Yup.object().shape({
     .required("Previous Company is required"),
   enjoyment: Yup.string().required("Enjoyment is required"),
   sneakpeek: Yup.string().required("Sneak peek is required"),
+  // photoFiles: Yup.mixed().required("Photo is required"),
+  // aadharCardFiles: Yup.mixed().required("Aadhar Card is required"),
+  // educationCertificateFiles: Yup.mixed().required("Education Certificate is required"),
+  // relievingLettersFiles: Yup.mixed().required("Relieving Letters are required"),
+  // payslipFiles: Yup.mixed().required("Payslip is required"),
+
+  
+    // Other fields...
+    photoFiles: Yup.mixed().test(
+      'fileRequired',
+      'Photo is required',
+      (value) => value && value.length > 0
+    ),
+    aadharCardFiles: Yup.mixed().test(
+      'fileRequired',
+      'Aadhar Card is required',
+      (value) => value && value.length > 0
+    ),
+    educationCertificateFiles: Yup.mixed().test(
+      'fileRequired',
+      'Education Certificate is required',
+      (value) => value && value.length > 0
+    ),
+    relievingLettersFiles: Yup.mixed().test(
+      'fileRequired',
+      'Relieving Letters are required',
+      (value) => value && value.length > 0
+    ),
+    payslipFiles: Yup.mixed().test(
+      'fileRequired',
+      'Payslip is required',
+      (value) => value && value.length > 0
+    ),
+
+
   // bottom form-1
   memberName: Yup.string()
     .matches(/^[^\d]+$/, "Member Name should not contain numbers")
