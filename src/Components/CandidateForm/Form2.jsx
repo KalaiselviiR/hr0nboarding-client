@@ -17,6 +17,7 @@ import {
   initialValues,
   validationSchema,
 } from "./validation";
+import { addCandidate } from "../../service/allapi";
 
 function Form2() {
   //create an object to store datas from input family details
@@ -306,7 +307,7 @@ function Form2() {
                 gap: "10px",
               }}
             >
-              <Button
+              {/* <Button
                 onClick={handleSubmit}
                 style={{
                   height: "35px",
@@ -330,7 +331,7 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
+              </Button> */}
             </div>
           </Form>
         </div>
@@ -606,16 +607,21 @@ function Form2() {
               </Row>
             </Row>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
               }}
-            >
+            > */}
+
+              {/* <Button
+                onClick={handleSubmitOne}
+
               <Button
                 onClick={handleSubmit}
+
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -638,8 +644,8 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
-            </div>
+              </Button> */}
+            {/* </div> */}
           </Form>
         </div>
       </Container>
@@ -856,14 +862,18 @@ function Form2() {
                 </Form.Group>
               </Col>
             </Row>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
-              }}
-            >
+              }} 
+            >*/}
+
+              {/* <Button
+                onClick={handleSubmitTwo}
+
               <Button
                 onClick={handleSubmit}
                 style={{
@@ -888,8 +898,8 @@ function Form2() {
                 }}
               >
                 Save as draft
-              </Button>
-            </div>
+              </Button> */}
+            {/* </div> */}
           </Form>
         </div>
       </Container>
