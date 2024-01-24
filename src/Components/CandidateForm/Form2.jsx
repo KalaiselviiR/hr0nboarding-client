@@ -21,12 +21,32 @@ import { addCandidate } from "../../service/allapi";
 
 function Form2() {
   //create an object to store datas from input family details
-  const [familyData, setFamily] = useState({
+  const [candidateData, setCandidate] = useState({
     memberName: "",
     relationship: "",
     dateOfBirth: "",
     emergencyContactNumber: "",
     emailAddress: "",
+    epfoUan: "",
+    pfNo: "",
+    adharCard: "",
+    panCard: "",
+    employeesName: "",
+    dateOfBirthAs: "",
+    gender: "",
+    maritalStatus: "",
+    fatherName: "",
+    accountNumber: "",
+    branch: "",
+    ifsc: "",
+    prefix: "",
+    firstNamehr: "",
+    middleName: "",
+    lastNamehr: "",
+    bloodGroup: "",
+    nationality: "",
+    officialEmail: "",
+    employeeId: "",
   });
 
   const [inputType, setInputType] = useState("text");
@@ -44,97 +64,28 @@ function Form2() {
     //access key to update in userData
     const key = e.target.name;
     //update the data with existing data
-    setFamily({ ...familyData, [key]: value });
+    setCandidate({ ...candidateData, [key]: value });
   };
-  console.log(familyData);
+  console.log(candidateData);
 
-  //create an object to store datas from input details of pf
-  const [pfData, setpfData] = useState({
-    epfoUan: "",
-    pfNo: "",
-    adharCard: "",
-    panCard: "",
-    employeesName: "",
-    dateOfBirthAs: "",
-    gender: "",
-    maritalStatus: "",
-    fatherName: "",
-    accountNumber: "",
-    branch: "",
-    ifsc: "",
-  });
-
-  const handleChangeone = (e) => {
-    handleFieldChange(formik, e);
-    //prevent the event
-    e.preventDefault();
-    //access value to update in userData
-    const { value } = e.target;
-    //access key to update in userData
-    const key = e.target.name;
-    //update the data with existing data
-    setpfData({ ...pfData, [key]: value });
-  };
-  console.log(pfData);
-
-  //create an object to store datas from input details of Hrnoe
-  const [hroneData, setHroneData] = useState({
-    prefix: "",
-    firstNamehr: "",
-    middleName: "",
-    lastNamehr: "",
-    bloodGroup: "",
-    nationality: "",
-    officialEmail: "",
-    employeeId: "",
-  });
-
-  const handleChangetwo = (e) => {
-    handleFieldChange(formik, e);
-    //prevent the event
-    e.preventDefault();
-    //access value to update in userData
-    const { value } = e.target;
-    //access key to update in userData
-    const key = e.target.name;
-    //update the data with existing data
-    setHroneData({ ...hroneData, [key]: value });
-  };
-  console.log(hroneData);
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     //api call
-    const response = await addCandidate(familyData);
+    const response = await addCandidate(candidateData);
 
     if (response.status == 200) {
       toast.success(response.data.message);
 
       //reset all states datas
-      setFamily({
+      setCandidate({
         memberName: "",
         relationship: "",
         dateOfBirth: "",
         emergencyContactNumber: "",
         emailAddress: "",
-      });
-    } else {
-      toast.error(response.data.message);
-    }
-  };
-
-  const handleSubmitOne = async (e) => {
-    e.preventDefault();
-
-    //api call
-    const response = await addCandidate(pfDataData);
-
-    if (response.status == 200) {
-      toast.success(response.data.message);
-
-      //reset all states datas
-      setpfData({
         epfoUan: "",
         pfNo: "",
         adharCard: "",
@@ -147,23 +98,6 @@ function Form2() {
         accountNumber: "",
         branch: "",
         ifsc: "",
-      });
-    } else {
-      toast.error(response.data.message);
-    }
-  };
-
-  const handleSubmitTwo = async (e) => {
-    e.preventDefault();
-
-    //api call
-    const response = await addCandidate(hroneData);
-
-    if (response.status == 200) {
-      toast.success(response.data.message);
-
-      //reset all states datas
-      setHroneData({
         prefix: "",
         firstNamehr: "",
         middleName: "",
@@ -171,12 +105,13 @@ function Form2() {
         bloodGroup: "",
         nationality: "",
         officialEmail: "",
-        employeeId: "",
+        employeeId: ""
       });
     } else {
       toast.error(response.data.message);
     }
   };
+
 
   const formik = useFormik({
     initialValues,
@@ -444,7 +379,7 @@ function Form2() {
                     type="text"
                     placeholder="EPFO UAN"
                     name="epfoUan"
-                    onChange={handleChangeone}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.epfoUan}
                   />
@@ -461,7 +396,7 @@ function Form2() {
                     type="text"
                     placeholder="PF No"
                     name="pfNo"
-                    onChange={handleChangeone}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.pfNo}
                   />
@@ -478,7 +413,7 @@ function Form2() {
                     type="text"
                     placeholder="Adhar Card No"
                     name="adharCard"
-                    onChange={handleChangeone}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.adharCard}
                   />
@@ -496,7 +431,7 @@ function Form2() {
                       type="text"
                       placeholder="Pan Card No"
                       name="panCard"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.panCard}
                     />
@@ -515,7 +450,7 @@ function Form2() {
                       type="text"
                       placeholder="Employee's Name"
                       name="employeesName"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.employeesName}
                     />
@@ -542,7 +477,7 @@ function Form2() {
                         onFocus={handleFocus}
                         placeholder="Date"
                         name="dateOfBirthAs"
-                        onChange={handleChangeone}
+                        onChange={handleChange}
                         onBlur={formik.handleBlur}
                         value={formik.values.dateOfBirthAs}
                       />
@@ -565,7 +500,7 @@ function Form2() {
                       type="text"
                       placeholder="Gender"
                       name="gender"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.gender}
                     />
@@ -582,7 +517,7 @@ function Form2() {
                       type="text"
                       placeholder="Marital Status"
                       name="maritalStatus"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.maritalStatus}
                     />
@@ -602,7 +537,7 @@ function Form2() {
                       type="text"
                       placeholder="Father's Name"
                       name="fatherName"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.fatherName}
                     />
@@ -623,7 +558,7 @@ function Form2() {
                       type="text"
                       placeholder="Account Number"
                       name="accountNumber"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.accountNumber}
                     />
@@ -643,7 +578,7 @@ function Form2() {
                       type="text"
                       placeholder="Branch"
                       name="branch"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.branch}
                     />
@@ -660,7 +595,7 @@ function Form2() {
                       type="text"
                       placeholder="IFSC"
                       name="ifsc"
-                      onChange={handleChangeone}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.ifsc}
                     />
@@ -672,16 +607,21 @@ function Form2() {
               </Row>
             </Row>
 
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
               }}
-            >
+            > */}
+
               {/* <Button
                 onClick={handleSubmitOne}
+
+              <Button
+                onClick={handleSubmit}
+
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -705,7 +645,7 @@ function Form2() {
               >
                 Save as draft
               </Button> */}
-            </div>
+            {/* </div> */}
           </Form>
         </div>
       </Container>
@@ -765,7 +705,7 @@ function Form2() {
                     type="text"
                     placeholder="olivia"
                     name="prefix"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.prefix}
                   />
@@ -782,7 +722,7 @@ function Form2() {
                     type="text"
                     placeholder="First Name"
                     name="firstNamehr"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.firstNamehr}
                   />
@@ -801,7 +741,7 @@ function Form2() {
                     type="text"
                     placeholder="Middle Name"
                     name="middleName"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.middleName}
                   />
@@ -823,7 +763,7 @@ function Form2() {
                     type="text"
                     placeholder="Last Name"
                     name="lastNamehr"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.lastNamehr}
                   />
@@ -842,7 +782,7 @@ function Form2() {
                     type="text"
                     placeholder="Blood Group"
                     name="bloodGroup"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.bloodGroup}
                   />
@@ -861,7 +801,7 @@ function Form2() {
                     type="text"
                     placeholder="Nationality"
                     name="nationality"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.nationality}
                   />
@@ -889,7 +829,7 @@ function Form2() {
                       type="email"
                       placeholder="✉️ Email"
                       name="officialEmail"
-                      onChange={handleChangetwo}
+                      onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.officialEmail}
                     />
@@ -910,7 +850,7 @@ function Form2() {
                     type="text"
                     placeholder="Employee ID"
                     name="employeeId"
-                    onChange={handleChangetwo}
+                    onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.employeeId}
                   />
@@ -922,16 +862,20 @@ function Form2() {
                 </Form.Group>
               </Col>
             </Row>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
-              }}
-            >
+              }} 
+            >*/}
+
               {/* <Button
                 onClick={handleSubmitTwo}
+
+              <Button
+                onClick={handleSubmit}
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -955,7 +899,7 @@ function Form2() {
               >
                 Save as draft
               </Button> */}
-            </div>
+            {/* </div> */}
           </Form>
         </div>
       </Container>

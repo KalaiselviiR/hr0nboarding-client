@@ -44,8 +44,8 @@ const handleChange = async (e) => {
   const { email, password } = userData;
 
   // Email validation
-  const emailRegex = /\b@techjays\.com$/;
-  if (!emailRegex.test(email)) {
+  const allowedEmail = 'techjayshr@techjays.com';
+  if (email !== allowedEmail) {
     toast.error('Invalid email address');
     return;
   }
@@ -127,7 +127,7 @@ const handleChange = async (e) => {
       
       <div  >
       <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss'>Email</Form.Label>
+            <Form.Label className='labelss' >Email </Form.Label>
             <InputGroup>
               <InputGroup.Text>
                 <MdOutlineMail  />

@@ -83,6 +83,7 @@
 .forgot-password{
     display: flex;
     justify-content: right;
+    margin-top: 10px;
 }
 
 .Frgtpass{
@@ -92,6 +93,7 @@
     cursor: pointer;
     font-size: 14px;
     line-height: 21px;
+    margin-top: 50px;
     
 }
 .btn-login{
@@ -102,7 +104,9 @@
     border: none;
     padding: 10px;
     width:400px ;
-    margin-top: 20px;
+    margin-top: 34px;
+    font-size: 18px;
+    font-weight: 450;
 
 
 }
@@ -131,4 +135,20 @@
     padding-left: 23px;
     padding-bottom: -10px;
     font-family: 'Inter', sans-serif;
+}
+
+.labelss{
+    font-weight: 450;
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.mb-3{
+    margin-top: 20px;
+}
+
+.input-field{
+    font-size: 14px;
+    border-radius: 8px;
+    border-width: 1.5px;
 }

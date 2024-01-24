@@ -17,6 +17,9 @@ function Dashboard() {
   const [isShow, setInvokeModal] = useState(false);
   const [UserToEdit, setUserToEdit] = useState(null);
 
+  const [filterType, setFilterType] = useState('isDelete');
+  const [search, setSearch] = useState('no');
+
   const initModal = () => {
     setInvokeModal(!isShow);
   };
@@ -47,7 +50,21 @@ function Dashboard() {
     getAllCandidate()
   }
 
+  useEffect(() => {
+    const handleClickedOutside = (event) => {
+      if ((addModalIsOpen || editModalIsOpen) && !event.target.closest('.addCandidateModal')) {
+        closeAddModal()
+        closeEditModal()
+      }
+    }
 
+    document.addEventListener('mousedown', handleClickedOutside)
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickedOutside)
+    };
+
+  }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 10;
@@ -56,6 +73,12 @@ function Dashboard() {
   const records = allcandidate.slice(firstIndex, lastIndex);
   const npages = Math.ceil(allcandidate.length / recordsPerPage);
   const numbers = [...Array(npages + 1).keys()].slice(1)
+
+    // Function to handle filter type selection
+    const handleFilterSelect = (type) => {
+      setFilterType(type);
+  
+    };
 
   //define a function to call api
   const getAllCandidate = async () => {
@@ -87,8 +110,9 @@ function Dashboard() {
     const response = await deleteCandidate(deleteId)
     if (response.status == 200) {
       toast.success(response.data.message);
-      setInvokeModal(false)
       getAllCandidate()
+      setInvokeModal(false)
+    
 
   } else {
       toast.error(response.data.message)
@@ -147,7 +171,8 @@ function Dashboard() {
             fontWeight:"500"}} className='na' href="/dashboard">All Candidates</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link className='' href='/dashboard' eventKey="link-1" style={{ color: "black" }}>Rejected</Nav.Link>
+          <Nav.Link className='' onClick={() => setSearch('Yes')}
+           eventKey="link-1" style={{ color: "black" }}>Rejected</Nav.Link>
         </Nav.Item>
 
       </Nav>
@@ -177,8 +202,11 @@ function Dashboard() {
 
           </MDBTableHead>
           <MDBTableBody>
-            {
-              records.length > 0 ? records.map((i, index) => (
+          {records.filter((item) => {
+            const searchTerm = search.toLowerCase();
+            const projectValue = item[filterType].toLowerCase();
+            return projectValue.includes(searchTerm);
+          }).map((i, index) => (
                 <tr>
                   <td>
                     <div className='d-flex align-items-center'>
@@ -213,9 +241,7 @@ function Dashboard() {
 
                   </td>
                 </tr>
-              )
-              ) : ""
-            }
+             ))}
 
 
           </MDBTableBody>
