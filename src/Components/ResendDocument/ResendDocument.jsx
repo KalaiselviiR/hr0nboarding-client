@@ -7,16 +7,19 @@ import {
   PAYSLIP,
   EDUCATIONAL_CERTIFICATE,
   RELIEVING_LETTERS,
+  CLIENT_SERVER_URL,
 } from "../../constants/constants";
+import { resendDocuments } from "../../service/allapi";
 
-function ResendDocument({ closeModal }) {
+
+function ResendDocument({ closeModal,onApiError,onApiSuccess }) {
   const [checkedItems, setCheckedItems] = useState([]);
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
+  const [isLoading,setIsLoading] = useState(false);
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
-    console.log({ value, checked });
     setCheckedItems((prevItems) =>
       checked
         ? [...prevItems, value]
@@ -33,17 +36,41 @@ function ResendDocument({ closeModal }) {
     setNote(value);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (checkedItems.length === 0) {
       setError("Please select at least one document");
       return;
     }
 
-    console.log({
-      documents: checkedItems,
-      note,
-    });
+    setIsLoading(true); 
+    
+    try {
+
+      const data = {
+        from:'hr@techjays.com',
+        to:'candidate@techjays.com',
+        documents:checkedItems,
+        note,
+        resendLink:`${CLIENT_SERVER_URL}/candidateForm`
+  
+      }
+      const response = await resendDocuments(data)
+      
+      if (response.status !== 200) {
+        throw new Error('something went wrong');
+      }
+
+      if(response){
+        onApiSuccess(response.data.message)
+      }
+      
+    } catch (error) {
+      onApiError(error.message)
+    }finally{
+      setIsLoading(false);
+    }
+    
 
     setError("");
 
@@ -139,7 +166,11 @@ function ResendDocument({ closeModal }) {
 
           <div className={styles.submit}>
             {error && <p className={styles.error}>{error}</p>}
-            <button>Submit</button>
+            <button>
+              {
+                isLoading ? 'sending..' : 'Submit'
+              }
+            </button>
           </div>
         </form>
       </div>

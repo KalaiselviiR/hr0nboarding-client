@@ -65,3 +65,9 @@ export const CreatePro=async(body,headers)=>{
 
 
 
+
+//Resend Documents
+
+export const resendDocuments=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/resend-documents`,body)
+}
