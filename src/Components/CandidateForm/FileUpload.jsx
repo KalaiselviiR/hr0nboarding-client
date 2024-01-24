@@ -2,8 +2,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Image, ProgressBar } from "react-bootstrap";
 import './CandidateForm.css'
 
+//file upload
+
+
+
 // FileUpload component for handling file upload
-function FileUpload({ label,onFileChange, fileData }) {
+function FileUpload({ label,onFileChange }) {
    // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -26,6 +30,8 @@ function FileUpload({ label,onFileChange, fileData }) {
       setFile(selectedFile);
         // Initiate the file upload process
       uploadFile(selectedFile);
+
+      onFileChange(selectedFile);
     
     
     }
