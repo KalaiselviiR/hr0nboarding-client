@@ -18,11 +18,11 @@ export const initialValues = {
   company: "",
   enjoyment: "",
   sneakpeek: "",
-  photoFiles:null,
-  aadharCardFiles:null,
-  educationCertificateFiles:null,
-  relievingLettersFiles:null,
-  payslipFiles:null,
+  photoFiles: null,
+  aadharCardFiles: null,
+  educationCertificateFiles: null,
+  relievingLettersFiles: null,
+  payslipFiles: null,
   //bottom-1
   memberName: "",
   relationship: "",
@@ -35,7 +35,7 @@ export const initialValues = {
   adharCard: "",
   panCard: "",
   employeesName: "",
-  dateOfBirthAs:"",
+  dateOfBirthAs: "",
   gender: "",
   maritalStatus: "",
   fatherName: "",
@@ -44,12 +44,12 @@ export const initialValues = {
   ifsc: "",
   //bottom-3
   prefix: "",
-  firstNamehr:"",
-  lastNamehr:"",
+  firstNamehr: "",
+  lastNamehr: "",
   middleName: "",
   bloodGroup: "",
   nationality: "",
-  officialEmail:"",
+  officialEmail: "",
   employeeId: "",
 };
 
@@ -60,11 +60,11 @@ export const validationSchema = Yup.object().shape({
   lastName: Yup.string()
     .matches(/^[^\d]+$/, "Last Name should not contain numbers")
     .required("Last Name is required"),
-   email: Yup.string()
+  email: Yup.string()
     .email("Invalid email")
     .required("Email is required")
     .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
-  
+
   phoneNumber: Yup.string()
     .matches(/^\+?[0-9]+$/, "Invalid phone number")
     .required("Phone Number is required"),
@@ -87,34 +87,32 @@ export const validationSchema = Yup.object().shape({
   // relievingLettersFiles: Yup.mixed().required("Relieving Letters are required"),
   // payslipFiles: Yup.mixed().required("Payslip is required"),
 
-  
-    // Other fields...
-    photoFiles: Yup.mixed().test(
-      'fileRequired',
-      'Photo is required',
-      (value) => value && value.length > 0
-    ),
-    aadharCardFiles: Yup.mixed().test(
-      'fileRequired',
-      'Aadhar Card is required',
-      (value) => value && value.length > 0
-    ),
-    educationCertificateFiles: Yup.mixed().test(
-      'fileRequired',
-      'Education Certificate is required',
-      (value) => value && value.length > 0
-    ),
-    relievingLettersFiles: Yup.mixed().test(
-      'fileRequired',
-      'Relieving Letters are required',
-      (value) => value && value.length > 0
-    ),
-    payslipFiles: Yup.mixed().test(
-      'fileRequired',
-      'Payslip is required',
-      (value) => value && value.length > 0
-    ),
-
+  // Other fields...
+  photoFiles: Yup.mixed().test(
+    "fileRequired",
+    "Photo is required",
+    (value) => value && value.length > 0
+  ),
+  aadharCardFiles: Yup.mixed().test(
+    "fileRequired",
+    "Aadhar Card is required",
+    (value) => value && value.length > 0
+  ),
+  educationCertificateFiles: Yup.mixed().test(
+    "fileRequired",
+    "Education Certificate is required",
+    (value) => value && value.length > 0
+  ),
+  relievingLettersFiles: Yup.mixed().test(
+    "fileRequired",
+    "Relieving Letters are required",
+    (value) => value && value.length > 0
+  ),
+  payslipFiles: Yup.mixed().test(
+    "fileRequired",
+    "Payslip is required",
+    (value) => value && value.length > 0
+  ),
 
   // bottom form-1
   memberName: Yup.string()
@@ -128,9 +126,9 @@ export const validationSchema = Yup.object().shape({
     .matches(/^\+?[0-9]+$/, "Invalid phone number")
     .required("Phone Number is required"),
   emailAddress: Yup.string()
-  .email("Invalid email")
-  .required("Email is required")
-  .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
+    .email("Invalid email")
+    .required("Email is required")
+    .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
 
   // bottomForm-2
   epfoUan: Yup.string()
@@ -143,19 +141,19 @@ export const validationSchema = Yup.object().shape({
     .matches(/^\d{13}$/, "Invalid AdharCard Number(It contains 13 digit)")
     .required("AdharCard Number is required"),
   panCard: Yup.string()
-     .matches(/^\+?[a-zA-Z0-9]+$/, 'Invalid PanCard Number' )
+    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid PanCard Number")
     .required("PanCard Number is required"),
   employeesName: Yup.string()
     .matches(/^[^\d]+$/, "employee Name should not contain numbers")
     .required("employee Name is required"),
 
-  dateOfBirthAs: Yup.string().required("Date of Birth"),  
+  dateOfBirthAs: Yup.string().required("Date of Birth"),
   gender: Yup.string()
-  .matches(/^[^\d]+$/, "Gender should not contain numbers")
-  .required("Gender is Required"),
+    .matches(/^[^\d]+$/, "Gender should not contain numbers")
+    .required("Gender is Required"),
   maritalStatus: Yup.string()
-  .matches(/^[^\d]+$/, "Marital status should not contain numbers")
-  .required("Marital Status is Required"),
+    .matches(/^[^\d]+$/, "Marital status should not contain numbers")
+    .required("Marital Status is Required"),
   fatherName: Yup.string()
     .matches(/^[^\d]+$/, "Father Name should not contain numbers")
     .required("Father Name is required"),
@@ -166,18 +164,18 @@ export const validationSchema = Yup.object().shape({
     .matches(/^[^\d]+$/, "Branch should not contain numbers")
     .required("Branch Name is required"),
   ifsc: Yup.string()
-  .matches(/^\+?[a-zA-Z0-9]+$/, 'Invalid IFSC Code' )
-  .required("IFSC code is required"),
+    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
+    .required("IFSC code is required"),
   //bottomForm-3
   prefix: Yup.string()
-  .matches(/^[^\d]+$/, "Prefix should not contain numbers")
-  .required("Prefix is required"),
+    .matches(/^[^\d]+$/, "Prefix should not contain numbers")
+    .required("Prefix is required"),
   firstNamehr: Yup.string()
     .matches(/^[^\d]+$/, "First Name should not contain numbers")
     .required("First Name is required"),
   lastNamehr: Yup.string()
     .matches(/^[^\d]+$/, "Last Name should not contain numbers")
-    .required("Last Name is required"),  
+    .required("Last Name is required"),
   middleName: Yup.string()
     .matches(/^[^\d]+$/, "Middle Name should not contain numbers")
     .required("Middle Name is required"),
@@ -186,14 +184,17 @@ export const validationSchema = Yup.object().shape({
     .matches(/^[^\d]+$/, "Nationality should not contain numbers")
     .required("Nationality is required"),
   officialEmail: Yup.string()
-  .email("Invalid email")
-  .required("Email is required")
-  .matches(/@techjays\.com$/, "Email must includes from @techjays.com domain"),  
+    .email("Invalid email")
+    .required("Email is required")
+    .matches(
+      /@techjays\.com$/,
+      "Email must includes from @techjays.com domain"
+    ),
   employeeId: Yup.string().required("Employee Id is Required"),
 });
 
 export const handleFieldChange = (formik, e) => {
-  const { name, value } = e.target;
+  const { name, value,type, files } = e.target;
   formik.handleChange(e); // Use Formik's handleChange for field-level changes
   formik.setFieldTouched(name, true, false); // Mark field as touched without validating
 
@@ -207,7 +208,7 @@ export const handleFieldChange = (formik, e) => {
     case "fatherName":
     case "branch":
     case "firstNamehr":
-    case "lastNamehr":    
+    case "lastNamehr":
     case "middleName":
     case "nationality":
     case "maritalStatus":
@@ -220,9 +221,25 @@ export const handleFieldChange = (formik, e) => {
       }
       break;
 
+    case "photoFiles":
+    case "aadharCardFiles":
+    case "educationCertificateFiles":
+    case "relievingLettersFiles":
+    case "payslipFiles":
+      // Check if files are selected
+      if (files && files.length > 0) {
+        formik.setFieldError(name, ""); // Clear the error if files are selected
+      } else {
+        formik.setFieldError(
+          name,
+          `Please upload a ${name === "payslipFiles" ? "PDF" : "image"}`
+        );
+      }
+      break;
+
     case "email":
     case "emailAddress":
-    case "officialEmail":  
+    case "officialEmail":
       // Your custom email validation logic
       // For example, checking if it contains '@'
       const requiredDomain = "techjays";
@@ -232,7 +249,7 @@ export const handleFieldChange = (formik, e) => {
       } else {
         formik.setFieldError(name, "");
       }
-      
+
       break;
 
     case "phoneNumber":
@@ -273,16 +290,13 @@ export const handleFieldChange = (formik, e) => {
         formik.setFieldError(name, "");
       }
 
-      case "panCard":
+    case "panCard":
       // epfoUan validation logic(it contains 12 digit number)
       if (!/^\+?[a-zA-Z0-9]+$/.test(value)) {
-        formik.setFieldError(
-          name,
-          "Invalid Number(Invalid PAN number)"
-        );
+        formik.setFieldError(name, "Invalid Number(Invalid PAN number)");
       } else {
         formik.setFieldError(name, "");
-      }  
+      }
 
     case "designation":
     case "dateOfJoining":
@@ -294,9 +308,9 @@ export const handleFieldChange = (formik, e) => {
     case "company":
     case "enjoyment":
     case "sneakpeek":
-    case "ifsc":  
+    case "ifsc":
     case "bloodGroup":
-    case "employeeId":        
+    case "employeeId":
       // Example: Check if the value is not empty
       if (value.trim() === "") {
         formik.setFieldError(name, `${name} is required`);

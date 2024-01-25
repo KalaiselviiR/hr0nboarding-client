@@ -23,10 +23,10 @@ export const ResetPassword=async(id,body)=>{
 }
 
 //Update password
-export const Updatepass=async(id,body)=>{
-    return await commonRequest("PUT",`${BASE_URL}/api/updatepass/${uid}`,body)
+export const changePassword=async(id,body)=>{
+    return await commonRequest("PUT",`${BASE_URL}/api/change-password/id`,body)
 }
-
+ 
 //Add Candidate
 export const addCandidate=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/add-candidate`,body)
@@ -68,3 +68,9 @@ export const createCandidateDetails=async(body)=>{
 
 
 
+
+//Resend Documents
+
+export const resendDocuments=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/resend-documents`,body)
+}

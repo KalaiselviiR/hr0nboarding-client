@@ -20,7 +20,7 @@ import {
 import {  createCandidateDetails } from "../../service/allapi";
 
 
-function Form2() {
+function Form2({updateForm2Data ,updateCandidateData}) {
   //create an object to store datas from input family details
   const [candidateData, setCandidate] = useState({
     memberName: "",
@@ -50,11 +50,16 @@ function Form2() {
     employeeId: "",
   });
 
-  const [inputType, setInputType] = useState("text");
 
-  const handleFocus = () => {
-    setInputType("date");
-  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      // Handle form submission logic here
+      console.log(values);
+    },
+  });
 
   const handleChange = (e) => {
     handleFieldChange(formik, e);
@@ -66,14 +71,16 @@ function Form2() {
     const key = e.target.name;
     //update the data with existing data
     setCandidate({ ...candidateData, [key]: value });
+    updateForm2Data(candidateData)
+    updateCandidateData(candidateData);
   };
   console.log(candidateData);
 
   
 
-  const handleSubmit = async (e) => {
+  const handleSubmitBottom = async (e) => {
     e.preventDefault();
-
+     formik.handleSubmit()
     //api call
     const response = await createCandidateDetails(candidateData);
 
@@ -114,14 +121,7 @@ function Form2() {
   };
 
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission logic here
-      console.log(values);
-    },
-  });
+
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
@@ -223,9 +223,8 @@ function Form2() {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control
+                    type="date"
                       className="input-field"
-                      type={inputType}
-                      onFocus={handleFocus}
                       placeholder="Date"
                       name="dateOfBirth"
                       onChange={handleChange}
@@ -474,8 +473,7 @@ function Form2() {
                       </InputGroup.Text>
                       <Form.Control
                         className="input-field"
-                        type={inputType}
-                        onFocus={handleFocus}
+                        type="date"
                         placeholder="Date"
                         name="dateOfBirthAs"
                         onChange={handleChange}

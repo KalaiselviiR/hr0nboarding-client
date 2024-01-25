@@ -32,16 +32,9 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
-
-  const [inputType, setInputType] = useState('text');
-
-
-  const handleFocus = () => {
-    setInputType('date');
-  };
-
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
+
     firstName: "",
     lastName: "",
     email: "",
@@ -62,6 +55,49 @@ const TopForm = () => {
     payslipFiles: null,
   })
 
+const [form2Data, setForm2Data] = useState({
+        memberName: "",
+        relationship: "",
+        dateOfBirth: "",
+        emergencyContactNumber: "",
+        emailAddress: "",
+        epfoUan: "",
+        pfNo: "",
+        adharCard: "",
+        panCard: "",
+        employeesName: "",
+        dateOfBirthAs: "",
+        gender: "",
+        maritalStatus: "",
+        fatherName: "",
+        accountNumber: "",
+        branch: "",
+        ifsc: "",
+        prefix: "",
+        firstNamehr: "",
+        middleName: "",
+        lastNamehr: "",
+        bloodGroup: "",
+        nationality: "",
+        officialEmail: "",
+        employeeId: ""
+});
+
+  // Function to update form2 data
+  const updateForm2Data = (data) => {
+    setForm2Data(data);
+  };
+
+  // Function to update candidate data from Form2
+  const updateCandidateData = (data) => {
+    // Update formData with candidateData from Form2
+    setFormData((prevData) => ({
+      ...prevData,
+      ...data,
+    }));
+  };
+
+    
   //input form validation using formk and yup library
   const formik = useFormik({
     initialValues,
@@ -99,45 +135,21 @@ const TopForm = () => {
 
   console.log(formData)
 
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     // Trigger Formik's validation
     formik.handleSubmit();
-  
+
     // Check if there are any errors in the form
     // if (formik.isValid) {
     //   console.log("Form is valid. Proceeding with form submission.");
-  
-      // Create an updated form data object
-      const updatedFormData = {
-        ...formData,
-        photoFiles: photoFiles || null,
-        aadharCardFiles: aadharCardFiles || null,
-        educationCertificateFiles: educationCertificateFiles || null,
-        relievingLettersFiles: relievingLettersFiles || null,
-        payslipFiles: payslipFiles || null,
-      };
-  
-      // Log the updated form data
-      console.log(updatedFormData);
-  
-      // Perform any additional actions or API calls if needed
-    // } else {
-    //   console.log("Form contains validation errors. Please fix them.");
-    // }
-  };
 
-  
-  
-    e.preventDefault()
-
-    console.log(formData)
-
+    // Create an updated form data object
     const updatedFormData = {
-      ...formData, // Keep the existing formData properties
+      ...formData,
       photoFiles: photoFiles || null,
       aadharCardFiles: aadharCardFiles || null,
       educationCertificateFiles: educationCertificateFiles || null,
@@ -145,8 +157,17 @@ const TopForm = () => {
       payslipFiles: payslipFiles || null,
     };
 
+    // Log the updated form data
     console.log(updatedFormData);
-  }
+
+    // Perform any additional actions or API calls if needed
+    // } else {
+    //   console.log("Form contains validation errors. Please fix them.");
+    // }
+  };
+
+
+
 
   const FileChange = (file, type) => {
     switch (type) {
@@ -170,7 +191,6 @@ const TopForm = () => {
     }
   };
 
-
   const handleSameAsPresentAddressChange = (e) => {
     const isChecked = e.target.checked;
 
@@ -181,7 +201,6 @@ const TopForm = () => {
       permanentAddress: isChecked ? formik.values.presentAddress : formik.values.permanentAddress,
     });
   };
-
 
   return (
     <>
@@ -379,8 +398,7 @@ const TopForm = () => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control
-                      type={inputType}
-                      onFocus={handleFocus}
+                      type="date"
                       placeholder="Date"
                       name="dateOfJoining"
                       onChange={handleChange}
@@ -563,6 +581,7 @@ const TopForm = () => {
                   acceptedFiles={photoFiles}
                   setAcceptedFiles={setPhotoFiles}
                   onFileChange={(file) => FileChange(file, "photo")}
+                  
                 />
 
                 <FileUpload
@@ -635,30 +654,33 @@ const TopForm = () => {
           </Form>
         </Container>
 
-        <Form2 />
+        <Form2 
+        updateForm2Data={updateForm2Data}
+        updateCandidateData={updateCandidateData}/>
 
-  <div style={{ display: "flex", 
-  justifyContent: "center",
-  marginBottom:"20px",
-  
-  }}>
-  <Button onClick={handleSubmit}
-    style={{
-      height: "35px",
-      fontSize: "15px",
-      backgroundColor: "rgb(210, 164, 250)",
-      color: "white",
-      borderColor: "rgb(210, 164, 250)",
-      fontWeight: "500",
-      marginRight: "10px",
-    }}
-  >
-    Submit
-  </Button>
- 
-</div>
+        <div style={{
+          display: "flex",
+          justifyContent: "center",
+          marginBottom: "20px",
 
-               
+        }}>
+          <Button onClick={handleSubmit}
+            style={{
+              height: "35px",
+              fontSize: "15px",
+              backgroundColor: "rgb(210, 164, 250)",
+              color: "white",
+              borderColor: "rgb(210, 164, 250)",
+              fontWeight: "500",
+              marginRight: "10px",
+            }}
+          >
+            Submit
+          </Button>
+
+        </div>
+
+
       </div>
     </>
   );
