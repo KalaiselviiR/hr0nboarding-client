@@ -3,7 +3,9 @@ import { Button, Form, Image, ProgressBar } from "react-bootstrap";
 import './CandidateForm.css'
 
 //file upload
-
+import axios from "axios";
+import { pdfjs } from "react-pdf";
+import PdfComp from "./PdfComp";
 
 
 // FileUpload component for handling file upload
@@ -14,13 +16,13 @@ function FileUpload({ label,onFileChange }) {
   const [error, setError] = useState(null);
     // Reference for file input element
   const fileInputRef = useRef(null);
+  
 
-   // Event handler for file input change
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(e.target.files[0])
-
-      // Check if a file is selected
+    console.log(e.target.files[0]);
+  
+    // Check if a file is selected
     if (!selectedFile) {
       setError("Please select a file");
     } else if (selectedFile.type !== "application/pdf") {
@@ -28,12 +30,10 @@ function FileUpload({ label,onFileChange }) {
     } else {
       setError(null);
       setFile(selectedFile);
-        // Initiate the file upload process
+  
+      // Initiate the file upload process
       uploadFile(selectedFile);
-
-      onFileChange(selectedFile);
-    
-    
+      onFileChange(selectedFile)
     }
   };
 

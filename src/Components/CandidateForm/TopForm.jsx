@@ -22,6 +22,15 @@ import {
 } from "./validation";
 import Form2 from "./Form2";
 
+import axios from "axios";
+import { pdfjs } from "react-pdf";
+import PdfComp from "./PdfComp";
+
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.js",
+  import.meta.url
+).toString();
+
 const TopForm = () => {
   //State management for document upload
   const [photoFiles, setPhotoFiles] = useState([]);
@@ -32,9 +41,10 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
+  
+
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
-
     firstName: "",
     lastName: "",
     email: "",
@@ -53,35 +63,35 @@ const TopForm = () => {
     educationCertificateFiles: null,
     relievingLettersFiles: null,
     payslipFiles: null,
-  })
+  });
 
-const [form2Data, setForm2Data] = useState({
-        memberName: "",
-        relationship: "",
-        dateOfBirth: "",
-        emergencyContactNumber: "",
-        emailAddress: "",
-        epfoUan: "",
-        pfNo: "",
-        adharCard: "",
-        panCard: "",
-        employeesName: "",
-        dateOfBirthAs: "",
-        gender: "",
-        maritalStatus: "",
-        fatherName: "",
-        accountNumber: "",
-        branch: "",
-        ifsc: "",
-        prefix: "",
-        firstNamehr: "",
-        middleName: "",
-        lastNamehr: "",
-        bloodGroup: "",
-        nationality: "",
-        officialEmail: "",
-        employeeId: ""
-});
+  const [form2Data, setForm2Data] = useState({
+    memberName: "",
+    relationship: "",
+    dateOfBirth: "",
+    emergencyContactNumber: "",
+    emailAddress: "",
+    epfoUan: "",
+    pfNo: "",
+    adharCard: "",
+    panCard: "",
+    employeesName: "",
+    dateOfBirthAs: "",
+    gender: "",
+    maritalStatus: "",
+    fatherName: "",
+    accountNumber: "",
+    branch: "",
+    ifsc: "",
+    prefix: "",
+    firstNamehr: "",
+    middleName: "",
+    lastNamehr: "",
+    bloodGroup: "",
+    nationality: "",
+    officialEmail: "",
+    employeeId: "",
+  });
 
   // Function to update form2 data
   const updateForm2Data = (data) => {
@@ -97,7 +107,6 @@ const [form2Data, setForm2Data] = useState({
     }));
   };
 
-    
   //input form validation using formk and yup library
   const formik = useFormik({
     initialValues,
@@ -133,15 +142,13 @@ const [form2Data, setForm2Data] = useState({
     formik.handleChange(e); // Update formik values
   };
 
-  console.log(formData)
-
-
+  console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     // Trigger Formik's validation
-    formik.handleSubmit();
+    // formik.handleSubmit();
 
     // Check if there are any errors in the form
     // if (formik.isValid) {
@@ -165,9 +172,6 @@ const [form2Data, setForm2Data] = useState({
     //   console.log("Form contains validation errors. Please fix them.");
     // }
   };
-
-
-
 
   const FileChange = (file, type) => {
     switch (type) {
@@ -198,7 +202,9 @@ const [form2Data, setForm2Data] = useState({
     // If checkbox is unchecked, leave permanentAddress unchanged
     formik.setValues({
       ...formik.values, // Spread other form values
-      permanentAddress: isChecked ? formik.values.presentAddress : formik.values.permanentAddress,
+      permanentAddress: isChecked
+        ? formik.values.presentAddress
+        : formik.values.permanentAddress,
     });
   };
 
@@ -407,7 +413,7 @@ const [form2Data, setForm2Data] = useState({
                     />
                   </InputGroup>
                   {formik.touched.dateOfJoining &&
-                    formik.errors.dateOfJoining ? (
+                  formik.errors.dateOfJoining ? (
                     <div className="text-danger">
                       {formik.errors.dateOfJoining}
                     </div>
@@ -428,7 +434,7 @@ const [form2Data, setForm2Data] = useState({
                   />
 
                   {formik.touched.presentAddress &&
-                    formik.errors.presentAddress ? (
+                  formik.errors.presentAddress ? (
                     <div className="text-danger">
                       {formik.errors.presentAddress}
                     </div>
@@ -465,7 +471,7 @@ const [form2Data, setForm2Data] = useState({
                     }}
                   />
                   {formik.touched.permanentAddress &&
-                    formik.errors.permanentAddress ? (
+                  formik.errors.permanentAddress ? (
                     <div className="text-danger">
                       {formik.errors.permanentAddress}
                     </div>
@@ -487,7 +493,7 @@ const [form2Data, setForm2Data] = useState({
                     value={formik.values.aboutYourself}
                   />
                   {formik.touched.aboutYourself &&
-                    formik.errors.aboutYourself ? (
+                  formik.errors.aboutYourself ? (
                     <div className="text-danger">
                       {formik.errors.aboutYourself}
                     </div>
@@ -581,8 +587,10 @@ const [form2Data, setForm2Data] = useState({
                   acceptedFiles={photoFiles}
                   setAcceptedFiles={setPhotoFiles}
                   onFileChange={(file) => FileChange(file, "photo")}
-                  
                 />
+                 {formik.touched.photoFiles && formik.errors.photoFiles ? (
+                    <div className="text-danger">{formik.errors.photoFiles}</div>
+                  ) : null}
 
                 <FileUpload
                   label="Aadhar Card"
@@ -591,14 +599,23 @@ const [form2Data, setForm2Data] = useState({
                   setAcceptedFiles={setAadharCardFiles}
                   onFileChange={(file) => FileChange(file, "aadharCard")}
                 />
+                {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
+                    <div className="text-danger">{formik.errors.aadharCardFiles}</div>
+                  ) : null}
+
 
                 <FileUpload
                   label="Education Certificate"
                   controlId="educationCertificate"
                   acceptedFiles={educationCertificateFiles}
                   setAcceptedFiles={setEducationCertificateFiles}
-                  onFileChange={(file) => FileChange(file, "educationCertificate")}
+                  onFileChange={(file) =>
+                    FileChange(file, "educationCertificate")
+                  }
                 />
+              {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+                    <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
+                  ) : null}
 
                 <FileUpload
                   label="Relieving Letters from all your previous organizations"
@@ -607,6 +624,9 @@ const [form2Data, setForm2Data] = useState({
                   setAcceptedFiles={setRelievingLettersFiles}
                   onFileChange={(file) => FileChange(file, "relievingLetters")}
                 />
+                 {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+                    <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
+                  ) : null}
 
                 <FileUpload
                   label="3 Months Payslip"
@@ -615,6 +635,9 @@ const [form2Data, setForm2Data] = useState({
                   setAcceptedFiles={setPayslipFiles}
                   onFileChange={(file) => FileChange(file, "payslip")}
                 />
+                 {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
+                    <div className="text-danger">{formik.errors.payslipFiles}</div>
+                  ) : null}
 
                 {/* <div
                   style={{
@@ -654,17 +677,20 @@ const [form2Data, setForm2Data] = useState({
           </Form>
         </Container>
 
-        <Form2 
-        updateForm2Data={updateForm2Data}
-        updateCandidateData={updateCandidateData}/>
+        <Form2
+          updateForm2Data={updateForm2Data}
+          updateCandidateData={updateCandidateData}
+        />
 
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          marginBottom: "20px",
-
-        }}>
-          <Button onClick={handleSubmit}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+          }}
+        >
+          <Button
+            onClick={handleSubmit}
             style={{
               height: "35px",
               fontSize: "15px",
@@ -677,10 +703,7 @@ const [form2Data, setForm2Data] = useState({
           >
             Submit
           </Button>
-
         </div>
-
-
       </div>
     </>
   );
