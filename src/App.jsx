@@ -30,6 +30,7 @@ function App() {
         <Route path="/candidateForm" element={<TopForm />} />
         {/* Route for the candidate Form Recruiter View*/}
         <Route path="/recruiterView/:id" element={<RecruiterForm />} />
+        <Route path="/candidateForm/:id" element={<TopForm />} />
 
        
 

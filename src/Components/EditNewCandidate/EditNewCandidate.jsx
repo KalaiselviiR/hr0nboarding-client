@@ -3,7 +3,7 @@ import styles from './EditNewCandidate.module.css'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
-import { editCandidate, getSingleCandidate } from '../../service/allapi';
+import { editCandidate, getSingleCandidate, resendCandidateForm } from '../../service/allapi';
 import moment from 'moment';
 import closeIcon from '../../assets/closeIcon.svg'
 
@@ -19,6 +19,9 @@ function EditNewCandidate({ UserToEdit, close }) {
         region: ""
     })
 
+
+    const [countryCode, setCountryCode] = useState("+91");
+
     // const [editdata, setEditData] = useState({})
     //object for useNavigate
     const navigate = useNavigate()
@@ -31,7 +34,14 @@ function EditNewCandidate({ UserToEdit, close }) {
         //access key to update in userData
         const key = e.target.name
         //update the data with existing data
-        setEditData({ ...editdata, [key]: value })
+        // setEditData({ ...editdata, [key]: value })
+        if (key === "phno") {
+            const updatedPhoneNumber = countryCode + value;
+            setEditData({ ...editdata, [key]: updatedPhoneNumber });
+        } else {
+            setEditData({ ...editdata, [key]: value });
+        }
+
 
     }
     console.log(editdata);
@@ -79,6 +89,27 @@ function EditNewCandidate({ UserToEdit, close }) {
             close()
         }
     }
+
+
+
+    const handleResend = async () => {
+
+        try {
+
+            const response = await resendCandidateForm(editdata._id)
+            toast.success(response.data.message);
+        }
+        catch (err) {
+            console.log(err)
+            toast.error(err.response.data.message)
+        }
+
+        handleClose()
+
+    }
+
+
+
 
     return (
 
@@ -129,8 +160,12 @@ function EditNewCandidate({ UserToEdit, close }) {
                             <p>Email</p>
                         </div>
                         <div className={styles.input}>
-                            <input type="email" name='email' required onChange={userDetails}
+                            <input type="text"
+                             name='email' required
+                              onChange={userDetails}
                                 value={editdata.email}
+                                pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
+                                title='enter a valid email'
 
                             />
                         </div>
@@ -140,9 +175,13 @@ function EditNewCandidate({ UserToEdit, close }) {
                             <p>Phone number</p>
                         </div>
                         <div className={styles.phoneInput}>
-                            <select className="country-code" onChange={userDetails}>
-                                <option value="+1">IN </option>
-                                <option value="+44">US</option>
+                            <select className="country-code"
+                                onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
                             </select>
                             <input name='phno' type="text" onChange={userDetails}
                                 value={editdata.phno}
@@ -190,7 +229,7 @@ function EditNewCandidate({ UserToEdit, close }) {
                             <button type='submit'>Save</button>
                         </div >
                         <div className={styles.resendLinkButton} >
-                            <button type='button' >Resend Link</button>
+                            <button type='button' onClick={handleResend} >Resend Link</button>
                         </div >
 
                     </div >

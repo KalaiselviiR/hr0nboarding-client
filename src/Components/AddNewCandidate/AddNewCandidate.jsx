@@ -18,13 +18,17 @@ function AddNewCandidate({ close }) {
         jdate: "",
         region: "",
         status: "Pending",
-        isDelete:"no"
+        isDelete: "no"
 
 
     })
     //object for useNavigate
     const navigate = useNavigate()
     // a function to update userdata when user enter the input in html
+
+    const [countryCode, setCountryCode] = useState("+91");
+
+    
     const userDetails = (e) => {
         //prevent the event
         e.preventDefault()
@@ -33,7 +37,13 @@ function AddNewCandidate({ close }) {
         //access key to update in userData
         const key = e.target.name
         //update the data with existing data
-        setUser({ ...userData, [key]: value })
+        // setUser({ ...userData, [key]: value })
+        if (key === "phno") {
+            const updatedPhoneNumber = countryCode + value;
+            setUser({ ...userData, [key]: updatedPhoneNumber });
+        } else {
+            setUser({ ...userData, [key]: value });
+        }
 
     }
     console.log(userData);
@@ -124,12 +134,14 @@ function AddNewCandidate({ close }) {
                         </div>
                         <div className={styles.input}>
                             <input
-                                type="email"
+                                type="text"
                                 placeholder='Email'
                                 name="email"
                                 required
                                 onChange={userDetails}
-                               
+                                pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
+                                title='enter a valid email'
+
                             />
                         </div>
                     </div>
@@ -138,9 +150,13 @@ function AddNewCandidate({ close }) {
                             <p>Phone number</p>
                         </div>
                         <div className={styles.phoneInput}>
-                            <select className="country-code">
-                                <option value="+1">IN </option>
-                                <option value="+44">US</option>
+                            <select className="country-code"
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
                             </select>
                             <input type="text"
                                 placeholder='8845789956'
