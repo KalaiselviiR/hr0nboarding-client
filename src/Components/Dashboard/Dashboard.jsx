@@ -46,8 +46,10 @@ function Dashboard() {
   }
 
   const closeEditModal = () => {
-    setEditModalIsOpen(false)
     getAllCandidate()
+    setEditModalIsOpen(false)
+    
+   
   }
 
   useEffect(() => {
@@ -164,15 +166,15 @@ function Dashboard() {
         </Container>
       </Navbar>
 
-       <Nav className=' p-3 border ' variant="black" defaultActiveKey="/home"  >
+       <Nav className=' p-3 ' variant="black" defaultActiveKey="/home"  >
       <Nav.Item style={{paddingLeft:"76px"}}>
-        <Nav.Link style={{  boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-            borderRadius:"5px",backgroundColor: " rgba(249, 250, 251, 1)",
-            fontWeight:"500"}} className='na' href="/dashboard">All Candidates</Nav.Link>
+        <Nav.Link 
+         className='' eventKey="link-1"  onClick={() => setSearch('no')} style={{fontWeight:"500",color: "#344054"}}>
+          All Candidates</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className='' onClick={() => setSearch('Yes')}
-           eventKey="link-1" style={{ color: "black" }}>Rejected</Nav.Link>
+           eventKey="link-2" style={{ color: "#344054",fontWeight:"500" }}>Rejected</Nav.Link>
         </Nav.Item>
 
       </Nav>
