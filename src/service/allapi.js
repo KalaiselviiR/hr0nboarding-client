@@ -67,6 +67,9 @@ export const createCandidateDetails=async(body)=>{
 
 
 
+export const resendCandidateForm = async(id)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/resend-form/${id}`)
+}
 
 
 //Resend Documents

@@ -61,6 +61,8 @@ function Form2({updateForm2Data ,updateCandidateData}) {
     },
   });
 
+  
+
   const handleChange = (e) => {
     handleFieldChange(formik, e);
     //prevent the event
