@@ -39,7 +39,7 @@ function AddNewCandidate({ close }) {
         //update the data with existing data
         // setUser({ ...userData, [key]: value })
         if (key === "phno") {
-            const updatedPhoneNumber = countryCode + value;
+            const updatedPhoneNumber = `${countryCode}-${value}`;
             setUser({ ...userData, [key]: updatedPhoneNumber });
         } else {
             setUser({ ...userData, [key]: value });
@@ -106,7 +106,7 @@ function AddNewCandidate({ close }) {
                                 placeholder='First Name'
                                 pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
                                 title='First Name must be atleat 3 charecters long'
-
+                                autoComplete="off"
 
                             />
                         </div>
@@ -124,6 +124,7 @@ function AddNewCandidate({ close }) {
                                 name="lname"
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
                                 title='Enter a valid Last Name'
+                                autoComplete="off"
                             />
 
                         </div>
@@ -141,7 +142,7 @@ function AddNewCandidate({ close }) {
                                 onChange={userDetails}
                                 pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
                                 title='enter a valid email'
-
+                                autoComplete="off"
                             />
                         </div>
                     </div>
@@ -165,6 +166,7 @@ function AddNewCandidate({ close }) {
                                 onChange={userDetails}
                                 pattern='^\d{10,}$'
                                 title='Enter a valid phone number'
+                                autoComplete="off"
                             />
                         </div>
                     </div >
@@ -181,6 +183,7 @@ function AddNewCandidate({ close }) {
                                 onChange={userDetails}
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
                                 title='Enter a valid Designation'
+                                autoComplete="off"
                             />
                         </div>
                     </div>
