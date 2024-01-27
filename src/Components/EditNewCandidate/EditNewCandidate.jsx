@@ -20,7 +20,8 @@ function EditNewCandidate({ UserToEdit, close }) {
     })
 
 
-    const [countryCode, setCountryCode] = useState("+91");
+    const [countryCode, setCountryCode] = useState((UserToEdit.phno).split("-")[0]);
+
 
     // const [editdata, setEditData] = useState({})
     //object for useNavigate
@@ -108,7 +109,7 @@ function EditNewCandidate({ UserToEdit, close }) {
 
     }
 
-
+    
 
 
     return (
@@ -133,6 +134,7 @@ function EditNewCandidate({ UserToEdit, close }) {
 
                                 pattern='^[a-zA-Z][a-zA-Z\s]{2,20}$'
                                 title='First Name must be atleat 3 charecters long'
+                                autoComplete="off"
                             />
                         </div>
                     </div>
@@ -150,6 +152,7 @@ function EditNewCandidate({ UserToEdit, close }) {
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
                                 title='Enter a valid Last Name'
                                 value={editdata.lname}
+                                autoComplete="off"
                             />
 
                         </div>
@@ -166,6 +169,7 @@ function EditNewCandidate({ UserToEdit, close }) {
                                 value={editdata.email}
                                 pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
                                 title='enter a valid email'
+                                autoComplete="off"
 
                             />
                         </div>
@@ -176,19 +180,21 @@ function EditNewCandidate({ UserToEdit, close }) {
                         </div>
                         <div className={styles.phoneInput}>
                             <select className="country-code"
+                            value={countryCode}
                                 onChange={(e) => setCountryCode(e.target.value)}
                             >
-                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+91">IN(+91)</option>
                                 <option  value="+880">BD(+880)</option>
                                 <option value="+1">US(+1)</option>
                                 <option value="+20">EG(+20)</option>
                             </select>
                             <input name='phno' type="text" onChange={userDetails}
-                                value={editdata.phno}
+                                value={(editdata.phno).split("-")[1]}
                                 required
 
                                 pattern='^\d{10,}$'
                                 title='Enter a valid phone number'
+                                autoComplete="off"
                             />
                         </div>
                     </div >
@@ -202,6 +208,7 @@ function EditNewCandidate({ UserToEdit, close }) {
 
                                 pattern='^[a-zA-Z][a-zA-Z\s]*'
                                 title='Enter a valid Designation'
+                                autoComplete="off"
                             />
                         </div>
                     </div >

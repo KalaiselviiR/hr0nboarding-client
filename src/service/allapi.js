@@ -24,7 +24,7 @@ export const ResetPassword=async(id,body)=>{
 
 //Update password
 export const changePassword=async(id,body)=>{
-    return await commonRequest("PUT",`${BASE_URL}/api/change-password/id`,body)
+    return await commonRequest("PUT",`${BASE_URL}/api/changePassword/:${userId}`,body)
 }
  
 //Add Candidate
