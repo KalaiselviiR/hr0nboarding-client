@@ -41,7 +41,7 @@ const TopForm = () => {
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
-  
+  const [scrollToError, setScrollToError] = useState(null);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
@@ -116,62 +116,99 @@ const TopForm = () => {
       console.log(values);
     },
   });
-  // handle change function for validation errors
-  const handleChange = (e) => {
-    e.preventDefault();
-    const { name, value, type, files } = e.target;
 
-    if (type === "file") {
-      // If the input is a file input, update the corresponding file name property
-      const fileNameProperty = `${name}FileName`;
-      setFormData((prevData) => ({
-        ...prevData,
-        [fileNameProperty]: files[0].name,
-      }));
-    }
 
-    // Update both the form data and formik values
+  
+ // handle change function for validation errors
+ const handleChange = (e) => {
+  e.preventDefault();
+  const { name, value, type, files } = e.target;
+
+  if (type === "file") {
+    // If the input is a file input, update the corresponding file name property
+    const fileNameProperty = `${name}FileName`;
+    setFormData((prevData) => ({
+      ...prevData,
+      [fileNameProperty]: files[0].name,
+    }));
+
+    // Update formik values for file input
+    formik.setFieldValue(name, files[0]);
+  } else {
+    // Update both the form data and formik values for non-file inputs
     const key = name;
-    const updatedValue = type === "file" ? files[0] : value;
+    const updatedValue = value;
 
     setFormData((prevData) => ({
       ...prevData,
       [key]: updatedValue,
     }));
 
-    formik.handleChange(e); // Update formik values
-  };
+    formik.handleChange(e);
+  }
+};
+
 
   console.log(formData);
+
+  console.log(formik.values);
+    console.log(formik.dirty);
+    console.log(formik.errors);
+    console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    
+  
+    // Check if all fields have values
+    const allFieldsFilled = Object.values(formik.values).every(
+      (value) => value !== "" && value !== null
+    );
+  
+    if (!allFieldsFilled) {
+      // Display an error message or take any other action
+      console.error("Please fill in all the required fields.");
+      return;
+    }
+  
     // Trigger Formik's validation
-    // formik.handleSubmit();
-
+    formik.handleSubmit();
+  
     // Check if there are any errors in the form
-    // if (formik.isValid) {
-    //   console.log("Form is valid. Proceeding with form submission.");
-
-    // Create an updated form data object
-    const updatedFormData = {
-      ...formData,
-      photoFiles: photoFiles || null,
-      aadharCardFiles: aadharCardFiles || null,
-      educationCertificateFiles: educationCertificateFiles || null,
-      relievingLettersFiles: relievingLettersFiles || null,
-      payslipFiles: payslipFiles || null,
-    };
-
-    // Log the updated form data
-    console.log(updatedFormData);
-
-    // Perform any additional actions or API calls if needed
-    // } else {
-    //   console.log("Form contains validation errors. Please fix them.");
-    // }
+    if (Object.keys(formik.errors).length === 0) {
+      // Form is valid, proceed with form submission
+  
+      try {
+        // Prepare FormData for file uploads
+        const formData = new FormData();
+        
+        // Append all form fields, including file inputs
+        for (const key in formik.values) {
+          formData.append(key, formik.values[key] || '');
+        }
+           
+        // Send a POST request using Axios
+        const response = await axios.post('http://localhost:4000/api/candidates', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        });
+  
+        if (response.status === 201) {
+          console.log('Form data submitted successfully');
+          // Optionally: Reset form or navigate to a success page
+        } else {
+          console.error('Failed to submit form data');
+        }
+      } catch (error) {
+        console.error('Error while submitting form data:', error);
+      }
+  
+      // Perform any additional actions or API calls if needed
+    }
   };
+  
 
   const FileChange = (file, type) => {
     switch (type) {
@@ -584,60 +621,60 @@ const TopForm = () => {
                 <FileUpload
                   label="Photo"
                   controlId="photo"
-                  acceptedFiles={photoFiles}
-                  setAcceptedFiles={setPhotoFiles}
+                  acceptedFiles={formData.photoFiles}
+                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, photoFiles: files }))}
                   onFileChange={(file) => FileChange(file, "photo")}
                 />
-                 {formik.touched.photoFiles && formik.errors.photoFiles ? (
+                 {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
                     <div className="text-danger">{formik.errors.photoFiles}</div>
-                  ) : null}
+                  ) : null} */}
 
                 <FileUpload
                   label="Aadhar Card"
                   controlId="aadharCard"
-                  acceptedFiles={aadharCardFiles}
-                  setAcceptedFiles={setAadharCardFiles}
+                  acceptedFiles={formData.aadharCardFiles}
+                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, aadharCardFiles: files }))}
                   onFileChange={(file) => FileChange(file, "aadharCard")}
                 />
-                {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
+                {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
                     <div className="text-danger">{formik.errors.aadharCardFiles}</div>
-                  ) : null}
+                  ) : null} */}
 
 
                 <FileUpload
                   label="Education Certificate"
                   controlId="educationCertificate"
-                  acceptedFiles={educationCertificateFiles}
-                  setAcceptedFiles={setEducationCertificateFiles}
+                  acceptedFiles={formData.educationCertificateFiles}
+                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, educationCertificateFiles: files }))}
                   onFileChange={(file) =>
                     FileChange(file, "educationCertificate")
                   }
                 />
-              {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+              {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
                     <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
-                  ) : null}
+                  ) : null} */}
 
                 <FileUpload
                   label="Relieving Letters from all your previous organizations"
                   controlId="relievingLetters"
-                  acceptedFiles={relievingLettersFiles}
-                  setAcceptedFiles={setRelievingLettersFiles}
+                  acceptedFiles={formData.relievingLettersFiles}
+                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, relievingLettersFiles: files }))}
                   onFileChange={(file) => FileChange(file, "relievingLetters")}
                 />
-                 {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+                 {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
                     <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
-                  ) : null}
+                  ) : null} */}
 
                 <FileUpload
                   label="3 Months Payslip"
                   controlId="payslip"
-                  acceptedFiles={payslipFiles}
-                  setAcceptedFiles={setPayslipFiles}
+                  acceptedFiles={formData.payslipFiles}
+                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, payslipFiles: files }))}
                   onFileChange={(file) => FileChange(file, "payslip")}
                 />
-                 {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
+                 {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
                     <div className="text-danger">{formik.errors.payslipFiles}</div>
-                  ) : null}
+                  ) : null} */}
 
                 {/* <div
                   style={{
