@@ -164,12 +164,7 @@ function Dashboard() {
              
 
           </Navbar.Brand>
-          {/* Add the Logout link
-      <Nav className="ml-auto">
-        <NavLink to="http://localhost:5173/" className="nav-link">
-          Logout
-        </NavLink>
-      </Nav> */}
+          
    
 
         </Container>
