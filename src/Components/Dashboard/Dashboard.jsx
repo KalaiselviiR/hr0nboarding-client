@@ -104,6 +104,8 @@ function Dashboard() {
     setDeleteId(null)
   }
 
+  
+
   const confirmDelete = async () => {
     // setInvokeModal(false)
 
@@ -154,13 +156,22 @@ function Dashboard() {
               Dashboard
             </Nav.Link>
           </Nav>
-          <Navbar.Brand href="#home">
+          <Navbar.Brand href="http://localhost:5173/">
           <FiUser  className="d-inline-block align-top" style={{color:"#7F56D9"
           ,height:"30px",width:'30px',borderRadius:"200px"
           ,backgroundColor:" rgba(249, 245, 255, 1)",gap:"16px"}} />
+          {/* <a href='http://localhost:5173/'></a> */}
              
 
           </Navbar.Brand>
+          {/* Add the Logout link
+      <Nav className="ml-auto">
+        <NavLink to="http://localhost:5173/" className="nav-link">
+          Logout
+        </NavLink>
+      </Nav> */}
+   
+
         </Container>
       </Navbar>
 
