@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -21,10 +21,11 @@ import {
   validationSchema,
 } from "./validation";
 import Form2 from "./Form2";
-
+import { useParams } from 'react-router-dom';
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
+import { getSingleCandidate } from "../../service/allapi";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -42,6 +43,19 @@ const TopForm = () => {
   const [payslipFiles, setPayslipFiles] = useState([]);
 
   const [scrollToError, setScrollToError] = useState(null);
+
+  const [id, setId] = useState(null);
+
+
+        // param id 
+        const{token} =useParams()
+        //get details of the perticuler expense
+        const getoneCandidate=async()=>{
+          const {data}=await getSingleCandidate(token)
+          console.log(data);
+            setId(data._id)
+        }
+        console.log(id);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
@@ -63,6 +77,8 @@ const TopForm = () => {
     educationCertificateFiles: null,
     relievingLettersFiles: null,
     payslipFiles: null,
+    id:id
+    
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -92,6 +108,8 @@ const TopForm = () => {
     officialEmail: "",
     employeeId: "",
   });
+
+
 
   // Function to update form2 data
   const updateForm2Data = (data) => {
@@ -244,6 +262,13 @@ const TopForm = () => {
         : formik.values.permanentAddress,
     });
   };
+
+  useEffect(()=>{
+ 
+    getoneCandidate()
+   
+  },[])
+  
 
   return (
     <>
