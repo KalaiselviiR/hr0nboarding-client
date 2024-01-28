@@ -1,4 +1,4 @@
-// formikUtils.js
+
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -270,6 +270,7 @@ export const handleFieldChange = (formik, e) => {
       } else {
         formik.setFieldError(name, "");
       }
+      break;
 
     case "pfNo":
       // epfoUan validation logic(it contains 12 digit number)
@@ -278,6 +279,7 @@ export const handleFieldChange = (formik, e) => {
       } else {
         formik.setFieldError(name, "");
       }
+      break;
 
     case "adharCard":
       // epfoUan validation logic(it contains 12 digit number)
@@ -289,6 +291,7 @@ export const handleFieldChange = (formik, e) => {
       } else {
         formik.setFieldError(name, "");
       }
+      break;
 
     case "panCard":
       // epfoUan validation logic(it contains 12 digit number)
@@ -297,6 +300,7 @@ export const handleFieldChange = (formik, e) => {
       } else {
         formik.setFieldError(name, "");
       }
+      break;
 
     case "designation":
     case "dateOfJoining":

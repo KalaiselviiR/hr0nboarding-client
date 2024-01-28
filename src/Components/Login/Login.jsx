@@ -129,10 +129,10 @@ const handleChange = async (e) => {
       <Form.Group className="mb-3" controlId="officialEmailAddress">
             <Form.Label className='labelss' >Email </Form.Label>
             <InputGroup>
-              {/* <InputGroup.Text>
+              <InputGroup.Text>
                 <MdOutlineMail  />
-                </InputGroup.Text> */}
-              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="✉️ Enter the email"/>
+                </InputGroup.Text>
+              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="Enter the email"/>
             </InputGroup>
           </Form.Group>
 

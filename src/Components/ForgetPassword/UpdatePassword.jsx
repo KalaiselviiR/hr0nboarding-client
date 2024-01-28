@@ -8,7 +8,14 @@ import { MdOutlineMail } from "react-icons/md";
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
-import axios from 'axios'
+import axios from 'axios';
+
+
+// const items = JSON.parse(localStorage.getItem('userId'));
+
+
+  
+
 
 function UpdatePassword() {
          //create an object to store datas from input
@@ -17,6 +24,19 @@ function UpdatePassword() {
     cpsw: ""
 
   })
+
+  
+
+// const [items, setItems] = useState([]);
+// const items = JSON.parse(localStorage.getItem('userId'));
+// useEffect(() => {
+// items = JSON.parse(localStorage.getItem('userId'));
+  // if (items) {
+// setItems(items);
+// console.log(items)
+//   }
+// }, []);
+
     //object for useNavigate
 const navigate=useNavigate()
    // a function to update userdata when user enter the input in html
@@ -31,7 +51,7 @@ const userDetails = (e) => {
   setUser({ ...userData, [key]: value })
 
 }
-console.log(userData);
+// console.log(userData);
 
 const handleSubmit = async (e) => {
 
@@ -39,10 +59,10 @@ const handleSubmit = async (e) => {
   e.preventDefault()
   const { psw, cpsw } = userData
   
- if (psw == "") {
-    toast.error('Password requierd')
+ if (psw === "") {
+    toast.error('Enter valid password')
   }
-  if (cpsw == "") {
+  if (cpsw === "") {
     toast.error('Confirm password requierd')
   }
   else if (psw !== cpsw)
@@ -53,21 +73,24 @@ const handleSubmit = async (e) => {
 
   else {
     
+    if(psw.length>8){
+    const items = localStorage.getItem('userId');
+    // setItems(items);
+    // console.log(items)
+    // console.log('hello')
+
     const newPassword = psw;
 
-    const userId = 'your user-id';
+    const userId = items;
+
 
     console.log(userData);
     //api call
-    const response =  axios.put('http:/localhost:4000/api/change-password/' +userId, {password : newPassword}) 
+    const response = axios.put(`http://localhost:4000/api/changePassword/${userId}`, { password: newPassword }) 
     .then(response => {
       console.log(response.data);
-    })
-    .catch(error => {
-      // console.error(error);
-    });
-    console.log(response);
-    if(response && response.status==200){
+      console.log(response.status);
+      if(response.status==200){
 
         toast.success(response.data.message);
       setTimeout(()=> {
@@ -84,9 +107,38 @@ const handleSubmit = async (e) => {
       
     }else{
     
-      // toast.error(response.data.message);
+      toast.error(response.data.message);
     }
 
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+    // console.log(response);
+    // if(response.status==200){
+
+    //     toast.success(response.data.message);
+    //   setTimeout(()=> {
+    //     navigate('/')
+    //   }, 1500);
+
+    // //reset all states datas
+    // setUser({
+    //     psw: "",
+    //     cpsw: ""
+    
+    // })
+
+      
+    // }else{
+    
+    //   // toast.error(response.data.message);
+    // }
+  }
+  else{
+    toast.error('Enter valid password')
+  }
   }
 }
     
@@ -106,7 +158,7 @@ const handleSubmit = async (e) => {
       
       <div  >
       <Form.Group className="mb-3" controlId="officialEmailAddress" >
-            <Form.Label className='labelss'>Password</Form.Label>
+            <Form.Label className='labelss'>New Password</Form.Label>
             <InputGroup>
             
               <Form.Control onChange={userDetails}  name='psw' className='input-field' type="password" placeholder="Enter password" />

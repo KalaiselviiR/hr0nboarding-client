@@ -9,7 +9,7 @@ import PdfComp from "./PdfComp";
 
 
 // FileUpload component for handling file upload
-function FileUpload({ label,onFileChange }) {
+function FileUpload({ label,onFileChange,acceptedFiles,setAcceptedFiles }) {
    // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -34,8 +34,12 @@ function FileUpload({ label,onFileChange }) {
       // Initiate the file upload process
       uploadFile(selectedFile);
       onFileChange(selectedFile)
+      setAcceptedFiles(selectedFile);
     }
   };
+
+
+
 
    // Event handler for triggering file input click
   const handleFileClick = (e) => {
@@ -63,7 +67,8 @@ function FileUpload({ label,onFileChange }) {
   
   useEffect(() => {
     onFileChange(file);
-  }, [file, onFileChange]);
+    setAcceptedFiles(file); 
+  }, []);
 
   return (
     <Form.Group className="mb-3">

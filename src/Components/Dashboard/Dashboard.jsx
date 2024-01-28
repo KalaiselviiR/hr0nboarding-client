@@ -52,21 +52,21 @@ function Dashboard() {
    
   }
 
-  useEffect(() => {
-    const handleClickedOutside = (event) => {
-      if ((addModalIsOpen || editModalIsOpen) && !event.target.closest('.addCandidateModal')) {
-        closeAddModal()
-        closeEditModal()
-      }
-    }
+  // useEffect(() => {
+  //   const handleClickedOutside = (event) => {
+  //     if ((addModalIsOpen || editModalIsOpen) && !event.target.closest('.addCandidateModal')) {
+  //       closeAddModal()
+  //       closeEditModal()
+  //     }
+  //   }
 
-    document.addEventListener('mousedown', handleClickedOutside)
+  //   document.addEventListener('mousedown', handleClickedOutside)
 
-    return () => {
-      document.removeEventListener('mousedown', handleClickedOutside)
-    };
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickedOutside)
+  //   };
 
-  }, [addModalIsOpen, editModalIsOpen])
+  // }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
   const recordsPerPage = 10;
