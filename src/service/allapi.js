@@ -33,8 +33,8 @@ export const addCandidate=async(body)=>{
 }
 
 //Get a single Candidate to fill edit form
-export const getSingleCandidate=async(id)=>{
-    return await commonRequest("GET",`${BASE_URL}/api/get-singlecandidate/${id}`,"")
+export const getSingleCandidate=async(token)=>{
+    return await commonRequest("GET",`${BASE_URL}/api/get-singlecandidate/${token}`,"")
 }
 
 //Edit Candidate

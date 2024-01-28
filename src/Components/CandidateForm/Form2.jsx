@@ -76,7 +76,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
     updateForm2Data(candidateData)
     updateCandidateData(candidateData);
   };
-  console.log(candidateData);
+
 
   
 
