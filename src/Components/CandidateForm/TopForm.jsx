@@ -109,10 +109,23 @@ const TopForm = () => {
     employeeId: "",
   });
 
-
+  //input form validation using formk and yup library
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit: (values) => {
+      // Handle form submission logic here
+      console.log(values);
+    },
+  });
 
   // Function to update form2 data
   const updateForm2Data = (data) => {
+    const combinedValues = {
+      ...formik.values,
+      ...data,
+    };
+    formik.setValues(combinedValues);
     setForm2Data(data);
   };
 
@@ -125,15 +138,7 @@ const TopForm = () => {
     }));
   };
 
-  //input form validation using formk and yup library
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit: (values) => {
-      // Handle form submission logic here
-      console.log(values);
-    },
-  });
+
 
 
   
@@ -172,7 +177,7 @@ const TopForm = () => {
   console.log(formik.values);
     console.log(formik.dirty);
     console.log(formik.errors);
-    console.log(formData);
+    // console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
