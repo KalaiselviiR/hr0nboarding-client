@@ -13,13 +13,13 @@ import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
 
 function App() {
  
-
+  const login = localStorage.getItem("isLoggedIn");
   return (
     <>
           {/* Defining the routes using React Router's `Routes` component */}
       <Routes>
       {/* Route for the Login page */}
-      <Route path="/" element={<Login />} />
+      <Route path="/" element={login ? <Dashboard /> : <Login />}></Route>
       <Route path="/verify" element={<VerifyEmail />} />
       <Route path="/updatepass/:id" element={<UpdatePassword />} />
         {/* Route for the Dashboard page */}

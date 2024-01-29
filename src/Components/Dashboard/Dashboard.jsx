@@ -12,6 +12,9 @@ import Nav from 'react-bootstrap/Nav';
 import { FiUser } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { deleteCandidate, getallCandidates } from '../../service/allapi';
+import { useNavigate } from 'react-router-dom';
+import Login from '../Login/Login';
+
 
 function Dashboard() {
 
@@ -33,6 +36,8 @@ function Dashboard() {
 
   const [deleteId, setDeleteId] = useState('')
 
+  // const [currentPage, setCurrentPage] = useState(1);
+
   const openAddModal = () => {
     setAddModalIsOpen(true)
   }
@@ -51,6 +56,13 @@ function Dashboard() {
     setEditModalIsOpen(false)
     
    
+  }
+
+  const navigate = useNavigate()
+  
+  const Logout = () => {
+    localStorage.removeItem("isLoggedIn")
+    navigate('/')
   }
 
   // useEffect(() => {
@@ -107,7 +119,6 @@ function Dashboard() {
     setDeleteId(null)
   }
 
-  
 
   const confirmDelete = async () => {
     // setInvokeModal(false)
@@ -159,11 +170,17 @@ function Dashboard() {
               Dashboard
             </Nav.Link>
           </Nav>
-              <Navbar.Brand href="http://localhost:5173/">
-          <IoLogOutOutline  className="d-inline-block align-top" style={{color:"#7F56D9"
-          ,height:"30px",width:'30px',borderRadius:"200px"
-          ,backgroundColor:" rgba(249, 245, 255, 1)"}} />
-          </Navbar.Brand>
+
+              
+          <Navbar.Brand href="http://localhost:5173/">
+      <IoLogOutOutline className="d-inline-block align-top" style={{
+        color: "#7F56D9",
+        height: "30px",
+        width: '30px',
+        borderRadius: "200px",
+        backgroundColor: " rgba(249, 245, 255, 1)"
+      }} onClick={Logout} />
+    </Navbar.Brand>
           
           <Navbar.Brand>
           <FiUser  className="d-inline-block align-top" style={{color:"#7F56D9"
