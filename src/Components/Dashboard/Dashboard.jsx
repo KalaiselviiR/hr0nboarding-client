@@ -16,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import Login from '../Login/Login';
 
 
+
 function Dashboard() {
 
   const [isShow, setInvokeModal] = useState(false);
@@ -23,6 +24,8 @@ function Dashboard() {
 
   const [filterType, setFilterType] = useState('isDelete');
   const [search, setSearch] = useState('no');
+
+  const [showModal, setShowModal] = useState(false);
 
   const initModal = () => {
     setInvokeModal(!isShow);
@@ -58,9 +61,18 @@ function Dashboard() {
    
   }
 
-  const navigate = useNavigate()
-  
-  const Logout = () => {
+  const navigate = useNavigate();
+
+  const handleUserIconClick = () => {
+    setShowModal(true);
+    // Add logic to fetch and display user email here if needed
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleLogout = () => {
     localStorage.removeItem("isLoggedIn")
     navigate('/')
   }
@@ -172,24 +184,49 @@ function Dashboard() {
           </Nav>
 
               
-          <Navbar.Brand href="http://localhost:5173/">
-      <IoLogOutOutline className="d-inline-block align-top" style={{
+          {/* <Navbar.Brand href="http://localhost:5173/"> */}
+      {/* <IoLogOutOutline className="d-inline-block align-top" style={{
         color: "#7F56D9",
         height: "30px",
         width: '30px',
         borderRadius: "200px",
         backgroundColor: " rgba(249, 245, 255, 1)"
-      }} onClick={Logout} />
-    </Navbar.Brand>
+      }} onClick={Logout} /> */}
+    {/* </Navbar.Brand> */}
           
-          <Navbar.Brand>
-          <FiUser  className="d-inline-block align-top" style={{color:"#7F56D9"
-          ,height:"30px",width:'30px',borderRadius:"200px"
-          ,backgroundColor:" rgba(249, 245, 255, 1)"}} />
-     
-             
-
+         <Navbar.Brand onClick={handleUserIconClick}>
+            <FiUser
+              className="d-inline-block align-top"
+              style={{
+                color: "#7F56D9",
+                height: "30px",
+                width: "30px",
+                borderRadius: "200px",
+                backgroundColor: "rgba(249, 245, 255, 1)",
+                cursor: "pointer",
+              }}
+            />
           </Navbar.Brand>
+
+
+      <Modal show={showModal} onHide={handleCloseModal} style={{  height: "350px", width: "2000px" }}>
+            <Modal.Header closeButton>
+              
+            </Modal.Header>
+            <Modal.Body>
+              {/* You can display the logged-in user's email here */}
+              User Email: techjays.com
+            </Modal.Body>
+            <Modal.Footer>
+              
+              <Button variant="primary" onClick={handleLogout} style={{ backgroundColor: '#7F56D9', border: '10px' }}
+            className='btn-login'>
+                Logout
+              </Button>
+            </Modal.Footer>
+          </Modal>
+
+
 
         </Container>
       </Navbar>
