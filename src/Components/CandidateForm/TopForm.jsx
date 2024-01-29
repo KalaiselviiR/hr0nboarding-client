@@ -246,18 +246,23 @@ const TopForm = () => {
     switch (type) {
       case "photo":
         setPhotoFiles(file);
+        formik.setFieldValue("photoFiles",file);
         break;
       case "aadharCard":
         setAadharCardFiles(file);
+        formik.setFieldValue("aadharCardFiles",file);
         break;
       case "educationCertificate":
         setEducationCertificateFiles(file);
+        formik.setFieldValue("educationCertificateFiles",file);
         break;
       case "relievingLetters":
         setRelievingLettersFiles(file);
+        formik.setFieldValue("relievingLettersFiles",file);
         break;
       case "payslip":
         setPayslipFiles(file);
+        formik.setFieldValue("payslipFiles",file);
         break;
       default:
         break;
