@@ -17,6 +17,7 @@ function FileUpload({ label,onFileChange,acceptedFiles,setAcceptedFiles }) {
     // Reference for file input element
   const fileInputRef = useRef(null);
   
+  
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -35,6 +36,7 @@ function FileUpload({ label,onFileChange,acceptedFiles,setAcceptedFiles }) {
       uploadFile(selectedFile);
       onFileChange(selectedFile)
       setAcceptedFiles(selectedFile);
+      
     }
   };
 
