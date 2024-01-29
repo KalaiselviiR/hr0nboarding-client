@@ -41,6 +41,8 @@ const userDetails = (e) => {
 const handleChange = async (e) => {
   e.preventDefault();
 
+ 
+
   const { email, password } = userData;
 
   // Email validation
@@ -81,6 +83,7 @@ const handleChange = async (e) => {
     // API call for login
     const response = await loginHr(userData);
     console.log(response.data);
+    localStorage.getItem("isLoggedIn");
 
     if (response.status === 200) {
       if (response.data.message === "Login successful") {
