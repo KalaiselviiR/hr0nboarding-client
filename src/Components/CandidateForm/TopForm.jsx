@@ -51,11 +51,20 @@ const TopForm = () => {
         const{token} =useParams()
         //get details of the perticuler expense
         const getoneCandidate=async()=>{
+          
           const {data}=await getSingleCandidate(token)
           console.log(data);
             setId(data._id)
         }
         console.log(id);
+
+        useEffect(() => {
+          console.log('Updated id:', id);
+          setFormData((prevData) => ({
+            ...prevData,
+            id: id,
+          }));
+        }, [id]);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
@@ -237,18 +246,23 @@ const TopForm = () => {
     switch (type) {
       case "photo":
         setPhotoFiles(file);
+        formik.setFieldValue("photoFiles",file);
         break;
       case "aadharCard":
         setAadharCardFiles(file);
+        formik.setFieldValue("aadharCardFiles",file);
         break;
       case "educationCertificate":
         setEducationCertificateFiles(file);
+        formik.setFieldValue("educationCertificateFiles",file);
         break;
       case "relievingLetters":
         setRelievingLettersFiles(file);
+        formik.setFieldValue("relievingLettersFiles",file);
         break;
       case "payslip":
         setPayslipFiles(file);
+        formik.setFieldValue("payslipFiles",file);
         break;
       default:
         break;
