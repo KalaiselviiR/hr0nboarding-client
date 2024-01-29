@@ -49,8 +49,8 @@ export const initialValues = {
   middleName: "",
   bloodGroup: "",
   nationality: "",
-  officialEmail: "",
-  employeeId: "",
+  // officialEmail: "",
+  // employeeId: "",
 };
 
 export const validationSchema = Yup.object().shape({
@@ -75,10 +75,10 @@ export const validationSchema = Yup.object().shape({
   presentAddress: Yup.string().required("Present Address is required"),
   permanentAddress: Yup.string().required("Permanent Address is required"),
   aboutYourself: Yup.string().required("About yourself is required"),
-  experience: Yup.string().required("Experience is required"),
-  company: Yup.string()
-    .matches(/^[^\d]+$/, "Company should not contain numbers")
-    .required("Previous Company is required"),
+  // experience: Yup.string().required("Experience is required"),
+  // company: Yup.string()
+  //   .matches(/^[^\d]+$/, "Company should not contain numbers")
+  //   .required("Previous Company is required"),
   enjoyment: Yup.string().required("Enjoyment is required"),
   sneakpeek: Yup.string().required("Sneak peek is required"),
   // photoFiles: Yup.mixed().required("Photo is required"),
@@ -131,12 +131,12 @@ export const validationSchema = Yup.object().shape({
     .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
 
   // bottomForm-2
-  epfoUan: Yup.string()
-    .matches(/^\d{12}$/, "Invalid EPFO UAN(It contains 12 digits)")
-    .required("EPFO UAN is required"),
-  pfNo: Yup.string()
-    .matches(/^\+?[0-9]+$/, "Invalid PF No")
-    .required("PF NO is required"),
+  // epfoUan: Yup.string()
+  //   .matches(/^\d{12}$/, "Invalid EPFO UAN(It contains 12 digits)")
+  //   .required("EPFO UAN is required"),
+  // pfNo: Yup.string()
+  //   .matches(/^\+?[0-9]+$/, "Invalid PF No")
+  //   .required("PF NO is required"),
   adharCard: Yup.string()
     .matches(/^\d{13}$/, "Invalid AdharCard Number(It contains 13 digit)")
     .required("AdharCard Number is required"),
@@ -167,30 +167,30 @@ export const validationSchema = Yup.object().shape({
     .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
     .required("IFSC code is required"),
   //bottomForm-3
-  prefix: Yup.string()
-    .matches(/^[^\d]+$/, "Prefix should not contain numbers")
-    .required("Prefix is required"),
+  // prefix: Yup.string()
+  //   .matches(/^[^\d]+$/, "Prefix should not contain numbers")
+  //   .required("Prefix is required"),
   firstNamehr: Yup.string()
     .matches(/^[^\d]+$/, "First Name should not contain numbers")
     .required("First Name is required"),
   lastNamehr: Yup.string()
     .matches(/^[^\d]+$/, "Last Name should not contain numbers")
     .required("Last Name is required"),
-  middleName: Yup.string()
-    .matches(/^[^\d]+$/, "Middle Name should not contain numbers")
-    .required("Middle Name is required"),
+  // middleName: Yup.string()
+  //   .matches(/^[^\d]+$/, "Middle Name should not contain numbers")
+  //   .required("Middle Name is required"),
   bloodGroup: Yup.string().required("Blood Group is Required"),
   nationality: Yup.string()
     .matches(/^[^\d]+$/, "Nationality should not contain numbers")
     .required("Nationality is required"),
-  officialEmail: Yup.string()
-    .email("Invalid email")
-    .required("Email is required")
-    .matches(
-      /@techjays\.com$/,
-      "Email must includes from @techjays.com domain"
-    ),
-  employeeId: Yup.string().required("Employee Id is Required"),
+  // officialEmail: Yup.string()
+  //   .email("Invalid email")
+  //   .required("Email is required")
+  //   .matches(
+  //     /@techjays\.com$/,
+  //     "Email must includes from @techjays.com domain"
+  //   ),
+  // employeeId: Yup.string().required("Employee Id is Required"),
 });
 
 export const handleFieldChange = (formik, e) => {
@@ -209,10 +209,10 @@ export const handleFieldChange = (formik, e) => {
     case "branch":
     case "firstNamehr":
     case "lastNamehr":
-    case "middleName":
+    // case "middleName":
     case "nationality":
-    case "maritalStatus":
-    case "gender":
+    // case "maritalStatus":
+    // case "gender":
       // Check if the value contains a number
       if (/\d/.test(value)) {
         formik.setFieldError(name, `${name} should not contain numbers`);
@@ -239,7 +239,7 @@ export const handleFieldChange = (formik, e) => {
 
     case "email":
     case "emailAddress":
-    case "officialEmail":
+    // case "officialEmail":
       // Your custom email validation logic
       // For example, checking if it contains '@'
       const requiredDomain = "techjays";
@@ -265,21 +265,22 @@ export const handleFieldChange = (formik, e) => {
 
     case "epfoUan":
       // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\d{12}$/.test(value)) {
+      if (!/^\d{10}$/.test(value)) {
         formik.setFieldError(name, "Invalid EpfoUan");
       } else {
         formik.setFieldError(name, "");
       }
       break;
 
-    case "pfNo":
-      // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\+?[0-9]+$/.test(value)) {
-        formik.setFieldError(name, "Invalid PF Number");
-      } else {
-        formik.setFieldError(name, "");
-      }
-      break;
+      case "pfNo":
+        // PF Number validation logic (first two capitalized letters, remaining numbers)
+        if (!/^[A-Z]{2}\d+$/.test(value)) {
+          formik.setFieldError(name, "Invalid PF Number");
+        } else {
+          formik.setFieldError(name, "");
+        }
+        break;
+      
 
     case "adharCard":
       // epfoUan validation logic(it contains 12 digit number)

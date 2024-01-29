@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./CandidateForm.css"; // Assuming you have a custom CSS file for styling
 import { CiExport, CiCalendar } from "react-icons/ci";
 import {
@@ -17,10 +17,9 @@ import {
   initialValues,
   validationSchema,
 } from "./validation";
-import {  createCandidateDetails } from "../../service/allapi";
+import { createCandidateDetails } from "../../service/allapi";
 
-
-function Form2({updateForm2Data ,updateCandidateData}) {
+function Form2({ updateForm2Data, updateCandidateData }) {
   //create an object to store datas from input family details
   const [candidateData, setCandidate] = useState({
     memberName: "",
@@ -46,11 +45,9 @@ function Form2({updateForm2Data ,updateCandidateData}) {
     lastNamehr: "",
     bloodGroup: "",
     nationality: "",
-    officialEmail: "",
-    employeeId: "",
+    // officialEmail: "",
+    // employeeId: "",
   });
-
-
 
   const formik = useFormik({
     initialValues,
@@ -61,28 +58,27 @@ function Form2({updateForm2Data ,updateCandidateData}) {
     },
   });
 
-  
-
   const handleChange = (e) => {
     handleFieldChange(formik, e);
-    //prevent the event
+    // prevent the event
     e.preventDefault();
-    //access value to update in userData
+    // access value to update in userData
     const { value } = e.target;
-    //access key to update in userData
+    // access key to update in userData
     const key = e.target.name;
-    //update the data with existing data
-    setCandidate({ ...candidateData, [key]: value });
-    updateForm2Data(candidateData)
-    updateCandidateData(candidateData);
+    // update the data with existing data
+    setCandidate((prevData) => ({ ...prevData, [key]: value }));
   };
 
-
-  
+  useEffect(() => {
+    // This will run whenever candidateData changes
+    updateForm2Data(candidateData);
+    updateCandidateData(candidateData);
+  }, [candidateData]);
 
   const handleSubmitBottom = async (e) => {
     e.preventDefault();
-     formik.handleSubmit()
+    formik.handleSubmit();
     //api call
     const response = await createCandidateDetails(candidateData);
 
@@ -115,15 +111,12 @@ function Form2({updateForm2Data ,updateCandidateData}) {
         bloodGroup: "",
         nationality: "",
         officialEmail: "",
-        employeeId: ""
+        employeeId: "",
       });
     } else {
       toast.error(response.data.message);
     }
   };
-
-
-
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
@@ -198,17 +191,23 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               </Col>
 
               <Col xs={12} md={4}>
-                <Form.Group controlId="realtionShip">
+                <Form.Group controlId="relationship">
                   <Form.Label className="labelss">Relationship</Form.Label>
-                  <Form.Control
+                  <Form.Select
                     className="input-field"
-                    type="text"
-                    placeholder="Relationship"
                     name="relationship"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.relationship}
-                  />
+                  >
+                    <option value="" label="Select Relationship" />
+                    <option value="Father" label="Father" />
+                    <option value="Mother" label="Mother" />
+                    <option value="Spouse" label="Spouse" />
+                    <option value="Child1" label="Child 1" />
+                    <option value="Child2" label="Child 2" />
+                   
+                  </Form.Select>
                   {formik.touched.relationship && formik.errors.relationship ? (
                     <div className="text-danger">
                       {formik.errors.relationship}
@@ -225,7 +224,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control
-                    type="date"
+                      type="date"
                       className="input-field"
                       placeholder="Date"
                       name="dateOfBirth"
@@ -379,7 +378,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                   <Form.Control
                     className="input-field"
                     type="text"
-                    placeholder="EPFO UAN"
+                    placeholder="XXXXXXXXXX"
                     name="epfoUan"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -396,7 +395,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                   <Form.Control
                     className="input-field"
                     type="text"
-                    placeholder="PF No"
+                    placeholder="XX/XXXXX/XXXXX"
                     name="pfNo"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -413,7 +412,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                   <Form.Control
                     className="input-field"
                     type="text"
-                    placeholder="Adhar Card No"
+                    placeholder="XXXX XXXX XXXX XXXX"
                     name="adharCard"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
@@ -494,34 +493,42 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               </Row>
               <Row>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 " controlId="formGroupEmail">
+                  <Form.Group className="mb-3" controlId="formGroupGender">
                     <Form.Label className="labelss">Gender</Form.Label>
-                    <Form.Control
+                    <Form.Select
                       className="input-field"
-                      type="text"
-                      placeholder="Gender"
                       name="gender"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.gender}
-                    />
-                    {formik.touched.gender && formik.errors.gender ? (
+                    >
+                      <option value="" label="Select Gender" />
+                      <option value="Male" label="Male" />
+                      <option value="Female" label="Female" />
+                      <option value="Other" label="Other" />
+                    </Form.Select>
+                    {/* {formik.touched.gender && formik.errors.gender ? (
                       <div className="text-danger">{formik.errors.gender}</div>
-                    ) : null}
+                    ) : null} */}
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 ms-2" controlId="formGroupEmail">
+                  <Form.Group
+                    className="mb-3 ms-2"
+                    controlId="formGroupMaritalStatus"
+                  >
                     <Form.Label className="labelss">Marital status</Form.Label>
-                    <Form.Control
+                    <Form.Select
                       className="input-field"
-                      type="text"
-                      placeholder="Marital Status"
                       name="maritalStatus"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
                       value={formik.values.maritalStatus}
-                    />
+                    >
+                      <option value="" label="Select Marital Status" />
+                      <option value="Single" label="Single" />
+                      <option value="Married" label="Married" />
+                    </Form.Select>
                     {formik.touched.maritalStatus &&
                     formik.errors.maritalStatus ? (
                       <div className="text-danger">
@@ -617,7 +624,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               }}
             > */}
 
-              {/* <Button
+            {/* <Button
                 onClick={handleSubmitOne}
 
               <Button
@@ -701,18 +708,24 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="prefix">
                   <Form.Label className="labelss">Prefix</Form.Label>
-                  <Form.Control
+                  <Form.Select
                     className="input-field"
-                    type="text"
-                    placeholder="olivia"
                     name="prefix"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.prefix}
-                  />
-                  {formik.touched.prefix && formik.errors.prefix ? (
-                    <div className="text-danger">{formik.errors.prefix}</div>
-                  ) : null}
+                  >
+                    <option value="">Select Prefix</option>
+                    <option value="Mr.">Mr.</option>
+                    <option value="Mrs.">Mrs.</option>
+                    <option value="Miss">Miss</option>
+                    <option value="Ms.">Ms.</option>
+                    <option value="Dr.">Dr.</option>
+                  
+                  </Form.Select>
+                  {/* {formik.touched.prefix && formik.errors.prefix ? (
+    <div className="text-danger">{formik.errors.prefix}</div>
+  ) : null} */}
                 </Form.Group>
               </Col>
               <Col xs={12} md={4}>
@@ -778,20 +791,28 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="bloodGroup">
                   <Form.Label className="labelss">Blood group</Form.Label>
-                  <Form.Control
+                  <Form.Select
                     className="input-field"
-                    type="text"
-                    placeholder="Blood Group"
                     name="bloodGroup"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
                     value={formik.values.bloodGroup}
-                  />
-                  {formik.touched.bloodGroup && formik.errors.bloodGroup ? (
+                  >
+                    <option value="" label="Select Blood Group" />
+                    <option value="A+" label="A+" />
+                    <option value="A-" label="A-" />
+                    <option value="B+" label="B+" />
+                    <option value="B-" label="B-" />
+                    <option value="AB+" label="AB+" />
+                    <option value="AB-" label="AB-" />
+                    <option value="O+" label="O+" />
+                    <option value="O-" label="O-" />
+                  </Form.Select>
+                  {/* {formik.touched.bloodGroup && formik.errors.bloodGroup ? (
                     <div className="text-danger">
                       {formik.errors.bloodGroup}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </Form.Group>
               </Col>
               <Col xs={12} md={4}>
@@ -815,17 +836,17 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               </Col>
             </Row>
 
-            <Row>
+            {/* <Row>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="officialEmailAddress">
                   <Form.Label className="labelss">
                     Official email address
                   </Form.Label>
-                  <InputGroup>
-                    {/* <InputGroup.Text>
+                  <InputGroup> */}
+            {/* <InputGroup.Text>
                 <MdOutlineMail  />
               </InputGroup.Text> */}
-                    <Form.Control
+            {/* <Form.Control
                       className="input-field"
                       type="email"
                       placeholder="✉️ Email"
@@ -842,8 +863,8 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
-              <Col xs={12} md={4}>
+              </Col> */}
+            {/* <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="employeeId">
                   <Form.Label className="labelss">Employee ID</Form.Label>
                   <Form.Control
@@ -861,8 +882,8 @@ function Form2({updateForm2Data ,updateCandidateData}) {
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
-            </Row>
+              </Col> */}
+            {/* </Row> */}
             {/* <div
               style={{
                 display: "flex",
@@ -872,7 +893,7 @@ function Form2({updateForm2Data ,updateCandidateData}) {
               }} 
             >*/}
 
-              {/* <Button
+            {/* <Button
                 onClick={handleSubmitTwo}
 
               <Button
