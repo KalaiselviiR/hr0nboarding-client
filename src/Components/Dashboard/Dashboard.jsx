@@ -10,6 +10,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import Nav from 'react-bootstrap/Nav';
 import { FiUser } from "react-icons/fi";
+import { IoLogOutOutline } from "react-icons/io5";
 import { deleteCandidate, getallCandidates } from '../../service/allapi';
 
 function Dashboard() {
@@ -158,16 +159,20 @@ function Dashboard() {
               Dashboard
             </Nav.Link>
           </Nav>
-          <Navbar.Brand href="http://localhost:5173/">
+              <Navbar.Brand href="http://localhost:5173/">
+          <IoLogOutOutline  className="d-inline-block align-top" style={{color:"#7F56D9"
+          ,height:"30px",width:'30px',borderRadius:"200px"
+          ,backgroundColor:" rgba(249, 245, 255, 1)"}} />
+          </Navbar.Brand>
+          
+          <Navbar.Brand>
           <FiUser  className="d-inline-block align-top" style={{color:"#7F56D9"
           ,height:"30px",width:'30px',borderRadius:"200px"
-          ,backgroundColor:" rgba(249, 245, 255, 1)",gap:"16px"}} />
-          {/* <a href='http://localhost:5173/'></a> */}
+          ,backgroundColor:" rgba(249, 245, 255, 1)"}} />
+     
              
 
           </Navbar.Brand>
-          
-   
 
         </Container>
       </Navbar>
