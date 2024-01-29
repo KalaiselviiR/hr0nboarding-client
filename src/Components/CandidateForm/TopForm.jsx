@@ -51,11 +51,20 @@ const TopForm = () => {
         const{token} =useParams()
         //get details of the perticuler expense
         const getoneCandidate=async()=>{
+          
           const {data}=await getSingleCandidate(token)
           console.log(data);
             setId(data._id)
         }
         console.log(id);
+
+        useEffect(() => {
+          console.log('Updated id:', id);
+          setFormData((prevData) => ({
+            ...prevData,
+            id: id,
+          }));
+        }, [id]);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
