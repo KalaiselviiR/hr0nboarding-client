@@ -11,7 +11,7 @@ import moment from 'moment';
 import Nav from 'react-bootstrap/Nav';
 import { FiUser } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
-import { deleteCandidate, getallCandidates } from '../../service/allapi';
+import { ConformdeleteCandidate, deleteCandidate, getallCandidates } from '../../service/allapi';
 import { useNavigate } from 'react-router-dom';
 import Login from '../Login/Login';
 
@@ -38,6 +38,8 @@ function Dashboard() {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
   const [deleteId, setDeleteId] = useState('')
+
+  const [deleteStatus, setDeleteStatus] = useState('')
 
   // const [currentPage, setCurrentPage] = useState(1);
 
@@ -121,20 +123,24 @@ function Dashboard() {
   }, []);
 
 
-  const handleDeleteClick = (id) => {
+  const handleDeleteClick = (id,status) => {
     initModal()
     setDeleteId(id)
+    setDeleteStatus(status)
+  
   }
 
   const cancleDelete = () => {
     setInvokeModal(false)
     setDeleteId(null)
+    setDeleteStatus(null)
   }
 
 
   const confirmDelete = async () => {
-    // setInvokeModal(false)
 
+    if(deleteStatus!="Rejected"){
+      
     const response = await deleteCandidate(deleteId)
     if (response.status == 200) {
       toast.success(response.data.message);
@@ -145,6 +151,21 @@ function Dashboard() {
   } else {
       toast.error(response.data.message)
   }
+
+    }
+    else{
+      const response = await ConformdeleteCandidate(deleteId)
+      if (response.status == 200) {
+        toast.success(response.data.message);
+        getAllCandidate()
+        setInvokeModal(false)
+      
+  
+    } else {
+        toast.error(response.data.message)
+    }
+      
+    }
  
   }
 
@@ -309,7 +330,7 @@ function Dashboard() {
                   </td>
                   <td>
                     <LuPen onClick={() => openEditModal(i)} className="  icon" />
-                    <LuTrash2 className=" icon2" onClick={() => handleDeleteClick(i._id)} />
+                    <LuTrash2 className=" icon2" onClick={() => handleDeleteClick(i._id,i.status)}/>
 
                   </td>
                 </tr>
