@@ -271,15 +271,15 @@ function Dashboard() {
           <Modal show={showModal} 
             onHide={handleCloseModal}
             dialogClassName="modal-responsive custom-modal"
-            style={{ maxWidth:"%", width:"90%", marginTop:"50px", marginLeft:"100px", border:'none', marginRight:'100px'}}>
-            <Modal.Header closeButton>
+            style={{ marginTop:"50px",  border:'none'}}>
+            <Modal.Header closeButton style={{border:"1px solid #fff"}}>
               
             </Modal.Header>
             <Modal.Body >
-            <FiUser style={{ color: '#7F56D9', fontSize:'20px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
+            <FiUser className='ms-4' style={{ color: '#7F56D9', fontSize:'24px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
               {email}
             </Modal.Body>
-            <Modal.Footer >
+            <Modal.Footer style={{border:"1px solid #fff"}}>
               
               <Button 
                 variant="primary"
