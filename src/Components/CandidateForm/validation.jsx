@@ -91,27 +91,28 @@ export const validationSchema = Yup.object().shape({
   photoFiles: Yup.mixed().test(
     "fileRequired",
     "Photo is required",
-    (value) => value && value.length > 0
+    // (value) => value && value.length > 0
+    (value) => value && value.size > 0
   ),
   aadharCardFiles: Yup.mixed().test(
     "fileRequired",
     "Aadhar Card is required",
-    (value) => value && value.length > 0
+    (value) => value && value.size > 0
   ),
   educationCertificateFiles: Yup.mixed().test(
     "fileRequired",
     "Education Certificate is required",
-    (value) => value && value.length > 0
+    (value) => value && value.size > 0
   ),
   relievingLettersFiles: Yup.mixed().test(
     "fileRequired",
     "Relieving Letters are required",
-    (value) => value && value.length > 0
+    (value) => value && value.size > 0
   ),
   payslipFiles: Yup.mixed().test(
     "fileRequired",
     "Payslip is required",
-    (value) => value && value.length > 0
+    (value) => value && value.size > 0
   ),
 
   // bottom form-1
