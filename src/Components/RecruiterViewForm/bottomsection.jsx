@@ -79,7 +79,6 @@ function BottomSection() {
               <Form.Control
                 className='input-field'
                 type='text'
-                placeholder='olivia'
                 name='relationship'
                
               />

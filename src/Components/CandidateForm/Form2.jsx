@@ -19,7 +19,7 @@ import {
 } from "./validation";
 import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Bank";
-import Select from "react-select";
+
 
 function Form2({ updateForm2Data, updateCandidateData }) {
   //create an object to store datas from input family details

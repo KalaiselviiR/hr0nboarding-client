@@ -652,7 +652,7 @@ const TopForm = () => {
               <Col md={4}>
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <FileUpload
-                  label="Photo"
+                  label="Photo  (Allowed formats: JPG or PNG)"
                   controlId="photo"
                   acceptedFiles={formData.photoFiles}
                   setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, photoFiles: files }))}
@@ -675,7 +675,7 @@ const TopForm = () => {
 
 
                 <FileUpload
-                  label="Education Certificate"
+                  label="Education Certificate  (Allowed format: Pdf)"
                   controlId="educationCertificate"
                   acceptedFiles={formData.educationCertificateFiles}
                   setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, educationCertificateFiles: files }))}
@@ -688,7 +688,7 @@ const TopForm = () => {
                   ) : null} */}
 
                 <FileUpload
-                  label="Relieving Letters from all your previous organizations"
+                  label="Relieving Letters from all your previous organizations  (Allowed format: Pdf)"
                   controlId="relievingLetters"
                   acceptedFiles={formData.relievingLettersFiles}
                   setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, relievingLettersFiles: files }))}
@@ -699,7 +699,7 @@ const TopForm = () => {
                   ) : null} */}
 
                 <FileUpload
-                  label="3 Months Payslip"
+                  label="3 Months Payslip (Allowed format: Pdf)"
                   controlId="payslip"
                   acceptedFiles={formData.payslipFiles}
                   setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, payslipFiles: files }))}
