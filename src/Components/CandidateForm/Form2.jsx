@@ -18,6 +18,8 @@ import {
   validationSchema,
 } from "./validation";
 import { createCandidateDetails } from "../../service/allapi";
+import { allBanks } from "./Bank";
+import Select from "react-select";
 
 function Form2({ updateForm2Data, updateCandidateData }) {
   //create an object to store datas from input family details
@@ -101,6 +103,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         gender: "",
         maritalStatus: "",
         fatherName: "",
+        bankName: "",
         accountNumber: "",
         branch: "",
         ifsc: "",
@@ -134,7 +137,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading"> Family details</h3>
+          <h3 className="heading"> Family Details Medical Insurance</h3>
         </div>
       </Container>
       <Container
@@ -561,22 +564,35 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mb-3" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Bank A/C No</Form.Label>
-                    <Form.Control
+                    <Form.Label className="labelss">Bank Name</Form.Label>
+                    <Form.Select
                       className="input-field"
-                      type="text"
-                      placeholder="Account Number"
-                      name="accountNumber"
+                      name="bankName"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.accountNumber}
-                    />
-                    {formik.touched.accountNumber &&
-                    formik.errors.accountNumber ? (
+                      value={formik.values.bankName}
+                    >
+                      <option value="" label="Select Bank" />
+                      {allBanks
+                        .filter((bank) =>
+                          bank
+                            .toLowerCase()
+                            .includes(formik.values.bankName.toLowerCase())
+                        )
+                        .map((filteredBank) => (
+                          <option
+                            key={filteredBank}
+                            value={filteredBank}
+                            label={filteredBank}
+                          />
+                        ))}
+                    </Form.Select>
+
+                    {formik.touched.bankName && formik.errors.bankName && (
                       <div className="text-danger">
-                        {formik.errors.accountNumber}
+                        {formik.errors.bankName}
                       </div>
-                    ) : null}
+                    )}
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
@@ -596,6 +612,28 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     ) : null}
                   </Form.Group>
                 </Col>
+                <Col xs={12} md={4}>
+                  <Form.Group className="mb-3" controlId="formGroupEmail">
+                    <Form.Label className="labelss">Bank A/C No</Form.Label>
+                    <Form.Control
+                      className="input-field"
+                      type="text"
+                      placeholder="Account Number"
+                      name="accountNumber"
+                      onChange={handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.accountNumber}
+                    />
+                    {formik.touched.accountNumber &&
+                    formik.errors.accountNumber ? (
+                      <div className="text-danger">
+                        {formik.errors.accountNumber}
+                      </div>
+                    ) : null}
+                  </Form.Group>
+                </Col>
+              </Row>
+              <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                     <Form.Label className="labelss">Bank IFSC No</Form.Label>

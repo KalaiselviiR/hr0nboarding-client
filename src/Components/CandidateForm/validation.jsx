@@ -8,6 +8,7 @@ export const initialValues = {
   firstName: "",
   lastName: "",
   email: "",
+  countryCode:"+91",
   phoneNumber: "",
   designation: "",
   dateOfJoining: null,
@@ -39,6 +40,7 @@ export const initialValues = {
   gender: "",
   maritalStatus: "",
   fatherName: "",
+  bankName: "",
   accountNumber: "",
   branch: "",
   ifsc: "",
@@ -158,6 +160,9 @@ export const validationSchema = Yup.object().shape({
   fatherName: Yup.string()
     .matches(/^[^\d]+$/, "Father Name should not contain numbers")
     .required("Father Name is required"),
+  bankName: Yup.string()
+    .matches(/^[^\d]+$/, "Bank Name should not contain numbers")
+    .required("Bank Name is required"),  
   accountNumber: Yup.string()
     .matches(/^\+?[0-9]+$/, "Invalid Account Number")
     .required("Account Number is required"),
@@ -212,6 +217,7 @@ export const handleFieldChange = (formik, e) => {
     case "lastNamehr":
     // case "middleName":
     case "nationality":
+    case "bankName":  
     // case "maritalStatus":
     // case "gender":
       // Check if the value contains a number

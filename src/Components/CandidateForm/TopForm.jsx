@@ -27,6 +27,7 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 import { getSingleCandidate } from "../../service/allapi";
 
+
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
   import.meta.url
