@@ -191,18 +191,6 @@ const TopForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    
-  
-    // Check if all fields have values
-    const allFieldsFilled = Object.values(formik.values).every(
-      (value) => value !== "" && value !== null
-    );
-  
-    if (!allFieldsFilled) {
-      // Display an error message or take any other action
-      console.error("Please fill in all the required fields.");
-      return;
-    }
   
     // Trigger Formik's validation
     formik.handleSubmit();
