@@ -102,12 +102,16 @@
     background-color: 
     #7F56D9;
     border-radius: 8px;
+    
     border: none;
     padding: 10px;
+    /* padding-left: 10px;
+    padding-right: 20px; */
     width:400px ;
     margin-top: 34px;
     font-size: 18px;
     font-weight: 450;
+    align-items: center;
 
 
 }
@@ -152,4 +156,9 @@
     font-size: 14px;
     border-radius: 8px;
     border-width: 1.5px;
+}
+
+.submit-box{
+    align-items: center;
+    padding-left: 0.1px;
 }

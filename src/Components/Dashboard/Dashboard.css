@@ -276,3 +276,23 @@ body:not(.modal-open) .modal-backdrop {
   }
 
 }
+
+@media (max-width: 800px) {
+  .modal-responsive {
+    max-width: 90%;
+  }
+}
+
+.modal-responsive {
+  display: flex !important;
+  align-items: flex-start !important;
+  justify-content: flex-end !important;
+}
+
+.custom-modal {
+  max-width: 450px; 
+  width: 150%;
+  height: 300px; 
+  margin-top: 10px;
+  margin-right: 65px;
+}

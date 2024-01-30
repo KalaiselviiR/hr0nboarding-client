@@ -81,6 +81,7 @@ function Dashboard() {
 
   
 
+  const email = localStorage.getItem('email');
   const navigate = useNavigate();
 
   const handleUserIconClick = () => {
@@ -93,7 +94,10 @@ function Dashboard() {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn")
+   
+    
+    localStorage.removeItem("email")
+    // console.log(response.data);
     navigate('/')
   }
 
@@ -264,18 +268,24 @@ function Dashboard() {
           </Navbar.Brand>
 
 
-      <Modal show={showModal} onHide={handleCloseModal} style={{  height: "350px", width: "2000px" }}>
+          <Modal show={showModal} 
+            onHide={handleCloseModal}
+            dialogClassName="modal-responsive custom-modal"
+            style={{ maxWidth:"%", width:"90%", marginTop:"50px", marginLeft:"100px", border:'none', marginRight:'100px'}}>
             <Modal.Header closeButton>
               
             </Modal.Header>
-            <Modal.Body>
-              {/* You can display the logged-in user's email here */}
-              User Email: techjays.com
+            <Modal.Body >
+            <FiUser style={{ color: '#7F56D9', fontSize:'20px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
+              {email}
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer >
               
-              <Button variant="primary" onClick={handleLogout} style={{ backgroundColor: '#7F56D9', border: '10px' }}
-            className='btn-login'>
+              <Button 
+                variant="primary"
+                onClick={handleLogout}
+                style={{ backgroundColor: '#7F56D9', border: '10px' }}
+                className='btn-login'>
                 Logout
               </Button>
             </Modal.Footer>
