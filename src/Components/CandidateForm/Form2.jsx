@@ -206,7 +206,6 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     <option value="Spouse" label="Spouse" />
                     <option value="Child1" label="Child 1" />
                     <option value="Child2" label="Child 2" />
-                   
                   </Form.Select>
                   {formik.touched.relationship && formik.errors.relationship ? (
                     <div className="text-danger">
@@ -352,7 +351,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">Details of PF</h3>
+          <h3 className="heading">PF Account</h3>
         </div>
       </Container>
 
@@ -526,8 +525,10 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                       value={formik.values.maritalStatus}
                     >
                       <option value="" label="Select Marital Status" />
-                      <option value="Single" label="Single" />
-                      <option value="Married" label="Married" />
+                      <option value="unmarried">Unmarried</option>
+                      <option value="married">Married</option>
+                      <option value="divorced">Divorced</option>
+                      <option value="widowed">Widowed</option>
                     </Form.Select>
                     {formik.touched.maritalStatus &&
                     formik.errors.maritalStatus ? (
@@ -671,7 +672,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">Details of HROne</h3>
+          <h3 className="heading">Details of HROne Portal</h3>
         </div>
       </Container>
       {/* Details of HROne */}
@@ -721,7 +722,6 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     <option value="Miss">Miss</option>
                     <option value="Ms.">Ms.</option>
                     <option value="Dr.">Dr.</option>
-                  
                   </Form.Select>
                   {/* {formik.touched.prefix && formik.errors.prefix ? (
     <div className="text-danger">{formik.errors.prefix}</div>

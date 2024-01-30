@@ -284,10 +284,10 @@ export const handleFieldChange = (formik, e) => {
 
     case "adharCard":
       // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\d{13}$/.test(value)) {
+      if (!/^\d{12}$/.test(value)) {
         formik.setFieldError(
           name,
-          "Invalid Number(Adhar contains 13 digit number)"
+          "Invalid Number(Adhar contains 12 digit number)"
         );
       } else {
         formik.setFieldError(name, "");

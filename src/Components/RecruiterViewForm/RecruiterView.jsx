@@ -147,7 +147,6 @@ const RecruiterForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="olivia"
                     name="firstName"
                   />
 
@@ -158,7 +157,7 @@ const RecruiterForm = () => {
                   <Form.Label className="labelss">Last Name</Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="olivia"
+                 
                     name="lastName"
 
                   />
@@ -170,7 +169,7 @@ const RecruiterForm = () => {
                   <Form.Label className="labelss">Email</Form.Label>
                   <Form.Control
                     type="email"
-                    placeholder="✉️ olivia@untitleedui.com"
+                  
                     name="email"
 
                   />
@@ -198,7 +197,7 @@ const RecruiterForm = () => {
                     </Dropdown>
 
                     <Form.Control type="tel"
-                      placeholder="+91(555) 000-0000"
+                      
                       name="phoneNumber"
                     />
                   </InputGroup>
@@ -211,7 +210,7 @@ const RecruiterForm = () => {
                     Designation
                   </Form.Label>
                   <Form.Control type="text"
-                    placeholder="Olivia"
+                    
                     name="designation"
                   />
                 </Form.Group>
@@ -226,7 +225,7 @@ const RecruiterForm = () => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control type="date"
-                      placeholder="Select date"
+                      
                       name="dateOfJoining"
                     />
                   </InputGroup>
@@ -240,7 +239,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                   
                     name="presentAddress"
                   />
                 </Form.Group>
@@ -253,7 +252,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                   
                     name="permanentAddress"
                   />
                 </Form.Group>
@@ -269,7 +268,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    placeholder="Enter a description..."
+                   
                     name="aboutYourself"
                   />
                 </Form.Group>
@@ -283,7 +282,7 @@ const RecruiterForm = () => {
                     Overall Work Experience
                   </Form.Label>
                   <Form.Control type="text"
-                    placeholder="Enter your Experience"
+                   
                     name="experience"
 
                   />
@@ -296,7 +295,7 @@ const RecruiterForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    placeholder="Enter your previous company name"
+                    
                     name="company"
                   />
                 </Form.Group>
@@ -309,7 +308,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                    
                     name="enjoyment"
                   />
                 </Form.Group>
@@ -322,7 +321,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    placeholder="Enter a description..."
+                 
                     name="sneakpeek"
                   />
                 </Form.Group>

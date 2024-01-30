@@ -28,7 +28,7 @@ function BottomSection() {
         }}
       >
          <div className='FamilyDet'>
-        <h3 className='heading'> Family details</h3>
+        <h3 className='heading'> Family details For Medical Insurance</h3>
         <div className='buttons'>
           <Button
             style={{ backgroundColor: '#7F56D9', border: 'none' }}
@@ -65,7 +65,7 @@ function BottomSection() {
               <Form.Control
                 className='input-field'
                 type='text'
-                placeholder='olivia'
+               
                 name='memberName'
                
                 />
@@ -97,7 +97,7 @@ function BottomSection() {
                 <Form.Control
                   className='input-field'
                   type='date'
-                  placeholder='Select date'
+                 
                   name='dateOfBirth'
                  
                 />
@@ -129,7 +129,7 @@ function BottomSection() {
                 <Form.Control
                   className='input-field'
                   type='tel'
-                  placeholder='+91(555) 000-0000'
+                  
                   name='emergencyContactNumber'
                  
                 />
@@ -144,7 +144,7 @@ function BottomSection() {
               <Form.Control
                 className='input-field'
                 type='email'
-                placeholder='olivia@untitledui.com'
+               
                 name='emailAddress'
                 
               />
@@ -171,7 +171,7 @@ function BottomSection() {
         }}
       >
          <div className='FamilyDet'>
-        <h3 className='heading'>Details of PF</h3>
+        <h3 className='heading'>PF Account</h3>
         <div className='buttons'>
           <Button
             style={{ backgroundColor: '#7F56D9', border: 'none' }}
@@ -207,7 +207,7 @@ function BottomSection() {
             <Form.Group controlId='epfoUan'>
               <Form.Label className='labelss'>EPFO UAN (If already allotted)</Form.Label>
               <Form.Control className='input-field' type='text'
-               placeholder='olivia' 
+             
                name='epfoUan'
               
              />
@@ -219,7 +219,7 @@ function BottomSection() {
             <Form.Group controlId='pfNo'>
               <Form.Label className='labelss'>PF NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-              placeholder='olivia' 
+              
               name='pfNo'
               
              />
@@ -230,7 +230,7 @@ function BottomSection() {
             <Form.Group controlId='adharCard' className='ms'>
               <Form.Label className='labelss'>AADHAR CARD NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-              placeholder='olivia' 
+             
               name='adharCard'
              
             />
@@ -242,7 +242,7 @@ function BottomSection() {
         <Form.Group className="mb-3" controlId="panCardNo">
                 <Form.Label className='labelss'>PAN CARD NO</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia" 
+              
                 name='panCard'
                
               />
@@ -253,7 +253,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="employeeName">
                 <Form.Label className='labelss'>Employee's name (As per Aadhar)</Form.Label>
                 <Form.Control  className='input-field ' type="text"
-                 placeholder="olivia"
+               
                  name='employeesName'
                 
                />
@@ -269,7 +269,7 @@ function BottomSection() {
                     <CiCalendar />
                   </InputGroup.Text>
                   <Form.Control  className='input-field' type="date"
-                   placeholder="Select date" 
+                
                    name='dateOfBirthAs'
                   
                    />
@@ -284,7 +284,7 @@ function BottomSection() {
         <Form.Group className="mb-3 " controlId="formGroupEmail">
                 <Form.Label className='labelss'>Gender</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia"
+             
                 name='gender'
                 
               />
@@ -295,7 +295,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-2" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Marital status</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia" 
+              
                 name='maritalStatus'
                 
               />
@@ -306,7 +306,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Father's name</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia" 
+                
                 name='fatherName'
               
               />
@@ -320,7 +320,7 @@ function BottomSection() {
         <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank A/C No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia"
+              
                 name='accountNumber'
               
               />
@@ -332,7 +332,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank branch</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia" 
+              
                 name='branch'
                 
               />
@@ -343,7 +343,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank IFSC No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                placeholder="olivia" 
+                
                 name='ifsc'
                
               />
@@ -373,7 +373,7 @@ function BottomSection() {
         }}
       >
        <div className='FamilyDet'>
-        <h3 className='heading'>Details of HROne</h3>
+        <h3 className='heading'>Details of HROne Portal</h3>
         <div className='buttons'>
           <Button
             style={{ backgroundColor: '#7F56D9', border: 'none' }}
@@ -422,7 +422,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="prefix">
             <Form.Label className='labelss'>Prefix</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="olivia" 
+             
              name='prefix'
              
            />
@@ -433,7 +433,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="firstName">
             <Form.Label className='labelss'>First name</Form.Label>
             <Form.Control className='input-field' type="text" 
-            placeholder="olivia" 
+           
             name='firstNamehr'
             
           />
@@ -444,7 +444,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="middleName">
             <Form.Label className='labelss'>Middle name</Form.Label>
             <Form.Control className='input-field' type="text" 
-            placeholder="olivia" 
+           
             name='middleName'
            
           />
@@ -458,7 +458,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="lastName">
             <Form.Label className='labelss'>Last name</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="olivia" 
+             
              name='lastNamehr'
              
            />
@@ -469,7 +469,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="bloodGroup">
             <Form.Label className='labelss'>Blood group</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="oliva" 
+           
              name='bloodGroup'
             
            />
@@ -480,7 +480,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="nationality">
             <Form.Label className='labelss'>Nationality</Form.Label>
             <Form.Control className='input-field' type="text"
-             placeholder="olivia" 
+           
              name='nationality'
             
            />
@@ -489,15 +489,15 @@ function BottomSection() {
         </Col>
       </Row>
 
-      <Row>
-        <Col xs={12} md={4}>
+      {/* <Row> */}
+        {/* <Col xs={12} md={4}>
           <Form.Group className="mb-3" controlId="officialEmailAddress">
             <Form.Label className='labelss'>Official email address</Form.Label>
-            <InputGroup>
+            <InputGroup> */}
               {/* <InputGroup.Text>
                 <MdOutlineMail  />
               </InputGroup.Text> */}
-              <Form.Control className='input-field' type="email"
+              {/* <Form.Control className='input-field' type="email"
                placeholder="✉️ olivia@untitleedui.com" 
                name='officialEmail'
             
@@ -505,8 +505,8 @@ function BottomSection() {
             </InputGroup>
            
           </Form.Group>
-        </Col>
-        <Col xs={12} md={4}>
+        </Col> */}
+        {/* <Col xs={12} md={4}>
           <Form.Group className="mb-3" controlId="employeeId">
             <Form.Label className='labelss'>Employee ID</Form.Label>
             <Form.Control className='input-field' type="text"
@@ -518,7 +518,7 @@ function BottomSection() {
           </Form.Group>
         </Col>
       
-      </Row>
+      </Row> */}
     </Form>
       </div>
       </Container>
