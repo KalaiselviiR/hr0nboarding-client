@@ -8,44 +8,42 @@ import moment from 'moment';
 import closeIcon from '../../assets/closeIcon.svg'
 
 function EditNewCandidate({ UserToEdit, close }) {
-    //create an object to store datas from input
+
     const [editdata, setEditData] = useState({
         fname: "",
         lname: "",
         email: "",
         phno: "",
+        countryCode: "",
         dsesignation: "",
         jdate: "",
-        region: ""
+        region: false
     })
 
 
-    const [countryCode, setCountryCode] = useState((UserToEdit.phno).split("-")[0]);
-
-
-    // const [editdata, setEditData] = useState({})
-    //object for useNavigate
-    const navigate = useNavigate()
-    // a function to update userdata when user enter the input in html
     const userDetails = (e) => {
-        //prevent the event
-        e.preventDefault()
-        //access value to update in userData
         const { value } = e.target
-        //access key to update in userData
+
         const key = e.target.name
-        //update the data with existing data
-        // setEditData({ ...editdata, [key]: value })
-        if (key === "phno") {
-            const updatedPhoneNumber = countryCode + value;
-            setEditData({ ...editdata, [key]: updatedPhoneNumber });
-        } else {
-            setEditData({ ...editdata, [key]: value });
+
+        const { checked } = e.target
+
+
+        if (key === 'region') {
+            setEditData({ ...editdata, [key]: checked })
         }
-
-
+        else {
+            setEditData({ ...editdata, [key]: value })
+        }
     }
     console.log(editdata);
+
+    const handleClose = () => {
+        if (close) {
+            close()
+        }
+    }
+
 
 
     const handleSubmit = async (e) => {
@@ -56,7 +54,6 @@ function EditNewCandidate({ UserToEdit, close }) {
         // console.log(response);
         if (response.status == 200) {
             toast.success(response.data.message);
-            close()
 
             //reset all states datas
             setEditData({
@@ -73,7 +70,10 @@ function EditNewCandidate({ UserToEdit, close }) {
         } else {
             toast.error(response.data.message)
         }
+        handleClose()
     }
+
+
     useEffect(() => {
         if (UserToEdit) {
             setEditData(UserToEdit);
@@ -83,17 +83,14 @@ function EditNewCandidate({ UserToEdit, close }) {
             setEditData(UserToEdit)
         }
     }, [UserToEdit])
-    // console.log(teamData);
 
-    const handleClose = () => {
-        if (close) {
-            close()
-        }
-    }
+
 
 
 
     const handleResend = async () => {
+
+        handleClose()
 
         try {
 
@@ -105,11 +102,9 @@ function EditNewCandidate({ UserToEdit, close }) {
             toast.error(err.response.data.message)
         }
 
-        handleClose()
-
     }
 
-    
+
 
 
     return (
@@ -164,8 +159,8 @@ function EditNewCandidate({ UserToEdit, close }) {
                         </div>
                         <div className={styles.input}>
                             <input type="text"
-                             name='email' required
-                              onChange={userDetails}
+                                name='email' required
+                                onChange={userDetails}
                                 value={editdata.email}
                                 pattern='^[^\s@]+@[^\s@]+\.[^\s@]+$'
                                 title='enter a valid email'
@@ -180,18 +175,18 @@ function EditNewCandidate({ UserToEdit, close }) {
                         </div>
                         <div className={styles.phoneInput}>
                             <select className="country-code"
-                            value={countryCode}
-                                onChange={(e) => setCountryCode(e.target.value)}
+                                name='countryCode'
+                                value={editdata.countryCode}
+                                onChange={userDetails}
                             >
-                                <option  value="+91">IN(+91)</option>
-                                <option  value="+880">BD(+880)</option>
+                                <option value="+91">IN(+91)</option>
+                                <option value="+880">BD(+880)</option>
                                 <option value="+1">US(+1)</option>
                                 <option value="+20">EG(+20)</option>
                             </select>
                             <input name='phno' type="text" onChange={userDetails}
-                                value={(editdata.phno).split("-")[1]}
+                                value={editdata.phno}
                                 required
-
                                 pattern='^\d{10,}$'
                                 title='Enter a valid phone number'
                                 autoComplete="off"
@@ -224,7 +219,8 @@ function EditNewCandidate({ UserToEdit, close }) {
                     </div >
                     <div className={styles.checkBoxDiv} >
                         <div>
-                            <input type="checkbox" name='region' onChange={userDetails} />
+                            <input checked={editdata.region} type="checkbox" name='region' onChange={userDetails} />
+
                         </div>
                         <div>
                             <p>Candidate is from outside india</p>

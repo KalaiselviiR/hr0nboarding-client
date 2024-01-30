@@ -11,7 +11,7 @@ import {
   Dropdown,
 } from "react-bootstrap";
 import { GoArrowLeft } from "react-icons/go";
-import "./candidateForm.css";
+import "./CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
 import FileUpload from "./FileUpload";
 import { useFormik } from "formik";
@@ -416,36 +416,35 @@ const TopForm = () => {
               </Col>
               <Col md={6} xs={12}>
                 <Form.Group className="mb-3" controlId="phoneNumber">
-                  <Form.Label className="labelss">Phone Number</Form.Label>
-                  <InputGroup>
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="outline-secondary"
-                        id="dropdown-basic"
-                      >
-                        IN
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#">+91</Dropdown.Item>
-                        <Dropdown.Item href="#">+44</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Form.Control
-                      type="tel"
-                      placeholder="+91(555) 000-0000"
-                      name="phoneNumber"
-                      onChange={handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.phoneNumber}
-                    />
-                  </InputGroup>
-                  {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                <div className="phoneDiv ">
+                        <div className="labelss">
+                            <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code  "
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input type="text"
+                            className=" form-control"
+                                placeholder='8845789956'
+                                name="phoneNumber"
+                                onChange={handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.phoneNumber}
+                               
+                            />
+                        </div>
+                        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
                     <div className="text-danger">
                       {formik.errors.phoneNumber}
                     </div>
                   ) : null}
+                    </div >
                 </Form.Group>
               </Col>
               <Col md={6} xs={12}>

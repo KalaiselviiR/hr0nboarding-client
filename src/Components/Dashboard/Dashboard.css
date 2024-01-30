@@ -286,16 +286,35 @@ body:not(.modal-open) .modal-backdrop {
 }
 
 
-.modal-responsive {
+/* .modal-responsive {
   display: flex !important;
   align-items: flex-start !important;
   justify-content: flex-end !important;
-}
+} */
 
 .custom-modal {
 
   width: 97%;
   height: 300px; 
   margin-top: 10px;
-  margin-right: 67px;
+  margin-right: 130px;
+}
+
+.btn-login{
+  cursor: pointer;
+  background-color: 
+  #7F56D9;
+  /* border-radius: 8px;
+  
+  border: none;
+  padding: 10px;
+  padding-left: 10px;
+  padding-right: 20px;
+  width:400px ;
+  margin-top: 34px;
+  font-size: 18px;
+  font-weight: 450; */
+  align-items: center;
+
+
 }

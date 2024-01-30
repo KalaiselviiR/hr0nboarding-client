@@ -60,7 +60,7 @@ function Dashboard() {
 
   const closeAddModal = () => {
     setAddModalIsOpen(false)
-    getAllCandidate()
+    // getAllCandidate()
   }
   const openEditModal = (user) => {
     setUserToEdit(user)
@@ -68,7 +68,7 @@ function Dashboard() {
   }
 
   const closeEditModal = () => {
-    getAllCandidate()
+    // getAllCandidate()
     setEditModalIsOpen(false)
     
   }
@@ -142,7 +142,7 @@ function Dashboard() {
   //  to fetch all candidates on component mount
   useEffect(() => {
     getAllCandidate();
-  }, []);
+  }, [editModalIsOpen]);
 
 
   const handleDeleteClick = (id,status) => {
@@ -179,7 +179,7 @@ function Dashboard() {
       const response = await ConformdeleteCandidate(deleteId)
       if (response.status == 200) {
         toast.success(response.data.message);
-        getAllCandidate()
+        // getAllCandidate()
         setInvokeModal(false)
       
   
@@ -188,6 +188,8 @@ function Dashboard() {
     }
       
     }
+
+    getAllCandidate()
  
   }
   const generatePDF=useReactToPrint({
@@ -206,6 +208,12 @@ function Dashboard() {
    
   })
   console.log(pdf);
+
+  const handleAddData = (newData) => {
+    console.log(newData)
+    SetAllCandidate([...allcandidate, newData]); 
+};
+
 
 
   return (
@@ -278,17 +286,18 @@ function Dashboard() {
             <Modal.Body >
             <FiUser className='ms-4' style={{ color: '#7F56D9', fontSize:'24px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
               {email}
-            </Modal.Body>
+            
             <Modal.Footer style={{border:"1px solid #fff"}}>
               
               <Button 
                 variant="primary"
                 onClick={handleLogout}
-                style={{ backgroundColor: '#7F56D9', border: '10px' }}
-                className='btn-login'>
+                style={{ backgroundColor: '#7F56D9', border: '10px', alignItems:'center', width:'500px', height:'45px', marginTop:'22px' }}
+                >
                 Logout
               </Button>
             </Modal.Footer>
+            </Modal.Body>
           </Modal>
 
 
@@ -537,7 +546,7 @@ function Dashboard() {
 
       {addModalIsOpen &&
         <div className='addCandidateModal'>
-          <AddNewCandidate close={closeAddModal} />
+          <AddNewCandidate close={closeAddModal} onAddData={handleAddData}  />
         </div>
       }
 

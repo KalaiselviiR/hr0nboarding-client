@@ -6,79 +6,42 @@ import { useNavigate } from 'react-router-dom';
 import { addCandidate } from '../../service/allapi'
 import closeIcon from '../../assets/closeIcon.svg'
 
-function AddNewCandidate({ close }) {
+function AddNewCandidate({ close, onAddData }) {
 
     //create an object to store datas from input
     const [userData, setUser] = useState({
         fname: "",
         lname: "",
         email: "",
+        countryCode: "+91",
         phno: "",
         dsesignation: "",
         jdate: "",
-        region: "",
+        region: false,
         status: "Pending",
         isDelete: "no"
 
 
     })
-    //object for useNavigate
+
     const navigate = useNavigate()
-    // a function to update userdata when user enter the input in html
 
-    const [countryCode, setCountryCode] = useState("+91");
 
-    
     const userDetails = (e) => {
-        //prevent the event
-        e.preventDefault()
-        //access value to update in userData
-        const { value } = e.target
-        //access key to update in userData
-        const key = e.target.name
-        //update the data with existing data
-        // setUser({ ...userData, [key]: value })
-        if (key === "phno") {
-            const updatedPhoneNumber = `${countryCode}-${value}`;
-            setUser({ ...userData, [key]: updatedPhoneNumber });
-        } else {
-            setUser({ ...userData, [key]: value });
-        }
 
+
+        const { value } = e.target
+        const key = e.target.name
+        const { checked } = e.target
+
+        if (key === 'region') {
+            setUser({ ...userData, [key]: checked })
+        }
+        else {
+            setUser({ ...userData, [key]: value })
+        }
     }
     console.log(userData);
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-
-
-        //api call
-        const response = await addCandidate(userData)
-
-        if (response.status == 200) {
-            toast.success(response.data.message);
-            close()
-
-            //reset all states datas
-            setUser({
-                fname: "",
-                lname: "",
-                email: "",
-                phno: "",
-                dsesignation: "",
-                jdate: "",
-                region: "",
-                status: ""
-
-            })
-
-        } else {
-            toast.error(response.data.message)
-        }
-
-
-    }
 
 
     const handleClose = () => {
@@ -86,6 +49,41 @@ function AddNewCandidate({ close }) {
             close()
         }
     }
+
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        handleClose()
+        const response = await addCandidate(userData)
+
+        if (response.status == 200) {
+            toast.success(response.data.message);
+            onAddData(response.data.newUser)
+
+            //reset all states datas
+            // setUser({
+            //     fname: "",
+            //     lname: "",
+            //     email: "",
+            //     phno: "",
+            //     dsesignation: "",
+            //     jdate: "",
+            //     region: "",
+            //     status: ""
+
+            // })
+
+
+        } else {
+            toast.error(response.message)
+        }
+
+
+    }
+
+
+   
     return (
         <form onSubmit={handleSubmit} >
             <div className={styles.addMain}>
@@ -152,10 +150,11 @@ function AddNewCandidate({ close }) {
                         </div>
                         <div className={styles.phoneInput}>
                             <select className="country-code"
-                             onChange={(e) => setCountryCode(e.target.value)}
+                                name="countryCode"
+                                onChange={userDetails}
                             >
                                 <option selected value="+91">IN(+91)</option>
-                                <option  value="+880">BD(+880)</option>
+                                <option value="+880">BD(+880)</option>
                                 <option value="+1">US(+1)</option>
                                 <option value="+20">EG(+20)</option>
                             </select>
@@ -205,7 +204,7 @@ function AddNewCandidate({ close }) {
                     </div >
                     <div className={styles.checkBoxDiv}>
                         <div>
-                            <input name='region' type="checkbox" onChange={userDetails} />
+                        <input name='region' type="checkbox" checked={userData.region} onChange={userDetails} />
                         </div>
                         <div>
                             <p>Candidate is from outside india</p>
