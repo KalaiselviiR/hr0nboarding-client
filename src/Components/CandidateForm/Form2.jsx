@@ -20,6 +20,16 @@ import {
 import { createCandidateDetails } from "../../service/allapi";
 
 function Form2({ updateForm2Data, updateCandidateData }) {
+
+  
+    const [familyMembers, setFamilyMembers] = useState([]);
+  
+    // ... your existing code
+  
+    const addFamilyMember = () => {
+      setFamilyMembers([...familyMembers, { memberName: '', relationship: '', dateOfBirth: '', emergencyContactNumber: '', emailAddress: '' }]);
+    };
+
   //create an object to store datas from input family details
   const [candidateData, setCandidate] = useState({
     memberName: "",
@@ -147,52 +157,34 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         {/* Family details form */}
-        <div>
+        <div >
           <Form
             className="forms"
             onSubmit={formik.handleSubmit}
             onReset={formik.handleReset}
           >
-            <Row className="mb-3">
-              <Col xs={12} md={4}>
-                <Form.Group controlId="formGroupEmail">
-                  <Form.Label className="labelss">
-                    Family member name
-                  </Form.Label>
-                  <Form.Control
-                    className="input-field"
-                    type="text"
-                    placeholder="Name"
-                    name="memberName"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.memberName}
-                  />
-                  {formik.touched.memberName && formik.errors.memberName ? (
-                    <div className="text-danger">
-                      {formik.errors.memberName}
-                    </div>
-                  ) : null}
-                </Form.Group>
-                <Button
-                  style={{
-                    marginTop: "10px",
-                    marginBottom: "10px",
-                    height: "35px",
-                    fontSize: "15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
-                  }}
-                >
-                  + Add
-                </Button>
-              </Col>
+             <Row className="mb-3">
+        <Col xs={12} md={4} className="mt-">
+          <Form.Group controlId="formGroupEmail">
+            <Form.Label className="labelss mt-4">Family member name</Form.Label>
+            <Form.Control
+              className="input-field"
+              type="text"
+              placeholder="Name"
+              name="memberName"
+              onChange={handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.memberName}
+            />
+            {formik.touched.memberName && formik.errors.memberName ? (
+              <div className="text-danger">{formik.errors.memberName}</div>
+            ) : null}
+          </Form.Group>
+        </Col>
 
-              <Col xs={12} md={4}>
-                <Form.Group controlId="relationship">
-                  <Form.Label className="labelss">Relationship</Form.Label>
+        <Col xs={12} md={4}>
+        <Form.Group controlId="relationship">
+                  <Form.Label className="labelss mt-4">Relationship</Form.Label>
                   <Form.Select
                     className="input-field"
                     name="relationship"
@@ -213,11 +205,11 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
+        </Col>
 
-              <Col xs={12} md={4}>
-                <Form.Group controlId="dateOfBirth">
-                  <Form.Label className="labelss">Date of Birth</Form.Label>
+        <Col xs={12} md={4}>
+          <Form.Group controlId="dateOfBirth">
+                  <Form.Label className="labelss mt-4">Date of Birth</Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
                       <CiCalendar />
@@ -238,50 +230,166 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
+          </Col>
+          <Col xs={12} md={4}>
+ <Form.Group controlId="EmergencyPhoneNumber">
+ <div className="phoneDiv mt-3 ">
+                        <div className="labelss">
+                            <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code  "
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input 
+                            className="input-field form-control"
+                            type="tel"
+                            placeholder="+91(555) 000-0000"
+                                name="emergencyContactNumber"
+                                onChange={handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.emergencyContactNumber}
+                               
+                            />
+                        </div>
+                        </div>
+       </Form.Group>
+ </Col>
+ <Col xs={12} md={4}>
+ <Form.Group controlId="emailAddress">
+         <Form.Label className="labelss ">Email address</Form.Label>
+         <Form.Control
+           className="input-field"
+           type="email"
+           placeholder="Email"
+           name="emailAddress"
+           onChange={handleChange}
+           onBlur={formik.handleBlur}
+           value={formik.values.emailAddress}
+         />
+         {formik.touched.emailAddress && formik.errors.emailAddress ? (
+           <div className="text-danger">
+             {formik.errors.emailAddress}
+           </div>
+         ) : null}
+       </Form.Group>
+     </Col>
 
-              <Col xs={12} md={4}>
-                <Form.Group controlId="EmergencyPhoneNumber">
-                  <Form.Label className="labelss">
-                    Emergency contact number
+        
+         
+      </Row>
+
+      {/* Mapping over familyMembers array */}
+      {familyMembers.map((member, index) => (
+        <Row key={index} className="mb-3">
+          {/* Render input fields for each family member */}
+          <Col xs={12} md={4} className="mt-">
+          <Form.Group controlId="formGroupEmail">
+                  <Form.Label className="labelss mt-4">
+                    Family member name
                   </Form.Label>
-                  <InputGroup>
-                    <Dropdown>
-                      <Dropdown.Toggle
-                        variant="outline-secondary"
-                        id="dropdown-basic"
-                      >
-                        IN
-                      </Dropdown.Toggle>
-
-                      <Dropdown.Menu>
-                        <Dropdown.Item href="#">+91</Dropdown.Item>
-                        <Dropdown.Item href="#">+44</Dropdown.Item>
-                      </Dropdown.Menu>
-                    </Dropdown>
-
-                    <Form.Control
-                      className="input-field"
-                      type="tel"
-                      placeholder="+91(555) 000-0000"
-                      name="emergencyContactNumber"
-                      onChange={handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.emergencyContactNumber}
-                    />
-                  </InputGroup>
-                  {formik.touched.emergencyContactNumber &&
-                  formik.errors.emergencyContactNumber ? (
+                  <Form.Control
+                    className="input-field"
+                    type="text"
+                    placeholder="Name"
+                    name="memberName"
+                    onChange={handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.memberName}
+                  />
+                  {formik.touched.memberName && formik.errors.memberName ? (
                     <div className="text-danger">
-                      {formik.errors.emergencyContactNumber}
+                      {formik.errors.memberName}
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
-
-              <Col xs={12} md={4}>
-                <Form.Group controlId="emailAddress">
-                  <Form.Label className="labelss">Email address</Form.Label>
+          </Col>
+          <Col xs={12} md={4}>
+          <Form.Group controlId="relationship">
+                  <Form.Label className="labelss mt-4">Relationship</Form.Label>
+                  <Form.Select
+                    className="input-field"
+                    name="relationship"
+                    onChange={handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.relationship}
+                  >
+                    <option value="" label="Select Relationship" />
+                    <option value="Father" label="Father" />
+                    <option value="Mother" label="Mother" />
+                    <option value="Spouse" label="Spouse" />
+                    <option value="Child1" label="Child 1" />
+                    <option value="Child2" label="Child 2" />
+                  </Form.Select>
+                  {formik.touched.relationship && formik.errors.relationship ? (
+                    <div className="text-danger">
+                      {formik.errors.relationship}
+                    </div>
+                  ) : null}
+                </Form.Group>
+          </Col>
+          <Col xs={12} md={4}>
+          <Form.Group controlId="dateOfBirth">
+                  <Form.Label className="labelss mt-4">Date of Birth</Form.Label>
+                  <InputGroup>
+                    <InputGroup.Text>
+                      <CiCalendar />
+                    </InputGroup.Text>
+                    <Form.Control
+                      type="date"
+                      className="input-field"
+                      placeholder="Date"
+                      name="dateOfBirth"
+                      onChange={handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.dateOfBirth}
+                    />
+                  </InputGroup>
+                  {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
+                    <div className="text-danger">
+                      {formik.errors.dateOfBirth}
+                    </div>
+                  ) : null}
+                </Form.Group>
+          </Col>
+          <Col xs={12} md={4}>
+          <Form.Group controlId="EmergencyPhoneNumber">
+                 
+                   <div className="phoneDiv mt-4">
+                        <div className="labelss">
+                            <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code "
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input 
+                            className="input-field form-control "
+                            type="tel"
+                            placeholder="+91(555) 000-0000"
+                                name="emergencyContactNumber"
+                                onChange={handleChange}
+                                onBlur={formik.handleBlur}
+                                value={formik.values.emergencyContactNumber}
+                               
+                            />
+                        </div>
+                        </div>
+                </Form.Group>
+          </Col>
+          <Col xs={12} md={4}>
+          <Form.Group controlId="emailAddress">
+                  <Form.Label className="labelss mt-4">Email address</Form.Label>
                   <Form.Control
                     className="input-field"
                     type="email"
@@ -297,42 +405,31 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     </div>
                   ) : null}
                 </Form.Group>
-              </Col>
-            </Row>
-            <div
-              style={{
-                display: "flex",
-                marginTop: "50px",
-                marginBottom: "25px",
-                gap: "10px",
-              }}
-            >
-              {/* <Button
-                onClick={handleSubmit}
-                style={{
-                  height: "35px",
-                  fontSize: "15px",
-                  backgroundColor: "rgb(210, 164, 250)",
-                  color: "white",
-                  borderColor: "rgb(210, 164, 250)",
-                  fontWeight: "500",
-                }}
-              >
-                Submit
-              </Button>
-              <Button
-                style={{
-                  height: "35px",
-                  fontSize: "15px",
-                  backgroundColor: "white",
-                  color: "rgb(147, 48, 233)",
-                  borderColor: "rgb(147, 48, 233)",
-                  fontWeight: "500",
-                }}
-              >
-                Save as draft
-              </Button> */}
-            </div>
+          </Col>
+        </Row>
+      ))}
+
+      {/* Button to add a new family member */}
+      <Row>
+        <Col>
+          <Button
+            onClick={addFamilyMember}
+            style={{
+              marginTop: "10px",
+              marginBottom: "10px",
+              height: "35px",
+              fontSize: "15px",
+              backgroundColor: "white",
+              color: "rgb(147, 48, 233)",
+              borderColor: "rgb(147, 48, 233)",
+              fontWeight: "500",
+            }}
+          >
+            + Add
+          </Button>
+        </Col>
+      </Row>
+           
           </Form>
         </div>
       </Container>
@@ -390,7 +487,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group controlId="pfNo">
-                  <Form.Label className="labelss">PF NO</Form.Label>
+                  <Form.Label className="labelss  ">PF NO</Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -407,7 +504,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group controlId="adharCard" className="ms">
-                  <Form.Label className="labelss">AADHAR CARD NO</Form.Label>
+                  <Form.Label className="labelss  ">AADHAR CARD NO</Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
