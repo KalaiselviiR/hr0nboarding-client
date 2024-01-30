@@ -13,7 +13,7 @@ import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
 
 function App() {
  
-  const login = localStorage.getItem("isLoggedIn");
+  const login = localStorage.getItem("email");
   return (
     <>
           {/* Defining the routes using React Router's `Routes` component */}
