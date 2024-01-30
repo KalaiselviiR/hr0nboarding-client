@@ -60,7 +60,7 @@ function Dashboard() {
 
   const closeAddModal = () => {
     setAddModalIsOpen(false)
-    getAllCandidate()
+    // getAllCandidate()
   }
   const openEditModal = (user) => {
     setUserToEdit(user)
@@ -68,7 +68,7 @@ function Dashboard() {
   }
 
   const closeEditModal = () => {
-    getAllCandidate()
+    // getAllCandidate()
     setEditModalIsOpen(false)
     
   }
@@ -142,7 +142,7 @@ function Dashboard() {
   //  to fetch all candidates on component mount
   useEffect(() => {
     getAllCandidate();
-  }, []);
+  }, [editModalIsOpen]);
 
 
   const handleDeleteClick = (id,status) => {
@@ -179,7 +179,7 @@ function Dashboard() {
       const response = await ConformdeleteCandidate(deleteId)
       if (response.status == 200) {
         toast.success(response.data.message);
-        getAllCandidate()
+        // getAllCandidate()
         setInvokeModal(false)
       
   
@@ -188,6 +188,8 @@ function Dashboard() {
     }
       
     }
+
+    getAllCandidate()
  
   }
   const generatePDF=useReactToPrint({
@@ -206,6 +208,12 @@ function Dashboard() {
    
   })
   console.log(pdf);
+
+  const handleAddData = (newData) => {
+    console.log(newData)
+    SetAllCandidate([...allcandidate, newData]); 
+};
+
 
 
   return (
@@ -537,7 +545,7 @@ function Dashboard() {
 
       {addModalIsOpen &&
         <div className='addCandidateModal'>
-          <AddNewCandidate close={closeAddModal} />
+          <AddNewCandidate close={closeAddModal} onAddData={handleAddData}  />
         </div>
       }
 
