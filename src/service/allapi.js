@@ -42,9 +42,14 @@ export const editCandidate=async(id,body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/edit-candidate/${id}`,body)
 }
 
-//Delete a Candidate
+//Change state to delete
 export const deleteCandidate=async(id)=>{
     return await commonRequest("POST",`${BASE_URL}/api/delete-candidate/${id}`,"")
+}
+
+//Delete a rejected Candidate
+export const ConformdeleteCandidate=async(id)=>{
+    return await commonRequest("DELETE",`${BASE_URL}/api/delete-candidatestate/${id}`,"")
 }
 
 //get all Candidates to Display in table
