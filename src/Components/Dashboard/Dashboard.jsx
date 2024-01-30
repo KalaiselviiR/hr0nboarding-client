@@ -450,10 +450,13 @@ function Dashboard() {
      
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setLgShow(false)} >
+          <Button variant="secondary" onClick={() => setLgShow(false)} 
+          style={{backgroundColor:'#F9F5FF',color:"#6941C6",borderRadius:'8px'
+          ,borderColor:"#7F56D9"}}>
             Close
           </Button>
-          <Button variant="primary" onClick={generate2PDF}>
+          <Button variant="" onClick={generate2PDF}
+           style={{backgroundColor:'#7F56D9',color:"white",borderRadius:'8px'}}>
             Print PDF
           </Button>
         </Modal.Footer>
