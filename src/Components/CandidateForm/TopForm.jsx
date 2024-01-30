@@ -114,8 +114,8 @@ const TopForm = () => {
     lastNamehr: "",
     bloodGroup: "",
     nationality: "",
-    officialEmail: "",
-    employeeId: "",
+    // officialEmail: "",
+    // employeeId: "",
   });
 
   //input form validation using formk and yup library
