@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import "./Dashboard.css"
 import { LuPen, LuTrash2 } from "react-icons/lu";
 import { MDBBadge, MDBBtn, MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
@@ -13,11 +13,15 @@ import { FiUser } from "react-icons/fi";
 import { IoLogOutOutline } from "react-icons/io5";
 import { ConformdeleteCandidate, deleteCandidate, getallCandidates } from '../../service/allapi';
 import { useNavigate } from 'react-router-dom';
+import { BiSolidDownload } from "react-icons/bi";
+import { useReactToPrint } from "react-to-print";
 import Login from '../Login/Login';
 
 
 
 function Dashboard() {
+
+  const [lgShow, setLgShow] = useState(false);
 
   const [isShow, setInvokeModal] = useState(false);
   const [UserToEdit, setUserToEdit] = useState(null);
@@ -34,12 +38,19 @@ function Dashboard() {
 
   const [allcandidate, SetAllCandidate] = useState([])
 
+  const [pdf, SetPdf] = useState([])
+
   const [addModalIsOpen, setAddModalIsOpen] = useState(false)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
 
   const [deleteId, setDeleteId] = useState('')
 
   const [deleteStatus, setDeleteStatus] = useState('')
+
+  const componentPDF = useRef(); 
+
+  
+  const component2PDF = useRef(); 
 
   // const [currentPage, setCurrentPage] = useState(1);
 
@@ -60,8 +71,15 @@ function Dashboard() {
     getAllCandidate()
     setEditModalIsOpen(false)
     
-   
   }
+
+  const modalpdfOpen = (i) => {
+    setLgShow(true)
+    SetPdf(i)
+    
+  }
+
+  
 
   const navigate = useNavigate();
 
@@ -168,6 +186,22 @@ function Dashboard() {
     }
  
   }
+  const generatePDF=useReactToPrint({
+    content: ()=>componentPDF.current,
+    documentTitle:"user data",
+    onAfterPrint:()=>toast.success("Data saved in pdf")
+    
+   
+  })
+
+  const generate2PDF=useReactToPrint({
+    content: ()=>component2PDF.current,
+    documentTitle:"user data",
+    onAfterPrint:()=>toast.success("Data saved in pdf") && setLgShow(false)
+    
+   
+  })
+  console.log(pdf);
 
 
   return (
@@ -252,7 +286,7 @@ function Dashboard() {
         </Container>
       </Navbar>
 
-       <Nav className=' p-3 ' variant="black" defaultActiveKey="/home"  >
+       <Nav className='border  p-3 ' variant="black" defaultActiveKey="/home"  >
       <Nav.Item style={{paddingLeft:"76px"}}>
         <Nav.Link 
          className='' eventKey="link-1"  onClick={() => setSearch('no')} style={{fontWeight:"500",color: "#344054"}}>
@@ -266,17 +300,24 @@ function Dashboard() {
       </Nav>
       <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`}
        style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
-        <div className=' d-flex mt-4   justify-content-between border bg-white'
+        <div className=' d-flex mt-3   justify-content-between border bg-white'
          style={{borderTopLeftRadius:"8px",borderTopRightRadius:"8px"}} >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
+          {search === "no" 
+                    ?   <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
+                    onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
+                     Add new candidate
+                    </button> 
+                    :   <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
+                    onClick={generatePDF} id='b' className='btn mb-4 mt-4 float-right'  >
+                     Download All
+                    </button> }
 
 
-          <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
-          onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
-            Add new candidate
-          </button>
+        
         </div>
+        <div ref={componentPDF} style={{width:"100%"}} >
         <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
           <MDBTableHead >
 
@@ -292,7 +333,7 @@ function Dashboard() {
             </tr>
 
           </MDBTableHead>
-          <MDBTableBody>
+          <MDBTableBody  >
           {records.filter((item) => {
             const searchTerm = search.toLowerCase();
             const projectValue = item[filterType].toLowerCase();
@@ -329,11 +370,96 @@ function Dashboard() {
 
                   </td>
                   <td>
-                    <LuPen onClick={() => openEditModal(i)} className="  icon" />
+                  {search === "no" 
+                    ? <LuPen onClick={() => openEditModal(i)} className="  icon" /> 
+                    : <BiSolidDownload onClick={() => modalpdfOpen(i)} className="  icon" /> }
+                    
                     <LuTrash2 className=" icon2" onClick={() => handleDeleteClick(i._id,i.status)}/>
 
                   </td>
+   
+      <Modal 
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >
+         
+        <Modal.Body><div ref={component2PDF}>     
+        <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
+          <MDBTableHead >
+
+
+            <tr >
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }}
+               scope='col' className='text-start '>Candidate</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
+            </tr>
+
+          </MDBTableHead> 
+          <MDBTableBody  >
+        
+       
+          <tr>
+                  <td>
+                    <div className='d-flex align-items-center'>
+
+                      <div className='ms-3'>
+                        <p style={{ padding: "8px" }} className='fw-normal mb-1'>
+                          <a  style={{textDecoration:"none",color:'black'}}>
+                            {pdf.fname} {pdf.lname}</a></p>
+
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    {moment(pdf.jdate).format("DD/MM/YYYY")}
+                  </td>
+                  <td>
+                    <p className='fw-normal mb-1'>{pdf.dsesignation}</p>
+
+                  </td>
+                  <td>{pdf.email}</td>
+                  <td>
+                    <MDBBadge className={` ${pdf.status === "Completed" ? 'green' : ""
+                     || pdf.status === "Active" ? 'violet' : ""
+                     || pdf.status === "Pending" ? 'orange' : ""
+                     || pdf.status === "Review pending" ? 'blue' : ""
+                     || pdf.status === "Rejected" ? 'red' : "" }`} pill>
+                     {pdf.status}
+                    </MDBBadge>
+
+                  </td>
+                  <td>
+            
+                     <BiSolidDownload  className="  icon" /> 
+                    
+                    <LuTrash2 className=" icon2" />
+
+                  </td>
+                  </tr>
+               
+
+          </MDBTableBody>
+          </MDBTable>
+          </div>
+     
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setLgShow(false)} >
+            Close
+          </Button>
+          <Button variant="primary" onClick={generate2PDF}>
+            Print PDF
+          </Button>
+        </Modal.Footer>
+      </Modal>
                 </tr>
+                
              ))}
 
 
@@ -341,6 +467,7 @@ function Dashboard() {
 
 
         </MDBTable>
+        </div>
         <nav className='border' style={{ backgroundColor: " white",
         borderBottomLeftRadius:"8px",borderBottomRightRadius:"8px" }}  >
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
