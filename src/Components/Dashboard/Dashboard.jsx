@@ -278,17 +278,18 @@ function Dashboard() {
             <Modal.Body >
             <FiUser className='ms-4' style={{ color: '#7F56D9', fontSize:'24px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
               {email}
-            </Modal.Body>
+            
             <Modal.Footer style={{border:"1px solid #fff"}}>
               
               <Button 
                 variant="primary"
                 onClick={handleLogout}
-                style={{ backgroundColor: '#7F56D9', border: '10px' }}
-                className='btn-login'>
+                style={{ backgroundColor: '#7F56D9', border: '10px', alignItems:'center', width:'500px', height:'45px', marginTop:'22px' }}
+                >
                 Logout
               </Button>
             </Modal.Footer>
+            </Modal.Body>
           </Modal>
 
 
