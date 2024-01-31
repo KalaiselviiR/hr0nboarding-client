@@ -406,7 +406,7 @@ const RecruiterForm = () => {
                       fontWeight: "500",
                     }}
                     onClick={openResendModal}
-                    disabled={isVerified || isResent}
+                    disabled={isVerified}
                   >
                     Resend documents
                   </Button>
