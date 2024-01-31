@@ -34,12 +34,28 @@ const RecruiterForm = () => {
 
   const [isResendModalOpen, setIsResendModalOpen] = useState(false)
 
+  const [isVerified, setIsVerified] = useState(false);
+  const [isResent, setIsResent] = useState(false);
+
+   // Function to handle the click on "Verify Documents" button
+   const handleVerify = () => {
+    // Perform verification logic
+    // Assume verification is successful for demonstration purposes
+    setIsVerified(true);
+    toast.success("Document verified Successfully", {
+      position: "top-center"
+    });
+    
+  };
+
   const openResendModal = () => {
     setIsResendModalOpen(true)
+    setIsResent(false);
   }
 
   const closeResendModal = () => {
     setIsResendModalOpen(false)
+    setIsResent(true);
   }
 
   const handleResendError = (error) => {
@@ -375,6 +391,8 @@ const RecruiterForm = () => {
                       borderColor: "rgb(147, 48, 233)",
                       fontWeight: "500",
                     }}
+                    onClick={handleVerify}
+                    disabled={isVerified || isResent}
                   >
                     Verify documents
                   </Button>
@@ -388,6 +406,7 @@ const RecruiterForm = () => {
                       fontWeight: "500",
                     }}
                     onClick={openResendModal}
+                    disabled={isVerified || isResent}
                   >
                     Resend documents
                   </Button>
@@ -400,9 +419,10 @@ const RecruiterForm = () => {
                       backgroundColor: "rgb(236, 236, 237)",
                       color: "rgb(147, 48, 233)",
                       fontWeight: "500",
-                      opacity: "0.5",
+                     opacity: isVerified ? "1" : "0.5",
                       borderColor: "white"
                     }}
+                    disabled={!isVerified && !isResent}
                   >
                     Good to go
                   </Button>
