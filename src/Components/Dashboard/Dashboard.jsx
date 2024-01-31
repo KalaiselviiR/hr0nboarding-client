@@ -22,6 +22,7 @@ import Login from '../Login/Login';
 function Dashboard() {
 
   const [lgShow, setLgShow] = useState(false);
+  const [admin, setAdmin] = useState('');
 
   const [isShow, setInvokeModal] = useState(false);
   const [UserToEdit, setUserToEdit] = useState(null);
@@ -162,8 +163,11 @@ function Dashboard() {
   const confirmDelete = async () => {
 
     if(deleteStatus!="Rejected"){
-      
-    const response = await deleteCandidate(deleteId)
+      if(admin!="sample@techjays.com"){
+        toast.error("You have no permissson to delete")
+      }else{
+        
+        const response = await deleteCandidate(deleteId)
     if (response.status == 200) {
       toast.success(response.data.message);
       getAllCandidate()
@@ -174,8 +178,13 @@ function Dashboard() {
       toast.error(response.data.message)
   }
 
+      }
+      
+    
     }
-    else{
+    else  if(admin!="sample@techjays.com"){
+      toast.error("You have no permissson to delete")
+    }else{
       const response = await ConformdeleteCandidate(deleteId)
       if (response.status == 200) {
         toast.success(response.data.message);
@@ -213,6 +222,15 @@ function Dashboard() {
     console.log(newData)
     SetAllCandidate([...allcandidate, newData]); 
 };
+
+useEffect(()=>{
+ 
+ const adm=localStorage.getItem('email')
+ setAdmin(adm)
+//  console.log(adm);
+ 
+},[])
+console.log(admin);
 
 
 
@@ -556,7 +574,7 @@ function Dashboard() {
         </div>
       }
 
-      <ToastContainer autoClose={800} position="top-center" />
+      <ToastContainer autoClose={1200} position="top-center" />
 
     </div>
   )
