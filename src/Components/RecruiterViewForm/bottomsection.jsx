@@ -1,14 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../CandidateForm/CandidateForm.css'; // Assuming you have a custom CSS file for styling
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form, Container } from 'react-bootstrap';
 import { MdOutlineMail } from "react-icons/md";
+import moment from 'moment';
+
+const Bottomdata = {
+  memberName: "",
+  relationship: "",
+  dateOfBirth: "",
+  emergencyContactNumber: "",
+  emailAddress: "",
+  epfoUan: "",
+  pfNo: "",
+  adharCard: "",
+  panCard: "",
+  employeesName: "",
+  dateOfBirthAs: "",
+  gender: "",
+  maritalStatus: "",
+  fatherName: "",
+  accountNumber: "",
+  branch: "",
+  ifsc: "",
+  prefix: "",
+  firstNamehr: "",
+  middleName: "",
+  lastNamehr: "",
+  bloodGroup: "",
+  nationality: "",
+};
 
 
 
+function BottomSection({cData}) {
 
-function BottomSection() {
+  const [cbData, setCbData] = useState(Bottomdata);
 
+  useEffect(() => {
+    if(cData){
+        setCbData(cData);
+        
+    }else
+    {
+      setCbData(Bottomdata)
+    }
+},[cData])
+console.log(cbData);
 
   return (
     
@@ -65,7 +103,7 @@ function BottomSection() {
               <Form.Control
                 className='input-field'
                 type='text'
-               
+                value={cbData.memberName}
                 name='memberName'
                
                 />
@@ -80,6 +118,7 @@ function BottomSection() {
                 className='input-field'
                 type='text'
                 name='relationship'
+                value={cbData.relationship}
                
               />
              
@@ -96,7 +135,7 @@ function BottomSection() {
                 <Form.Control
                   className='input-field'
                   type='date'
-                 
+                  value={moment(cbData.dateOfBirth).format("yyyy-MM-DD")}
                   name='dateOfBirth'
                  
                 />
@@ -128,7 +167,7 @@ function BottomSection() {
                 <Form.Control
                   className='input-field'
                   type='tel'
-                  
+                  value={cbData.emergencyContactNumber}
                   name='emergencyContactNumber'
                  
                 />
@@ -143,7 +182,7 @@ function BottomSection() {
               <Form.Control
                 className='input-field'
                 type='email'
-               
+                value={cbData.emailAddress}
                 name='emailAddress'
                 
               />
@@ -206,7 +245,7 @@ function BottomSection() {
             <Form.Group controlId='epfoUan'>
               <Form.Label className='labelss'>EPFO UAN (If already allotted)</Form.Label>
               <Form.Control className='input-field' type='text'
-             
+               value={cbData.epfoUan}
                name='epfoUan'
               
              />
@@ -218,7 +257,7 @@ function BottomSection() {
             <Form.Group controlId='pfNo'>
               <Form.Label className='labelss'>PF NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-              
+              value={cbData.pfNo}
               name='pfNo'
               
              />
@@ -229,7 +268,7 @@ function BottomSection() {
             <Form.Group controlId='adharCard' className='ms'>
               <Form.Label className='labelss'>AADHAR CARD NO</Form.Label>
               <Form.Control className='input-field' type='text' 
-             
+              value={cbData.adharCard}
               name='adharCard'
              
             />
@@ -241,7 +280,7 @@ function BottomSection() {
         <Form.Group className="mb-3" controlId="panCardNo">
                 <Form.Label className='labelss'>PAN CARD NO</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-              
+                value={cbData.panCard}
                 name='panCard'
                
               />
@@ -252,7 +291,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="employeeName">
                 <Form.Label className='labelss'>Employee's name (As per Aadhar)</Form.Label>
                 <Form.Control  className='input-field ' type="text"
-               
+                value={cbData.employeesName}
                  name='employeesName'
                 
                />
@@ -268,7 +307,7 @@ function BottomSection() {
                     <CiCalendar />
                   </InputGroup.Text>
                   <Form.Control  className='input-field' type="date"
-                
+                   value={moment(cbData.dateOfBirthAs).format("yyyy-MM-DD")}
                    name='dateOfBirthAs'
                   
                    />
@@ -283,7 +322,7 @@ function BottomSection() {
         <Form.Group className="mb-3 " controlId="formGroupEmail">
                 <Form.Label className='labelss'>Gender</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-             
+                value={cbData.gender}
                 name='gender'
                 
               />
@@ -294,7 +333,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-2" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Marital status</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-              
+                value={cbData.maritalStatus}
                 name='maritalStatus'
                 
               />
@@ -305,7 +344,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Father's name</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                
+                value={cbData.fatherName}
                 name='fatherName'
               
               />
@@ -319,7 +358,7 @@ function BottomSection() {
         <Form.Group className="mb-3" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank A/C No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-              
+                value={cbData.accountNumber}
                 name='accountNumber'
               
               />
@@ -331,7 +370,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank branch</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-              
+                value={cbData.branch}
                 name='branch'
                 
               />
@@ -342,7 +381,7 @@ function BottomSection() {
         <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank IFSC No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
-                
+                value={cbData.ifsc}
                 name='ifsc'
                
               />
@@ -421,7 +460,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="prefix">
             <Form.Label className='labelss'>Prefix</Form.Label>
             <Form.Control className='input-field' type="text"
-             
+            value={cbData.prefix}
              name='prefix'
              
            />
@@ -432,7 +471,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="firstName">
             <Form.Label className='labelss'>First name</Form.Label>
             <Form.Control className='input-field' type="text" 
-           
+            value={cbData.firstNamehr}
             name='firstNamehr'
             
           />
@@ -443,7 +482,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="middleName">
             <Form.Label className='labelss'>Middle name</Form.Label>
             <Form.Control className='input-field' type="text" 
-           
+            value={cbData.middleName}
             name='middleName'
            
           />
@@ -457,7 +496,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="lastName">
             <Form.Label className='labelss'>Last name</Form.Label>
             <Form.Control className='input-field' type="text"
-             
+             value={cbData.lastNamehr}
              name='lastNamehr'
              
            />
@@ -468,7 +507,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="bloodGroup">
             <Form.Label className='labelss'>Blood group</Form.Label>
             <Form.Control className='input-field' type="text"
-           
+             value={cbData.bloodGroup}
              name='bloodGroup'
             
            />
@@ -479,7 +518,7 @@ function BottomSection() {
           <Form.Group className="mb-3" controlId="nationality">
             <Form.Label className='labelss'>Nationality</Form.Label>
             <Form.Control className='input-field' type="text"
-           
+             value={cbData.nationality}
              name='nationality'
             
            />
