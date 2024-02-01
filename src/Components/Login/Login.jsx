@@ -19,7 +19,8 @@ function Login() {
   //create an object to store datas from input
   const [userData, setUser] = useState({
     email: "",
-    password: ""
+    password: "",
+    role:"user"
 
   })
     //object for useNavigate
@@ -67,8 +68,7 @@ const handleChange = async (e) => {
       if (register.data.message === "Signup Successfully") {
         console.log(register.data.message);
         localStorage.setItem("email", email);
-        
-
+        localStorage.setItem("role", email);
         setTimeout(() => {
           navigate('/dashboard');
         }, 1500);

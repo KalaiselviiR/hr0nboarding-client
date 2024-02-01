@@ -369,43 +369,183 @@ const RecruiterForm = () => {
             </Row>
             <Row className="mt-4">
               <Col md={4}>
-                <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
-                <RecruiterFileView
-                  label="Photo"
-                  controlId="photo"
-                  acceptedFiles={photoFiles}
-                  setAcceptedFiles={setPhotoFiles}
-                />
+              <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
+                <div>
+                <div className="file-info mt-3">
+                <p style={{ margin: "0" }}>Photo</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+                <div className="pdf-image" style={{ height: "50px" }}>
+                <a href={cData.photoFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+            
+              <div className="file-info mt-3">
+                <p style={{ margin: "0" }}>Adhar Card</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+            
+              <Form.Label className="mt-3" style={{ fontWeight: "500" }}>Educational Certificates</Form.Label>
+              <div className="row d-flex">
+                <div className="col">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>10 th Marksheet</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              <div className="col">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>12 th Marksheet</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              <div className="col-4">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>UG digree certificate</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              <div className="col-4">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>UG digree marksheet</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              <div className="col-4">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>PG digree certificate</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              <div className="col-4">
+              <div className="file-info mt-2">
+                <p style={{ margin: "0" }}>PG digree marksheet</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.aadharCardFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+              </div>
+              
+              </div>
+              <div className="file-info mt-4 ">
+                <p style={{ margin: "0" }}>Relieving Letters</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.relievingLettersFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+            
+              <div className="file-info mt-3">
+                <p style={{ margin: "0" }}>Payslips</p>
+                <p style={{ margin: "0", fontSize: "10px" }}>
+                  {/* {(file.size / 1024).toFixed(2)} KB */}
+                </p>
+              </div>
+            </div>
 
-                <RecruiterFileView
-                  label="Aadhar Card"
-                  controlId="aadharCard"
-                  acceptedFiles={aadharCardFiles}
-                  setAcceptedFiles={setAadharCardFiles}
-                />
+              <div className="pdf-image " style={{ height: "50px" }}>
+                <a href={cData.payslipFiles}>
+                <img
+                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />  </a>
+              </div>
+            
+             
 
-                <RecruiterFileView
-                  label="Education Certificate"
-                  controlId="educationCertificate"
-                  acceptedFiles={educationCertificateFiles}
-                  setAcceptedFiles={setEducationCertificateFiles}
-                />
-
-                <RecruiterFileView
-                  label="Relieving Letters from all your previous organizations"
-                  controlId="relievingLetters"
-                  acceptedFiles={relievingLettersFiles}
-                  setAcceptedFiles={setRelievingLettersFiles}
-                />
-
-                <RecruiterFileView
-                  label="3 Months Payslip"
-                  controlId="payslip"
-                  acceptedFiles={payslipFiles}
-                  setAcceptedFiles={setPayslipFiles}
-                />
-
-                <div style={{ display: "flex", gap: "10px" }}>
+                <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button
                     style={{
                       height: "35px",
