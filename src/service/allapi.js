@@ -32,7 +32,7 @@ export const addCandidate=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/add-candidate`,body)
 }
 
-//Get a single Candidate to fill edit form
+//Get a single Candidate from token 
 export const getSingleCandidate=async(token)=>{
     return await commonRequest("GET",`${BASE_URL}/api/get-singlecandidate/${token}`,"")
 }
@@ -58,12 +58,16 @@ export const getallCandidates=async(body)=>{
 }
 
 
-//recruiter view
 export const CreatePro=async(body,headers)=>{
     return await commonRequest("POST",`${BASE_URL}/api/recruiter-view`,body,headers)
 }
 
 //Candidate Api
+
+//Get a single Candidate from id
+export const getRecruterView=async(id)=>{
+    return await commonRequest("GET",`${BASE_URL}/api/get-recruterview/${id}`,"")
+}
 
 
 export const createCandidateDetails=async(body)=>{

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Container,
   Row,
@@ -13,13 +13,15 @@ import {
 import { GoArrowLeft } from "react-icons/go";
 import "../CandidateForm/CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
-
+import moment from 'moment';
 import { useFormik } from "formik";
 import RecruiterFileView from "./DocumentView";
 import BottomSection from "./bottomsection";
 import ResendDocument from '../ResendDocument/ResendDocument'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useParams } from "react-router-dom";
+import { getRecruterView } from "../../service/allapi";
 
 
 
@@ -36,6 +38,20 @@ const RecruiterForm = () => {
 
   const [isVerified, setIsVerified] = useState(false);
   const [isResent, setIsResent] = useState(false);
+
+  const [cData, setCdata] = useState([]);
+
+  // param id 
+  const{id} =useParams()
+  console.log(id);
+  //get details of the perticuler Candidate
+  const getoneCandidate=async()=>{
+    const {data}=await getRecruterView(id)
+    setCdata(data);
+      
+  }
+  console.log(cData);
+
 
    // Function to handle the click on "Verify Documents" button
    const handleVerify = () => {
@@ -69,6 +85,11 @@ const RecruiterForm = () => {
       position: "top-center"
     });
   }
+  useEffect(()=>{
+ 
+    getoneCandidate()
+   
+  },[])
 
 
   return (
@@ -164,6 +185,8 @@ const RecruiterForm = () => {
                   <Form.Control
                     type="text"
                     name="firstName"
+                    value={cData.firstName}
+
                   />
 
                 </Form.Group>
@@ -173,7 +196,7 @@ const RecruiterForm = () => {
                   <Form.Label className="labelss">Last Name</Form.Label>
                   <Form.Control
                     type="text"
-                 
+                    value={cData.lastName}
                     name="lastName"
 
                   />
@@ -185,7 +208,7 @@ const RecruiterForm = () => {
                   <Form.Label className="labelss">Email</Form.Label>
                   <Form.Control
                     type="email"
-                  
+                    value={cData.email}
                     name="email"
 
                   />
@@ -202,6 +225,7 @@ const RecruiterForm = () => {
                       <Dropdown.Toggle
                         variant="outline-secondary"
                         id="dropdown-basic"
+                        
                       >
                         IN
                       </Dropdown.Toggle>
@@ -213,7 +237,7 @@ const RecruiterForm = () => {
                     </Dropdown>
 
                     <Form.Control type="tel"
-                      
+                      value={cData.phoneNumber}
                       name="phoneNumber"
                     />
                   </InputGroup>
@@ -226,7 +250,7 @@ const RecruiterForm = () => {
                     Designation
                   </Form.Label>
                   <Form.Control type="text"
-                    
+                    value={cData.designation}
                     name="designation"
                   />
                 </Form.Group>
@@ -241,7 +265,7 @@ const RecruiterForm = () => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control type="date"
-                      
+                      value={moment(cData.dateOfJoining).format("yyyy-MM-DD")}
                       name="dateOfJoining"
                     />
                   </InputGroup>
@@ -255,7 +279,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                   
+                    value={cData.presentAddress}
                     name="presentAddress"
                   />
                 </Form.Group>
@@ -268,7 +292,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                   
+                    value={cData.permanentAddress}
                     name="permanentAddress"
                   />
                 </Form.Group>
@@ -284,7 +308,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                   
+                    value={cData.aboutYourself}
                     name="aboutYourself"
                   />
                 </Form.Group>
@@ -298,7 +322,7 @@ const RecruiterForm = () => {
                     Overall Work Experience
                   </Form.Label>
                   <Form.Control type="text"
-                   
+                    value={cData.experience}
                     name="experience"
 
                   />
@@ -311,7 +335,7 @@ const RecruiterForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    
+                    value={cData.company}
                     name="company"
                   />
                 </Form.Group>
@@ -324,7 +348,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    
+                    value={cData.enjoyment}
                     name="enjoyment"
                   />
                 </Form.Group>
@@ -337,7 +361,7 @@ const RecruiterForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                 
+                    value={cData.sneakpeek}
                     name="sneakpeek"
                   />
                 </Form.Group>
@@ -433,7 +457,7 @@ const RecruiterForm = () => {
 
         </Container>
 
-        <BottomSection />
+        <BottomSection cData={cData} />
       </div>
 
       {isResendModalOpen &&
