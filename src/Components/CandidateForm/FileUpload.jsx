@@ -134,7 +134,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
                 <Image src={label === "Photo  [ Accepted Formats: JPG or PNG ]" ? png : pdf} alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
-                <p style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
+                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
                 <p style={{ margin: "0", fontSize: "10px", marginTop: "-1px" }}>
                   {(file.size / 1024).toFixed(2)} KB
                 </p>
