@@ -21,7 +21,12 @@ export const initialValues = {
   sneakpeek: "",
   photoFiles: null,
   aadharCardFiles: null,
-  educationCertificateFiles: null,
+  tenthMarksheetFiles: null,
+  twelfthMarksheetFiles: null,
+  pgDegreeCertificateFiles: null,
+  pgMarksheetFiles: null,
+  ugDegreeCertificateFiles: null,
+  ugMarksheetFiles: null,
   relievingLettersFiles: null,
   payslipFiles: null,
   //bottom-1
@@ -101,9 +106,14 @@ export const validationSchema = Yup.object().shape({
     "Aadhar Card is required",
     (value) => value && value.size > 0
   ),
-  educationCertificateFiles: Yup.mixed().test(
+  tenthMarksheetFiles: Yup.mixed().test(
     "fileRequired",
-    "Education Certificate is required",
+    "10th marksheet is required",
+    (value) => value && value.size > 0
+  ),
+  twelfthMarksheetFiles: Yup.mixed().test(
+    "fileRequired",
+    "12th marksheet is required",
     (value) => value && value.size > 0
   ),
   relievingLettersFiles: Yup.mixed().test(
@@ -230,16 +240,15 @@ export const handleFieldChange = (formik, e) => {
 
     case "photoFiles":
     case "aadharCardFiles":
-    case "educationCertificateFiles":
     case "relievingLettersFiles":
     case "payslipFiles":
       // Check if files are selected
       if (files && files.length > 0) {
-        formik.setFieldError(name, ""); // Clear the error if files are selected
+        formik.setFieldError(name, ""); 
       } else {
         formik.setFieldError(
           name,
-          `Please upload a ${name === "payslipFiles" ? "PDF" : "image"}`
+          `Please upload a ${name} file`
         );
       }
       break;

@@ -15,57 +15,69 @@ import "./CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
 import FileUpload from "./FileUpload";
 import { useFormik } from "formik";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropupCircle } from "react-icons/io";
 import {
   handleFieldChange,
   initialValues,
   validationSchema,
 } from "./validation";
 import Form2 from "./Form2";
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 import { getSingleCandidate } from "../../service/allapi";
+import { ImMenu2 } from "react-icons/im";
 
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-  "pdfjs-dist/build/pdf.worker.min.js",
-  import.meta.url
-).toString();
+// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+//   "pdfjs-dist/build/pdf.worker.min.js",
+//   import.meta.url
+// ).toString();
 
 const TopForm = () => {
   //State management for document upload
   const [photoFiles, setPhotoFiles] = useState([]);
   const [aadharCardFiles, setAadharCardFiles] = useState([]);
-  const [educationCertificateFiles, setEducationCertificateFiles] = useState(
-    []
-  );
+  // const [educationCertificateFiles, setEducationCertificateFiles] = useState(
+  //   []
+  // );
+  const [tenthMarksheetFiles, setTenthMarksheetFiles] = useState([]);
+  const [twelfthMarksheetFiles, setTwelfthMarksheetFiles] = useState([]);
+  const [pgDegreeCertificateFiles, setPgDegreeCertificateFiles] = useState([]);
+  const [pgMarksheetFiles, setPgMarksheetFiles] = useState([]);
+  const [ugDegreeCertificateFiles, setUgDegreeCertificateFiles] = useState([]);
+  const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
+
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
   const [scrollToError, setScrollToError] = useState(null);
 
   const [id, setId] = useState(null);
+  const [isSectionOpen, setIsSectionOpen] = useState(false);
 
+  const handleToggleSection = () => {
+    setIsSectionOpen((prevIsOpen) => !prevIsOpen);
+  };
 
-        // param id 
-        const{token} =useParams()
-        //get details of the perticuler expense
-        const getoneCandidate=async()=>{
-          
-          const {data}=await getSingleCandidate(token)
-          console.log(data);
-            setId(data._id)
-        }
-        console.log(id);
+  // param id
+  const { token } = useParams();
+  //get details of the perticuler expense
+  const getoneCandidate = async () => {
+    const { data } = await getSingleCandidate(token);
+    console.log(data);
+    setId(data._id);
+  };
+  console.log(id);
 
-        useEffect(() => {
-          console.log('Updated id:', id);
-          setFormData((prevData) => ({
-            ...prevData,
-            id: id,
-          }));
-        }, [id]);
+  useEffect(() => {
+    console.log("Updated id:", id);
+    setFormData((prevData) => ({
+      ...prevData,
+      id: id,
+    }));
+  }, [id]);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
@@ -84,11 +96,16 @@ const TopForm = () => {
     sneakpeek: "",
     photoFiles: null,
     aadharCardFiles: null,
-    educationCertificateFiles: null,
+    // educationCertificateFiles: null,
+    tenthMarksheetFiles: null,
+    twelfthMarksheetFiles: null,
+    pgDegreeCertificateFiles: null,
+    pgMarksheetFiles: null,
+    ugDegreeCertificateFiles: null,
+    ugMarksheetFiles: null,
     relievingLettersFiles: null,
     payslipFiles: null,
-    id:id
-    
+    id: id,
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -148,110 +165,131 @@ const TopForm = () => {
     }));
   };
 
+  // handle change function for validation errors
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value, type, files } = e.target;
 
+    if (type === "file") {
+      // If the input is a file input, update the corresponding file name property
+      const fileNameProperty = `${name}FileName`;
+      setFormData((prevData) => ({
+        ...prevData,
+        [fileNameProperty]: files[0].name,
+      }));
 
+      // Update formik values for file input
+      formik.setFieldValue(name, files[0]);
+    } else {
+      // Update both the form data and formik values for non-file inputs
+      const key = name;
+      const updatedValue = value;
 
-  
- // handle change function for validation errors
- const handleChange = (e) => {
-  e.preventDefault();
-  const { name, value, type, files } = e.target;
+      setFormData((prevData) => ({
+        ...prevData,
+        [key]: updatedValue,
+      }));
 
-  if (type === "file") {
-    // If the input is a file input, update the corresponding file name property
-    const fileNameProperty = `${name}FileName`;
-    setFormData((prevData) => ({
-      ...prevData,
-      [fileNameProperty]: files[0].name,
-    }));
-
-    // Update formik values for file input
-    formik.setFieldValue(name, files[0]);
-  } else {
-    // Update both the form data and formik values for non-file inputs
-    const key = name;
-    const updatedValue = value;
-
-    setFormData((prevData) => ({
-      ...prevData,
-      [key]: updatedValue,
-    }));
-
-    formik.handleChange(e);
-  }
-};
-
+      formik.handleChange(e);
+    }
+  };
 
   console.log(formData);
 
   console.log(formik.values);
-    console.log(formik.dirty);
-    console.log(formik.errors);
-    // console.log(formData);
+  console.log(formik.dirty);
+  console.log(formik.errors);
+  // console.log(formData);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-  
     // Trigger Formik's validation
     formik.handleSubmit();
-  
+
     // Check if there are any errors in the form
     if (Object.keys(formik.errors).length === 0) {
       // Form is valid, proceed with form submission
-  
+
       try {
         // Prepare FormData for file uploads
         const formData = new FormData();
-        
+
         // Append all form fields, including file inputs
         for (const key in formik.values) {
-          formData.append(key, formik.values[key] || '');
+          formData.append(key, formik.values[key] || "");
         }
-           
+
         // Send a POST request using Axios
-        const response = await axios.post('http://localhost:4000/api/candidates', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        });
-  
+        const response = await axios.post(
+          "http://localhost:4000/api/candidates",
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }
+        );
+
         if (response.status === 201) {
-          console.log('Form data submitted successfully');
+          console.log("Form data submitted successfully");
           // Optionally: Reset form or navigate to a success page
         } else {
-          console.error('Failed to submit form data');
+          console.error("Failed to submit form data");
         }
       } catch (error) {
-        console.error('Error while submitting form data:', error);
+        console.error("Error while submitting form data:", error);
       }
-  
+
       // Perform any additional actions or API calls if needed
     }
   };
-  
 
   const FileChange = (file, type) => {
     switch (type) {
       case "photo":
         setPhotoFiles(file);
-        formik.setFieldValue("photoFiles",file);
+        formik.setFieldValue("photoFiles", file);
         break;
       case "aadharCard":
         setAadharCardFiles(file);
-        formik.setFieldValue("aadharCardFiles",file);
+        formik.setFieldValue("aadharCardFiles", file);
         break;
-      case "educationCertificate":
-        setEducationCertificateFiles(file);
-        formik.setFieldValue("educationCertificateFiles",file);
+      // case "educationCertificate":
+      //   setEducationCertificateFiles(file);
+      //   formik.setFieldValue("educationCertificateFiles",file);
+      //   break;
+      case "tenthMarksheet":
+        setTenthMarksheetFiles(file);
+        formik.setFieldValue("tenthMarksheetFiles", file);
+        break;
+      case "twelfthMarksheet":
+        setTwelfthMarksheetFiles(file);
+        formik.setFieldValue("twelfthMarksheetFiles", file);
+        break;
+      case "PGDegreeCertificate":
+        setPgDegreeCertificateFiles(file);
+        formik.setFieldValue("pgDegreeCertificateFiles", file);
+        break;
+      case "PGMarksheet":
+        setPgMarksheetFiles(file);
+        formik.setFieldValue("pgMarksheetFiles", file);
+        break;
+      case "UGDegreeCertificate":
+        setUgDegreeCertificateFiles(file);
+        formik.setFieldValue("ugDegreeCertificateFiles", file);
+        break;
+      case "UGMarksheet":
+        setUgMarksheetFiles(file);
+        formik.setFieldValue("ugMarksheetFiles", file);
         break;
       case "relievingLetters":
         setRelievingLettersFiles(file);
-        formik.setFieldValue("relievingLettersFiles",file);
+        formik.setFieldValue("relievingLettersFiles", file);
         break;
       case "payslip":
         setPayslipFiles(file);
-        formik.setFieldValue("payslipFiles",file);
+        formik.setFieldValue("payslipFiles", file);
         break;
       default:
         break;
@@ -271,12 +309,9 @@ const TopForm = () => {
     });
   };
 
-  useEffect(()=>{
- 
-    getoneCandidate()
-   
-  },[])
-  
+  useEffect(() => {
+    getoneCandidate();
+  }, []);
 
   return (
     <>
@@ -416,35 +451,38 @@ const TopForm = () => {
               </Col>
               <Col md={6} xs={12}>
                 <Form.Group className="mb-3" controlId="phoneNumber">
-                <div className="phoneDiv ">
-                        <div className="labelss">
-                            <p>Phone number</p>
-                        </div>
-                        <div className="phoneInput ">
-                            <select className="country-code  "
-                             onChange={(e) => setCountryCode(e.target.value)}
-                            >
-                                <option selected value="+91">IN(+91)</option>
-                                <option  value="+880">BD(+880)</option>
-                                <option value="+1">US(+1)</option>
-                                <option value="+20">EG(+20)</option>
-                            </select>
-                            <input type="text"
-                            className=" form-control"
-                                placeholder='8845789956'
-                                name="phoneNumber"
-                                onChange={handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.phoneNumber}
-                               
-                            />
-                        </div>
-                        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                    <div className="text-danger">
-                      {formik.errors.phoneNumber}
+                  <div className="phoneDiv ">
+                    <div className="labelss">
+                      <p>Phone number</p>
                     </div>
-                  ) : null}
-                    </div >
+                    <div className="phoneInput ">
+                      <select
+                        className="country-code  "
+                        onChange={(e) => setCountryCode(e.target.value)}
+                      >
+                        <option selected value="+91">
+                          IN(+91)
+                        </option>
+                        <option value="+880">BD(+880)</option>
+                        <option value="+1">US(+1)</option>
+                        <option value="+20">EG(+20)</option>
+                      </select>
+                      <input
+                        type="text"
+                        className=" form-control"
+                        placeholder="8845789956"
+                        name="phoneNumber"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.phoneNumber}
+                      />
+                    </div>
+                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                      <div className="text-danger">
+                        {formik.errors.phoneNumber}
+                      </div>
+                    ) : null}
+                  </div>
                 </Form.Group>
               </Col>
               <Col md={6} xs={12}>
@@ -651,60 +689,165 @@ const TopForm = () => {
               <Col md={4}>
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <FileUpload
-                  label="Photo  (Allowed Formats: JPG or PNG)"
+                  label="Photo  [ Accepted Formats: JPG or PNG ]"
                   controlId="photo"
                   acceptedFiles={formData.photoFiles}
-                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, photoFiles: files }))}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      photoFiles: files,
+                    }))
+                  }
                   onFileChange={(file) => FileChange(file, "photo")}
                 />
-                 {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
+                {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
                     <div className="text-danger">{formik.errors.photoFiles}</div>
                   ) : null} */}
 
                 <FileUpload
-                  label="Aadhar Card (Allowed Formats :pdf)"
+                  label="Aadhar Card [ Accepted Formats :pdf ]"
                   controlId="aadharCard"
                   acceptedFiles={formData.aadharCardFiles}
-                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, aadharCardFiles: files }))}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      aadharCardFiles: files,
+                    }))
+                  }
                   onFileChange={(file) => FileChange(file, "aadharCard")}
                 />
                 {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
                     <div className="text-danger">{formik.errors.aadharCardFiles}</div>
                   ) : null} */}
-
-
-                <FileUpload
-                  label="Education Certificate  (Allowed Format: Pdf)"
-                  controlId="educationCertificate"
-                  acceptedFiles={formData.educationCertificateFiles}
-                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, educationCertificateFiles: files }))}
-                  onFileChange={(file) =>
-                    FileChange(file, "educationCertificate")
-                  }
-                />
-              {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      cursor:'pointer'
+                    }}
+                    onClick={handleToggleSection}
+                  >
+                    <h6>Educational Certificates [ Accepted Formats: Pdf ]</h6>
+                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
+                  </div>
+                  {isSectionOpen && (
+                    <div>
+                  <FileUpload
+                    label="10th Marksheet"
+                    controlId="tenthMarksheet"
+                    acceptedFiles={formData.tenthMarksheetFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        tenthMarksheetFiles: files,
+                      }))
+                    }
+                    onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                  />
+                  <FileUpload
+                    label="12th Marksheet"
+                    controlId="twelfthMarksheet"
+                    acceptedFiles={formData.twelfthMarksheetFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        twelfthMarksheetFiles: files,
+                      }))
+                    }
+                    onFileChange={(file) =>
+                      FileChange(file, "twelfthMarksheet")
+                    }
+                  />
+                  <FileUpload
+                    label="PG Degree Certificate"
+                    controlId="PGDegreeCertificate"
+                    acceptedFiles={formData.pgDegreeCertificateFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        PGDegreeCertificate: files,
+                      }))
+                    }
+                    onFileChange={(file) =>
+                      FileChange(file, "PGDegreeCertificate")
+                    }
+                  />
+                  <FileUpload
+                    label="PG Marksheet"
+                    controlId="PGMarksheet"
+                    acceptedFiles={formData.pgMarksheetFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        pgMarksheetFiles: files,
+                      }))
+                    }
+                    onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                  />
+                  <FileUpload
+                    label="UG Degree Certificate"
+                    controlId="UGDegreeCertificate"
+                    acceptedFiles={formData.ugDegreeCertificateFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        ugDegreeCertificateFiles: files,
+                      }))
+                    }
+                    onFileChange={(file) =>
+                      FileChange(file, "UGDegreeCertificate")
+                    }
+                  />
+                  <FileUpload
+                    label="UG Marksheet"
+                    controlId="UGMarksheet"
+                    acceptedFiles={formData.ugMarksheetFiles}
+                    setAcceptedFiles={(files) =>
+                      setFormData((prevData) => ({
+                        ...prevData,
+                        ugMarksheetFiles: files,
+                      }))
+                    }
+                    onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                  />
+                    </div>
+                  )}
+                </div>
+                {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
                     <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
                   ) : null} */}
 
                 <FileUpload
-                  label="Relieving Letters from all your previous organizations  (Allowed Format: Pdf)"
+                  label="Relieving Letters from all your previous organizations  [ Accepted Formats: Pdf ]"
                   controlId="relievingLetters"
                   acceptedFiles={formData.relievingLettersFiles}
-                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, relievingLettersFiles: files }))}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      relievingLettersFiles: files,
+                    }))
+                  }
                   onFileChange={(file) => FileChange(file, "relievingLetters")}
                 />
-                 {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+                {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
                     <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
                   ) : null} */}
 
                 <FileUpload
-                  label="3 Months Payslip (Allowed Format: Pdf)"
+                  label="3 Months Payslip [ Accepted Formats: Pdf ]"
                   controlId="payslip"
                   acceptedFiles={formData.payslipFiles}
-                  setAcceptedFiles={(files) => setFormData((prevData) => ({ ...prevData, payslipFiles: files }))}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payslipFiles: files,
+                    }))
+                  }
                   onFileChange={(file) => FileChange(file, "payslip")}
                 />
-                 {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
+                {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
                     <div className="text-danger">{formik.errors.payslipFiles}</div>
                   ) : null} */}
 
