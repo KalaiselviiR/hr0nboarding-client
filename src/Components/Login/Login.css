@@ -146,6 +146,7 @@
     font-weight: 450;
     margin-top: 12px;
     font-size: 14px;
+   
 }
 
 .mb-3{
@@ -160,5 +161,42 @@
 
 .submit-box{
     align-items: center;
-    padding-left: 0.1px;
+    margin-left: -6px;
+}
+.EmailInput{
+   
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.box{
+    width: auto;
+    height: 20px;
+    background-color: white;
+   
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+.MailIcon{
+font-size: 17px;
+color: #777;
+margin-left: -10px;
+
+}
+.InputEmail{
+    flex: 1;
+    height: 40px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    padding-left:10px ;
+
+}
+.InputEmail::placeholder{
+    font-size: 14px;
+}
+.Frgtpass{
+    font-weight: 340;
 }

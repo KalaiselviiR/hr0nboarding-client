@@ -21,6 +21,7 @@ const Bottomdata = {
   gender: "",
   maritalStatus: "",
   fatherName: "",
+  bankName:"",
   accountNumber: "",
   branch: "",
   ifsc: "",
@@ -92,6 +93,7 @@ const csvHeaders = [
   'gender',
   'maritalStatus',
   'fatherName',
+  'bankName',
   'accountNumber',
   'branch',
   'ifsc',
@@ -172,7 +174,7 @@ const HRData = [
       <Form className='forms'>
         <Row className='mb-3'>
           <Col xs={12} md={4}>
-            <Form.Group controlId='formGroupEmail'>
+            <Form.Group controlId='formGroupEmail' className='mt-3'>
               <Form.Label className='labelss'>Family member name</Form.Label>
               <Form.Control
                 className='input-field'
@@ -186,7 +188,7 @@ const HRData = [
           </Col>
 
           <Col xs={12} md={4}>
-            <Form.Group controlId='realtionShip'>
+            <Form.Group controlId='realtionShip' className='mt-3'>
               <Form.Label className='labelss'>Relationship</Form.Label>
               <Form.Control
                 className='input-field'
@@ -200,7 +202,7 @@ const HRData = [
           </Col>
 
           <Col xs={12} md={4}>
-            <Form.Group controlId='dateOfBirth'>
+            <Form.Group controlId='dateOfBirth' className='mt-3'>
               <Form.Label className='labelss'>Date of Birth</Form.Label>
               <InputGroup>
                 <InputGroup.Text>
@@ -219,39 +221,38 @@ const HRData = [
           </Col>
 
           <Col xs={12} md={4}>
-            <Form.Group controlId='EmergencyPhoneNumber'>
-              <Form.Label className='labelss'>
-                Emergency contact number
-              </Form.Label>
-              <InputGroup>
-                <Dropdown>
-                  <Dropdown.Toggle
-                    variant='outline-secondary'
-                    id='dropdown-basic'
-                  >
-                    IN
-                  </Dropdown.Toggle>
-
-                  <Dropdown.Menu>
-                    <Dropdown.Item href='#'>+91</Dropdown.Item>
-                    <Dropdown.Item href='#'>+44</Dropdown.Item>
-                  </Dropdown.Menu>
-                </Dropdown>
-
-                <Form.Control
-                  className='input-field'
-                  type='tel'
-                  value={cbData.emergencyContactNumber}
-                  name='emergencyContactNumber'
-                 
-                />
-              </InputGroup>
+            <Form.Group controlId='EmergencyPhoneNumber' className='mt-3'>
+             
+               <div className="phoneDiv mt-4">
+                        <div className="labelss">
+                            <p>Emergency contact number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code "
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input 
+                            className="input-field form-control "
+                            type="tel"
+                            placeholder="+91(555) 000-0000"
+                               
+                                value={cbData.emergencyContactNumber}
+                                name='emergencyContactNumber'
+                               
+                            />
+                        </div>
+                        </div>
             
             </Form.Group>
           </Col>
 
           <Col xs={12} md={4}>
-            <Form.Group controlId='emailAddress'>
+            <Form.Group controlId='emailAddress' className='mt-4'>
               <Form.Label className='labelss'>Email address</Form.Label>
               <Form.Control
                 className='input-field'
@@ -333,7 +334,7 @@ const HRData = [
       <Form className='forms'>
         <Row className='mb-3'>
           <Col xs={12} md={4}>
-            <Form.Group controlId='epfoUan'>
+            <Form.Group controlId='epfoUan' className='mt-3'>
               <Form.Label className='labelss'>EPFO UAN (If already allotted)</Form.Label>
               <Form.Control className='input-field' type='text'
                value={cbData.epfoUan}
@@ -345,7 +346,7 @@ const HRData = [
             </Form.Group>
           </Col>
           <Col xs={12} md={4}>
-            <Form.Group controlId='pfNo'>
+            <Form.Group controlId='pfNo' className='mt-3'>
               <Form.Label className='labelss'>PF NO</Form.Label>
               <Form.Control className='input-field' type='text' 
               value={cbData.pfNo}
@@ -356,7 +357,7 @@ const HRData = [
             </Form.Group>
           </Col>
           <Col xs={12} md={4}>
-            <Form.Group controlId='adharCard' className='ms'>
+            <Form.Group controlId='adharCard' className='ms mt-3'>
               <Form.Label className='labelss'>AADHAR CARD NO</Form.Label>
               <Form.Control className='input-field' type='text' 
               value={cbData.adharCard}
@@ -368,7 +369,7 @@ const HRData = [
           </Col>
           <Row>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="panCardNo">
+        <Form.Group className="mt-3" controlId="panCardNo">
                 <Form.Label className='labelss'>PAN CARD NO</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.panCard}
@@ -379,7 +380,7 @@ const HRData = [
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 ms-1" controlId="employeeName">
+        <Form.Group className="mt-3 ms-1" controlId="employeeName">
                 <Form.Label className='labelss'>Employee's name (As per Aadhar)</Form.Label>
                 <Form.Control  className='input-field ' type="text"
                 value={cbData.employeesName}
@@ -391,7 +392,7 @@ const HRData = [
         </Col>
         <Col  xs={12} md={4}>
       
-      <Form.Group className="mb-3 " controlId="dateOfBirthAs">
+      <Form.Group className="mt-3 " controlId="dateOfBirthAs">
                 <Form.Label className='labelss ms-1' >Date of birth (As per the Aadhar)</Form.Label>
                 <InputGroup className='ms-1'>
                   <InputGroup.Text>
@@ -410,7 +411,7 @@ const HRData = [
       </Row>
       <Row>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 " controlId="formGroupEmail">
+        <Form.Group className="mt-3 " controlId="formGroupEmail">
                 <Form.Label className='labelss'>Gender</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.gender}
@@ -421,7 +422,7 @@ const HRData = [
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 ms-2" controlId="formGroupEmail">
+        <Form.Group className="mt-3 ms-2" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Marital status</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.maritalStatus}
@@ -432,7 +433,7 @@ const HRData = [
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+        <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Father's name</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.fatherName}
@@ -444,9 +445,33 @@ const HRData = [
         </Col>
         
       </Row>
+    
       <Row>
+      <Col  xs={12} md={4}>
+        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+                <Form.Label className='labelss'>Bank Name</Form.Label>
+                <Form.Control  className='input-field' type="text" 
+              value={cbData.bankName}
+                name='bankName'
+                
+              />
+             
+     </Form.Group>
+        </Col>
+        
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3" controlId="formGroupEmail">
+        <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
+                <Form.Label className='labelss'>Bank branch</Form.Label>
+                <Form.Control  className='input-field' type="text" 
+                value={cbData.branch}
+                name='branch'
+                
+              />
+             
+     </Form.Group>
+        </Col>
+        <Col  xs={12} md={4}>
+        <Form.Group className="mt-3" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank A/C No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.accountNumber}
@@ -458,18 +483,7 @@ const HRData = [
      </Form.Group>
         </Col>
         <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
-                <Form.Label className='labelss'>Bank branch</Form.Label>
-                <Form.Control  className='input-field' type="text" 
-                value={cbData.branch}
-                name='branch'
-                
-              />
-             
-     </Form.Group>
-        </Col>
-        <Col  xs={12} md={4}>
-        <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+        <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
                 <Form.Label className='labelss'>Bank IFSC No</Form.Label>
                 <Form.Control  className='input-field' type="text" 
                 value={cbData.ifsc}

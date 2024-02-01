@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./RecruiterView.css"
 import {
   Container,
   Row,
@@ -217,7 +218,7 @@ const RecruiterForm = () => {
               </Col>
               <Col md={6} xs={12}>
                 <Form.Group className="mb-3" controlId="phoneNumber">
-                  <Form.Label className="labelss">
+                  {/* <Form.Label className="labelss">
                     Phone Number
                   </Form.Label>
                   <InputGroup>
@@ -240,7 +241,30 @@ const RecruiterForm = () => {
                       value={cData.phoneNumber}
                       name="phoneNumber"
                     />
-                  </InputGroup>
+                  </InputGroup> */}
+                  <div className="phoneDiv mt-4">
+                        <div className="labelss">
+                            <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code "
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input 
+                            className="input-field form-control "
+                            type="tel"
+                            value={cData.phoneNumber}
+                                name="emergencyContactNumber"
+                                
+                               
+                            />
+                        </div>
+                        </div>
 
                 </Form.Group>
               </Col>

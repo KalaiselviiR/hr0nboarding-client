@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import './Login.css'
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form } from 'react-bootstrap';
-import { MdOutlineMail } from "react-icons/md";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
@@ -129,15 +129,19 @@ const handleChange = async (e) => {
        
       
       <div  >
-      <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss' >Email </Form.Label>
-            <InputGroup>
-              <InputGroup.Text>
-                <MdOutlineMail  />
-                </InputGroup.Text>
-              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="Enter the email"/>
-            </InputGroup>
-          </Form.Group>
+      <div className=' mb-3'>
+          <label  className='labelss' style={{lineHeight:"30px"}}>Email</label>
+          <div className='box form-control'>
+
+         
+          <div className='EmailInput'> 
+ 
+         
+          <MdOutlineMailOutline className='MailIcon'   />
+          <input className='InputEmail' onChange={userDetails} type="text"  placeholder='Enter the email' />
+          </div>
+          </div>
+          </div>
 
           <Form.Group className="mb-3" controlId="officialPassword" >
             <Form.Label className='labelss'>Password</Form.Label>

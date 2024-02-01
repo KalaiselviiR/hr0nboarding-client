@@ -95,12 +95,13 @@ function Dashboard() {
   };
 
   const handleLogout = () => {
-   
-    
-    localStorage.removeItem("email")
-    // console.log(response.data);
-    navigate('/')
-  }
+  
+    localStorage.removeItem('email');
+ 
+    setLoggedIn(false);
+  
+    return <navigate to="/" />;
+  };
 
   // useEffect(() => {
   //   const handleClickedOutside = (event) => {
