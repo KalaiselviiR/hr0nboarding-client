@@ -138,10 +138,10 @@ export const validationSchema = Yup.object().shape({
   emergencyContactNumber: Yup.string()
     .matches(/^\+?[0-9]+$/, "Invalid phone number")
     .required("Phone Number is required"),
-  emailAddress: Yup.string()
-    .email("Invalid email")
-    .required("Email is required")
-    .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
+  // emailAddress: Yup.string()
+  //   .email("Invalid email")
+  //   .required("Email is required")
+  //   .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
 
   // bottomForm-2
   // epfoUan: Yup.string()
@@ -254,7 +254,7 @@ export const handleFieldChange = (formik, e) => {
       break;
 
     case "email":
-    case "emailAddress":
+    // case "emailAddress":
     // case "officialEmail":
       // Your custom email validation logic
       // For example, checking if it contains '@'

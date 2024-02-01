@@ -147,7 +147,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading"> Family Details Medical Insurance</h3>
+          <h3 className="heading"> Family Details For Medical Insurance</h3>
         </div>
       </Container>
       <Container
@@ -451,7 +451,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">PF Account</h3>
+          <h3 className="heading">Details For PF</h3>
         </div>
       </Container>
 
@@ -807,7 +807,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">Details of HROne Portal</h3>
+          <h3 className="heading">Details For HROne Portal</h3>
         </div>
       </Container>
       {/* Details of HROne */}

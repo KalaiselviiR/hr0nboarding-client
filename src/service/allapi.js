@@ -42,6 +42,10 @@ export const editCandidate=async(id,body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/edit-candidate/${id}`,body)
 }
 
+export const verifyToken = async (id) => {
+    return await commonRequest("GET", `${BASE_URL}/api/verifyToken/${token}`)
+}
+
 //Change state to delete
 export const deleteCandidate=async(id)=>{
     return await commonRequest("POST",`${BASE_URL}/api/delete-candidate/${id}`,"")

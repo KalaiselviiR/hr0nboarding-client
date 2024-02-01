@@ -25,7 +25,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
       setError("Please select a file");
     } else {
       // Check file type for photo
-      if (label === "Photo  [ Accepted Formats: JPG or PNG ]") {
+      if (label === "Photo  - Accepted Formats: JPG or PNG ") {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
         if (!allowedPhotoTypes.includes(selectedFile.type)) {
           setError("Only JPG and PNG files are allowed for photos");
@@ -95,7 +95,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
           </Button>
           <input
             type="file"
-            accept={label === "Photo  [ Accepted Formats: JPG or PNG ]" ? ".jpg, .jpeg, .png" : ".pdf"}
+            accept={label === "Photo  - Accepted Formats: JPG or PNG " ? ".jpg, .jpeg, .png" : ".pdf"}
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -131,7 +131,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
               }}
             >
               <div className="pdf-image" style={{ height: "50px" }}>
-                <Image src={label === "Photo  [ Accepted Formats: JPG or PNG ]" ? png : pdf} alt="PDF" width="40px" height="50px" />
+                <Image src={label === "Photo  - Accepted Formats: JPG or PNG " ? png : pdf} alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
                 <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
@@ -180,7 +180,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
             </Button>
             <input
               type="file"
-              accept={label === "Photo  [ Accepted Formats: JPG or PNG ]" ? ".jpg, .jpeg, .png" : ".pdf"}
+              accept={label === "Photo  - Accepted Formats: JPG or PNG " ? ".jpg, .jpeg, .png" : ".pdf"}
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}
