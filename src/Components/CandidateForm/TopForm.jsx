@@ -689,7 +689,7 @@ const TopForm = () => {
               <Col md={4}>
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <FileUpload
-                  label="Photo  [ Accepted Formats: JPG or PNG ]"
+                  label="Photo  - Accepted Formats: JPG or PNG "
                   controlId="photo"
                   acceptedFiles={formData.photoFiles}
                   setAcceptedFiles={(files) =>
@@ -705,7 +705,7 @@ const TopForm = () => {
                   ) : null} */}
 
                 <FileUpload
-                  label="Aadhar Card [ Accepted Formats :pdf ]"
+                  label="Aadhar Card - Accepted Formats :pdf "
                   controlId="aadharCard"
                   acceptedFiles={formData.aadharCardFiles}
                   setAcceptedFiles={(files) =>
@@ -729,7 +729,7 @@ const TopForm = () => {
                     }}
                     onClick={handleToggleSection}
                   >
-                    <h6>Educational Certificates [ Accepted Formats: Pdf ]</h6>
+                    <h6 style={{fontWeight:"normal"}}>Educational Certificates - Accepted Formats: Pdf</h6>
                     {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                   </div>
                   {isSectionOpen && (
@@ -818,9 +818,9 @@ const TopForm = () => {
                 {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
                     <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
                   ) : null} */}
-
+             
                 <FileUpload
-                  label="Relieving Letters from all your previous organizations  [ Accepted Formats: Pdf ]"
+                  label="Relieving Letters from all your previous organizations  - Accepted Formats: Pdf "
                   controlId="relievingLetters"
                   acceptedFiles={formData.relievingLettersFiles}
                   setAcceptedFiles={(files) =>
@@ -836,7 +836,7 @@ const TopForm = () => {
                   ) : null} */}
 
                 <FileUpload
-                  label="3 Months Payslip [ Accepted Formats: Pdf ]"
+                  label="3 Months Payslip - Accepted Formats: Pdf "
                   controlId="payslip"
                   acceptedFiles={formData.payslipFiles}
                   setAcceptedFiles={(files) =>
