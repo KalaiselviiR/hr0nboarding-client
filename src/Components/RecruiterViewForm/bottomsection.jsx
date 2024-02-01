@@ -4,6 +4,7 @@ import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form, Container } from 'react-bootstrap';
 import { MdOutlineMail } from "react-icons/md";
 import moment from 'moment';
+import { CSVLink } from 'react-csv';
 
 const Bottomdata = {
   memberName: "",
@@ -48,6 +49,78 @@ function BottomSection({cData}) {
 },[cData])
 console.log(cbData);
 
+const handleExportCSV = () => {
+  // Prepare data for CSV export
+  const csvData = [
+    [
+      "Family member name",
+      "Relationship",
+      "Date of Birth",
+      "Emergency contact number",
+      "Email address",
+    ],
+    [
+      cbData.memberName,
+      cbData.relationship,
+      moment(cbData.dateOfBirth).format("YYYY-MM-DD"),
+      cbData.emergencyContactNumber,
+      cbData.emailAddress,
+    ],
+  ];
+
+  
+  const csvFileName = "family_details.csv";
+  // const csvHeaders = { headers: ["Content-Disposition"]: `attachment; filename=${csvFileName}` };
+
+  const csvLink = document.createElement('a');
+  csvLink.href = encodeURI(`data:text/csv;charset=utf-8,${csvData.map(row => row.join(',')).join('\n')}`);
+  csvLink.target = '_blank';
+  csvLink.download = csvFileName;
+  csvLink.click();
+};
+
+
+
+
+const csvHeaders = [
+  'epfoUan',
+  'pfNo',
+  'adharCard',
+  'panCard',
+  'employeesName',
+  'dateOfBirthAs',
+  'gender',
+  'maritalStatus',
+  'fatherName',
+  'accountNumber',
+  'branch',
+  'ifsc',
+];
+
+
+
+
+const HRData = [
+  
+  [
+    "Prefix",
+    "First Name",
+    "Middle Name",
+    "Last Name",
+    "Blood Group",
+    "Nationality",
+  ],
+  [
+    
+    cbData.prefix,
+    cbData.firstNamehr,
+    cbData.middleName,
+    cbData.lastNamehr,
+    cbData.bloodGroup,
+    cbData.nationality,
+  ],
+];
+
   return (
     
     <div className=' margin-mobile' style={{width:"100%"}}>
@@ -68,16 +141,17 @@ console.log(cbData);
          <div className='FamilyDet'>
         <h3 className='heading'> Family details For Medical Insurance</h3>
         <div className='buttons'>
-          <Button
-            style={{ backgroundColor: '#7F56D9', border: 'none' }}
-            className='buttonss'
-          >
-            <CiExport
-              className='me-2 icon'
-              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
-            />
-            Export
-          </Button>
+        <Button
+              style={{ backgroundColor: '#7F56D9', border: 'none' }}
+              className='buttonss'
+              onClick={handleExportCSV}
+            >
+              <CiExport
+                className='me-2 icon'
+                style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+              />
+              Export
+            </Button>
         </div>
       </div>
       </Container>
@@ -211,16 +285,33 @@ console.log(cbData);
          <div className='FamilyDet'>
         <h3 className='heading'>PF Account</h3>
         <div className='buttons'>
-          <Button
-            style={{ backgroundColor: '#7F56D9', border: 'none' }}
-            className='buttonss'
-          >
-            <CiExport
-              className='me-2 icon'
-              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
-            />
-            Export
-          </Button>
+        {/* <Button
+              style={{ backgroundColor: '#7F56D9', border: 'none' }}
+              className='buttonss'
+            >
+              <CiExport
+                className='me-2 icon'
+                style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+              />
+              Export
+            </Button> */}
+            <CSVLink
+              data={[cbData]} 
+              headers={csvHeaders} 
+              filename={'PF Account_details.csv'} 
+              className='buttonss' 
+            >
+              <Button
+              style={{ backgroundColor: '#7F56D9', border: 'none' }}
+              className='buttonss'
+            >
+              <CiExport
+                className='me-2 icon'
+                style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+              />
+              Export
+            </Button>
+            </CSVLink>
         </div>
       </div>
       </Container>
@@ -413,16 +504,22 @@ console.log(cbData);
        <div className='FamilyDet'>
         <h3 className='heading'>Details of HROne Portal</h3>
         <div className='buttons'>
-          <Button
-            style={{ backgroundColor: '#7F56D9', border: 'none' }}
-            className='buttonss'
-          >
-            <CiExport
-              className='me-2 icon'
-              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
-            />
-            Export
-          </Button>
+        <CSVLink
+              data={HRData}
+              filename={'Details_of_HROne_Portal.csv'}
+              className='buttonss'
+            >
+              <Button
+              style={{ backgroundColor: '#7F56D9', border: 'none' }}
+              className='buttonss'
+            >
+              <CiExport
+                className='me-2 icon'
+                style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
+              />
+              Export
+            </Button>
+            </CSVLink>
         </div>
       </div>
       </Container>
