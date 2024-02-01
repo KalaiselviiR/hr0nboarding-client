@@ -23,6 +23,8 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useParams } from "react-router-dom";
 import { getRecruterView } from "../../service/allapi";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropupCircle } from "react-icons/io";
 
 
 
@@ -41,6 +43,11 @@ const RecruiterForm = () => {
   const [isResent, setIsResent] = useState(false);
 
   const [cData, setCdata] = useState([]);
+  const [isSectionOpen, setIsSectionOpen] = useState(false);
+
+  const handleToggleSection = () => {
+    setIsSectionOpen((prevIsOpen) => !prevIsOpen);
+  };
 
   // param id 
   const{id} =useParams()
@@ -395,180 +402,36 @@ const RecruiterForm = () => {
               <Col md={4}>
               <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
-                <div className="file-info mt-3">
-                <p style={{ margin: "0" }}>Photo</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-                <div className="pdf-image" style={{ height: "50px" }}>
-                <a href={cData.photoFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-            
-              <div className="file-info mt-3">
-                <p style={{ margin: "0" }}>Adhar Card</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-            
-              <Form.Label className="mt-3" style={{ fontWeight: "500" }}>Educational Certificates</Form.Label>
-              <div className="row d-flex">
-                <div className="col">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>10 th Marksheet</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              <div className="col">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>12 th Marksheet</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              <div className="col-4">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>UG digree certificate</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              <div className="col-4">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>UG digree marksheet</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              <div className="col-4">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>PG digree certificate</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              <div className="col-4">
-              <div className="file-info mt-2">
-                <p style={{ margin: "0" }}>PG digree marksheet</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.aadharCardFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-              </div>
-              
-              </div>
-              <div className="file-info mt-4 ">
-                <p style={{ margin: "0" }}>Relieving Letters</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.relievingLettersFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-            
-              <div className="file-info mt-3">
-                <p style={{ margin: "0" }}>Payslips</p>
-                <p style={{ margin: "0", fontSize: "10px" }}>
-                  {/* {(file.size / 1024).toFixed(2)} KB */}
-                </p>
-              </div>
+               <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+              <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
+              <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      cursor:'pointer'
+                    }}
+                    onClick={handleToggleSection}
+                  >
+                    <h6 style={{fontWeight:"normal"}}>Educational Certificates - Accepted Formats: Pdf</h6>
+                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
+                  </div>
+                  {isSectionOpen && (
+                    <div>
+                      <RecruiterFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"}/>
+                      <RecruiterFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"}/>
+                      <RecruiterFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"}/>
+                      <RecruiterFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"}/>
+                      <RecruiterFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"}/>
+                      <RecruiterFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"}/>
+                    </div>
+                  )}
+                </div>
+
+              <RecruiterFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"}/>
+              <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"}/>
             </div>
-
-              <div className="pdf-image " style={{ height: "50px" }}>
-                <a href={cData.payslipFiles}>
-                <img
-                  src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
-                  alt="PDF"
-                  width="40px"
-                  height="50px"
-                />  </a>
-              </div>
-            
-             
-
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button
                     style={{
@@ -588,6 +451,7 @@ const RecruiterForm = () => {
                     style={{
                       height: "35px",
                       fontSize: "15px",
+                      
                       backgroundColor: "white",
                       color: "black",
                       borderColor: "black",

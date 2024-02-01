@@ -312,6 +312,7 @@ const TopForm = () => {
   useEffect(() => {
     getoneCandidate();
   }, []);
+  
 
   return (
     <>
