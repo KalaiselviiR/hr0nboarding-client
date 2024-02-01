@@ -109,7 +109,7 @@ body{
 
 }
 .fileName{
-    width: calc(100% - 60px);
+    width:240px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
