@@ -264,7 +264,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
        </Form.Group>
  </Col>
  <Col xs={12} md={4}>
- <Form.Group controlId="emailAddress">
+ <Form.Group controlId="emailAddress" className="mt-4">
          <Form.Label className="labelss ">Email address</Form.Label>
          <Form.Control
            className="input-field"
@@ -294,7 +294,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
           <Col xs={12} md={4} className="mt-">
           <Form.Group controlId="formGroupEmail">
                   <Form.Label className="labelss mt-4">
-                    Family member name
+                    Family member name {index+1}
                   </Form.Label>
                   <Form.Control
                     className="input-field"
@@ -470,7 +470,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
           <Form className="forms">
             <Row className="mb-3">
               <Col xs={12} md={4}>
-                <Form.Group controlId="epfoUan">
+                <Form.Group controlId="epfoUan" className="mt-3">
                   <Form.Label className="labelss">
                     EPFO UAN (If already allotted)
                   </Form.Label>
@@ -489,7 +489,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4}>
-                <Form.Group controlId="pfNo">
+                <Form.Group controlId="pfNo" className="mt-3">
                   <Form.Label className="labelss  ">PF NO</Form.Label>
                   <Form.Control
                     className="input-field"
@@ -506,7 +506,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                 </Form.Group>
               </Col>
               <Col xs={12} md={4}>
-                <Form.Group controlId="adharCard" className="ms">
+                <Form.Group controlId="adharCard" className="ms mt-3">
                   <Form.Label className="labelss  ">AADHAR CARD NO</Form.Label>
                   <Form.Control
                     className="input-field"
@@ -524,7 +524,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Col>
               <Row>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3" controlId="panCardNo">
+                  <Form.Group className="mt-3" controlId="panCardNo">
                     <Form.Label className="labelss">PAN CARD NO</Form.Label>
                     <Form.Control
                       className="input-field"
@@ -541,7 +541,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 ms-1" controlId="employeeName">
+                  <Form.Group className="mt-3 ms-1" controlId="employeeName">
                     <Form.Label className="labelss">
                       Employee's name (As per Aadhar)
                     </Form.Label>
@@ -563,7 +563,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 " controlId="dateOfBirthAs">
+                  <Form.Group className="mt-3 " controlId="dateOfBirthAs">
                     <Form.Label className="labelss ms-1">
                       Date of birth (As per the Aadhar)
                     </Form.Label>
@@ -592,7 +592,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Row>
               <Row>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3" controlId="formGroupGender">
+                  <Form.Group className="mt-3" controlId="formGroupGender">
                     <Form.Label className="labelss">Gender</Form.Label>
                     <Form.Select
                       className="input-field"
@@ -613,7 +613,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                 </Col>
                 <Col xs={12} md={4}>
                   <Form.Group
-                    className="mb-3 ms-2"
+                    className="mt-3 ms-2"
                     controlId="formGroupMaritalStatus"
                   >
                     <Form.Label className="labelss">Marital status</Form.Label>
@@ -639,7 +639,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+                  <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
                     <Form.Label className="labelss">Father's name</Form.Label>
                     <Form.Control
                       className="input-field"
@@ -660,7 +660,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Row>
               <Row>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Group className="mt-3" controlId="formGroupEmail">
                     <Form.Label className="labelss">Bank Name</Form.Label>
                     <Form.Select
                       className="input-field"
@@ -693,7 +693,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+                  <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
                     <Form.Label className="labelss">Bank branch</Form.Label>
                     <Form.Control
                       className="input-field"
@@ -710,7 +710,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   </Form.Group>
                 </Col>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3" controlId="formGroupEmail">
+                  <Form.Group className="mt-3" controlId="formGroupEmail">
                     <Form.Label className="labelss">Bank A/C No</Form.Label>
                     <Form.Control
                       className="input-field"
@@ -732,7 +732,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
               </Row>
               <Row>
                 <Col xs={12} md={4}>
-                  <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+                  <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
                     <Form.Label className="labelss">Bank IFSC No</Form.Label>
                     <Form.Control
                       className="input-field"
