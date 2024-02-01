@@ -188,9 +188,10 @@ margin-left: -10px;
 .InputEmail{
     flex: 1;
     height: 40px;
+    width: 360px;
     border: none;
     outline: none;
-    font-size: 18px;
+    font-size: 14px;
     padding-left:10px ;
 
 }

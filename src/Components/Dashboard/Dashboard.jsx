@@ -95,12 +95,10 @@ function Dashboard() {
   };
 
   const handleLogout = () => {
-  
+   
     localStorage.removeItem('email');
- 
-    setLoggedIn(false);
-  
-    return <navigate to="/" />;
+    // setItem(false);
+    navigate('/');
   };
 
   // useEffect(() => {
