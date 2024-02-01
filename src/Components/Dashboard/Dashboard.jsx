@@ -16,6 +16,8 @@ import { useNavigate } from 'react-router-dom';
 import { BiSolidDownload } from "react-icons/bi";
 import { useReactToPrint } from "react-to-print";
 import Login from '../Login/Login';
+import { CSVLink } from 'react-csv';
+import { CiExport } from 'react-icons/ci';
 
 
 
@@ -31,6 +33,8 @@ function Dashboard() {
   const [search, setSearch] = useState('no');
 
   const [showModal, setShowModal] = useState(false);
+
+  const [csvData, setCSVData] = useState([]);
 
   const initModal = () => {
     setInvokeModal(!isShow);
@@ -54,6 +58,9 @@ function Dashboard() {
   const component2PDF = useRef(); 
 
   // const [currentPage, setCurrentPage] = useState(1);
+
+
+  
 
   const openAddModal = () => {
     setAddModalIsOpen(true)
@@ -231,6 +238,26 @@ useEffect(()=>{
 },[])
 console.log(admin);
 
+function handleCSVExport(candidate) {
+  setCSVData([
+    {
+      fname: candidate.fname,
+      lname: candidate.lname,
+      jdate: candidate.jdate,
+      dsesignation: candidate.dsesignation,
+      email: candidate.email,
+    },
+  ]);
+};
+
+const generateCSV = useReactToPrint({
+  content: () => componentPDF.current,
+  documentTitle: 'user_data',
+  onAfterPrint: () => toast.success('Data saved in CSV'),
+});
+
+  
+
 
 
   return (
@@ -353,6 +380,8 @@ console.log(admin);
 
         
         </div>
+
+
         <div ref={componentPDF} style={{width:"100%"}} >
         <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
           <MDBTableHead >
@@ -364,7 +393,7 @@ console.log(admin);
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
+              {/* <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td> */}
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
             </tr>
 
@@ -395,7 +424,7 @@ console.log(admin);
 
                   </td>
                   <td>{i.email}</td>
-                  <td>
+                  {/* <td>
                     <MDBBadge className={` ${i.status === "Completed" ? 'green' : ""
                      || i.status === "Active" ? 'violet' : ""
                      || i.status === "Pending" ? 'orange' : ""
@@ -404,13 +433,29 @@ console.log(admin);
                      {i.status}
                     </MDBBadge>
 
-                  </td>
+                  </td> */}
                   <td>
                   {search === "no" 
                     ? <LuPen onClick={() => openEditModal(i)} className="  icon" /> 
-                    : <BiSolidDownload onClick={() => modalpdfOpen(i)} className="  icon" /> }
+                    : <CSVLink
+                    data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
+                    headers={[
+                      { label: 'Candidate First Name', key: 'fname' },
+                      { label: 'Candidate Last Name', key: 'lname' },
+                      { label: 'Date of Joining', key: 'jdate' },
+                      { label: 'Designation', key: 'dsesignation' },
+                      { label: 'Email Address', key: 'email' },
+                    ]}
                     
-                    <LuTrash2 className=" icon2" onClick={() => handleDeleteClick(i._id,i.status)}/>
+                    filename={`Rejected_candidate_${i.fname}.csv`}
+                    onClick={() => handleCSVExport(i)}
+                    className="icon1"
+                  >
+                    {/* ${i.fname}_${i.lname} */}
+                    <CiExport/>
+                  </CSVLink> }
+                    
+                    <LuTrash2 className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 
                   </td>
    

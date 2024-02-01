@@ -314,611 +314,653 @@ const TopForm = () => {
   }, []);
   
 
+
+
+
+  const [isLinkValid, setisLinkValid] = useState(true)
+
+
+  useEffect(() => {
+
+    const verifyToken = async () => {
+
+      try {
+        const response = await axios.get(`http://localhost:4000/api/verifyToken/${token}`)
+        console.log(response)
+        if (response.data.status === 'success') {
+          setisLinkValid(true)
+        }
+
+      }
+      catch (error) {
+        console.log(error)
+      }
+
+    }
+
+    verifyToken()
+  }, [])
+
+
+
   return (
     <>
-      <Navbar
-        bg="white"
-        variant="black"
-        style={{
-          background: "white",
-          marginBottom: "10px",
-          width: "100%",
-          boxSizing: "border-box",
-          boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-        }}
-      >
-        <Container style={{ gap: "25px" }}>
-          <Navbar.Brand href="#home">
-            <img
-              alt="Techjays Logo"
-              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
-              height="40"
-              className="d-inline-block align-top"
-            />
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link
-              href="#home"
-              className="d-none d-md-block"
-              style={{
-                background: "rgb(242, 249, 251)",
-                boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-                borderRadius: "5px",
-                fontWeight: "600",
-              }}
-            >
-              Dashboard
-            </Nav.Link>
-          </Nav>
-        </Container>
-      </Navbar>
-      <div className="container-fluid">
-        <Container
-          style={{
-            background: "white",
-            padding: "20px",
-            marginBottom: "10px",
-            marginTop: "20px",
-            borderRadius: "5px",
-            width: "100%",
-            boxSizing: "border-box",
-            boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-          }}
-        >
-          <Row>
-            <Col md={10}>
-              <h5 style={{ gap: "20px" }}>
-                <GoArrowLeft /> Candidate Info
-              </h5>
-            </Col>
-            <Col md={2} className="d-flex justify-content-end">
-              <h6 className="text-end d-none d-sm-inline-block align-top">
-                Review Pending
-              </h6>
-            </Col>
-          </Row>
-        </Container>
-
-        <Container
-          className="mt-4 margin-mobile"
-          style={{
-            background: "white",
-            padding: "20px",
-            marginBottom: "20px",
-            borderRadius: "5px",
-            boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
-            boxSizing: "border-box",
-          }}
-        >
-          <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
-            <Row>
-              <Col
-                md={12}
-                className="d-flex align-items-center"
-                style={{
-                  borderBottom: "2px solid  rgba(0,0,0,0.1)",
-                  marginBottom: "20px",
-                }}
-              >
-                <h5>Basic Information</h5>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="firstName">
-                  <Form.Label className="labelss">First Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="First Name"
-                    name="firstName"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.firstName}
-                  />
-                  {formik.touched.firstName && formik.errors.firstName ? (
-                    <div className="text-danger">{formik.errors.firstName}</div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="lastName">
-                  <Form.Label className="labelss">Last Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Last Name"
-                    name="lastName"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.lastName}
-                  />
-                  {formik.touched.lastName && formik.errors.lastName ? (
-                    <div className="text-danger">{formik.errors.lastName}</div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="email">
-                  <Form.Label className="labelss">Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="✉️ Email"
-                    name="email"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.email}
-                  />
-                  {formik.touched.email && formik.errors.email ? (
-                    <div className="text-danger">{formik.errors.email}</div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="phoneNumber">
-                  <div className="phoneDiv ">
-                    <div className="labelss">
-                      <p>Phone number</p>
-                    </div>
-                    <div className="phoneInput ">
-                      <select
-                        className="country-code  "
-                        onChange={(e) => setCountryCode(e.target.value)}
-                      >
-                        <option selected value="+91">
-                          IN(+91)
-                        </option>
-                        <option value="+880">BD(+880)</option>
-                        <option value="+1">US(+1)</option>
-                        <option value="+20">EG(+20)</option>
-                      </select>
-                      <input
-                        type="text"
-                        className=" form-control"
-                        placeholder="8845789956"
-                        name="phoneNumber"
-                        onChange={handleChange}
-                        onBlur={formik.handleBlur}
-                        value={formik.values.phoneNumber}
-                      />
-                    </div>
-                    {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
-                      <div className="text-danger">
-                        {formik.errors.phoneNumber}
-                      </div>
-                    ) : null}
-                  </div>
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="designation">
-                  <Form.Label className="labelss">Designation</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Designation"
-                    name="designation"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.designation}
-                  />
-                  {formik.touched.designation && formik.errors.designation ? (
-                    <div className="text-danger">
-                      {formik.errors.designation}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="dateOfJoining">
-                  <Form.Label className="labelss">Date of Joining</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <CiCalendar />
-                    </InputGroup.Text>
-                    <Form.Control
-                      type="date"
-                      placeholder="Date"
-                      name="dateOfJoining"
-                      onChange={handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.dateOfJoining}
-                    />
-                  </InputGroup>
-                  {formik.touched.dateOfJoining &&
-                  formik.errors.dateOfJoining ? (
-                    <div className="text-danger">
-                      {formik.errors.dateOfJoining}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="presentAddress">
-                  <Form.Label className="labelss">Present Address</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={4}
-                    placeholder="Present Address"
-                    name="presentAddress"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.presentAddress}
-                  />
-
-                  {formik.touched.presentAddress &&
-                  formik.errors.presentAddress ? (
-                    <div className="text-danger">
-                      {formik.errors.presentAddress}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="permanentAddress">
-                  <Form.Label className="labelss">Permanent Address</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={4}
-                    placeholder="Permanent Address"
-                    name="permanentAddress"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.permanentAddress}
-                    disabled={formik.values.sameAsPresentAddress}
-                  />
-                  <Form.Check
-                    type="checkbox"
-                    id="sameAsPresentAddress"
-                    label="Same as Present Address"
-                    name="sameAsPresentAddress"
-                    onChange={(e) => {
-                      const isChecked = e.target.checked;
-                      formik.setValues({
-                        ...formik.values,
-                        sameAsPresentAddress: isChecked,
-                        permanentAddress: isChecked
-                          ? formik.values.presentAddress
-                          : formik.values.permanentAddress,
-                      });
-                    }}
-                  />
-                  {formik.touched.permanentAddress &&
-                  formik.errors.permanentAddress ? (
-                    <div className="text-danger">
-                      {formik.errors.permanentAddress}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-            </Row>
-            <Row>
-              <Col md={12}>
-                <Form.Group className="mb-3" controlId="aboutYourself">
-                  <Form.Label className="labelss"> About yourself</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={5}
-                    placeholder="Enter a description..."
-                    name="aboutYourself"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.aboutYourself}
-                  />
-                  {formik.touched.aboutYourself &&
-                  formik.errors.aboutYourself ? (
-                    <div className="text-danger">
-                      {formik.errors.aboutYourself}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-            </Row>
-
-            <Row className="mt-4">
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="experience">
-                  <Form.Label className="labelss">
-                    Overall Work Experience
-                  </Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your Experience"
-                    name="experience"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.experience}
-                  />
-                  {formik.touched.experience && formik.errors.experience ? (
-                    <div className="text-danger">
-                      {formik.errors.experience}
-                    </div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="company">
-                  <Form.Label className="labelss">Previous Company</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter your previous company name"
-                    name="company"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.company}
-                  />
-                  {formik.touched.company && formik.errors.company ? (
-                    <div className="text-danger">{formik.errors.company}</div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="enjoyment">
-                  <Form.Label className="labelss">
-                    What do you enjoy outside of your work?
-                  </Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={4}
-                    placeholder="Enter a description..."
-                    name="enjoyment"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.enjoyment}
-                  />
-                  {formik.touched.enjoyment && formik.errors.enjoyment ? (
-                    <div className="text-danger">{formik.errors.enjoyment}</div>
-                  ) : null}
-                </Form.Group>
-              </Col>
-              <Col md={6} xs={12}>
-                <Form.Group className="mb-3" controlId="sneakpeek">
-                  <Form.Label className="labelss">
-                    Sneak peek at your bucket list
-                  </Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={4}
-                    placeholder="Enter a description..."
-                    name="sneakpeek"
-                    onChange={handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.sneakpeek}
-                  />
-                </Form.Group>
-                {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
-                  <div className="text-danger">{formik.errors.sneakpeek}</div>
-                ) : null}
-              </Col>
-            </Row>
-            <Row className="mt-4">
-              <Col md={4}>
-                <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
-                <FileUpload
-                  label="Photo  - Accepted Formats: JPG or PNG "
-                  controlId="photo"
-                  acceptedFiles={formData.photoFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      photoFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "photo")}
-                />
-                {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
-                    <div className="text-danger">{formik.errors.photoFiles}</div>
-                  ) : null} */}
-
-                <FileUpload
-                  label="Aadhar Card - Accepted Formats :pdf "
-                  controlId="aadharCard"
-                  acceptedFiles={formData.aadharCardFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      aadharCardFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "aadharCard")}
-                />
-                {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
-                    <div className="text-danger">{formik.errors.aadharCardFiles}</div>
-                  ) : null} */}
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      cursor:'pointer'
-                    }}
-                    onClick={handleToggleSection}
-                  >
-                    <h6 style={{fontWeight:"normal"}}>Educational Certificates - Accepted Formats: Pdf</h6>
-                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
-                  </div>
-                  {isSectionOpen && (
-                    <div>
-                  <FileUpload
-                    label="10th Marksheet"
-                    controlId="tenthMarksheet"
-                    acceptedFiles={formData.tenthMarksheetFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        tenthMarksheetFiles: files,
-                      }))
-                    }
-                    onFileChange={(file) => FileChange(file, "tenthMarksheet")}
-                  />
-                  <FileUpload
-                    label="12th Marksheet"
-                    controlId="twelfthMarksheet"
-                    acceptedFiles={formData.twelfthMarksheetFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        twelfthMarksheetFiles: files,
-                      }))
-                    }
-                    onFileChange={(file) =>
-                      FileChange(file, "twelfthMarksheet")
-                    }
-                  />
-                  <FileUpload
-                    label="PG Degree Certificate"
-                    controlId="PGDegreeCertificate"
-                    acceptedFiles={formData.pgDegreeCertificateFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        PGDegreeCertificate: files,
-                      }))
-                    }
-                    onFileChange={(file) =>
-                      FileChange(file, "PGDegreeCertificate")
-                    }
-                  />
-                  <FileUpload
-                    label="PG Marksheet"
-                    controlId="PGMarksheet"
-                    acceptedFiles={formData.pgMarksheetFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        pgMarksheetFiles: files,
-                      }))
-                    }
-                    onFileChange={(file) => FileChange(file, "PGMarksheet")}
-                  />
-                  <FileUpload
-                    label="UG Degree Certificate"
-                    controlId="UGDegreeCertificate"
-                    acceptedFiles={formData.ugDegreeCertificateFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        ugDegreeCertificateFiles: files,
-                      }))
-                    }
-                    onFileChange={(file) =>
-                      FileChange(file, "UGDegreeCertificate")
-                    }
-                  />
-                  <FileUpload
-                    label="UG Marksheet"
-                    controlId="UGMarksheet"
-                    acceptedFiles={formData.ugMarksheetFiles}
-                    setAcceptedFiles={(files) =>
-                      setFormData((prevData) => ({
-                        ...prevData,
-                        ugMarksheetFiles: files,
-                      }))
-                    }
-                    onFileChange={(file) => FileChange(file, "UGMarksheet")}
-                  />
-                    </div>
-                  )}
-                </div>
-                {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
-                    <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
-                  ) : null} */}
-             
-                <FileUpload
-                  label="Relieving Letters from all your previous organizations  - Accepted Formats: Pdf "
-                  controlId="relievingLetters"
-                  acceptedFiles={formData.relievingLettersFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      relievingLettersFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "relievingLetters")}
-                />
-                {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
-                    <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
-                  ) : null} */}
-
-                <FileUpload
-                  label="3 Months Payslip - Accepted Formats: Pdf "
-                  controlId="payslip"
-                  acceptedFiles={formData.payslipFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      payslipFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "payslip")}
-                />
-                {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
-                    <div className="text-danger">{formik.errors.payslipFiles}</div>
-                  ) : null} */}
-
-                {/* <div
-                  style={{
-                    display: "flex",
-                    marginTop: "50px",
-                    marginBottom: "25px",
-                    gap: "10px",
-                  }}
-                >
-                  <Button onClick={handleSubmit}
-                    style={{
-                      height: "35px",
-                      fontSize: "15px",
-                      backgroundColor: "rgb(210, 164, 250)",
-                      color: "white",
-                      borderColor: "rgb(210, 164, 250)",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Submit
-                  </Button>
-                  <Button
-                    style={{
-                      height: "35px",
-                      fontSize: "15px",
-                      backgroundColor: "white",
-                      color: "rgb(147, 48, 233)",
-                      borderColor: "rgb(147, 48, 233)",
-                      fontWeight: "500",
-                    }}
-                  >
-                    Save as draft
-                  </Button>
-                </div> */}
-              </Col>
-            </Row>
-          </Form>
-        </Container>
-
-        <Form2
-          updateForm2Data={updateForm2Data}
-          updateCandidateData={updateCandidateData}
-        />
-
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginBottom: "20px",
-          }}
-        >
-          <Button
-            onClick={handleSubmit}
+      {isLinkValid ?
+        <>
+          <Navbar
+            bg="white"
+            variant="black"
             style={{
-              height: "35px",
-              fontSize: "15px",
-              backgroundColor: "rgb(210, 164, 250)",
-              color: "white",
-              borderColor: "rgb(210, 164, 250)",
-              fontWeight: "500",
-              marginRight: "10px",
+              background: "white",
+              marginBottom: "10px",
+              width: "100%",
+              boxSizing: "border-box",
+              boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
             }}
           >
-            Submit
-          </Button>
+            <Container style={{ gap: "25px" }}>
+              <Navbar.Brand href="#home">
+                <img
+                  alt="Techjays Logo"
+                  src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+                  height="40"
+                  className="d-inline-block align-top"
+                />
+              </Navbar.Brand>
+              <Nav className="me-auto">
+                <Nav.Link
+                  href="#home"
+                  className="d-none d-md-block"
+                  style={{
+                    background: "rgb(242, 249, 251)",
+                    boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+                    borderRadius: "5px",
+                    fontWeight: "600",
+                  }}
+                >
+                  Dashboard
+                </Nav.Link>
+              </Nav>
+            </Container>
+          </Navbar>
+          <div className="container-fluid">
+            <Container
+              style={{
+                background: "white",
+                padding: "20px",
+                marginBottom: "10px",
+                marginTop: "20px",
+                borderRadius: "5px",
+                width: "100%",
+                boxSizing: "border-box",
+                boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
+              }}
+            >
+              <Row>
+                <Col md={10}>
+                  <h5 style={{ gap: "20px" }}>
+                    <GoArrowLeft /> Candidate Info
+                  </h5>
+                </Col>
+                <Col md={2} className="d-flex justify-content-end">
+                  <h6 className="text-end d-none d-sm-inline-block align-top">
+                    Review Pending
+                  </h6>
+                </Col>
+              </Row>
+            </Container>
+
+            <Container
+              className="mt-4 margin-mobile"
+              style={{
+                background: "white",
+                padding: "20px",
+                marginBottom: "20px",
+                borderRadius: "5px",
+                boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
+                boxSizing: "border-box",
+              }}
+            >
+              <Form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
+                <Row>
+                  <Col
+                    md={12}
+                    className="d-flex align-items-center"
+                    style={{
+                      borderBottom: "2px solid  rgba(0,0,0,0.1)",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <h5>Basic Information</h5>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="firstName">
+                      <Form.Label className="labelss">First Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="First Name"
+                        name="firstName"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.firstName}
+                      />
+                      {formik.touched.firstName && formik.errors.firstName ? (
+                        <div className="text-danger">{formik.errors.firstName}</div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="lastName">
+                      <Form.Label className="labelss">Last Name</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Last Name"
+                        name="lastName"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.lastName}
+                      />
+                      {formik.touched.lastName && formik.errors.lastName ? (
+                        <div className="text-danger">{formik.errors.lastName}</div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="email">
+                      <Form.Label className="labelss">Email</Form.Label>
+                      <Form.Control
+                        type="email"
+                        placeholder="✉️ Email"
+                        name="email"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
+                      />
+                      {formik.touched.email && formik.errors.email ? (
+                        <div className="text-danger">{formik.errors.email}</div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="phoneNumber">
+                      <div className="phoneDiv ">
+                        <div className="labelss">
+                          <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                          <select
+                            className="country-code  "
+                            onChange={(e) => setCountryCode(e.target.value)}
+                          >
+                            <option selected value="+91">
+                              IN(+91)
+                            </option>
+                            <option value="+880">BD(+880)</option>
+                            <option value="+1">US(+1)</option>
+                            <option value="+20">EG(+20)</option>
+                          </select>
+                          <input
+                            type="text"
+                            className=" form-control"
+                            placeholder="8845789956"
+                            name="phoneNumber"
+                            onChange={handleChange}
+                            onBlur={formik.handleBlur}
+                            value={formik.values.phoneNumber}
+                          />
+                        </div>
+                        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                          <div className="text-danger">
+                            {formik.errors.phoneNumber}
+                          </div>
+                        ) : null}
+                      </div>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="designation">
+                      <Form.Label className="labelss">Designation</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Designation"
+                        name="designation"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.designation}
+                      />
+                      {formik.touched.designation && formik.errors.designation ? (
+                        <div className="text-danger">
+                          {formik.errors.designation}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="dateOfJoining">
+                      <Form.Label className="labelss">Date of Joining</Form.Label>
+                      <InputGroup>
+                        <InputGroup.Text>
+                          <CiCalendar />
+                        </InputGroup.Text>
+                        <Form.Control
+                          type="date"
+                          placeholder="Date"
+                          name="dateOfJoining"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={formik.values.dateOfJoining}
+                        />
+                      </InputGroup>
+                      {formik.touched.dateOfJoining &&
+                        formik.errors.dateOfJoining ? (
+                        <div className="text-danger">
+                          {formik.errors.dateOfJoining}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="presentAddress">
+                      <Form.Label className="labelss">Present Address</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Present Address"
+                        name="presentAddress"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.presentAddress}
+                      />
+
+                      {formik.touched.presentAddress &&
+                        formik.errors.presentAddress ? (
+                        <div className="text-danger">
+                          {formik.errors.presentAddress}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="permanentAddress">
+                      <Form.Label className="labelss">Permanent Address</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Permanent Address"
+                        name="permanentAddress"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.permanentAddress}
+                        disabled={formik.values.sameAsPresentAddress}
+                      />
+                      <Form.Check
+                        type="checkbox"
+                        id="sameAsPresentAddress"
+                        label="Same as Present Address"
+                        name="sameAsPresentAddress"
+                        onChange={(e) => {
+                          const isChecked = e.target.checked;
+                          formik.setValues({
+                            ...formik.values,
+                            sameAsPresentAddress: isChecked,
+                            permanentAddress: isChecked
+                              ? formik.values.presentAddress
+                              : formik.values.permanentAddress,
+                          });
+                        }}
+                      />
+                      {formik.touched.permanentAddress &&
+                        formik.errors.permanentAddress ? (
+                        <div className="text-danger">
+                          {formik.errors.permanentAddress}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col md={12}>
+                    <Form.Group className="mb-3" controlId="aboutYourself">
+                      <Form.Label className="labelss"> About yourself</Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={5}
+                        placeholder="Enter a description..."
+                        name="aboutYourself"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.aboutYourself}
+                      />
+                      {formik.touched.aboutYourself &&
+                        formik.errors.aboutYourself ? (
+                        <div className="text-danger">
+                          {formik.errors.aboutYourself}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                </Row>
+
+                <Row className="mt-4">
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="experience">
+                      <Form.Label className="labelss">
+                        Overall Work Experience
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your Experience"
+                        name="experience"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.experience}
+                      />
+                      {formik.touched.experience && formik.errors.experience ? (
+                        <div className="text-danger">
+                          {formik.errors.experience}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="company">
+                      <Form.Label className="labelss">Previous Company</Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Enter your previous company name"
+                        name="company"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.company}
+                      />
+                      {formik.touched.company && formik.errors.company ? (
+                        <div className="text-danger">{formik.errors.company}</div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="enjoyment">
+                      <Form.Label className="labelss">
+                        What do you enjoy outside of your work?
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Enter a description..."
+                        name="enjoyment"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.enjoyment}
+                      />
+                      {formik.touched.enjoyment && formik.errors.enjoyment ? (
+                        <div className="text-danger">{formik.errors.enjoyment}</div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="sneakpeek">
+                      <Form.Label className="labelss">
+                        Sneak peek at your bucket list
+                      </Form.Label>
+                      <Form.Control
+                        as="textarea"
+                        rows={4}
+                        placeholder="Enter a description..."
+                        name="sneakpeek"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.sneakpeek}
+                      />
+                    </Form.Group>
+                    {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
+                      <div className="text-danger">{formik.errors.sneakpeek}</div>
+                    ) : null}
+                  </Col>
+                </Row>
+                <Row className="mt-4">
+                  <Col md={4}>
+                    <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
+                    <FileUpload
+                      label="Photo  - Accepted Formats: JPG or PNG "
+                      controlId="photo"
+                      acceptedFiles={formData.photoFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          photoFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "photo")}
+                    />
+                    {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
+               <div className="text-danger">{formik.errors.photoFiles}</div>
+             ) : null} */}
+
+                    <FileUpload
+                      label="Aadhar Card - Accepted Formats :pdf "
+                      controlId="aadharCard"
+                      acceptedFiles={formData.aadharCardFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          aadharCardFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "aadharCard")}
+                    />
+                    {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
+               <div className="text-danger">{formik.errors.aadharCardFiles}</div>
+             ) : null} */}
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: 'pointer'
+                        }}
+                        onClick={handleToggleSection}
+                      >
+                        <h6 style={{ fontWeight: "normal" }}>Educational Certificates - Accepted Formats: Pdf</h6>
+                        {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
+                      </div>
+                      {isSectionOpen && (
+                        <div>
+                          <FileUpload
+                            label="10th Marksheet"
+                            controlId="tenthMarksheet"
+                            acceptedFiles={formData.tenthMarksheetFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                tenthMarksheetFiles: files,
+                              }))
+                            }
+                            onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                          />
+                          <FileUpload
+                            label="12th Marksheet"
+                            controlId="twelfthMarksheet"
+                            acceptedFiles={formData.twelfthMarksheetFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                twelfthMarksheetFiles: files,
+                              }))
+                            }
+                            onFileChange={(file) =>
+                              FileChange(file, "twelfthMarksheet")
+                            }
+                          />
+                          <FileUpload
+                            label="PG Degree Certificate"
+                            controlId="PGDegreeCertificate"
+                            acceptedFiles={formData.pgDegreeCertificateFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                PGDegreeCertificate: files,
+                              }))
+                            }
+                            onFileChange={(file) =>
+                              FileChange(file, "PGDegreeCertificate")
+                            }
+                          />
+                          <FileUpload
+                            label="PG Marksheet"
+                            controlId="PGMarksheet"
+                            acceptedFiles={formData.pgMarksheetFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                pgMarksheetFiles: files,
+                              }))
+                            }
+                            onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                          />
+                          <FileUpload
+                            label="UG Degree Certificate"
+                            controlId="UGDegreeCertificate"
+                            acceptedFiles={formData.ugDegreeCertificateFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                ugDegreeCertificateFiles: files,
+                              }))
+                            }
+                            onFileChange={(file) =>
+                              FileChange(file, "UGDegreeCertificate")
+                            }
+                          />
+                          <FileUpload
+                            label="UG Marksheet"
+                            controlId="UGMarksheet"
+                            acceptedFiles={formData.ugMarksheetFiles}
+                            setAcceptedFiles={(files) =>
+                              setFormData((prevData) => ({
+                                ...prevData,
+                                ugMarksheetFiles: files,
+                              }))
+                            }
+                            onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                          />
+                        </div>
+                      )}
+                    </div>
+                    {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+               <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
+             ) : null} */}
+
+                    <FileUpload
+                      label="Relieving Letters from all your previous organizations  - Accepted Formats: Pdf "
+                      controlId="relievingLetters"
+                      acceptedFiles={formData.relievingLettersFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          relievingLettersFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "relievingLetters")}
+                    />
+                    {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+               <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
+             ) : null} */}
+
+                    <FileUpload
+                      label="3 Months Payslip - Accepted Formats: Pdf "
+                      controlId="payslip"
+                      acceptedFiles={formData.payslipFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          payslipFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "payslip")}
+                    />
+                    {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
+               <div className="text-danger">{formik.errors.payslipFiles}</div>
+             ) : null} */}
+
+                    {/* <div
+             style={{
+               display: "flex",
+               marginTop: "50px",
+               marginBottom: "25px",
+               gap: "10px",
+             }}
+           >
+             <Button onClick={handleSubmit}
+               style={{
+                 height: "35px",
+                 fontSize: "15px",
+                 backgroundColor: "rgb(210, 164, 250)",
+                 color: "white",
+                 borderColor: "rgb(210, 164, 250)",
+                 fontWeight: "500",
+               }}
+             >
+               Submit
+             </Button>
+             <Button
+               style={{
+                 height: "35px",
+                 fontSize: "15px",
+                 backgroundColor: "white",
+                 color: "rgb(147, 48, 233)",
+                 borderColor: "rgb(147, 48, 233)",
+                 fontWeight: "500",
+               }}
+             >
+               Save as draft
+             </Button>
+           </div> */}
+                  </Col>
+                </Row>
+              </Form>
+            </Container>
+
+            <Form2
+              updateForm2Data={updateForm2Data}
+              updateCandidateData={updateCandidateData}
+            />
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginBottom: "20px",
+              }}
+            >
+              <Button
+                onClick={handleSubmit}
+                style={{
+                  height: "35px",
+                  fontSize: "15px",
+                  backgroundColor: "rgb(210, 164, 250)",
+                  color: "white",
+                  borderColor: "rgb(210, 164, 250)",
+                  fontWeight: "500",
+                  marginRight: "10px",
+                }}
+              >
+                Submit
+              </Button>
+            </div>
+          </div>
+        </>
+
+        :
+        <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#0000002e', display: "flex", justifyContent: 'center' }}>
+          <p style={{ fontSize: '28px', marginTop: '30px' }}>Invalid or Expired Link</p>
+
         </div>
-      </div>
+      }
+
     </>
+
+
   );
 };
 
