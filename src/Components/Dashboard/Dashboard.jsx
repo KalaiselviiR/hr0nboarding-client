@@ -444,7 +444,7 @@ const generateCSV = useReactToPrint({
                   <td>
                   {search === "no" 
                     ? <LuPen onClick={() => openEditModal(i)} className="  icon" /> 
-                    : <FiDownload
+                    : <CSVLink
                     data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
                     headers={[
                       { label: 'Candidate First Name', key: 'fname' },
@@ -453,14 +453,15 @@ const generateCSV = useReactToPrint({
                       { label: 'Designation', key: 'dsesignation' },
                       { label: 'Email Address', key: 'email' },
                     ]}
-                    
+                    cursor={'pointer'}  
                     filename={`Rejected_candidate_${i.fname}.csv`}
-                    onClick={() => handleCSVExport(i)}
-                    className="icon"
+                    onClick={() => handleCSVExport(i) }
+                    className="icon1"
                   >
                     {/* ${i.fname}_${i.lname} */}
-                    <CiExport/>
-                  </FiDownload> }
+                    {/* <CiExport/> */}
+                  <FiDownload/>
+                  </CSVLink> }
                     
                     <LuTrash2 className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 

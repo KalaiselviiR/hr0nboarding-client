@@ -323,9 +323,9 @@ body:not(.modal-open) .modal-backdrop {
 
 .icon1{
   font-size: 19px;
-  color: #160637;
-  font-weight: bold;
-  transform: scale(1.2);
+  color: #27252c;
+  /* font-weight: bold; */
+  /* transform: scale(1.2); */
   padding-top: 10px;
   /* background-color: #7F56D9;
   border-radius: 5px;
