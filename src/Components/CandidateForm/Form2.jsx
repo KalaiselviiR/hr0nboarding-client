@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CandidateForm.css"; // Assuming you have a custom CSS file for styling
-import { CiExport, CiCalendar } from "react-icons/ci";
+import { CiExport, CiCalendar,CiTrash  } from "react-icons/ci";
 import {
   InputGroup,
   Row,
@@ -21,15 +21,20 @@ import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Bank";
 
 
-function Form2({ updateForm2Data, updateCandidateData }) {
+function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
 
   
-    const [familyMembers, setFamilyMembers] = useState([]);
+    const [familyMembers, setFamilyMembers] = useState([{ memberName: '', relationship: '', dateOfBirth: '', emergencyContactNumber: '', emailAddress: '' }]);
   
     // ... your existing code
   
     const addFamilyMember = () => {
       setFamilyMembers([...familyMembers, { memberName: '', relationship: '', dateOfBirth: '', emergencyContactNumber: '', emailAddress: '' }]);
+
+      formik.setFieldValue('members', [
+        ...formik.values.members,
+        { memberName: '', relationship: '', dateOfBirth: '', emergencyContactNumber: '', emailAddress: '' }
+      ]);
     };
 
   //create an object to store datas from input family details
@@ -82,11 +87,32 @@ function Form2({ updateForm2Data, updateCandidateData }) {
     setCandidate((prevData) => ({ ...prevData, [key]: value }));
   };
 
+  const handleFamilyDetailsChange = (index, key, value) => {
+
+    const updatedMembers = [...familyMembers];
+    updatedMembers[index][key] = value;
+    setFamilyMembers(updatedMembers);
+
+    // formik.setFieldValue(`members[${index}].${key}`, value);
+
+  }
+
+  const handleRemoveMember = (index) => {
+    const updatedMembers = [...familyMembers];
+    updatedMembers.splice(index, 1);
+    setFamilyMembers(updatedMembers);
+  };
+
+
   useEffect(() => {
     // This will run whenever candidateData changes
     updateForm2Data(candidateData);
     updateCandidateData(candidateData);
   }, [candidateData]);
+
+  useEffect(() => {
+    onFamilyDetailsChange(familyMembers)
+  },[familyMembers]);
 
   const handleSubmitBottom = async (e) => {
     e.preventDefault();
@@ -166,7 +192,7 @@ function Form2({ updateForm2Data, updateCandidateData }) {
             onSubmit={formik.handleSubmit}
             onReset={formik.handleReset}
           >
-             <Row className="mb-3">
+             {/* <Row className="mb-3">
         <Col xs={12} md={4} className="mt-">
           <Form.Group controlId="formGroupEmail">
             <Form.Label className="labelss mt-4">Family member name</Form.Label>
@@ -285,10 +311,38 @@ function Form2({ updateForm2Data, updateCandidateData }) {
 
         
          
-      </Row>
+      </Row> */}
 
       {/* Mapping over familyMembers array */}
       {familyMembers.map((member, index) => (
+        <>
+        {
+          index !== 0 && 
+          <Button
+          style={{
+            marginTop: "10px",
+            marginBottom: "10px",
+            height: "35px",
+            fontSize: "15px",
+            backgroundColor: "white",
+            color: "rgb(147, 48, 233)",
+            borderColor: "rgb(147, 48, 233)",
+            fontWeight: "500",
+            width:"120px"
+          }}
+          onClick={() => handleRemoveMember(index)}
+        >
+          <div style={{
+            display:"flex",
+            justifyContent:"center",
+            alignItems:"center",
+            gap:"10px"
+          }}> 
+            <span>Delete</span>
+             <CiTrash />                       
+          </div>       
+        </Button>          
+        }
         <Row key={index} className="mb-3">
           {/* Render input fields for each family member */}
           <Col xs={12} md={4} className="mt-">
@@ -301,15 +355,15 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     type="text"
                     placeholder="Name"
                     name="memberName"
-                    onChange={handleChange}
+                    onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={formik.values.memberName}
+                    value={familyMembers?.memberName}                   
                   />
-                  {formik.touched.memberName && formik.errors.memberName ? (
+                  {/* {formik.touched.memberName && formik.errors.memberName ? (
                     <div className="text-danger">
                       {formik.errors.memberName}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </Form.Group>
           </Col>
           <Col xs={12} md={4}>
@@ -318,9 +372,9 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                   <Form.Select
                     className="input-field"
                     name="relationship"
-                    onChange={handleChange}
+                    onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={formik.values.relationship}
+                    value={familyMembers?.relationship}
                   >
                     <option value="" label="Select Relationship" />
                     <option value="Father" label="Father" />
@@ -347,17 +401,17 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                       type="date"
                       className="input-field"
                       placeholder="Date"
-                      name="dateOfBirth"
-                      onChange={handleChange}
-                      onBlur={formik.handleBlur}
-                      value={formik.values.dateOfBirth}
+                      name="dateOfBirth"         
+                      onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
+                      onBlur={formik.handleBlur}                   
+                      value={familyMembers?.dateOfBirth}
                     />
                   </InputGroup>
-                  {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
+                  {/* {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
                     <div className="text-danger">
                       {formik.errors.dateOfBirth}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </Form.Group>
           </Col>
           <Col xs={12} md={4}>
@@ -381,9 +435,10 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                             type="tel"
                             placeholder="+91(555) 000-0000"
                                 name="emergencyContactNumber"
-                                onChange={handleChange}
-                                onBlur={formik.handleBlur}
-                                value={formik.values.emergencyContactNumber}
+                                
+                                onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
+                                onBlur={formik.handleBlur}                              
+                                value={familyMembers?.emergencyContactNumber}
                                
                             />
                         </div>
@@ -398,18 +453,19 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                     type="email"
                     placeholder="Email"
                     name="emailAddress"
-                    onChange={handleChange}
+                    onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={formik.values.emailAddress}
+                    value={familyMembers?.emailAddress}
                   />
-                  {formik.touched.emailAddress && formik.errors.emailAddress ? (
+                  {/* {formik.touched.emailAddress && formik.errors.emailAddress ? (
                     <div className="text-danger">
                       {formik.errors.emailAddress}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </Form.Group>
           </Col>
         </Row>
+        </>
       ))}
 
       {/* Button to add a new family member */}

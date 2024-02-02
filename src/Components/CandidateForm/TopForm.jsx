@@ -106,6 +106,7 @@ const TopForm = () => {
     relievingLettersFiles: null,
     payslipFiles: null,
     id: id,
+    members:[]
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -164,6 +165,21 @@ const TopForm = () => {
       ...data,
     }));
   };
+
+  const updateFamilyMembers = (data) => {
+    setFormData((prevData) => ({
+      ...prevData,
+      members:data
+    }))
+
+    const combinedValues = {
+      ...formik.values,
+      members:data
+    };
+    formik.setValues(combinedValues);
+  } 
+
+
 
   // handle change function for validation errors
   const handleChange = (e) => {
@@ -921,10 +937,11 @@ const TopForm = () => {
               </Form>
             </Container>
 
-            <Form2
-              updateForm2Data={updateForm2Data}
-              updateCandidateData={updateCandidateData}
-            />
+        <Form2
+          updateForm2Data={updateForm2Data}
+          updateCandidateData={updateCandidateData}
+          onFamilyDetailsChange={updateFamilyMembers}
+        />
 
             <div
               style={{
