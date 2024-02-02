@@ -30,11 +30,12 @@ export const initialValues = {
   relievingLettersFiles: null,
   payslipFiles: null,
   //bottom-1
-  memberName: "",
-  relationship: "",
-  dateOfBirth: null,
-  emergencyContactNumber: "",
-  emailAddress: "",
+  // memberName: "",
+  // relationship: "",
+  // dateOfBirth: null,
+  // emergencyContactNumber: "",
+  // emailAddress: "",
+  
   //bottom-2
   epfoUan: "",
   pfNo: "",
@@ -128,20 +129,21 @@ export const validationSchema = Yup.object().shape({
   ),
 
   // bottom form-1
-  memberName: Yup.string()
-    .matches(/^[^\d]+$/, "Member Name should not contain numbers")
-    .required("Member Name is required"),
-  relationship: Yup.string()
-    .matches(/^[^\d]+$/, "Relationship Name should not contain numbers")
-    .required("Relationship Name is required"),
-  dateOfBirth: Yup.date().required("Date of Birth is required"),
-  emergencyContactNumber: Yup.string()
-    .matches(/^\+?[0-9]+$/, "Invalid phone number")
-    .required("Phone Number is required"),
+  // memberName: Yup.string()
+  //   .matches(/^[^\d]+$/, "Member Name should not contain numbers")
+  //   .required("Member Name is required"),
+  // relationship: Yup.string()
+  //   .matches(/^[^\d]+$/, "Relationship Name should not contain numbers")
+  //   .required("Relationship Name is required"),
+  // dateOfBirth: Yup.date().required("Date of Birth is required"),
+  // emergencyContactNumber: Yup.string()
+  //   .matches(/^\+?[0-9]+$/, "Invalid phone number")
+  //   .required("Phone Number is required"),
   // emailAddress: Yup.string()
   //   .email("Invalid email")
   //   .required("Email is required")
   //   .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
+          
 
   // bottomForm-2
   // epfoUan: Yup.string()
