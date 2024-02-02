@@ -18,6 +18,7 @@ import { useReactToPrint } from "react-to-print";
 import Login from '../Login/Login';
 import { CSVLink } from 'react-csv';
 import { CiExport } from 'react-icons/ci';
+import { FiDownload } from "react-icons/fi";
 
 
 
@@ -393,13 +394,15 @@ const generateCSV = useReactToPrint({
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
-              {/* <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td> */}
+              {search=="no" ?
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
+               :""}
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
             </tr>
 
           </MDBTableHead>
           <MDBTableBody  >
-          {records.filter((item) => {
+          {records.length > 0 ? records.filter((item) => {
             const searchTerm = search.toLowerCase();
             const projectValue = item[filterType].toLowerCase();
             return projectValue.includes(searchTerm);
@@ -424,7 +427,9 @@ const generateCSV = useReactToPrint({
 
                   </td>
                   <td>{i.email}</td>
-                  {/* <td>
+                  {search=="no" ?
+                  <td>
+                    
                     <MDBBadge className={` ${i.status === "Completed" ? 'green' : ""
                      || i.status === "Active" ? 'violet' : ""
                      || i.status === "Pending" ? 'orange' : ""
@@ -432,12 +437,14 @@ const generateCSV = useReactToPrint({
                      || i.status === "Rejected" ? 'red' : "" }`} pill>
                      {i.status}
                     </MDBBadge>
+                  
 
-                  </td> */}
+                  </td>
+                    :""}
                   <td>
                   {search === "no" 
                     ? <LuPen onClick={() => openEditModal(i)} className="  icon" /> 
-                    : <CSVLink
+                    : <FiDownload
                     data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
                     headers={[
                       { label: 'Candidate First Name', key: 'fname' },
@@ -449,11 +456,11 @@ const generateCSV = useReactToPrint({
                     
                     filename={`Rejected_candidate_${i.fname}.csv`}
                     onClick={() => handleCSVExport(i)}
-                    className="icon1"
+                    className="icon"
                   >
                     {/* ${i.fname}_${i.lname} */}
                     <CiExport/>
-                  </CSVLink> }
+                  </FiDownload> }
                     
                     <LuTrash2 className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 
@@ -544,7 +551,9 @@ const generateCSV = useReactToPrint({
       </Modal>
                 </tr>
                 
-             ))}
+                )
+                ):<p className='text-danger text-center ms-5'>No Data Present</p>
+            }
 
 
           </MDBTableBody>
@@ -554,7 +563,9 @@ const generateCSV = useReactToPrint({
         </div>
         <nav className='border' style={{ backgroundColor: " white",
         borderBottomLeftRadius:"8px",borderBottomRightRadius:"8px" }}  >
+          {  records.length > 0 ?
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
+            
 
             <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
               <a href='#' style={{ borderRadius: "8px" }}
@@ -574,13 +585,44 @@ const generateCSV = useReactToPrint({
                 </div>
 
 
-            
+             
             <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
               <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
               onClick={nextPage}>Next </a>
 
             </li>
+
           </ul>
+          :    <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
+            
+
+          <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
+            <a href='#' style={{ borderRadius: "8px" }}
+             className='page-link bg-white  text-dark border index ' onClick={() => changeCpage(1)}> Previous</a>
+
+          </li>
+
+             <div className='page-item d-flex'>
+             {
+            numbers.map((n, i) => (
+              <li className="ms-2" key={i} >
+                <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} 
+                onClick={() => changeCpage(n)}>{n}</a>
+              </li>
+                ))
+              }
+              </div>
+
+
+           
+          <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
+            <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
+            onClick={() => changeCpage(1)}>Next </a>
+
+          </li>
+
+        </ul>
+          }
         </nav>
         <Modal className='deleteModal' show={isShow} onHide={initModal}>
 
