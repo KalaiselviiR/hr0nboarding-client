@@ -126,18 +126,14 @@ function Dashboard() {
   // }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const recordsPerPage = 10;
+  const recordsPerPage = 7;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allcandidate.slice(firstIndex, lastIndex);
   const npages = Math.ceil(allcandidate.length / recordsPerPage);
   const numbers = [...Array(npages + 1).keys()].slice(1)
 
-    // Function to handle filter type selection
-    const handleFilterSelect = (type) => {
-      setFilterType(type);
-  
-    };
+
 
   //define a function to call api
   const getAllCandidate = async () => {
@@ -285,7 +281,7 @@ const generateCSV = useReactToPrint({
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="d-none d-md-block" style={{ backgroundColor: " rgba(249, 250, 251, 1)" ,  
+            <Nav.Link href="/dashboard" className="d-none d-md-block" style={{ backgroundColor: " rgba(249, 250, 251, 1)" ,  
             boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
             borderRadius:"5px",
             fontWeight:"500"
@@ -564,15 +560,20 @@ const generateCSV = useReactToPrint({
         </div>
         <nav className='border' style={{ backgroundColor: " white",
         borderBottomLeftRadius:"8px",borderBottomRightRadius:"8px" }}  >
-          {  records.length > 0 ?
+         
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
             
-
+            {currentPage != 1 ?
             <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
               <a href='#' style={{ borderRadius: "8px" }}
                className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
 
-            </li>
+            </li>: <li className='page-item float-left disabled' style={{ paddingLeft: '30px' }} >
+              <a href='#' style={{ borderRadius: "8px",
+              borderColor:"rgba(234,236,240,1)",color:"rgba(234,236,240,1)" }}
+               className='page-link bg-white   border index ' onClick={prePage}> Previous</a>
+
+            </li> }
  
                <div className='page-item d-flex'>
                {
@@ -586,44 +587,22 @@ const generateCSV = useReactToPrint({
                 </div>
 
 
-             
+                {currentPage != npages ?
             <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
               <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
               onClick={nextPage}>Next </a>
 
             </li>
+            :  <li  className='page-item float-right disabled '
+             style={{ paddingRight: '30px' }} >
+            <a href='#' style={{ borderRadius: "8px",
+            borderColor:"rgba(234,236,240,1)",color:"rgba(234,236,240,1)" }} className='page-link bg-white   index' 
+            onClick={nextPage}>Next </a>
+
+          </li> }
 
           </ul>
-          :    <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
-            
-
-          <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
-            <a href='#' style={{ borderRadius: "8px" }}
-             className='page-link bg-white  text-dark border index ' onClick={() => changeCpage(1)}> Previous</a>
-
-          </li>
-
-             <div className='page-item d-flex'>
-             {
-            numbers.map((n, i) => (
-              <li className="ms-2" key={i} >
-                <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} 
-                onClick={() => changeCpage(n)}>{n}</a>
-              </li>
-                ))
-              }
-              </div>
-
-
-           
-          <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
-            <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
-            onClick={() => changeCpage(1)}>Next </a>
-
-          </li>
-
-        </ul>
-          }
+          
         </nav>
         <Modal className='deleteModal' show={isShow} onHide={initModal}>
 

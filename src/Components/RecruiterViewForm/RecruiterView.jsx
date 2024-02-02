@@ -130,7 +130,7 @@ const RecruiterForm = () => {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="#home" className="d-none d-md-block" style={{
+            <Nav.Link href="/dashboard" className="d-none d-md-block" style={{
               background: "rgb(242, 249, 251)",
               boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
               borderRadius: "5px",

@@ -383,9 +383,9 @@ const TopForm = () => {
                   className="d-inline-block align-top"
                 />
               </Navbar.Brand>
-              <Nav className="me-auto">
+              <Nav className="me-auto disabled">
                 <Nav.Link
-                  href="#home"
+                  href=""
                   className="d-none d-md-block"
                   style={{
                     background: "rgb(242, 249, 251)",
