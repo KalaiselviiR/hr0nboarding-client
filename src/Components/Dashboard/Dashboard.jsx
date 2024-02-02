@@ -211,7 +211,7 @@ function Dashboard() {
   const generatePDF=useReactToPrint({
     content: ()=>componentPDF.current,
     documentTitle:"user data",
-    onAfterPrint:()=>toast.success("Data saved in pdf")
+    // onAfterPrint:()=>toast.success("Data saved in pdf")
     
    
   })
