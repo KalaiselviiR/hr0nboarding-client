@@ -21,7 +21,7 @@ import BottomSection from "./bottomsection";
 import ResendDocument from '../ResendDocument/ResendDocument'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getRecruterView } from "../../service/allapi";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
@@ -44,6 +44,13 @@ const RecruiterForm = () => {
 
   const [cData, setCdata] = useState([]);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    // Use navigate to go to the dashboard 
+    navigate('/dashboard');
+  };
 
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
@@ -151,7 +158,7 @@ const RecruiterForm = () => {
           <Row>
             <Col md={10}>
               <h5 style={{ gap: "20px" }}>
-                <GoArrowLeft /> Candidate Info
+                <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}} onClick={handleClick} /> Candidate Info
               </h5>
             </Col>
             <Col md={2} className="d-flex justify-content-end">
