@@ -628,7 +628,8 @@ function Form2({ updateForm2Data, updateCandidateData }) {
                       <option value="unmarried">Unmarried</option>
                       <option value="married">Married</option>
                       <option value="divorced">Divorced</option>
-                      <option value="widowed">Widowed</option>
+                      <option value="divorced">Divorced</option>
+                      <option value="separated">Separated</option>
                     </Form.Select>
                     {formik.touched.maritalStatus &&
                     formik.errors.maritalStatus ? (

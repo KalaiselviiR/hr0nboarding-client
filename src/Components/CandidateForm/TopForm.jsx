@@ -718,7 +718,7 @@ const TopForm = () => {
                   </Col>
                 </Row>
                 <Row className="mt-4">
-                  <Col md={4}>
+                  <Col md={6}>
                     <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                     <FileUpload
                       label="Photo  - Accepted Formats: JPG or PNG "
@@ -759,12 +759,12 @@ const TopForm = () => {
                           alignItems: "center",
                           cursor: 'pointer'
                         }}
-                        onClick={handleToggleSection}
+                        // onClick={handleToggleSection}
                       >
                         <h6 style={{ fontWeight: "normal" }}>Educational Certificates - Accepted Formats: Pdf</h6>
-                        {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
+                        {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
                       </div>
-                      {isSectionOpen && (
+                      {/* {isSectionOpen && ( */}
                         <div>
                           <FileUpload
                             label="10th Marksheet"
@@ -845,7 +845,7 @@ const TopForm = () => {
                             onFileChange={(file) => FileChange(file, "UGMarksheet")}
                           />
                         </div>
-                      )}
+                      {/* )} */}
                     </div>
                     {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
                <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
