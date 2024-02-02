@@ -22,7 +22,7 @@ function RecruiterFileView({ label, file,name,size }) {
           }}
         >
           <div className="pdf-image" style={{ height: "50px" }}>
-            <a href={file}>
+            <a href={file} target="pdf-frame">
             <Image
               src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
               alt="PDF"
