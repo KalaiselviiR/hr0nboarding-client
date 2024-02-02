@@ -43,10 +43,12 @@ const Bottomdata = {
 
 function BottomSection({ cData }) {
   const [cbData, setCbData] = useState(Bottomdata);
+  const [familyMembers, setFamilyMembers] = useState([]);
 
   useEffect(() => {
     if (cData) {
       setCbData(cData);
+      setFamilyMembers(cData.members)
     } else {
       setCbData(Bottomdata);
     }
@@ -63,13 +65,13 @@ function BottomSection({ cData }) {
         "Emergency contact number",
         "Email address",
       ],
-      [
-        cbData.memberName,
-        cbData.relationship,
-        moment(cbData.dateOfBirth).format("YYYY-MM-DD"),
-        cbData.emergencyContactNumber,
-        cbData.emailAddress,
-      ],
+      ...familyMembers?.map(member => [
+        member.memberName,
+        member.relationship,
+        moment(member.dateOfBirth).format("YYYY-MM-DD"),
+        member.emergencyContactNumber,
+        member.emailAddress,
+    ]),
     ];
 
     const csvFileName = "family_details.csv";
@@ -123,7 +125,9 @@ function BottomSection({ cData }) {
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
-      <Container
+      {
+        familyMembers?.length > 0 && 
+        <Container
         style={{
           background: "white",
 
@@ -157,6 +161,7 @@ function BottomSection({ cData }) {
           </div>
         </div>
       </Container>
+      }     
       <Container
         className="mt"
         style={{
@@ -168,94 +173,105 @@ function BottomSection({ cData }) {
       >
         {/* Family details form */}
         <div>
-          <Form className="forms">
-            <Row className="mb-3">
-              <Col xs={12} md={4}>
-                <Form.Group controlId="formGroupEmail" className="mt-3">
-                  <Form.Label className="labelss">
-                    Family member name
-                  </Form.Label>
-                  <Form.Control
-                    className="input-field"
-                    type="text"
-                    value={cbData.memberName}
-                    name="memberName"
-                  />
-                </Form.Group>
-              </Col>
-
-              <Col xs={12} md={4}>
-                <Form.Group controlId="realtionShip" className="mt-3">
-                  <Form.Label className="labelss">Relationship</Form.Label>
-                  <Form.Control
-                    className="input-field"
-                    type="text"
-                    name="relationship"
-                    value={cbData.relationship}
-                  />
-                </Form.Group>
-              </Col>
-
-              <Col xs={12} md={4}>
-                <Form.Group controlId="dateOfBirth" className="mt-3">
-                  <Form.Label className="labelss">Date of Birth</Form.Label>
-                  <InputGroup>
-                    <InputGroup.Text>
-                      <CiCalendar />
-                    </InputGroup.Text>
-                    <Form.Control
-                      className="input-field"
-                      type="date"
-                      value={moment(cbData.dateOfBirth).format("yyyy-MM-DD")}
-                      name="dateOfBirth"
-                    />
-                  </InputGroup>
-                </Form.Group>
-              </Col>
-
-              <Col xs={12} md={4}>
-                <Form.Group controlId="EmergencyPhoneNumber" className="mt-3">
-                  <div className="phoneDiv mt-4">
-                    <div className="labelss">
-                      <p>Emergency contact number</p>
-                    </div>
-                    <div className="phoneInput ">
-                      <select
-                        className="country-code "
-                        onChange={(e) => setCountryCode(e.target.value)}
-                      >
-                        <option selected value="+91">
-                          IN(+91)
-                        </option>
-                        <option value="+880">BD(+880)</option>
-                        <option value="+1">US(+1)</option>
-                        <option value="+20">EG(+20)</option>
-                      </select>
-                      <input
-                        className="input-field form-control "
-                        type="tel"
-                        placeholder="+91(555) 000-0000"
-                        value={cbData.emergencyContactNumber}
-                        name="emergencyContactNumber"
-                      />
-                    </div>
-                  </div>
-                </Form.Group>
-              </Col>
-
-              <Col xs={12} md={4}>
-                <Form.Group controlId="emailAddress" className="mt-4">
-                  <Form.Label className="labelss">Email address</Form.Label>
-                  <Form.Control
-                    className="input-field"
-                    type="email"
-                    value={cbData.emailAddress}
-                    name="emailAddress"
-                  />
-                </Form.Group>
-              </Col>
-            </Row>
-          </Form>
+        <Form className="forms">
+          {
+            familyMembers?.length > 0 ? (         
+              familyMembers?.map((member,index) => (            
+             <Row className="mb-3" key={member?._id}>
+               <Col xs={12} md={4}>
+                 <Form.Group controlId="formGroupEmail" className="mt-3">
+                   <Form.Label className="labelss">
+                     Family member name
+                   </Form.Label>
+                   <Form.Control
+                     className="input-field"
+                     type="text"
+                     value={member?.memberName}
+                     name="memberName"
+                   />
+                 </Form.Group>
+               </Col>
+ 
+               <Col xs={12} md={4}>
+                 <Form.Group controlId="realtionShip" className="mt-3">
+                   <Form.Label className="labelss">Relationship</Form.Label>
+                   <Form.Control
+                     className="input-field"
+                     type="text"
+                     name="relationship"
+                     value={member?.relationship}
+                   />
+                 </Form.Group>
+               </Col>
+ 
+               <Col xs={12} md={4}>
+                 <Form.Group controlId="dateOfBirth" className="mt-3">
+                   <Form.Label className="labelss">Date of Birth</Form.Label>
+                   <InputGroup>
+                     <InputGroup.Text>
+                       <CiCalendar />
+                     </InputGroup.Text>
+                     <Form.Control
+                       className="input-field"
+                       type="date"
+                       value={moment(member?.dateOfBirth).format("yyyy-MM-DD")}
+                       name="dateOfBirth"
+                     />
+                   </InputGroup>
+                 </Form.Group>
+               </Col>
+ 
+               <Col xs={12} md={4}>
+                 <Form.Group controlId="EmergencyPhoneNumber" className="mt-3">
+                   <div className="phoneDiv mt-4">
+                     <div className="labelss">
+                       <p>Emergency contact number</p>
+                     </div>
+                     <div className="phoneInput ">
+                       <select
+                         className="country-code "
+                         onChange={(e) => setCountryCode(e.target.value)}
+                       >
+                         <option selected value="+91">
+                           IN(+91)
+                         </option>
+                         <option value="+880">BD(+880)</option>
+                         <option value="+1">US(+1)</option>
+                         <option value="+20">EG(+20)</option>
+                       </select>
+                       <input
+                         className="input-field form-control "
+                         type="tel"
+                         placeholder="+91(555) 000-0000"
+                         value={member?.emergencyContactNumber}
+                         name="emergencyContactNumber"
+                       />
+                     </div>
+                   </div>
+                 </Form.Group>
+               </Col>
+ 
+               <Col xs={12} md={4}>
+                 <Form.Group controlId="emailAddress" className="mt-4">
+                   <Form.Label className="labelss">Email address</Form.Label>
+                   <Form.Control
+                     className="input-field"
+                     type="email"
+                     value={member?.emailAddress}
+                     name="emailAddress"
+                   />
+                 </Form.Group>
+               </Col>
+             </Row>         
+           ))
+            )
+             : ( 
+              <h4 className="heading text-center mt-2 mb-2">
+              No Family Members Added for Medical Insurance
+              </h4>
+             )
+          }       
+           </Form>
         </div>
       </Container>
       {/* <br /> */}
