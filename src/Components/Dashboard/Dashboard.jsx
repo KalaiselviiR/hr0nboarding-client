@@ -10,22 +10,15 @@ import 'react-toastify/dist/ReactToastify.css';
 import moment from 'moment';
 import Nav from 'react-bootstrap/Nav';
 import { FiUser } from "react-icons/fi";
-import { IoLogOutOutline } from "react-icons/io5";
 import { ConformdeleteCandidate, deleteCandidate, getallCandidates } from '../../service/allapi';
 import { useNavigate } from 'react-router-dom';
-import { BiSolidDownload } from "react-icons/bi";
 import { useReactToPrint } from "react-to-print";
-import Login from '../Login/Login';
 import { CSVLink } from 'react-csv';
-import { CiExport } from 'react-icons/ci';
 import { FiDownload } from "react-icons/fi";
 
 
 
 function Dashboard() {
-
-  const [lgShow, setLgShow] = useState(false);
-  const [admin, setAdmin] = useState('');
 
   const [isShow, setInvokeModal] = useState(false);
   const [UserToEdit, setUserToEdit] = useState(null);
@@ -44,7 +37,6 @@ function Dashboard() {
 
   const [allcandidate, SetAllCandidate] = useState([])
 
-  const [pdf, SetPdf] = useState([])
 
   const [addModalIsOpen, setAddModalIsOpen] = useState(false)
   const [editModalIsOpen, setEditModalIsOpen] = useState(false)
@@ -55,13 +47,6 @@ function Dashboard() {
 
   const componentPDF = useRef(); 
 
-  
-  const component2PDF = useRef(); 
-
-  // const [currentPage, setCurrentPage] = useState(1);
-
-
-  
 
   const openAddModal = () => {
     setAddModalIsOpen(true)
@@ -82,13 +67,7 @@ function Dashboard() {
     
   }
 
-  const modalpdfOpen = (i) => {
-    setLgShow(true)
-    SetPdf(i)
-    
-  }
-
-  
+ 
 
   const email = localStorage.getItem('email');
   const navigate = useNavigate();
@@ -105,28 +84,15 @@ function Dashboard() {
   const handleLogout = () => {
    
     localStorage.removeItem('email');
+    localStorage.removeItem('userToken');
+    localStorage.removeItem('userId');
     // setItem(false);
     navigate('/');
   };
 
-  // useEffect(() => {
-  //   const handleClickedOutside = (event) => {
-  //     if ((addModalIsOpen || editModalIsOpen) && !event.target.closest('.addCandidateModal')) {
-  //       closeAddModal()
-  //       closeEditModal()
-  //     }
-  //   }
-
-  //   document.addEventListener('mousedown', handleClickedOutside)
-
-  //   return () => {
-  //     document.removeEventListener('mousedown', handleClickedOutside)
-  //   };
-
-  // }, [addModalIsOpen, editModalIsOpen])
 
   const [currentPage, setCurrentPage] = useState(1)
-  const recordsPerPage = 7;
+  const recordsPerPage = 11;
   const lastIndex = currentPage * recordsPerPage;
   const firstIndex = lastIndex - recordsPerPage;
   const records = allcandidate.slice(firstIndex, lastIndex);
@@ -166,9 +132,7 @@ function Dashboard() {
   const confirmDelete = async () => {
 
     if(deleteStatus!="Rejected"){
-      if(admin!="sample@techjays.com"){
-        toast.error("You have no permissson to delete")
-      }else{
+  
         
         const response = await deleteCandidate(deleteId)
     if (response.status == 200) {
@@ -178,16 +142,12 @@ function Dashboard() {
     
 
   } else {
-      toast.error(response.data.message)
+      toast.error("Its Admin Only Access")
   }
 
       }
       
-    
-    }
-    else  if(admin!="sample@techjays.com"){
-      toast.error("You have no permissson to delete")
-    }else{
+   else{
       const response = await ConformdeleteCandidate(deleteId)
       if (response.status == 200) {
         toast.success(response.data.message);
@@ -196,7 +156,7 @@ function Dashboard() {
       
   
     } else {
-        toast.error(response.data.message)
+      toast.error("Its Admin Only Access")
     }
       
     }
@@ -212,28 +172,11 @@ function Dashboard() {
    
   })
 
-  const generate2PDF=useReactToPrint({
-    content: ()=>component2PDF.current,
-    documentTitle:"user data",
-    onAfterPrint:()=>toast.success("Data saved in pdf") && setLgShow(false)
-    
-   
-  })
-  console.log(pdf);
 
   const handleAddData = (newData) => {
     console.log(newData)
     SetAllCandidate([...allcandidate, newData]); 
 };
-
-useEffect(()=>{
- 
- const adm=localStorage.getItem('email')
- setAdmin(adm)
-//  console.log(adm);
- 
-},[])
-console.log(admin);
 
 function handleCSVExport(candidate) {
   setCSVData([
@@ -247,13 +190,7 @@ function handleCSVExport(candidate) {
   ]);
 };
 
-const generateCSV = useReactToPrint({
-  content: () => componentPDF.current,
-  documentTitle: 'user_data',
-  onAfterPrint: () => toast.success('Data saved in CSV'),
-});
 
-  
 
 
 
@@ -462,90 +399,7 @@ const generateCSV = useReactToPrint({
                     <LuTrash2 className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 
                   </td>
-   
-      <Modal 
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-         
-        <Modal.Body><div ref={component2PDF}>     
-        <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
-          <MDBTableHead >
-
-
-            <tr >
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }}
-               scope='col' className='text-start '>Candidate</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
-            </tr>
-
-          </MDBTableHead> 
-          <MDBTableBody  >
-        
-       
-          <tr>
-                  <td>
-                    <div className='d-flex align-items-center'>
-
-                      <div className='ms-3'>
-                        <p style={{ padding: "8px" }} className='fw-normal mb-1'>
-                          <a  style={{textDecoration:"none",color:'black'}}>
-                            {pdf.fname} {pdf.lname}</a></p>
-
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    {moment(pdf.jdate).format("DD/MM/YYYY")}
-                  </td>
-                  <td>
-                    <p className='fw-normal mb-1'>{pdf.dsesignation}</p>
-
-                  </td>
-                  <td>{pdf.email}</td>
-                  <td>
-                    <MDBBadge className={` ${pdf.status === "Completed" ? 'green' : ""
-                     || pdf.status === "Active" ? 'violet' : ""
-                     || pdf.status === "Pending" ? 'orange' : ""
-                     || pdf.status === "Review pending" ? 'blue' : ""
-                     || pdf.status === "Rejected" ? 'red' : "" }`} pill>
-                     {pdf.status}
-                    </MDBBadge>
-
-                  </td>
-                  <td>
-            
-                     <BiSolidDownload  className="  icon" /> 
-                    
-                    <LuTrash2 className=" icon2" />
-
-                  </td>
-                  </tr>
-               
-
-          </MDBTableBody>
-          </MDBTable>
-          </div>
-     
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={() => setLgShow(false)} 
-          style={{backgroundColor:'#F9F5FF',color:"#6941C6",borderRadius:'8px'
-          ,borderColor:"#7F56D9"}}>
-            Close
-          </Button>
-          <Button variant="" onClick={generate2PDF}
-           style={{backgroundColor:'#7F56D9',color:"white",borderRadius:'8px'}}>
-            Print PDF
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      
                 </tr>
                 
                 )
@@ -640,7 +494,7 @@ const generateCSV = useReactToPrint({
         </div>
       }
 
-      <ToastContainer autoClose={1200} position="top-center" />
+      <ToastContainer autoClose={1400} position="top-center" />
 
     </div>
   )
