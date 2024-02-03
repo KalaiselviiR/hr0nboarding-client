@@ -1,5 +1,7 @@
 import React from "react";
 import { Form, Image } from "react-bootstrap";
+import pdf from "../../assets/pdf-image.jpeg"
+import jpg from "../../assets/jpg-image.jpg"
 
 function RecruiterFileView({ label, file,name,size }) {
   
@@ -7,6 +9,7 @@ function RecruiterFileView({ label, file,name,size }) {
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>
       {file && (
+         <a href={file} target="pdf-frame" style={{textDecoration:"none",color:"black"}}>
         <div
           className="file-container"
           style={{
@@ -22,22 +25,24 @@ function RecruiterFileView({ label, file,name,size }) {
           }}
         >
           <div className="pdf-image" style={{ height: "50px" }}>
-            <a href={file} target="pdf-frame">
+           
             <Image
-              src="https://th.bing.com/th/id/OIP.qyip0gFDasQiIdcBiJSRiwHaJM?w=158&h=196&c=7&r=0&o=5&dpr=1.3&pid=1.7"
+              src={name.toLowerCase() === "photo.jpg" ? jpg : pdf}
               alt="PDF"
               width="40px"
               height="50px"
             />
-            </a>
+          
           </div>
           <div className="file-info">
+         
             <p style={{ margin: "0" }}>{name}</p>
             <p style={{ margin: "0", fontSize: "10px" }}>
               {(size / 1024).toFixed(2)} KB
             </p>
           </div>
         </div>
+        </a>
       )}
     </Form.Group>
   );

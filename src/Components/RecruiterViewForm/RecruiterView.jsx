@@ -29,13 +29,7 @@ import { IoMdArrowDropupCircle } from "react-icons/io";
 
 
 const RecruiterForm = () => {
-  const [photoFiles, setPhotoFiles] = useState([]);
-  const [aadharCardFiles, setAadharCardFiles] = useState([]);
-  const [educationCertificateFiles, setEducationCertificateFiles] = useState(
-    []
-  );
-  const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
-  const [payslipFiles, setPayslipFiles] = useState([]);
+  
 
   const [isResendModalOpen, setIsResendModalOpen] = useState(false)
 
@@ -136,6 +130,7 @@ const RecruiterForm = () => {
               borderRadius: "5px",
               fontWeight: "600"
             }}
+            onClick={handleClick} 
             >
               Dashboard
             </Nav.Link>
