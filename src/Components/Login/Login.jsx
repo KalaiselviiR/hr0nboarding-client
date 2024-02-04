@@ -138,7 +138,7 @@ const handleChange = async (e) => {
  
          
           <MdOutlineMailOutline className='MailIcon'   />
-          <Form.Control onChange={userDetails} name='email' className='InputEmail' type="email" placeholder="Enter the email"/>
+          <input onChange={userDetails} name='email' className='InputEmail' type="email" placeholder="Enter the email"/>
           </div>
           </div>
           </div>
