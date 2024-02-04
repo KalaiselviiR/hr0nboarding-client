@@ -231,10 +231,18 @@ const TopForm = () => {
         // Prepare FormData for file uploads
         const formData = new FormData();
 
-        // Append all form fields, including file inputs
+        // Append all form fields, including file inputs      
+
         for (const key in formik.values) {
-          formData.append(key, formik.values[key] || "");
-        }
+          if (key !== 'members') {
+              formData.append(key, formik.values[key] || "");
+          }
+      }
+      
+      // Append members array
+      if (Array.isArray(formik.values.members)) {
+          formData.append('members', JSON.stringify(formik.values.members));
+      }
 
         // Send a POST request using Axios
         const response = await axios.post(
