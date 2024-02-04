@@ -20,11 +20,14 @@ function App() {
           {/* Defining the routes using React Router's `Routes` component */}
       <Routes>
       {/* Route for the Login page */}
-      <Route path="/" element={login ? <Dashboard /> : <Login />}></Route>
+      <Route path="/" element={ <Login />}></Route>
       <Route path="/verify" element={<VerifyEmail />} />
       <Route path="/updatepass/:id" element={<UpdatePassword />} />
         {/* Route for the Dashboard page */}
-        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/dashboard" element
+        ={<ProtectedRoutes><Dashboard /></ProtectedRoutes>} />
+
+
         {/* Route for the candidate Form */}
         <Route path="/edit" element={<EditNewCandidate />} />
         <Route path="/add" element={<AddNewCandidate />} />
@@ -43,3 +46,13 @@ function App() {
 }
 
 export default App
+
+
+export function ProtectedRoutes(props){
+  if(localStorage.getItem('email')){
+    return props.children
+  }
+  else{
+    return <Navigate to="/"/>
+  }
+}

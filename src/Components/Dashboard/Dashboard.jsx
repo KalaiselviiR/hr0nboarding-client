@@ -82,12 +82,20 @@ function Dashboard() {
   };
 
   const handleLogout = () => {
-   
-    localStorage.removeItem('email');
-    localStorage.removeItem('userToken');
-    localStorage.removeItem('userId');
-    // setItem(false);
-    navigate('/');
+    // Check if email and JWT token are present in local storage
+    const userEmail = localStorage.getItem("email");
+    const userToken = localStorage.getItem("userToken");
+  
+    if (!userEmail && !userToken) {
+      // If not available, navigate to home page
+      navigate("/");
+    }
+  
+    // If available, clear local storage and perform additional logout actions if needed
+    localStorage.removeItem("email");
+    localStorage.removeItem("userToken");
+    // Perform additional logout actions if needed
+    navigate("/");
   };
 
 
