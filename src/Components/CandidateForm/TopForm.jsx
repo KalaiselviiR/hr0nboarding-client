@@ -960,10 +960,13 @@ const TopForm = () => {
             >
               <Button
                 onClick={handleSubmit}
+                disabled={!formik.isValid}
                 style={{
-                  height: "35px",
+                  marginTop:"-10px",
+                  height: "45px",
+                  width:"95px",
                   fontSize: "15px",
-                  backgroundColor: "rgb(210, 164, 250)",
+                  backgroundColor: " rgb(149, 89, 201)",
                   color: "white",
                   borderColor: "rgb(210, 164, 250)",
                   fontWeight: "500",

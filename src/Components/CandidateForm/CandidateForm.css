@@ -150,3 +150,7 @@ body{
 .phoneInput{
     margin-top: -10px;
 }
+
+.text-danger{
+    font-size: 14px;
+}

@@ -133,25 +133,25 @@ export const validationSchema = Yup.object().shape({
   //   .matches(/^[^\d]+$/, "Member Name should not contain numbers")
   //   .required("Member Name is required"),
   // relationship: Yup.string()
-  //   .matches(/^[^\d]+$/, "Relationship Name should not contain numbers")
-  //   .required("Relationship Name is required"),
+  //   .matches(/^[^\d]+$/, "Relationship Name should not contain numbers"),
+    // .required("Relationship Name is required"),
   // dateOfBirth: Yup.date().required("Date of Birth is required"),
   // emergencyContactNumber: Yup.string()
-  //   .matches(/^\+?[0-9]+$/, "Invalid phone number")
-  //   .required("Phone Number is required"),
+  //   .matches(/^\+?[0-9]+$/, "Invalid phone number"),
+    // .required("Phone Number is required"),
   // emailAddress: Yup.string()
-  //   .email("Invalid email")
-  //   .required("Email is required")
+  //   .email("Invalid email"),
+    // .required("Email is required"),
   //   .matches(/@techjays\.com$/, "Email must includes @techjays.com domain"),
           
 
   // bottomForm-2
-  // epfoUan: Yup.string()
-  //   .matches(/^\d{12}$/, "Invalid EPFO UAN(It contains 12 digits)")
-  //   .required("EPFO UAN is required"),
-  // pfNo: Yup.string()
-  //   .matches(/^\+?[0-9]+$/, "Invalid PF No")
-  //   .required("PF NO is required"),
+  epfoUan: Yup.string()
+  .matches(/^\d{10}$/, "It contains 10 digits"),
+  // .required("EPFO UAN is required"),
+pfNo: Yup.string()
+.matches(/^\d{10}$/, "It contains 10 digits"),
+//   .required("PF NO is required"),
   adharCard: Yup.string()
     .matches(/^\d{13}$/, "Invalid AdharCard Number(It contains 13 digit)")
     .required("AdharCard Number is required"),
@@ -231,7 +231,7 @@ export const handleFieldChange = (formik, e) => {
     case "nationality":
     case "bankName":  
     // case "maritalStatus":
-    // case "gender":
+    case "gender":
       // Check if the value contains a number
       if (/\d/.test(value)) {
         formik.setFieldError(name, `${name} should not contain numbers`);

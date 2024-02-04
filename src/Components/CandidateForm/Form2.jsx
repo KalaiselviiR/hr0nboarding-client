@@ -383,11 +383,11 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     <option value="Child1" label="Child 1" />
                     <option value="Child2" label="Child 2" />
                   </Form.Select>
-                  {formik.touched.relationship && formik.errors.relationship ? (
+                  {/* {formik.touched.relationship && formik.errors.relationship ? (
                     <div className="text-danger">
                       {formik.errors.relationship}
                     </div>
-                  ) : null}
+                  ) : null} */}
                 </Form.Group>
           </Col>
           <Col xs={12} md={4}>
