@@ -338,7 +338,7 @@ function handleCSVExport(candidate) {
               {search=="no" ?
               <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
                :""}
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Action</td>
+              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)",paddingLeft:"20px" }} scope='col '>Action</td>
             </tr>
 
           </MDBTableHead>
@@ -384,8 +384,8 @@ function handleCSVExport(candidate) {
                     :""}
                   <td>
                   {search === "no" 
-                    ? <LuPen onClick={() => openEditModal(i)} className="  icon" /> 
-                    : <CSVLink
+                    ? <LuPen style={{color:"#7F56D9"}} onClick={() => openEditModal(i)} className="ms-1 icon" /> 
+                    : <CSVLink style={{color:"#7F56D9"}}
                     data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
                     headers={[
                       { label: 'Candidate First Name', key: 'fname' },
@@ -397,14 +397,15 @@ function handleCSVExport(candidate) {
                     cursor={'pointer'}  
                     filename={`Rejected_candidate_${i.fname}.csv`}
                     onClick={() => handleCSVExport(i) }
-                    className="icon1"
+                    className="icon ms-1"
+                    
                   >
                     {/* ${i.fname}_${i.lname} */}
                     {/* <CiExport/> */}
                   <FiDownload/>
                   </CSVLink> }
                     
-                    <LuTrash2 className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
+                    <LuTrash2 style={{color:"#7F56D9"}} className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 
                   </td>
       

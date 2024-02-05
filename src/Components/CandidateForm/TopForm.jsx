@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
-import { getSingleCandidate } from "../../service/allapi";
+import { getSingleCandidate, updateStatus } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
 
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -179,6 +179,13 @@ const TopForm = () => {
     formik.setValues(combinedValues);
   } 
 
+    //create an object to store datas from input
+    const [userData, setUser] = useState({
+      status: "Review Pending",
+      cid: id
+  
+    })
+
 
 
   // handle change function for validation errors
@@ -257,6 +264,8 @@ const TopForm = () => {
 
         if (response.status === 201) {
           console.log("Form data submitted successfully");
+          const response = await updateStatus(userData)
+          console.log(response);
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -344,6 +353,7 @@ const TopForm = () => {
   const [isLinkValid, setisLinkValid] = useState(true)
 
 
+
   useEffect(() => {
 
     const verifyToken = async () => {
@@ -353,6 +363,8 @@ const TopForm = () => {
         console.log(response)
         if (response.data.status === 'success') {
           setisLinkValid(true)
+        
+
         }
 
       }

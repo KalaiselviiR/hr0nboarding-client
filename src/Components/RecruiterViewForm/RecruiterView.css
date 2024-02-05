@@ -37,3 +37,7 @@
 body{
     overflow-x: hidden;
 }
+.green {
+    background-color: #e9f8ee !important;
+    color: rgb(12, 139, 12);
+  }
