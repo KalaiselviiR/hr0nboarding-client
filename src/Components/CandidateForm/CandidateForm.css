@@ -1,5 +1,6 @@
 .text-end{
- 
+    background-color:rgb(207, 223, 248) ;
+    color: rgb(36, 81, 229);
     width: fit-content;
     border-radius: 12px;
     padding: 5px;
@@ -152,4 +153,7 @@ body{
 
 .text-danger{
     font-size: 14px;
+}
+input::placeholder{
+    font-size: 13px;
 }

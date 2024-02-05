@@ -59,8 +59,6 @@ const TopForm = () => {
   const [id, setId] = useState(null);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
-  const [isVerified, setIsVerified] = useState(false);
-
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
   };
@@ -110,7 +108,8 @@ const TopForm = () => {
     relievingLettersFiles: null,
     payslipFiles: null,
     id: id,
-    members:[]
+    members:[],
+    contact:{}
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -169,6 +168,7 @@ const TopForm = () => {
       ...data,
     }));
   };
+
 
   const handleSaveDraft = () => {
    
@@ -230,15 +230,20 @@ const TopForm = () => {
     console.log('Form data saved as draft.');
   };
 
-  const updateFamilyMembers = (data) => {
+  
+
+  const updateFamilyMembers = (data,contact) => {
+
     setFormData((prevData) => ({
       ...prevData,
-      members:data
+      members:data,
+      contact
     }))
 
     const combinedValues = {
       ...formik.values,
-      members:data
+      members:data,
+      contact
     };
     formik.setValues(combinedValues);
   } 
@@ -305,10 +310,12 @@ const TopForm = () => {
         // Append all form fields, including file inputs      
 
         for (const key in formik.values) {
-          if (key !== 'members') {
+          if (key !== 'members' && key !== 'contact') {
               formData.append(key, formik.values[key] || "");
           }
       }
+
+      formData.append('contact',JSON.stringify(formik.values.contact))
       
       // Append members array
       if (Array.isArray(formik.values.members)) {
@@ -332,7 +339,6 @@ const TopForm = () => {
           sessionStorage.clear();
           const response = await updateStatus(userData)
           console.log(response);
-          setIsVerified(true)
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -485,7 +491,7 @@ const TopForm = () => {
                   className="d-inline-block align-top"
                 />
               </Navbar.Brand>
-              <Nav className="me-auto disabled">
+              {/* <Nav className="me-auto disabled">
                 <Nav.Link
                   href=""
                   className="d-none d-md-block"
@@ -498,9 +504,9 @@ const TopForm = () => {
                 >
                   Dashboard
                 </Nav.Link>
-              </Nav>
-            </Container>
-          </Navbar> */}
+              </Nav> */}
+            {/* </Container>
+          </Navbar> */} 
           <ToastContainer/>
           <div className="container-fluid">
             <Container
@@ -522,8 +528,8 @@ const TopForm = () => {
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'blue' : 'orange'}`}>
-                {isVerified ==false ? "Pending" : "Review Pending" }
+                  <h6 className="text-end d-none d-sm-inline-block align-top">
+                    Review Pending
                   </h6>
                 </Col>
               </Row>
@@ -603,8 +609,8 @@ const TopForm = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="phoneNumber">
                       <div className="phoneDiv ">
-                        <div className="labelss">
-                          <p>Phone number</p>
+                        <div >
+                          <p className="labelss">Phone number</p>
                         </div>
                         <div className="phoneInput ">
                           <select
@@ -621,7 +627,7 @@ const TopForm = () => {
                           <input
                             type="text"
                             className=" form-control"
-                            placeholder="8845789956"
+                            placeholder="(555) 000-0000"
                             name="phoneNumber"
                             onChange={handleChange}
                             onBlur={formik.handleBlur}

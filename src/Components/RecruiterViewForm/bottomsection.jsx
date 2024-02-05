@@ -44,11 +44,13 @@ const Bottomdata = {
 function BottomSection({ cData }) {
   const [cbData, setCbData] = useState(Bottomdata);
   const [familyMembers, setFamilyMembers] = useState([]);
+  const [contact,setEmergencyContact] =useState('');
 
   useEffect(() => {
     if (cData) {
       setCbData(cData);
       setFamilyMembers(cData.members)
+      setEmergencyContact(cData?.contact)
     } else {
       setCbData(Bottomdata);
     }
@@ -62,15 +64,11 @@ function BottomSection({ cData }) {
         "Family member name",
         "Relationship",
         "Date of Birth",
-        "Emergency contact number",
-        "Email address",
       ],
       ...familyMembers?.map(member => [
         member.memberName,
         member.relationship,
         moment(member.dateOfBirth).format("YYYY-MM-DD"),
-        member.emergencyContactNumber,
-        member.emailAddress,
     ]),
     ];
 
@@ -220,8 +218,19 @@ function BottomSection({ cData }) {
                    </InputGroup>
                  </Form.Group>
                </Col>
- 
-               <Col xs={12} md={4}>
+             </Row>         
+           ))
+            )
+             : ( 
+              <h4 className="heading text-center mt-2 mb-2">
+              No Family Members Added for Medical Insurance
+              </h4>
+             )
+          }  
+          <Row>
+            {
+              contact?.emergencyContactNumber &&
+              <Col xs={12} md={4}>
                  <Form.Group controlId="EmergencyPhoneNumber" className="mt-3">
                    <div className="phoneDiv mt-4">
                      <div className="labelss">
@@ -243,34 +252,30 @@ function BottomSection({ cData }) {
                          className="input-field form-control "
                          type="tel"
                          placeholder="+91(555) 000-0000"
-                         value={member?.emergencyContactNumber}
+                         value={contact?.emergencyContactNumber}
                          name="emergencyContactNumber"
                        />
                      </div>
                    </div>
                  </Form.Group>
                </Col>
- 
-               <Col xs={12} md={4}>
+
+            }
+            {
+              contact?.relationToEmergencyContact &&
+              <Col xs={12} md={4}>
                  <Form.Group controlId="emailAddress" className="mt-4">
-                   <Form.Label className="labelss">Email address</Form.Label>
+                   <Form.Label className="labelss">Relation to emergency contact</Form.Label>
                    <Form.Control
                      className="input-field"
                      type="email"
-                     value={member?.emailAddress}
+                     value={contact?.relationToEmergencyContact}
                      name="emailAddress"
                    />
                  </Form.Group>
                </Col>
-             </Row>         
-           ))
-            )
-             : ( 
-              <h4 className="heading text-center mt-2 mb-2">
-              No Family Members Added for Medical Insurance
-              </h4>
-             )
-          }       
+            }
+          </Row>
            </Form>
         </div>
       </Container>

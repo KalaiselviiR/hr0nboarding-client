@@ -159,7 +159,7 @@ function AddNewCandidate({ close, onAddData }) {
                                 <option value="+20">EG(+20)</option>
                             </select>
                             <input type="text"
-                                placeholder='8845789956'
+                                placeholder="(555) 000-0000"
                                 name="phno"
                                 required
                                 onChange={userDetails}

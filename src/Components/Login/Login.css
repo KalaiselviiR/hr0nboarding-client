@@ -16,7 +16,7 @@
     background: white;
     border-radius: 20px;
     padding-bottom: 20px;
-    height: 450px;
+    height:450px;
     width: 450px;
     padding: 10px 30px;
     border-color: rgb(106,90,205);
@@ -26,7 +26,7 @@
 }
 
 .header2.has-errors{
-    height: 500px;
+    height: 450px;
 }
 
 
@@ -47,7 +47,7 @@
 }
 
 
-.details{
+/* .details{
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -58,15 +58,15 @@
     /* border-radius: 50px;
     border-color: #3C009D;
     border-style: solid; */
-    background-color: white;
+    /* background-color: white;
     font-size: 50px;
-}
-.details img{
+} */ 
+/* .details img{
     margin: 0px 5px;
     height: 20px;
 
    
-}
+} */
 .Logo{
     display: flex;
     justify-content: center;
@@ -78,7 +78,7 @@
   
    
 }
-.details details{
+/* .details details{
     height: 35px;
     width: 500px;
     align-items: center;
@@ -88,9 +88,9 @@
     gap: 5px;
     /* border: 100px;
     outline: black; */
-    font-size: 15px;
-    padding-left: 20px;
-}
+    /* font-size: 15px;
+    padding-left: 20px; */
+/* }  */
 .forgot-password{
     display: flex;
     justify-content: right;
@@ -200,7 +200,7 @@ margin-left: -10px;
 .InputEmail{
     flex: 1;
     height: 40px;
-    width: 360px;
+    width: 350px;
     border: none;
     outline: none;
     font-size: 14px;
@@ -221,10 +221,20 @@ margin-left: -10px;
 } */
 
 
-.box form-control{
+/* .box form-control{
     height: 500px;
-}
+} */
 
-.has-errors{
+/* .has-errors{
     height: 500px;
+} */
+.error-message{
+ color: red;
+ font-weight: 450;
+ line-height: 5px;
+    
+
 }
+/* .inputSize{
+    height: 40px;
+} */

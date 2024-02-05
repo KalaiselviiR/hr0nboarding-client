@@ -35,7 +35,11 @@ export const initialValues = {
   // dateOfBirth: null,
   // emergencyContactNumber: "",
   // emailAddress: "",
-  
+  contact:{
+    countryCode:'',
+    emergencyContactNumber:'',
+    relationToEmergencyContact:''
+  },
   //bottom-2
   epfoUan: "",
   pfNo: "",
@@ -50,6 +54,7 @@ export const initialValues = {
   accountNumber: "",
   branch: "",
   ifsc: "",
+  highestQualification:"",
   //bottom-3
   prefix: "",
   firstNamehr: "",
@@ -184,6 +189,9 @@ pfNo: Yup.string()
   ifsc: Yup.string()
     .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
     .required("IFSC code is required"),
+    highestQualification:Yup.string()
+    .matches(/^[^\d]+$/, "Highest Qualification should not contain numbers")
+    .required("Highest Qualification is required"),
   //bottomForm-3
   // prefix: Yup.string()
   //   .matches(/^[^\d]+$/, "Prefix should not contain numbers")
@@ -230,6 +238,7 @@ export const handleFieldChange = (formik, e) => {
     // case "middleName":
     case "nationality":
     case "bankName":  
+    case " highestQualification":
     // case "maritalStatus":
     case "gender":
       // Check if the value contains a number

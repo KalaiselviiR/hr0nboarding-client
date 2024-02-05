@@ -25,6 +25,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { getRecruterView, updateStatus } from "../../service/allapi";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
+import { Modal } from 'react-bootstrap';
 
 
 
@@ -38,8 +39,18 @@ const RecruiterForm = () => {
 
   const [cData, setCdata] = useState([]);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
+  const [isShow, setInvokeModal] = useState(false);
 
   const navigate = useNavigate();
+
+  const initModal = () => {
+    setInvokeModal(!isShow);
+  };
+
+  const cancleVerify = () => {
+    setInvokeModal(false)
+   
+  }
 
   const handleClick = () => {
     // Use navigate to go to the dashboard 
@@ -72,6 +83,7 @@ const RecruiterForm = () => {
    const handleVerify = async () => {
     // Perform verification logic
     // Assume verification is successful for demonstration purposes
+    cancleVerify()
     const response = await updateStatus(userData)
     console.log(response);
     
@@ -453,7 +465,7 @@ const RecruiterForm = () => {
                       borderColor: "rgb(147, 48, 233)",
                       fontWeight: "500",
                     }}
-                    onClick={handleVerify}
+                    onClick={initModal}
                     disabled={isVerified || isResent}
                   >
                     Verify documents
@@ -473,6 +485,24 @@ const RecruiterForm = () => {
                   >
                     Resend documents
                   </Button>
+                  <Modal className='deleteModal' show={isShow} onHide={initModal}>
+
+<div className="deleteModalBody">
+
+  <div className="deleteModalContent">
+    <h3>Verify documents</h3>
+    <p>Are you sure you've completed document verification? This action is irreversible</p>
+  </div>
+
+  <div className="deleteModalButtons">
+    <button onClick={cancleVerify} className='deleteButtonNo'>No</button>
+    <button onClick={handleVerify} className='deleteButtonYes'>Yes</button>
+  </div>
+
+</div>
+
+
+</Modal>
                 </div>
                 <div className="mt-5 mb-3">
                   <Button
