@@ -2,8 +2,11 @@
     background: white;
     height:100%;
     width:100%;
+    height: 450px;
 
 }
+
+
 .header2{
     /* border-color: rgb(81, 81, 204); */
     display : flex;
@@ -19,7 +22,14 @@
     border-color: rgb(106,90,205);
     border-style: solid;
     border-width: 1px;
+    transition: height 0.1s ease-in-out;
 }
+
+.header2.has-errors{
+    height: 500px;
+}
+
+
 
 .subhead{
     /* color: #3C009D; */
@@ -94,7 +104,7 @@
     cursor: pointer;
     font-size: 14px;
     line-height: 21px;
-    margin-top: 50px;
+    margin-top: 30px;
     
 }
 .btn-login{
@@ -162,12 +172,14 @@
 .submit-box{
     align-items: center;
     margin-left: -6px;
+    /* padding-bottom: 100px; */
 }
 .EmailInput{
    
     display: flex;
     justify-content: center;
     align-items: center;
+    /* width: 500px; */
    
 }
 .box{
@@ -200,4 +212,19 @@ margin-left: -10px;
 }
 .Frgtpass{
     font-weight: 340;
+}
+
+/* .error-message{
+   
+    line-break: px;
+    padding-right: 500px;
+} */
+
+
+.box form-control{
+    height: 500px;
+}
+
+.has-errors{
+    height: 500px;
 }
