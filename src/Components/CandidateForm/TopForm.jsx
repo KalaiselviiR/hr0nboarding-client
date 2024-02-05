@@ -106,7 +106,8 @@ const TopForm = () => {
     relievingLettersFiles: null,
     payslipFiles: null,
     id: id,
-    members:[]
+    members:[],
+    contact:{}
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -166,15 +167,17 @@ const TopForm = () => {
     }));
   };
 
-  const updateFamilyMembers = (data) => {
+  const updateFamilyMembers = (data,contact) => {
     setFormData((prevData) => ({
       ...prevData,
-      members:data
+      members:data,
+      contact
     }))
 
     const combinedValues = {
       ...formik.values,
-      members:data
+      members:data,
+      contact
     };
     formik.setValues(combinedValues);
   } 
@@ -241,10 +244,12 @@ const TopForm = () => {
         // Append all form fields, including file inputs      
 
         for (const key in formik.values) {
-          if (key !== 'members') {
+          if (key !== 'members' && key !== 'contact') {
               formData.append(key, formik.values[key] || "");
           }
       }
+
+      formData.append('contact',JSON.stringify(formik.values.contact))
       
       // Append members array
       if (Array.isArray(formik.values.members)) {

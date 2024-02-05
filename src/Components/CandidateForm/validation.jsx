@@ -35,7 +35,11 @@ export const initialValues = {
   // dateOfBirth: null,
   // emergencyContactNumber: "",
   // emailAddress: "",
-  
+  contact:{
+    countryCode:'',
+    emergencyContactNumber:'',
+    relationToEmergencyContact:''
+  },
   //bottom-2
   epfoUan: "",
   pfNo: "",
