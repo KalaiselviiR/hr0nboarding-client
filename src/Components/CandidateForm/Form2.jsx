@@ -81,8 +81,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
       memberName: member.memberName,
       relationship: member.relationship,
       dateOfBirth: member.dateOfBirth,
-      emergencyContactNumber: member.emergencyContactNumber,
-      emailAddress: member.emailAddress,
+   
     }));
   
     sessionStorage.setItem('medicalInsurance', JSON.stringify(formData));
@@ -108,6 +107,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
       accountNumber: candidateData.accountNumber,
       branch: candidateData.branch,
       ifsc: candidateData.ifsc,
+      highestQualification:candidateData.highestQualification
     })
    
   
@@ -486,6 +486,42 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                   ) : null} */}
                 </Form.Group>
           </Col>
+          <div
+              style={{
+                display: "flex",
+                marginTop: "50px",
+                marginBottom: "25px",
+                gap: "10px",
+              }} 
+            >
+
+              <Button
+               
+                style={{
+                  height: "35px",
+                  fontSize: "15px",
+                  backgroundColor: "rgb(210, 164, 250)",
+                  color: "white",
+                  borderColor: "rgb(210, 164, 250)",
+                  fontWeight: "500",
+                }}
+              >
+                Submit
+              </Button>
+              <Button
+              onClick={handleSaveDraft1}
+                style={{
+                  height: "35px",
+                  fontSize: "15px",
+                  backgroundColor: "white",
+                  color: "rgb(147, 48, 233)",
+                  borderColor: "rgb(147, 48, 233)",
+                  fontWeight: "500",
+                }}
+              >
+                Save as draft
+              </Button> 
+            </div>
           </Row>      
           </Form>
         </div>
@@ -815,7 +851,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="highestQualification"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.highestQualification}
+                      value={candidateData.highestQualification ? candidateData.highestQualification : formik.values.highestQualification}
                     />
                     {formik.touched.highestQualification &&
                     formik.errors.highestQualification ? (
