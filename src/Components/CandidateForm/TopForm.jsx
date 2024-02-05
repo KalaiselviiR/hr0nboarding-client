@@ -29,6 +29,8 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 import { getSingleCandidate, updateStatus } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 //   "pdfjs-dist/build/pdf.worker.min.js",
@@ -112,11 +114,11 @@ const TopForm = () => {
   });
 
   const [form2Data, setForm2Data] = useState({
-    memberName: "",
-    relationship: "",
-    dateOfBirth: "",
-    emergencyContactNumber: "",
-    emailAddress: "",
+    // memberName: "",
+    // relationship: "",
+    // dateOfBirth: "",
+    // emergencyContactNumber: "",
+    // emailAddress: "",
     epfoUan: "",
     pfNo: "",
     adharCard: "",
@@ -166,6 +168,66 @@ const TopForm = () => {
       ...prevData,
       ...data,
     }));
+  };
+
+  const handleSaveDraft = () => {
+   
+    // Convert the form data to a string before storing it in sessionStorage
+    const formDataString =JSON.stringify({
+      firstName: formData.firstName,
+      lastName: formData.lastName,
+      email:formData.email,
+      phoneNumber: formData.phoneNumber,
+      designation: formData.designation,
+      dateOfJoining: formData.dateOfJoining,
+      presentAddress: formData.presentAddress,
+      permanentAddress: formData.permanentAddress,
+      aboutYourself: formData.aboutYourself,
+      experience: formData.experience,
+      company: formData.company,
+      enjoyment: formData.enjoyment,
+      sneakpeek: formData.sneakpeek,
+      photoFiles: formData.photoFiles.name,
+      aadharCardFiles: aadharCardFiles
+      ? { name: aadharCardFiles.name, size: aadharCardFiles.size }
+      : null,
+      // educationCertificateFiles: null,
+      tenthMarksheetFiles:  tenthMarksheetFiles
+      ? { name: tenthMarksheetFiles.name, size: tenthMarksheetFiles.size }
+      : null,
+      twelfthMarksheetFiles: twelfthMarksheetFiles
+      ? { name: twelfthMarksheetFiles.name, size: twelfthMarksheetFiles.size }
+      : null,
+      pgDegreeCertificateFiles:pgDegreeCertificateFiles
+      ? { name: pgDegreeCertificateFiles.name, size: pgDegreeCertificateFiles.size }
+      : null,
+      pgMarksheetFiles: pgMarksheetFiles
+      ? { name: pgMarksheetFiles.name, size: pgMarksheetFiles.size }
+      : null,
+      ugDegreeCertificateFiles:ugDegreeCertificateFiles
+      ? { name: ugDegreeCertificateFiles.name, size: ugDegreeCertificateFiles.size }
+      : null,
+      ugMarksheetFiles:ugMarksheetFiles
+      ? { name: ugMarksheetFiles.name, size: ugMarksheetFiles.size }
+      : null,
+      relievingLettersFiles: relievingLettersFiles
+      ? { name: relievingLettersFiles.name, size: relievingLettersFiles.size }
+      : null,
+      payslipFiles: payslipFiles
+      ? { name: payslipFiles.name, size: payslipFiles.size }
+      : null,
+      id: formData.firstName,
+    })
+
+    // Store the form data string in sessionStorage
+    sessionStorage.setItem('draftFormData', formDataString);
+    
+    toast.success("Details Saved Successfully", {
+      position: "top-center"
+    });
+
+    // You can also display a message or perform other actions if needed
+    console.log('Form data saved as draft.');
   };
 
   const updateFamilyMembers = (data) => {
@@ -266,6 +328,8 @@ const TopForm = () => {
 
         if (response.status === 201) {
           console.log("Form data submitted successfully");
+          toast.success("Form data submitted successfully");
+          sessionStorage.clear();
           const response = await updateStatus(userData)
           console.log(response);
           setIsVerified(true)
@@ -348,6 +412,21 @@ const TopForm = () => {
   useEffect(() => {
     getoneCandidate();
   }, []);
+
+  useEffect(() => {
+    // Function to retrieve draft data from sessionStorage
+    const retrieveDraftData = () => {
+      const storedData = sessionStorage.getItem('draftFormData');
+      if (storedData) {
+        const formDataFromStorage = JSON.parse(storedData);
+        // Set the formData in your state
+        setFormData(formDataFromStorage);
+      }
+    };
+
+    // Call the function when your component mounts
+    retrieveDraftData();
+  }, []);
   
 
 
@@ -386,7 +465,7 @@ const TopForm = () => {
     <>
       {isLinkValid ?
         <>
-          <Navbar
+          {/* <Navbar
             bg="white"
             variant="black"
             style={{
@@ -421,7 +500,8 @@ const TopForm = () => {
                 </Nav.Link>
               </Nav>
             </Container>
-          </Navbar>
+          </Navbar> */}
+          <ToastContainer/>
           <div className="container-fluid">
             <Container
               style={{
@@ -438,7 +518,7 @@ const TopForm = () => {
               <Row>
                 <Col md={10}>
                   <h5 style={{ gap: "20px" }}>
-                    <GoArrowLeft /> Candidate Info
+                    Candidate Info
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
@@ -481,7 +561,7 @@ const TopForm = () => {
                         name="firstName"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.firstName}
+                        value={formData.firstName ? formData.firstName : formik.values.firstName}
                       />
                       {formik.touched.firstName && formik.errors.firstName ? (
                         <div className="text-danger">{formik.errors.firstName}</div>
@@ -497,7 +577,7 @@ const TopForm = () => {
                         name="lastName"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.lastName}
+                        value={formData.lastName ? formData.lastName :formik.values.lastName}
                       />
                       {formik.touched.lastName && formik.errors.lastName ? (
                         <div className="text-danger">{formik.errors.lastName}</div>
@@ -513,7 +593,7 @@ const TopForm = () => {
                         name="email"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.email}
+                        value={formData.email ? formData.email :formik.values.email}
                       />
                       {formik.touched.email && formik.errors.email ? (
                         <div className="text-danger">{formik.errors.email}</div>
@@ -545,7 +625,7 @@ const TopForm = () => {
                             name="phoneNumber"
                             onChange={handleChange}
                             onBlur={formik.handleBlur}
-                            value={formik.values.phoneNumber}
+                            value={formData.phoneNumber ? formData.phoneNumber :formik.values.phoneNumber}
                           />
                         </div>
                         {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
@@ -565,7 +645,7 @@ const TopForm = () => {
                         name="designation"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.designation}
+                        value={formData.designation ? formData.designation :formik.values.designation}
                       />
                       {formik.touched.designation && formik.errors.designation ? (
                         <div className="text-danger">
@@ -587,7 +667,7 @@ const TopForm = () => {
                           name="dateOfJoining"
                           onChange={handleChange}
                           onBlur={formik.handleBlur}
-                          value={formik.values.dateOfJoining}
+                          value={formData.dateOfJoining ? formData.dateOfJoining :formik.values.dateOfJoining}
                         />
                       </InputGroup>
                       {formik.touched.dateOfJoining &&
@@ -608,7 +688,7 @@ const TopForm = () => {
                         name="presentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.presentAddress}
+                        value={formData.presentAddress ? formData.presentAddress :formik.values.presentAddress}
                       />
 
                       {formik.touched.presentAddress &&
@@ -629,7 +709,7 @@ const TopForm = () => {
                         name="permanentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.permanentAddress}
+                        value={formData.permanentAddress ? formData.permanentAddress :formik.values.permanentAddress}
                         disabled={formik.values.sameAsPresentAddress}
                       />
                       <Form.Check
@@ -668,7 +748,7 @@ const TopForm = () => {
                         name="aboutYourself"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.aboutYourself}
+                        value={formData.aboutYourself ? formData.aboutYourself :formik.values.aboutYourself}
                       />
                       {formik.touched.aboutYourself &&
                         formik.errors.aboutYourself ? (
@@ -692,7 +772,7 @@ const TopForm = () => {
                         name="experience"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.experience}
+                        value={formData.experience ? formData.experience :formik.values.experience}
                       />
                       {formik.touched.experience && formik.errors.experience ? (
                         <div className="text-danger">
@@ -710,7 +790,7 @@ const TopForm = () => {
                         name="company"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.company}
+                        value={formData.company ? formData.company :formik.values.company}
                       />
                       {formik.touched.company && formik.errors.company ? (
                         <div className="text-danger">{formik.errors.company}</div>
@@ -729,7 +809,7 @@ const TopForm = () => {
                         name="enjoyment"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.enjoyment}
+                        value={formData.enjoyment ? formData.enjoyment :formik.values.enjoyment}
                       />
                       {formik.touched.enjoyment && formik.errors.enjoyment ? (
                         <div className="text-danger">{formik.errors.enjoyment}</div>
@@ -748,7 +828,7 @@ const TopForm = () => {
                         name="sneakpeek"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.sneakpeek}
+                        value={formData.sneakpeek ? formData.sneakpeek :formik.values.sneakpeek}
                       />
                     </Form.Group>
                     {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
@@ -922,7 +1002,7 @@ const TopForm = () => {
                <div className="text-danger">{formik.errors.payslipFiles}</div>
              ) : null} */}
 
-                    {/* <div
+                    <div
              style={{
                display: "flex",
                marginTop: "50px",
@@ -930,7 +1010,7 @@ const TopForm = () => {
                gap: "10px",
              }}
            >
-             <Button onClick={handleSubmit}
+             <Button 
                style={{
                  height: "35px",
                  fontSize: "15px",
@@ -943,6 +1023,7 @@ const TopForm = () => {
                Submit
              </Button>
              <Button
+             onClick={handleSaveDraft}
                style={{
                  height: "35px",
                  fontSize: "15px",
@@ -954,7 +1035,7 @@ const TopForm = () => {
              >
                Save as draft
              </Button>
-           </div> */}
+           </div>
                   </Col>
                 </Row>
               </Form>

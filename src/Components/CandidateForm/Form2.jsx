@@ -19,6 +19,8 @@ import {
 } from "./validation";
 import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Bank";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
@@ -39,11 +41,11 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
 
   //create an object to store datas from input family details
   const [candidateData, setCandidate] = useState({
-    memberName: "",
-    relationship: "",
-    dateOfBirth: "",
-    emergencyContactNumber: "",
-    emailAddress: "",
+    // memberName: "",
+    // relationship: "",
+    // dateOfBirth: "",
+    // emergencyContactNumber: "",
+    // emailAddress: "",
     epfoUan: "",
     pfNo: "",
     adharCard: "",
@@ -65,6 +67,72 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     // officialEmail: "",
     // employeeId: "",
   });
+
+  const handleSaveDraft1 = () => {
+    const formData = familyMembers.map(member => ({
+      memberName: member.memberName,
+      relationship: member.relationship,
+      dateOfBirth: member.dateOfBirth,
+      emergencyContactNumber: member.emergencyContactNumber,
+      emailAddress: member.emailAddress,
+    }));
+  
+    sessionStorage.setItem('medicalInsurance', JSON.stringify(formData));
+  
+    toast.success("Details Saved Successfully", {
+      position: "top-center"
+    });
+  
+    console.log('Form data saved as draft.');
+  };
+  
+  const handleSaveDraft2 = () => {
+    const pfAccount = JSON.stringify({
+      epfoUan: candidateData.epfoUan,
+      pfNo: candidateData.pfNo,
+      adharCard:candidateData.adharCard,
+      panCard: candidateData.panCard,
+      employeesName: candidateData.employeesName,
+      dateOfBirthAs: candidateData.dateOfBirthAs,
+      gender: candidateData.gender,
+      maritalStatus: candidateData.maritalStatus,
+      fatherName: candidateData.fatherName,
+      accountNumber: candidateData.accountNumber,
+      branch: candidateData.branch,
+      ifsc: candidateData.ifsc,
+    })
+   
+  
+    sessionStorage.setItem('pfAccount', pfAccount);
+  
+    toast.success("Details Saved Successfully", {
+      position: "top-center"
+    });
+  
+    console.log('Form data saved as draft.');
+  };
+
+  const handleSaveDraft3 = () => {
+    const hrOneDetails = JSON.stringify({
+      prefix: candidateData.prefix,
+      firstNamehr:candidateData.firstNamehr,
+      middleName: candidateData.middleName,
+      lastNamehr: candidateData.lastNamehr,
+      bloodGroup: candidateData.bloodGroup,
+      nationality:candidateData.nationality,
+    })
+   
+  
+    sessionStorage.setItem('hrOneDetails', hrOneDetails);
+  
+    toast.success("Details Saved Successfully", {
+      position: "top-center"
+    });
+  
+    console.log('Form data saved as draft.');
+  };
+
+
 
   const formik = useFormik({
     initialValues,
@@ -125,11 +193,11 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
 
       //reset all states datas
       setCandidate({
-        memberName: "",
-        relationship: "",
-        dateOfBirth: "",
-        emergencyContactNumber: "",
-        emailAddress: "",
+        // memberName: "",
+        // relationship: "",
+        // dateOfBirth: "",
+        // emergencyContactNumber: "",
+        // emailAddress: "",
         epfoUan: "",
         pfNo: "",
         adharCard: "",
@@ -157,8 +225,50 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     }
   };
 
+  useEffect(() => {
+    // Function to retrieve draft data from sessionStorage
+    const retrieveDraftData = () => {
+      const storedData = sessionStorage.getItem('medicalInsurance');
+      if (storedData) {
+        const formDataFromStorage1 = JSON.parse(storedData);
+        setFamilyMembers(formDataFromStorage1);
+      }
+    };
+  
+    // Call the function when your component mounts
+    retrieveDraftData();
+  }, []);
+  
+  useEffect(() => {
+    // Function to retrieve draft data from sessionStorage
+    const retrieveDraftData = () => {
+      const pfData = sessionStorage.getItem('pfAccount');
+      if (pfData) {
+        const pfAccountDetails = JSON.parse(pfData);
+        setCandidate((prevData) => ({ ...prevData, ...pfAccountDetails }));
+      }
+    };
+    // Call the function when your component mounts
+    retrieveDraftData();
+  }, []);
+  
+  useEffect(() => {
+    // Function to retrieve draft data from sessionStorage
+    const retrieveDraftData = () => {
+      const hrData = sessionStorage.getItem('hrOneDetails');
+      if (hrData) {
+        const hrOneDetails = JSON.parse(hrData);
+        setCandidate((prevData) => ({ ...prevData, ...hrOneDetails }));
+      }
+    };
+    // Call the function when your component mounts
+    retrieveDraftData();
+  }, []);
+  
+
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
+      <ToastContainer/>
       <Container
         style={{
           background: "white",
@@ -357,7 +467,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="memberName"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers?.memberName}                   
+                    value={familyMembers[index]?.memberName? familyMembers[index]?.memberName:familyMembers?.memberName }                   
                   />
                   {/* {formik.touched.memberName && formik.errors.memberName ? (
                     <div className="text-danger">
@@ -374,7 +484,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="relationship"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers?.relationship}
+                    value={familyMembers[index]?.relationship? familyMembers[index]?.relationship:familyMembers?.relationship }  
                   >
                     <option value="" label="Select Relationship" />
                     <option value="Father" label="Father" />
@@ -404,7 +514,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="dateOfBirth"         
                       onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                       onBlur={formik.handleBlur}                   
-                      value={familyMembers?.dateOfBirth}
+                      value={familyMembers[index]?.dateOfBirth? familyMembers[index]?.dateOfBirth:familyMembers?.dateOfBirth }  
                     />
                   </InputGroup>
                   {/* {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
@@ -438,7 +548,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                                 
                                 onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                                 onBlur={formik.handleBlur}                              
-                                value={familyMembers?.emergencyContactNumber}
+                                value={familyMembers[index]?.emergencyContactNumber? familyMembers[index]?.emergencyContactNumber:familyMembers?.emergencyContactNumber }  
                                
                             />
                         </div>
@@ -455,7 +565,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="emailAddress"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers?.emailAddress}
+                    value={familyMembers[index]?.emailAddress? familyMembers[index]?.emailAddress:familyMembers?.emailAddress }  
                   />
                   {/* {formik.touched.emailAddress && formik.errors.emailAddress ? (
                     <div className="text-danger">
@@ -463,12 +573,15 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     </div>
                   ) : null} */}
                 </Form.Group>
+                
           </Col>
+          
         </Row>
         </>
       ))}
 
       {/* Button to add a new family member */}
+      
       <Row>
         <Col>
           <Button
@@ -488,6 +601,42 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
           </Button>
         </Col>
       </Row>
+      <div
+              style={{
+                display: "flex",
+                marginTop: "50px",
+                marginBottom: "25px",
+                gap: "10px",
+              }} 
+            >
+
+              <Button
+               
+                style={{
+                  height: "35px",
+                  fontSize: "15px",
+                  backgroundColor: "rgb(210, 164, 250)",
+                  color: "white",
+                  borderColor: "rgb(210, 164, 250)",
+                  fontWeight: "500",
+                }}
+              >
+                Submit
+              </Button>
+              <Button
+              onClick={handleSaveDraft1}
+                style={{
+                  height: "35px",
+                  fontSize: "15px",
+                  backgroundColor: "white",
+                  color: "rgb(147, 48, 233)",
+                  borderColor: "rgb(147, 48, 233)",
+                  fontWeight: "500",
+                }}
+              >
+                Save as draft
+              </Button> 
+            </div>
            
           </Form>
         </div>
@@ -537,7 +686,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="epfoUan"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.epfoUan}
+                    value={candidateData.epfoUan ? candidateData.epfoUan : formik.values.epfoUan}
                   />
                   {formik.touched.epfoUan && formik.errors.epfoUan ? (
                     <div className="text-danger">{formik.errors.epfoUan}</div>
@@ -554,7 +703,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="pfNo"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.pfNo}
+                    value={candidateData.pfNo ? candidateData.pfNo : formik.values.pfNo}
                   />
                   {formik.touched.pfNo && formik.errors.pfNo ? (
                     <div className="text-danger">{formik.errors.pfNo}</div>
@@ -571,7 +720,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="adharCard"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.adharCard}
+                    value={candidateData.adharCard ? candidateData.adharCard : formik.values.adharCard}
                   />
                   {formik.touched.adharCard && formik.errors.adharCard ? (
                     <div className="text-danger">{formik.errors.adharCard}</div>
@@ -589,7 +738,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="panCard"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.panCard}
+                      value={candidateData.panCard ? candidateData.panCard : formik.values.panCard}
                     />
                     {formik.touched.panCard && formik.errors.panCard ? (
                       <div className="text-danger">{formik.errors.panCard}</div>
@@ -608,7 +757,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="employeesName"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.employeesName}
+                      value={candidateData.employeesName ? candidateData.employeesName : formik.values.employeesName}
                     />
                     {formik.touched.employeesName &&
                     formik.errors.employeesName ? (
@@ -634,7 +783,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                         name="dateOfBirthAs"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formik.values.dateOfBirthAs}
+                        value={candidateData.dateOfBirthAs ? candidateData.dateOfBirthAs : formik.values.dateOfBirthAs}
                       />
                     </InputGroup>
                     {formik.touched.dateOfBirthAs &&
@@ -655,7 +804,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="gender"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.gender}
+                      value={candidateData.gender ? candidateData.gender : formik.values.gender}
                     >
                       <option value="" label="Select Gender" />
                       <option value="Male" label="Male" />
@@ -678,7 +827,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="maritalStatus"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.maritalStatus}
+                      value={candidateData.maritalStatus ? candidateData.maritalStatus : formik.values.maritalStatus}
                     >
                       <option value="" label="Select Marital Status" />
                       <option value="unmarried">Unmarried</option>
@@ -705,7 +854,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="fatherName"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.fatherName}
+                      value={candidateData.fatherName ? candidateData.fatherName : formik.values.fatherName}
                     />
                     {formik.touched.fatherName && formik.errors.fatherName ? (
                       <div className="text-danger">
@@ -724,7 +873,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="bankName"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.bankName}
+                      value={candidateData.bankName ? candidateData.bankName : formik.values.bankName}
                     >
                       <option value="" label="Select Bank" />
                       {allBanks
@@ -759,7 +908,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="branch"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.branch}
+                      value={candidateData.branch ? candidateData.branch : formik.values.branch}
                     />
                     {formik.touched.branch && formik.errors.branch ? (
                       <div className="text-danger">{formik.errors.branch}</div>
@@ -776,7 +925,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="accountNumber"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.accountNumber}
+                      value={candidateData.accountNumber ? candidateData.accountNumber : formik.values.accountNumber}
                     />
                     {formik.touched.accountNumber &&
                     formik.errors.accountNumber ? (
@@ -798,7 +947,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="ifsc"
                       onChange={handleChange}
                       onBlur={formik.handleBlur}
-                      value={formik.values.ifsc}
+                      value={candidateData.ifsc ? candidateData.ifsc : formik.values.ifsc}
                     />
                     {formik.touched.ifsc && formik.errors.ifsc ? (
                       <div className="text-danger">{formik.errors.ifsc}</div>
@@ -808,20 +957,16 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
               </Row>
             </Row>
 
-            {/* <div
+            <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
               }}
-            > */}
-
-            {/* <Button
-                onClick={handleSubmitOne}
-
+            > 
               <Button
-                onClick={handleSubmit}
+            
 
                 style={{
                   height: "35px",
@@ -835,6 +980,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 Submit
               </Button>
               <Button
+              onClick={handleSaveDraft2}
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -845,8 +991,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 }}
               >
                 Save as draft
-              </Button> */}
-            {/* </div> */}
+              </Button> 
+            </div>
           </Form>
         </div>
       </Container>
@@ -906,7 +1052,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="prefix"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.prefix}
+                    value={candidateData.prefix ? candidateData.prefix : formik.values.prefix}
                   >
                     <option value="">Select Prefix</option>
                     <option value="Mr.">Mr.</option>
@@ -930,7 +1076,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="firstNamehr"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.firstNamehr}
+                    value={candidateData.firstNamehr ? candidateData.firstNamehr : formik.values.firstNamehr}
                   />
                   {formik.touched.firstNamehr && formik.errors.firstNamehr ? (
                     <div className="text-danger">
@@ -949,7 +1095,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="middleName"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.middleName}
+                    value={candidateData.middleName ? candidateData.middleName : formik.values.middleName}
                   />
                   {formik.touched.middleName && formik.errors.middleName ? (
                     <div className="text-danger">
@@ -971,7 +1117,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="lastNamehr"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.lastNamehr}
+                    value={candidateData.lastNamehr ? candidateData.lastNamehr : formik.values.lastNamehr}
                   />
                   {formik.touched.lastNamehr && formik.errors.lastNamehr ? (
                     <div className="text-danger">
@@ -988,7 +1134,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="bloodGroup"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.bloodGroup}
+                    value={candidateData.bloodGroup ? candidateData.bloodGroup : formik.values.bloodGroup}
                   >
                     <option value="" label="Select Blood Group" />
                     <option value="A+" label="A+" />
@@ -1017,7 +1163,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="nationality"
                     onChange={handleChange}
                     onBlur={formik.handleBlur}
-                    value={formik.values.nationality}
+                    value={candidateData.nationality ? candidateData.nationality : formik.values.nationality}
                   />
                   {formik.touched.nationality && formik.errors.nationality ? (
                     <div className="text-danger">
@@ -1076,20 +1222,17 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 </Form.Group>
               </Col> */}
             {/* </Row> */}
-            {/* <div
+            <div
               style={{
                 display: "flex",
                 marginTop: "50px",
                 marginBottom: "25px",
                 gap: "10px",
               }} 
-            >*/}
-
-            {/* <Button
-                onClick={handleSubmitTwo}
+            >
 
               <Button
-                onClick={handleSubmit}
+               
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -1102,6 +1245,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 Submit
               </Button>
               <Button
+              onClick={handleSaveDraft3}
                 style={{
                   height: "35px",
                   fontSize: "15px",
@@ -1112,8 +1256,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 }}
               >
                 Save as draft
-              </Button> */}
-            {/* </div> */}
+              </Button> 
+            </div>
           </Form>
         </div>
       </Container>
