@@ -22,12 +22,12 @@
     border-color: rgb(106,90,205);
     border-style: solid;
     border-width: 1px;
-    /* transition: height 0.1s ease-in-out; */
+    transition: height 0.1s ease-in-out;
 }
 
-/* .header2.has-errors{
-    height: 500px;
-} */
+.header2.has-errors{
+    height: 450px;
+}
 
 
 
@@ -235,6 +235,6 @@ margin-left: -10px;
     
 
 }
-.inputSize{
+/* .inputSize{
     height: 40px;
-}
+} */

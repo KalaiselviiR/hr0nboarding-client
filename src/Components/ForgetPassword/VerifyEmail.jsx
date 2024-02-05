@@ -9,6 +9,7 @@ import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
 import { Verifymail } from '../../service/allapi';
+import { MdOutlineMailOutline } from 'react-icons/md';
 
 function VerifyEmail() {
      //create an object to store datas from input
@@ -88,18 +89,28 @@ const handleSubmit = async (e) => {
         </div>
        
       
-      <div  >
-      <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss'>Email</Form.Label>
-            <InputGroup>
-              <InputGroup.Text>
-                <MdOutlineMail  />
-                </InputGroup.Text>
-              <Form.Control onChange={userDetails} name='email' className='input-field' type="email" placeholder="Enter email" />
-            </InputGroup>
-          </Form.Group>
-  
-      </div>
+        <div>
+          <div className=' mb-3'>
+            <label className='labelss' style={{paddingBottom:'10px'}}>Email</label>
+            <div>
+            <div className='box form-control'>
+              <div className='EmailInput'>
+                <MdOutlineMailOutline className='MailIcon' />
+                <input
+                  
+                  onChange={userDetails}
+                 
+                  className='InputEmail'
+                  type="email"
+                  placeholder="Enter the email"
+                />
+              </div>
+              
+            </div>
+            {/* <p className="error-message">{emailError}</p> */}
+            </div>
+          </div>
+          </div>
 
       <div className="submit-box">
       <Button

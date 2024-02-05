@@ -28,7 +28,7 @@ function Login() {
   const validatePassword = () => {
     
     if (password.length < 8) {
-      setPasswordError('Invalid password');
+      setPasswordError('Password should be minimum 8 characters');
     }  else {
       setPasswordError('');
     }
