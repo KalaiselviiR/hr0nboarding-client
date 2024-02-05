@@ -72,8 +72,8 @@ const RecruiterForm = () => {
    const handleVerify = async () => {
     // Perform verification logic
     // Assume verification is successful for demonstration purposes
-    // const response = await updateStatus(userData)
-    // console.log(response);
+    const response = await updateStatus(userData)
+    console.log(response);
     
     setIsVerified(true);
     toast.success("Document verified Successfully", {
@@ -165,8 +165,8 @@ const RecruiterForm = () => {
                 <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}} onClick={handleClick} /> Candidate Info
               </h5>
             </Col>
-            <Col md={2} className={` d-flex justify-content-end ${isVerified === true ? 'green' : 'blue'}`}>
-              <h6 className="text-end d-none d-sm-inline-block align-top">
+            <Col md={2} className="d-flex justify-content-end ">
+              <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
                 {isVerified ==false ? "Review Pending" : "Completed" }
               </h6>
             </Col>

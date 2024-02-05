@@ -57,6 +57,8 @@ const TopForm = () => {
   const [id, setId] = useState(null);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
+  const [isVerified, setIsVerified] = useState(false);
+
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
   };
@@ -266,6 +268,7 @@ const TopForm = () => {
           console.log("Form data submitted successfully");
           const response = await updateStatus(userData)
           console.log(response);
+          setIsVerified(true)
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -439,8 +442,8 @@ const TopForm = () => {
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                  <h6 className="text-end d-none d-sm-inline-block align-top">
-                    Review Pending
+                <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'blue' : 'orange'}`}>
+                {isVerified ==false ? "Pending" : "Review Pending" }
                   </h6>
                 </Col>
               </Row>
