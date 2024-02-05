@@ -56,6 +56,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     accountNumber: "",
     branch: "",
     ifsc: "",
+    highestQualification:"",
     prefix: "",
     firstNamehr: "",
     middleName: "",
@@ -143,6 +144,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
         accountNumber: "",
         branch: "",
         ifsc: "",
+        highestQualification:"",
         prefix: "",
         firstNamehr: "",
         middleName: "",
@@ -418,8 +420,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
           <Form.Group controlId="EmergencyPhoneNumber">
                  
                    <div className="phoneDiv mt-4">
-                        <div className="labelss">
-                            <p>Phone number</p>
+                        <div >
+                            <p className="labelss">Emergency Phone Number</p>
                         </div>
                         <div className="phoneInput ">
                             <select className="country-code "
@@ -431,9 +433,9 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                                 <option value="+20">EG(+20)</option>
                             </select>
                             <input 
-                            className="input-field form-control "
+                            className="input-field form-control phoneNumberSize "
                             type="tel"
-                            placeholder="+91(555) 000-0000"
+                            placeholder="(555) 000-0000"
                                 name="emergencyContactNumber"
                                 
                                 onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
@@ -684,7 +686,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       <option value="unmarried">Unmarried</option>
                       <option value="married">Married</option>
                       <option value="divorced">Divorced</option>
-                      <option value="divorced">Divorced</option>
+                     
                       <option value="separated">Separated</option>
                     </Form.Select>
                     {formik.touched.maritalStatus &&
@@ -802,6 +804,28 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     />
                     {formik.touched.ifsc && formik.errors.ifsc ? (
                       <div className="text-danger">{formik.errors.ifsc}</div>
+                    ) : null}
+                  </Form.Group>
+                </Col>
+                <Col xs={12} md={4}>
+                  <Form.Group className="mt-3" controlId=" highestQualification">
+                    <Form.Label className="labelss">
+                    Highest qualification
+                    </Form.Label>
+                    <Form.Control
+                      className="input-field "
+                      type="text"
+                      placeholder="Highest qualification"
+                      name="highestQualification"
+                      onChange={handleChange}
+                      onBlur={formik.handleBlur}
+                      value={formik.values.highestQualification}
+                    />
+                    {formik.touched.highestQualification &&
+                    formik.errors.highestQualification ? (
+                      <div className="text-danger">
+                        {formik.errors.highestQualification}
+                      </div>
                     ) : null}
                   </Form.Group>
                 </Col>

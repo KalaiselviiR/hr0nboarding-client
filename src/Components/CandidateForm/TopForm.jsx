@@ -57,8 +57,6 @@ const TopForm = () => {
   const [id, setId] = useState(null);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
-  const [isVerified, setIsVerified] = useState(false);
-
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
   };
@@ -268,7 +266,6 @@ const TopForm = () => {
           console.log("Form data submitted successfully");
           const response = await updateStatus(userData)
           console.log(response);
-          setIsVerified(true)
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -406,7 +403,7 @@ const TopForm = () => {
                   className="d-inline-block align-top"
                 />
               </Navbar.Brand>
-              <Nav className="me-auto disabled">
+              {/* <Nav className="me-auto disabled">
                 <Nav.Link
                   href=""
                   className="d-none d-md-block"
@@ -419,7 +416,7 @@ const TopForm = () => {
                 >
                   Dashboard
                 </Nav.Link>
-              </Nav>
+              </Nav> */}
             </Container>
           </Navbar>
           <div className="container-fluid">
@@ -442,8 +439,8 @@ const TopForm = () => {
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'blue' : 'orange'}`}>
-                {isVerified ==false ? "Pending" : "Review Pending" }
+                  <h6 className="text-end d-none d-sm-inline-block align-top">
+                    Review Pending
                   </h6>
                 </Col>
               </Row>
@@ -523,8 +520,8 @@ const TopForm = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="phoneNumber">
                       <div className="phoneDiv ">
-                        <div className="labelss">
-                          <p>Phone number</p>
+                        <div >
+                          <p className="labelss">Phone number</p>
                         </div>
                         <div className="phoneInput ">
                           <select
@@ -541,7 +538,7 @@ const TopForm = () => {
                           <input
                             type="text"
                             className=" form-control"
-                            placeholder="8845789956"
+                            placeholder="(555) 000-0000"
                             name="phoneNumber"
                             onChange={handleChange}
                             onBlur={formik.handleBlur}
