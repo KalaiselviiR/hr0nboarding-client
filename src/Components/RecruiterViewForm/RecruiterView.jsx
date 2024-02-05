@@ -22,7 +22,7 @@ import ResendDocument from '../ResendDocument/ResendDocument'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRecruterView } from "../../service/allapi";
+import { getRecruterView, updateStatus } from "../../service/allapi";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 
@@ -60,12 +60,21 @@ const RecruiterForm = () => {
       
   }
   console.log(cData);
-
+  
+      //create an object to store datas from input
+      const [userData, setUser] = useState({
+        status: "Completed",
+        cid: id
+    
+      })
 
    // Function to handle the click on "Verify Documents" button
-   const handleVerify = () => {
+   const handleVerify = async () => {
     // Perform verification logic
     // Assume verification is successful for demonstration purposes
+    const response = await updateStatus(userData)
+    console.log(response);
+    
     setIsVerified(true);
     toast.success("Document verified Successfully", {
       position: "top-center"
@@ -156,9 +165,9 @@ const RecruiterForm = () => {
                 <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}} onClick={handleClick} /> Candidate Info
               </h5>
             </Col>
-            <Col md={2} className="d-flex justify-content-end">
-              <h6 className="text-end d-none d-sm-inline-block align-top">
-                Review Pending
+            <Col md={2} className="d-flex justify-content-end ">
+              <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
+                {isVerified ==false ? "Review Pending" : "Completed" }
               </h6>
             </Col>
           </Row>
@@ -416,7 +425,7 @@ const RecruiterForm = () => {
                     }}
                     onClick={handleToggleSection}
                   >
-                    <h6 style={{fontWeight:"normal"}}>Educational Certificates - Accepted Formats: Pdf</h6>
+                    <h6 style={{fontWeight:"normal"}}>Educational Certificates</h6>
                     {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                   </div>
                   {isSectionOpen && (

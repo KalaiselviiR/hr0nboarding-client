@@ -56,6 +56,11 @@ export const ConformdeleteCandidate=async(id)=>{
     return await commonRequest("DELETE",`${BASE_URL}/api/delete-candidatestate/${id}`,"")
 }
 
+//Change Status
+export const updateStatus=async(body)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/update-status`,body)
+}
+
 //get all Candidates to Display in table
 export const getallCandidates=async(body)=>{
     return await commonRequest("GET",`${BASE_URL}/api/get-candidates`,body)

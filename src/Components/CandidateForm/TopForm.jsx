@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
-import { getSingleCandidate } from "../../service/allapi";
+import { getSingleCandidate, updateStatus } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
 
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
@@ -56,6 +56,8 @@ const TopForm = () => {
 
   const [id, setId] = useState(null);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
+
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
@@ -179,6 +181,13 @@ const TopForm = () => {
     formik.setValues(combinedValues);
   } 
 
+    //create an object to store datas from input
+    const [userData, setUser] = useState({
+      status: "Review Pending",
+      cid: id
+  
+    })
+
 
 
   // handle change function for validation errors
@@ -257,6 +266,9 @@ const TopForm = () => {
 
         if (response.status === 201) {
           console.log("Form data submitted successfully");
+          const response = await updateStatus(userData)
+          console.log(response);
+          setIsVerified(true)
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -344,6 +356,7 @@ const TopForm = () => {
   const [isLinkValid, setisLinkValid] = useState(true)
 
 
+
   useEffect(() => {
 
     const verifyToken = async () => {
@@ -353,6 +366,8 @@ const TopForm = () => {
         console.log(response)
         if (response.data.status === 'success') {
           setisLinkValid(true)
+        
+
         }
 
       }
@@ -427,8 +442,8 @@ const TopForm = () => {
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                  <h6 className="text-end d-none d-sm-inline-block align-top">
-                    Review Pending
+                <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'blue' : 'orange'}`}>
+                {isVerified ==false ? "Pending" : "Review Pending" }
                   </h6>
                 </Col>
               </Row>
