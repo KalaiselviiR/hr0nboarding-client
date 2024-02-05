@@ -99,10 +99,11 @@ function Login() {
         <div>
           <div className=' mb-3'>
             <label className='labelss' style={{ lineHeight: "30px" }}>Email</label>
+            <div>
             <div className='box form-control'>
               <div className='EmailInput'>
                 <MdOutlineMailOutline className='MailIcon' />
-                <Form.Control
+                <input
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onBlur={validateEmail}
@@ -113,12 +114,13 @@ function Login() {
               </div>
               
             </div>
-            <div className="error-message">{emailError}</div>
+            <p className="error-message">{emailError}</p>
+            </div>
           </div>
-
+        
           <Form.Group className="mb-3" controlId="officialPassword" >
             <Form.Label className='labelss'>Password</Form.Label>
-            <InputGroup>
+            <InputGroup className='inputSi'>
               <Form.Control
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
@@ -128,7 +130,7 @@ function Login() {
                 placeholder="Enter your password"
               />
             </InputGroup>
-            <div className="error-message">{passwordError}</div>
+            <p className="error-message">{passwordError}</p>
           </Form.Group>
         </div>
         <div className="forgot-password">
