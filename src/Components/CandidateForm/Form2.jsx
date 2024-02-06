@@ -76,6 +76,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     // employeeId: "",
   });
 
+  //save as draft for medical issurance details
+
   const handleSaveDraft1 = () => {
     const formData = familyMembers.map(member => ({
       memberName: member.memberName,
@@ -83,6 +85,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
       dateOfBirth: member.dateOfBirth,
    
     }));
+    
   
     sessionStorage.setItem('medicalInsurance', JSON.stringify(formData));
   
@@ -92,7 +95,31 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
   
     console.log('Form data saved as draft.');
   };
+
+  const handleSaveDraftContact = () => {
+    const contactDetails = JSON.stringify({
+      countryCode:contact.countryCode,
+      emergencyContactNumber:contact.emergencyContactNumber,
+      relationToEmergencyContact:contact. relationToEmergencyContact,
+    })
+   
   
+    sessionStorage.setItem('contact', contactDetails);
+  
+    toast.success("Details Saved Successfully", {
+      position: "top-center"
+    });
+  
+    console.log('Form data saved as draft.');
+  };
+  
+  const handleSaveDraftAll = () => {
+    handleSaveDraft1();
+    handleSaveDraftContact();
+  };
+
+
+  //save as draft for pf account
   const handleSaveDraft2 = () => {
     const pfAccount = JSON.stringify({
       epfoUan: candidateData.epfoUan,
@@ -120,6 +147,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     console.log('Form data saved as draft.');
   };
 
+
+  //save as draft for hrone details
   const handleSaveDraft3 = () => {
     const hrOneDetails = JSON.stringify({
       prefix: candidateData.prefix,
@@ -234,6 +263,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     }
   };
 
+  //save as draft for medical insurance information
+
   useEffect(() => {
     // Function to retrieve draft data from sessionStorage
     const retrieveDraftData = () => {
@@ -247,6 +278,24 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     // Call the function when your component mounts
     retrieveDraftData();
   }, []);
+
+  //save as draft for contact details
+  
+  useEffect(() => {
+    // Function to retrieve draft data from sessionStorage
+    const retrieveDraftData = () => {
+      const storedData = sessionStorage.getItem('contact');
+      if (storedData) {
+        const formDataFromStorage1 = JSON.parse(storedData);
+        setEmergencyContact(formDataFromStorage1);
+      }
+    };
+  
+    // Call the function when your component mounts
+    retrieveDraftData();
+  }, []);
+
+  //save as draft for pf account
   
   useEffect(() => {
     // Function to retrieve draft data from sessionStorage
@@ -260,6 +309,8 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
     // Call the function when your component mounts
     retrieveDraftData();
   }, []);
+
+  //save as draft for hrone details
   
   useEffect(() => {
     // Function to retrieve draft data from sessionStorage
@@ -328,7 +379,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="memberName"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers?.memberName}                   
+                    value={familyMembers[index]?.memberName ? familyMembers[index]?.memberName:familyMembers?.memberName}                   
                   />
                   {/* {formik.touched.memberName && formik.errors.memberName ? (
                     <div className="text-danger">
@@ -345,7 +396,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                     name="relationship"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers?.relationship}
+                    value={familyMembers[index]?.relationship ? familyMembers[index]?.relationship:familyMembers?.relationship}
                   >
                     <option value="" label="Select Relationship" />
                     <option value="Father" label="Father" />
@@ -375,7 +426,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                       name="dateOfBirth"         
                       onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                       onBlur={formik.handleBlur}                   
-                      value={familyMembers?.dateOfBirth}
+                      value={familyMembers[index]?.dateOfBirth ? familyMembers[index]?.dateOfBirth:familyMembers?.dateOfBirth}
                     />
                   </InputGroup>
                   {/* {formik.touched.dateOfBirth && formik.errors.dateOfBirth ? (
@@ -509,7 +560,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
                 Submit
               </Button>
               <Button
-              onClick={handleSaveDraft1}
+              onClick={handleSaveDraftAll}
                 style={{
                   height: "35px",
                   fontSize: "15px",
