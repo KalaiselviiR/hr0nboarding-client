@@ -123,7 +123,7 @@ const CandidateViewForm = () => {
 
   return (
     <>
-      <Navbar
+         <Navbar
         bg="white"
         variant="black"
         style={{
@@ -150,7 +150,7 @@ const CandidateViewForm = () => {
               borderRadius: "5px",
               fontWeight: "600"
             }}
-            // onClick={handleClick} 
+            onClick={handleClick} 
             >
               Dashboard
             </Nav.Link>
@@ -173,12 +173,12 @@ const CandidateViewForm = () => {
           <Row>
             <Col md={10}>
               <h5 style={{ gap: "20px" }}>
-                <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}}  /> Candidate Info
+                <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}} onClick={handleClick} /> Candidate Info
               </h5>
             </Col>
             <Col md={2} className="d-flex justify-content-end ">
-              <h6 className={'text-end d-none d-sm-inline-block align-top '}>
-                Review Pending
+              <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
+                {isVerified ==false ? "Review Pending" : "Completed" }
               </h6>
             </Col>
           </Row>
@@ -215,7 +215,8 @@ const CandidateViewForm = () => {
                   <Form.Control
                     type="text"
                     name="firstName"
-                    // value={cData.firstName}
+                    value={cData.firstName}
+                    disabled
 
                   />
 
@@ -226,8 +227,9 @@ const CandidateViewForm = () => {
                   <Form.Label className="labelss">Last Name</Form.Label>
                   <Form.Control
                     type="text"
-                    // value={cData.lastName}
+                    value={cData.lastName}
                     name="lastName"
+                    disabled
 
                   />
 
@@ -238,8 +240,9 @@ const CandidateViewForm = () => {
                   <Form.Label className="labelss">Email</Form.Label>
                   <Form.Control
                     type="email"
-                    // value={cData.email}
+                    value={cData.email}
                     name="email"
+                    disabled
 
                   />
 
@@ -276,7 +279,7 @@ const CandidateViewForm = () => {
                             <p>Phone number</p>
                         </div>
                         <div className="phoneInput ">
-                            <select className="country-code "
+                            <select className="country-code " disabled
                              onChange={(e) => setCountryCode(e.target.value)}
                             >
                                 <option selected value="+91">IN(+91)</option>
@@ -287,8 +290,9 @@ const CandidateViewForm = () => {
                             <input 
                             className="input-field form-control "
                             type="tel"
-                            // value={cData.phoneNumber}
+                            value={cData.phoneNumber}
                                 name="emergencyContactNumber"
+                                disabled
                                 
                                
                             />
@@ -303,8 +307,9 @@ const CandidateViewForm = () => {
                     Designation
                   </Form.Label>
                   <Form.Control type="text"
-                    // value={cData.designation}
+                    value={cData.designation}
                     name="designation"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -318,8 +323,9 @@ const CandidateViewForm = () => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control type="date"
-                    //   value={moment(cData.dateOfJoining).format("yyyy-MM-DD")}
+                      value={moment(cData.dateOfJoining).format("yyyy-MM-DD")}
                       name="dateOfJoining"
+                      disabled
                     />
                   </InputGroup>
                 </Form.Group>
@@ -332,8 +338,9 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    // value={cData.presentAddress}
+                    value={cData.presentAddress}
                     name="presentAddress"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -345,8 +352,9 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    // value={cData.permanentAddress}
+                    value={cData.permanentAddress}
                     name="permanentAddress"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -361,8 +369,9 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    // value={cData.aboutYourself}
+                    value={cData.aboutYourself}
                     name="aboutYourself"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -375,8 +384,9 @@ const CandidateViewForm = () => {
                     Overall Work Experience
                   </Form.Label>
                   <Form.Control type="text"
-                    // value={cData.experience}
+                    value={cData.experience}
                     name="experience"
+                    disabled
 
                   />
                 </Form.Group>
@@ -388,8 +398,9 @@ const CandidateViewForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    // value={cData.company}
+                    value={cData.company}
                     name="company"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -401,8 +412,9 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    // value={cData.enjoyment}
+                    value={cData.enjoyment}
                     name="enjoyment"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -414,8 +426,9 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    // value={cData.sneakpeek}
+                    value={cData.sneakpeek}
                     name="sneakpeek"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -424,8 +437,8 @@ const CandidateViewForm = () => {
               <Col md={4}>
               <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
-               <CandidateFileView label={"photo"}  name={"Photo.jpg"} />
-              <CandidateFileView label={"Adhar Card"} name={"Adharcard.pdf"} />
+                <CandidateFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+              <CandidateFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
               <div>
                   <div
                     style={{
@@ -441,18 +454,18 @@ const CandidateViewForm = () => {
                   </div>
                   {isSectionOpen && (
                     <div>
-                      <CandidateFileView label={"10th Marksheet"}name={"10th Marksheet.pdf"}/>
-                      <CandidateFileView label={"12th Marksheet"}  name={"12th Marksheet.pdf"}/>
-                      <CandidateFileView label={"PG Degree Certificate"}  name={"PG Degree.pdf"}/>
-                      <CandidateFileView label={"PG Marksheet"}  name={"PG Marksheet.pdf"}/>
-                      <CandidateFileView label={"UG Degree Certificate"}  name={"UG Degree.pdf"}/>
-                      <CandidateFileView label={"UG Marksheet"}  name={"UG Marksheet.pdf"}/>
+                      <CandidateFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"}/>
+                      <CandidateFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"}/>
+                      <CandidateFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"}/>
+                      <CandidateFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"}/>
+                      <CandidateFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"}/>
+                      <CandidateFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"}/>
                     </div>
                   )}
                 </div>
 
-              <CandidateFileView label={"Relieving Letters"} name={"Relieving Letters.pdf"}/>
-              <CandidateFileView label={"Payslips"}  name={"Payslips.pdf"}/>
+              <CandidateFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"}/>
+              <CandidateFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"}/>
             </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button

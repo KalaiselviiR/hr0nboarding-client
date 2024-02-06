@@ -186,6 +186,7 @@ function BottomSection({ cData }) {
                      type="text"
                      value={member?.memberName}
                      name="memberName"
+                     disabled
                    />
                  </Form.Group>
                </Col>
@@ -198,6 +199,7 @@ function BottomSection({ cData }) {
                      type="text"
                      name="relationship"
                      value={member?.relationship}
+                     disabled
                    />
                  </Form.Group>
                </Col>
@@ -214,6 +216,7 @@ function BottomSection({ cData }) {
                        type="date"
                        value={moment(member?.dateOfBirth).format("yyyy-MM-DD")}
                        name="dateOfBirth"
+                       disabled
                      />
                    </InputGroup>
                  </Form.Group>
@@ -238,7 +241,7 @@ function BottomSection({ cData }) {
                      </div>
                      <div className="phoneInput ">
                        <select
-                         className="country-code "
+                         className="country-code " disabled
                          onChange={(e) => setCountryCode(e.target.value)}
                        >
                          <option selected value="+91">
@@ -254,6 +257,7 @@ function BottomSection({ cData }) {
                          placeholder="+91(555) 000-0000"
                          value={contact?.emergencyContactNumber}
                          name="emergencyContactNumber"
+                         disabled
                        />
                      </div>
                    </div>
@@ -271,6 +275,7 @@ function BottomSection({ cData }) {
                      type="email"
                      value={contact?.relationToEmergencyContact}
                      name="emailAddress"
+                     disabled
                    />
                  </Form.Group>
                </Col>
@@ -355,6 +360,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.epfoUan}
                     name="epfoUan"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -366,6 +372,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.pfNo}
                     name="pfNo"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -377,6 +384,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.adharCard}
                     name="adharCard"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -389,6 +397,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.panCard}
                       name="panCard"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -402,6 +411,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.employeesName}
                       name="employeesName"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -421,6 +431,7 @@ function BottomSection({ cData }) {
                           "yyyy-MM-DD"
                         )}
                         name="dateOfBirthAs"
+                        disabled
                       />
                     </InputGroup>
                   </Form.Group>
@@ -435,6 +446,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.gender}
                       name="gender"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -446,6 +458,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.maritalStatus}
                       name="maritalStatus"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -457,6 +470,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.fatherName}
                       name="fatherName"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -471,6 +485,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.bankName}
                       name="bankName"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -483,6 +498,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.branch}
                       name="branch"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -494,6 +510,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.accountNumber}
                       name="accountNumber"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -505,6 +522,7 @@ function BottomSection({ cData }) {
                       type="text"
                       value={cbData.ifsc}
                       name="ifsc"
+                      disabled
                     />
                   </Form.Group>
                 </Col>
@@ -592,6 +610,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.prefix}
                     name="prefix"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -603,6 +622,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.firstNamehr}
                     name="firstNamehr"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -614,6 +634,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.middleName}
                     name="middleName"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -628,6 +649,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.lastNamehr}
                     name="lastNamehr"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -639,6 +661,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.bloodGroup}
                     name="bloodGroup"
+                    disabled
                   />
                 </Form.Group>
               </Col>
@@ -650,6 +673,7 @@ function BottomSection({ cData }) {
                     type="text"
                     value={cbData.nationality}
                     name="nationality"
+                    disabled
                   />
                 </Form.Group>
               </Col>
