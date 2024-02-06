@@ -18,18 +18,22 @@ function VerifyEmail() {
     psw: ""
 
   })
-    //object for useNavigate
+const [emailError, setEmailError] = useState("");   
 const navigate=useNavigate()
-   // a function to update userdata when user enter the input in html
+  
 const userDetails = (e) => {
-  //prevent the event
+
   e.preventDefault()
-  //access value to update in userData
-  const { value } = e.target
-  //access key to update in userData
+  
+  const { value, name } = e.target
+ 
   const key = e.target.name
-  //update the data with existing data
+
   setUser({ ...userData, [key]: value })
+
+  if (name === 'email') {
+    setEmailError("");
+  }
 
 }
 console.log(userData);
@@ -39,11 +43,13 @@ const handleSubmit = async (e) => {
   const { email } = userData;
 
   if (email === "") {
-    toast.error('Email required');
-  }
- 
-  else {
- 
+    setEmailError("Email is required");
+    return;
+  } else if (!isValidEmail(email)) {
+    setEmailError("Invalid email format");
+    return;
+  } else {
+    setEmailError("");
    
     //api call
     const response = await Verifymail(userData)
@@ -72,6 +78,20 @@ const handleSubmit = async (e) => {
 
   }
 }
+
+const isValidEmail = (email) => {
+  // Add your custom email validation logic here
+  const validDomains = ["gmail.com", "techjays.com"];
+  const minEmailLength = 5;
+
+  const emailParts = email.split('@');
+  if (emailParts.length !== 2 || emailParts[0].length < minEmailLength) {
+    return false;
+  }
+
+  const domain = emailParts[1].toLowerCase();
+  return validDomains.includes(domain);
+};
   return (
     <div className='header1'>
     <div className='Logo  '>
@@ -102,7 +122,8 @@ const handleSubmit = async (e) => {
               </div>
               
             </div>
-            {/* <p className="error-message">{emailError}</p> */}
+           
+            <p className="error-message">{emailError}</p>
             </div>
           </div>
           </div>
