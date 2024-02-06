@@ -11,6 +11,8 @@ import Login from './Components/Login/Login';
 import VerifyEmail from './Components/ForgetPassword/VerifyEmail';
 import UpdatePassword from './Components/ForgetPassword/UpdatePassword';
 import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
+import CandidateViewForm from './Components/resendform/candidateview';
+
 
 function App() {
  
@@ -35,6 +37,7 @@ function App() {
         <Route path="/candidateForm" element={<TopForm />} />
         {/* Route for the candidate Form Recruiter View*/}
         <Route path="/recruiterView/:id" element={<RecruiterForm />} />
+        <Route path="/candidateView/" element={<CandidateViewForm />} />
         <Route path="/candidateForm/:token" element={<TopForm />} />
 
        
