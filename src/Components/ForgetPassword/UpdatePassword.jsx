@@ -163,14 +163,18 @@ const handleSubmit = async (e) => {
             
               <Form.Control onChange={userDetails}  name='psw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
+            {userData.psw.length > 0 && userData.psw.length <= 8 && <p className="error-message">Password must be more than 8 characters</p>}
           </Form.Group>
           <Form.Group className="mb-3" controlId="officialEmailAddress" >
             <Form.Label className='labelss'>Confirm Password</Form.Label>
             <InputGroup>
-            
               <Form.Control onChange={userDetails} name='cpsw' className='input-field' type="password" placeholder="Enter password" />
             </InputGroup>
+            {/* {userData.cpsw === "" && <p className="error-message">Confirm password required</p>} */}
+            
+
           </Form.Group>
+          {userData.psw !== userData.cpsw && <p className="error-message">Passwords do not match</p>}
   
       </div>
 
@@ -183,6 +187,9 @@ const handleSubmit = async (e) => {
             Submit
           </Button>
       </div>
+      
+      
+      
 
       </div>
       
