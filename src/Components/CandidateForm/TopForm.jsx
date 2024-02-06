@@ -108,8 +108,8 @@ const TopForm = () => {
     relievingLettersFiles: null,
     payslipFiles: null,
     id: id,
-    members:[],
-    contact:{}
+    members: [],
+    contact: {}
   });
 
   const [form2Data, setForm2Data] = useState({
@@ -171,12 +171,12 @@ const TopForm = () => {
 
 
   const handleSaveDraft = () => {
-   
+
     // Convert the form data to a string before storing it in sessionStorage
-    const formDataString =JSON.stringify({
+    const formDataString = JSON.stringify({
       firstName: formData.firstName,
       lastName: formData.lastName,
-      email:formData.email,
+      email: formData.email,
       phoneNumber: formData.phoneNumber,
       designation: formData.designation,
       dateOfJoining: formData.dateOfJoining,
@@ -189,39 +189,39 @@ const TopForm = () => {
       sneakpeek: formData.sneakpeek,
       photoFiles: formData.photoFiles.name,
       aadharCardFiles: aadharCardFiles
-      ? { name: aadharCardFiles.name, size: aadharCardFiles.size }
-      : null,
+        ? { name: aadharCardFiles.name, size: aadharCardFiles.size }
+        : null,
       // educationCertificateFiles: null,
-      tenthMarksheetFiles:  tenthMarksheetFiles
-      ? { name: tenthMarksheetFiles.name, size: tenthMarksheetFiles.size }
-      : null,
+      tenthMarksheetFiles: tenthMarksheetFiles
+        ? { name: tenthMarksheetFiles.name, size: tenthMarksheetFiles.size }
+        : null,
       twelfthMarksheetFiles: twelfthMarksheetFiles
-      ? { name: twelfthMarksheetFiles.name, size: twelfthMarksheetFiles.size }
-      : null,
-      pgDegreeCertificateFiles:pgDegreeCertificateFiles
-      ? { name: pgDegreeCertificateFiles.name, size: pgDegreeCertificateFiles.size }
-      : null,
+        ? { name: twelfthMarksheetFiles.name, size: twelfthMarksheetFiles.size }
+        : null,
+      pgDegreeCertificateFiles: pgDegreeCertificateFiles
+        ? { name: pgDegreeCertificateFiles.name, size: pgDegreeCertificateFiles.size }
+        : null,
       pgMarksheetFiles: pgMarksheetFiles
-      ? { name: pgMarksheetFiles.name, size: pgMarksheetFiles.size }
-      : null,
-      ugDegreeCertificateFiles:ugDegreeCertificateFiles
-      ? { name: ugDegreeCertificateFiles.name, size: ugDegreeCertificateFiles.size }
-      : null,
-      ugMarksheetFiles:ugMarksheetFiles
-      ? { name: ugMarksheetFiles.name, size: ugMarksheetFiles.size }
-      : null,
+        ? { name: pgMarksheetFiles.name, size: pgMarksheetFiles.size }
+        : null,
+      ugDegreeCertificateFiles: ugDegreeCertificateFiles
+        ? { name: ugDegreeCertificateFiles.name, size: ugDegreeCertificateFiles.size }
+        : null,
+      ugMarksheetFiles: ugMarksheetFiles
+        ? { name: ugMarksheetFiles.name, size: ugMarksheetFiles.size }
+        : null,
       relievingLettersFiles: relievingLettersFiles
-      ? { name: relievingLettersFiles.name, size: relievingLettersFiles.size }
-      : null,
+        ? { name: relievingLettersFiles.name, size: relievingLettersFiles.size }
+        : null,
       payslipFiles: payslipFiles
-      ? { name: payslipFiles.name, size: payslipFiles.size }
-      : null,
+        ? { name: payslipFiles.name, size: payslipFiles.size }
+        : null,
       id: formData.firstName,
     })
 
     // Store the form data string in sessionStorage
     sessionStorage.setItem('draftFormData', formDataString);
-    
+
     toast.success("Details Saved Successfully", {
       position: "top-center"
     });
@@ -230,30 +230,30 @@ const TopForm = () => {
     console.log('Form data saved as draft.');
   };
 
-  
 
-  const updateFamilyMembers = (data,contact) => {
+
+  const updateFamilyMembers = (data, contact) => {
 
     setFormData((prevData) => ({
       ...prevData,
-      members:data,
+      members: data,
       contact
     }))
 
     const combinedValues = {
       ...formik.values,
-      members:data,
+      members: data,
       contact
     };
     formik.setValues(combinedValues);
-  } 
+  }
 
-    //create an object to store datas from input
-    const [userData, setUser] = useState({
-      status: "Review Pending",
-      cid: id
-  
-    })
+  //create an object to store datas from input
+  const [userData, setUser] = useState({
+    status: "Review Pending",
+    cid: id
+
+  })
 
 
 
@@ -311,16 +311,16 @@ const TopForm = () => {
 
         for (const key in formik.values) {
           if (key !== 'members' && key !== 'contact') {
-              formData.append(key, formik.values[key] || "");
+            formData.append(key, formik.values[key] || "");
           }
-      }
+        }
 
-      formData.append('contact',JSON.stringify(formik.values.contact))
-      
-      // Append members array
-      if (Array.isArray(formik.values.members)) {
+        formData.append('contact', JSON.stringify(formik.values.contact))
+
+        // Append members array
+        if (Array.isArray(formik.values.members)) {
           formData.append('members', JSON.stringify(formik.values.members));
-      }
+        }
 
         // Send a POST request using Axios
         const response = await axios.post(
@@ -433,12 +433,12 @@ const TopForm = () => {
     // Call the function when your component mounts
     retrieveDraftData();
   }, []);
-  
 
 
 
 
-  const [isLinkValid, setisLinkValid] = useState(true)
+
+  const [isLinkValid, setisLinkValid] = useState(false)
 
 
 
@@ -451,7 +451,7 @@ const TopForm = () => {
         console.log(response)
         if (response.data.status === 'success') {
           setisLinkValid(true)
-        
+
 
         }
 
@@ -505,9 +505,9 @@ const TopForm = () => {
                   Dashboard
                 </Nav.Link>
               </Nav> */}
-            {/* </Container>
-          </Navbar> */} 
-          <ToastContainer/>
+          {/* </Container>
+          </Navbar> */}
+          <ToastContainer />
           <div className="container-fluid">
             <Container
               style={{
@@ -583,7 +583,7 @@ const TopForm = () => {
                         name="lastName"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.lastName ? formData.lastName :formik.values.lastName}
+                        value={formData.lastName ? formData.lastName : formik.values.lastName}
                       />
                       {formik.touched.lastName && formik.errors.lastName ? (
                         <div className="text-danger">{formik.errors.lastName}</div>
@@ -599,7 +599,7 @@ const TopForm = () => {
                         name="email"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.email ? formData.email :formik.values.email}
+                        value={formData.email ? formData.email : formik.values.email}
                       />
                       {formik.touched.email && formik.errors.email ? (
                         <div className="text-danger">{formik.errors.email}</div>
@@ -631,7 +631,7 @@ const TopForm = () => {
                             name="phoneNumber"
                             onChange={handleChange}
                             onBlur={formik.handleBlur}
-                            value={formData.phoneNumber ? formData.phoneNumber :formik.values.phoneNumber}
+                            value={formData.phoneNumber ? formData.phoneNumber : formik.values.phoneNumber}
                           />
                         </div>
                         {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
@@ -651,7 +651,7 @@ const TopForm = () => {
                         name="designation"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.designation ? formData.designation :formik.values.designation}
+                        value={formData.designation ? formData.designation : formik.values.designation}
                       />
                       {formik.touched.designation && formik.errors.designation ? (
                         <div className="text-danger">
@@ -673,7 +673,7 @@ const TopForm = () => {
                           name="dateOfJoining"
                           onChange={handleChange}
                           onBlur={formik.handleBlur}
-                          value={formData.dateOfJoining ? formData.dateOfJoining :formik.values.dateOfJoining}
+                          value={formData.dateOfJoining ? formData.dateOfJoining : formik.values.dateOfJoining}
                         />
                       </InputGroup>
                       {formik.touched.dateOfJoining &&
@@ -694,7 +694,7 @@ const TopForm = () => {
                         name="presentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.presentAddress ? formData.presentAddress :formik.values.presentAddress}
+                        value={formData.presentAddress ? formData.presentAddress : formik.values.presentAddress}
                       />
 
                       {formik.touched.presentAddress &&
@@ -715,7 +715,7 @@ const TopForm = () => {
                         name="permanentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.permanentAddress ? formData.permanentAddress :formik.values.permanentAddress}
+                        value={formData.permanentAddress ? formData.permanentAddress : formik.values.permanentAddress}
                         disabled={formik.values.sameAsPresentAddress}
                       />
                       <Form.Check
@@ -754,7 +754,7 @@ const TopForm = () => {
                         name="aboutYourself"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.aboutYourself ? formData.aboutYourself :formik.values.aboutYourself}
+                        value={formData.aboutYourself ? formData.aboutYourself : formik.values.aboutYourself}
                       />
                       {formik.touched.aboutYourself &&
                         formik.errors.aboutYourself ? (
@@ -778,7 +778,7 @@ const TopForm = () => {
                         name="experience"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.experience ? formData.experience :formik.values.experience}
+                        value={formData.experience ? formData.experience : formik.values.experience}
                       />
                       {formik.touched.experience && formik.errors.experience ? (
                         <div className="text-danger">
@@ -796,7 +796,7 @@ const TopForm = () => {
                         name="company"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.company ? formData.company :formik.values.company}
+                        value={formData.company ? formData.company : formik.values.company}
                       />
                       {formik.touched.company && formik.errors.company ? (
                         <div className="text-danger">{formik.errors.company}</div>
@@ -815,7 +815,7 @@ const TopForm = () => {
                         name="enjoyment"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.enjoyment ? formData.enjoyment :formik.values.enjoyment}
+                        value={formData.enjoyment ? formData.enjoyment : formik.values.enjoyment}
                       />
                       {formik.touched.enjoyment && formik.errors.enjoyment ? (
                         <div className="text-danger">{formik.errors.enjoyment}</div>
@@ -834,7 +834,7 @@ const TopForm = () => {
                         name="sneakpeek"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.sneakpeek ? formData.sneakpeek :formik.values.sneakpeek}
+                        value={formData.sneakpeek ? formData.sneakpeek : formik.values.sneakpeek}
                       />
                     </Form.Group>
                     {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
@@ -884,92 +884,92 @@ const TopForm = () => {
                           alignItems: "center",
                           cursor: 'pointer'
                         }}
-                        // onClick={handleToggleSection}
+                      // onClick={handleToggleSection}
                       >
                         <h6 style={{ fontWeight: "normal" }}>Educational Certificates - Accepted Formats: Pdf</h6>
                         {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
                       </div>
                       {/* {isSectionOpen && ( */}
-                        <div>
-                          <FileUpload
-                            label="10th Marksheet"
-                            controlId="tenthMarksheet"
-                            acceptedFiles={formData.tenthMarksheetFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                tenthMarksheetFiles: files,
-                              }))
-                            }
-                            onFileChange={(file) => FileChange(file, "tenthMarksheet")}
-                          />
-                          <FileUpload
-                            label="12th Marksheet"
-                            controlId="twelfthMarksheet"
-                            acceptedFiles={formData.twelfthMarksheetFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                twelfthMarksheetFiles: files,
-                              }))
-                            }
-                            onFileChange={(file) =>
-                              FileChange(file, "twelfthMarksheet")
-                            }
-                          />
-                          <FileUpload
-                            label="PG Degree Certificate"
-                            controlId="PGDegreeCertificate"
-                            acceptedFiles={formData.pgDegreeCertificateFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                PGDegreeCertificate: files,
-                              }))
-                            }
-                            onFileChange={(file) =>
-                              FileChange(file, "PGDegreeCertificate")
-                            }
-                          />
-                          <FileUpload
-                            label="PG Marksheet"
-                            controlId="PGMarksheet"
-                            acceptedFiles={formData.pgMarksheetFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                pgMarksheetFiles: files,
-                              }))
-                            }
-                            onFileChange={(file) => FileChange(file, "PGMarksheet")}
-                          />
-                          <FileUpload
-                            label="UG Degree Certificate"
-                            controlId="UGDegreeCertificate"
-                            acceptedFiles={formData.ugDegreeCertificateFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                ugDegreeCertificateFiles: files,
-                              }))
-                            }
-                            onFileChange={(file) =>
-                              FileChange(file, "UGDegreeCertificate")
-                            }
-                          />
-                          <FileUpload
-                            label="UG Marksheet"
-                            controlId="UGMarksheet"
-                            acceptedFiles={formData.ugMarksheetFiles}
-                            setAcceptedFiles={(files) =>
-                              setFormData((prevData) => ({
-                                ...prevData,
-                                ugMarksheetFiles: files,
-                              }))
-                            }
-                            onFileChange={(file) => FileChange(file, "UGMarksheet")}
-                          />
-                        </div>
+                      <div>
+                        <FileUpload
+                          label="10th Marksheet"
+                          controlId="tenthMarksheet"
+                          acceptedFiles={formData.tenthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              tenthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                        />
+                        <FileUpload
+                          label="12th Marksheet"
+                          controlId="twelfthMarksheet"
+                          acceptedFiles={formData.twelfthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              twelfthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "twelfthMarksheet")
+                          }
+                        />
+                        <FileUpload
+                          label="PG Degree Certificate"
+                          controlId="PGDegreeCertificate"
+                          acceptedFiles={formData.pgDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              PGDegreeCertificate: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "PGDegreeCertificate")
+                          }
+                        />
+                        <FileUpload
+                          label="PG Marksheet"
+                          controlId="PGMarksheet"
+                          acceptedFiles={formData.pgMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              pgMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                        />
+                        <FileUpload
+                          label="UG Degree Certificate"
+                          controlId="UGDegreeCertificate"
+                          acceptedFiles={formData.ugDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugDegreeCertificateFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "UGDegreeCertificate")
+                          }
+                        />
+                        <FileUpload
+                          label="UG Marksheet"
+                          controlId="UGMarksheet"
+                          acceptedFiles={formData.ugMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                        />
+                      </div>
                       {/* )} */}
                     </div>
                     {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
@@ -1009,49 +1009,49 @@ const TopForm = () => {
              ) : null} */}
 
                     <div
-             style={{
-               display: "flex",
-               marginTop: "50px",
-               marginBottom: "25px",
-               gap: "10px",
-             }}
-           >
-             <Button 
-               style={{
-                 height: "35px",
-                 fontSize: "15px",
-                 backgroundColor: "rgb(210, 164, 250)",
-                 color: "white",
-                 borderColor: "rgb(210, 164, 250)",
-                 fontWeight: "500",
-               }}
-             >
-               Submit
-             </Button>
-             <Button
-             onClick={handleSaveDraft}
-               style={{
-                 height: "35px",
-                 fontSize: "15px",
-                 backgroundColor: "white",
-                 color: "rgb(147, 48, 233)",
-                 borderColor: "rgb(147, 48, 233)",
-                 fontWeight: "500",
-               }}
-             >
-               Save as draft
-             </Button>
-           </div>
+                      style={{
+                        display: "flex",
+                        marginTop: "50px",
+                        marginBottom: "25px",
+                        gap: "10px",
+                      }}
+                    >
+                      <Button
+                        style={{
+                          height: "35px",
+                          fontSize: "15px",
+                          backgroundColor: "rgb(210, 164, 250)",
+                          color: "white",
+                          borderColor: "rgb(210, 164, 250)",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Submit
+                      </Button>
+                      <Button
+                        onClick={handleSaveDraft}
+                        style={{
+                          height: "35px",
+                          fontSize: "15px",
+                          backgroundColor: "white",
+                          color: "rgb(147, 48, 233)",
+                          borderColor: "rgb(147, 48, 233)",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Save as draft
+                      </Button>
+                    </div>
                   </Col>
                 </Row>
               </Form>
             </Container>
 
-        <Form2
-          updateForm2Data={updateForm2Data}
-          updateCandidateData={updateCandidateData}
-          onFamilyDetailsChange={updateFamilyMembers}
-        />
+            <Form2
+              updateForm2Data={updateForm2Data}
+              updateCandidateData={updateCandidateData}
+              onFamilyDetailsChange={updateFamilyMembers}
+            />
 
             <div
               style={{
@@ -1064,9 +1064,9 @@ const TopForm = () => {
                 onClick={handleSubmit}
                 disabled={!formik.isValid}
                 style={{
-                  marginTop:"-10px",
+                  marginTop: "-10px",
                   height: "45px",
-                  width:"95px",
+                  width: "95px",
                   fontSize: "15px",
                   backgroundColor: " rgb(149, 89, 201)",
                   color: "white",
@@ -1082,8 +1082,23 @@ const TopForm = () => {
         </>
 
         :
-        <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#0000002e', display: "flex", justifyContent: 'center' }}>
-          <p style={{ fontSize: '28px', marginTop: '30px' }}>Invalid or Expired Link</p>
+        <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#0000002e', display: "flex", justifyContent: 'center', alignItems: "center" }}>
+
+          <div style={{
+            width: '80%',
+            height: '60vh',
+            backgroundColor: 'white',
+            boxShadow: 'rgb(16 24 40 / 30%) 1px 1px 10px 2px',
+            borderRadius: '10px',
+            padding: '8px 14px',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: "column"
+          }}>
+
+            <p style={{ fontSize: '36px', letterSpacing: '3px', color: 'rgb(102 98 98)', textAlign: 'center' }}>Oops! It seems you've reached an expired link.</p>
+
+            <p style={{ fontSize: '18px', letterSpacing: '3px', color: 'gray' }}>Please reach out to your HR representative</p>
+          </div>
+
 
         </div>
       }
