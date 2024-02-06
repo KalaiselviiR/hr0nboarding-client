@@ -354,8 +354,8 @@ function handleCSVExport(candidate) {
 
                       <div className='ms-3'>
                         <p style={{ padding: "8px" }} className='fw-normal mb-1'>
-                          <a href={`/recruiterView/${i._id}`} style={{textDecoration:"none",color:'black'}}>
-                            {i.fname} {i.lname}</a></p>
+                        {i.status != "Pending" ? <a href={`/recruiterView/${i._id}`} style={{textDecoration:"none",color:'black'}}>
+                            {i.fname} {i.lname}</a> :`${i.fname} ${i.lname}` }</p>
 
                       </div>
                     </div>

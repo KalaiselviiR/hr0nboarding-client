@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,useParams } from 'react-router-dom';
 import { CiExport, CiCalendar } from 'react-icons/ci';
 import { InputGroup, Row, Col, Button, Dropdown,Form } from 'react-bootstrap';
 import { MdOutlineMail } from "react-icons/md";
@@ -14,8 +14,6 @@ import axios from 'axios';
 // const items = JSON.parse(localStorage.getItem('userId'));
 
 
-  
-
 
 function UpdatePassword() {
          //create an object to store datas from input
@@ -26,16 +24,11 @@ function UpdatePassword() {
   })
 
   
+  // param id 
+  const{id} =useParams()
+  console.log(id);
 
-// const [items, setItems] = useState([]);
-// const items = JSON.parse(localStorage.getItem('userId'));
-// useEffect(() => {
-// items = JSON.parse(localStorage.getItem('userId'));
-  // if (items) {
-// setItems(items);
-// console.log(items)
-//   }
-// }, []);
+
 
     //object for useNavigate
 const navigate=useNavigate()
@@ -75,18 +68,16 @@ const handleSubmit = async (e) => {
     
     if(psw.length>8){
     const items = localStorage.getItem('userId');
-    // setItems(items);
-    // console.log(items)
-    // console.log('hello')
+   
 
     const newPassword = psw;
 
-    const userId = items;
+
 
 
     console.log(userData);
     //api call
-    const response = axios.put(`http://localhost:4000/api/changePassword/${userId}`, { password: newPassword }) 
+    const response = axios.put(`http://localhost:4000/api/changePassword/${id}`, { password: newPassword }) 
     .then(response => {
       console.log(response.data);
       console.log(response.status);
@@ -115,26 +106,6 @@ const handleSubmit = async (e) => {
       console.log(error);
     });
 
-    // console.log(response);
-    // if(response.status==200){
-
-    //     toast.success(response.data.message);
-    //   setTimeout(()=> {
-    //     navigate('/')
-    //   }, 1500);
-
-    // //reset all states datas
-    // setUser({
-    //     psw: "",
-    //     cpsw: ""
-    
-    // })
-
-      
-    // }else{
-    
-    //   // toast.error(response.data.message);
-    // }
   }
   else{
     toast.error('Enter valid password')
