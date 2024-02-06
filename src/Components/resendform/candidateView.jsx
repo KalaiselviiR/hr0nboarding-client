@@ -80,41 +80,41 @@ const CandidateViewForm = () => {
         })
   
      // Function to handle the click on "Verify Documents" button
-     const handleVerify = async () => {
-      // Perform verification logic
-      // Assume verification is successful for demonstration purposes
-      cancleVerify()
-      const response = await updateStatus(userData)
-      console.log(response);
+    //  const handleVerify = async () => {
+    //   // Perform verification logic
+    //   // Assume verification is successful for demonstration purposes
+    //   cancleVerify()
+    //   const response = await updateStatus(userData)
+    //   console.log(response);
       
-      setIsVerified(true);
-      toast.success("Document verified Successfully", {
-        position: "top-center"
-      });
+    //   setIsVerified(true);
+    //   toast.success("Document verified Successfully", {
+    //     position: "top-center"
+    //   });
       
-    };
+    // };
   
-    const openResendModal = () => {
-      setIsResendModalOpen(true)
-      setIsResent(false);
-    }
+    // const openResendModal = () => {
+    //   setIsResendModalOpen(true)
+    //   setIsResent(false);
+    // }
   
-    const closeResendModal = () => {
-      setIsResendModalOpen(false)
-      setIsResent(true);
-    }
+    // const closeResendModal = () => {
+    //   setIsResendModalOpen(false)
+    //   setIsResent(true);
+    // }
   
-    const handleResendError = (error) => {
-      toast.error(error, {
-        position: "top-center"
-      });
-    }
+    // const handleResendError = (error) => {
+    //   toast.error(error, {
+    //     position: "top-center"
+    //   });
+    // }
   
-    const handleResendSuccess = (successMessage) => {
-      toast.success(successMessage, {
-        position: "top-center"
-      });
-    }
+    // const handleResendSuccess = (successMessage) => {
+    //   toast.success(successMessage, {
+    //     position: "top-center"
+    //   });
+    // }
     useEffect(()=>{
    
       getoneCandidate()
@@ -467,8 +467,8 @@ const CandidateViewForm = () => {
               <CandidateFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"}/>
               <CandidateFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"}/>
             </div>
-                <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
-                  <Button
+                {/* <div className="mt-3" style={{ display: "flex", gap: "10px" }}> */}
+                  {/* <Button
                     style={{
                       height: "35px",
                       fontSize: "15px",
@@ -480,9 +480,9 @@ const CandidateViewForm = () => {
                     onClick={initModal}
                     disabled={isVerified || isResent}
                   >
-                    Verify documents
-                  </Button>
-                  <Button
+                    Verify 
+                  </Button> */}
+                  {/* <Button
                     style={{
                       height: "35px",
                       fontSize: "15px",
@@ -497,9 +497,9 @@ const CandidateViewForm = () => {
                   >
                     Resend documents
                   </Button>
-                  <Modal className='deleteModal' show={isShow} onHide={initModal}>
+                  <Modal className='deleteModal' show={isShow} onHide={initModal}> */}
 
-<div className="deleteModalBody">
+{/* <div className="deleteModalBody">
 
   <div className="deleteModalContent">
     <h3>Verify documents</h3>
@@ -515,8 +515,8 @@ const CandidateViewForm = () => {
 
 
 </Modal>
-                </div>
-                <div className="mt-5 mb-3">
+                </div> */}
+                {/* <div className="mt-5 mb-3">
                   <Button
                     style={{
                       height: "35px",
@@ -531,7 +531,7 @@ const CandidateViewForm = () => {
                   >
                     Good to go
                   </Button>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </Form>

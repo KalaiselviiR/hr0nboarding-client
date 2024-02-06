@@ -57,69 +57,69 @@ function BottomSection({ cData }) {
   }, [cData]);
   console.log(cbData);
 
-  const handleExportCSV = () => {
-    // Prepare data for CSV export
-    const csvData = [
-      [
-        "Family member name",
-        "Relationship",
-        "Date of Birth",
-      ],
-      ...familyMembers?.map(member => [
-        member.memberName,
-        member.relationship,
-        moment(member.dateOfBirth).format("YYYY-MM-DD"),
-    ]),
-    ];
+  // const handleExportCSV = () => {
+  //   // Prepare data for CSV export
+  //   const csvData = [
+  //     [
+  //       "Family member name",
+  //       "Relationship",
+  //       "Date of Birth",
+  //     ],
+  //     ...familyMembers?.map(member => [
+  //       member.memberName,
+  //       member.relationship,
+  //       moment(member.dateOfBirth).format("YYYY-MM-DD"),
+  //   ]),
+  //   ];
 
-    const csvFileName = "family_details.csv";
-    // const csvHeaders = { headers: ["Content-Disposition"]: `attachment; filename=${csvFileName}` };
+  //   const csvFileName = "family_details.csv";
+  //   // const csvHeaders = { headers: ["Content-Disposition"]: `attachment; filename=${csvFileName}` };
 
-    const csvLink = document.createElement("a");
-    csvLink.href = encodeURI(
-      `data:text/csv;charset=utf-8,${csvData
-        .map((row) => row.join(","))
-        .join("\n")}`
-    );
-    csvLink.target = "_blank";
-    csvLink.download = csvFileName;
-    csvLink.click();
-  };
+  //   const csvLink = document.createElement("a");
+  //   csvLink.href = encodeURI(
+  //     `data:text/csv;charset=utf-8,${csvData
+  //       .map((row) => row.join(","))
+  //       .join("\n")}`
+  //   );
+  //   csvLink.target = "_blank";
+  //   csvLink.download = csvFileName;
+  //   csvLink.click();
+  // };
 
-  const csvHeaders = [
-    "epfoUan",
-    "pfNo",
-    "adharCard",
-    "panCard",
-    "employeesName",
-    "dateOfBirthAs",
-    "gender",
-    "maritalStatus",
-    "fatherName",
-    "bankName",
-    "accountNumber",
-    "branch",
-    "ifsc",
-  ];
+  // const csvHeaders = [
+  //   "epfoUan",
+  //   "pfNo",
+  //   "adharCard",
+  //   "panCard",
+  //   "employeesName",
+  //   "dateOfBirthAs",
+  //   "gender",
+  //   "maritalStatus",
+  //   "fatherName",
+  //   "bankName",
+  //   "accountNumber",
+  //   "branch",
+  //   "ifsc",
+  // ];
 
-  const HRData = [
-    [
-      "Prefix",
-      "First Name",
-      "Middle Name",
-      "Last Name",
-      "Blood Group",
-      "Nationality",
-    ],
-    [
-      cbData.prefix,
-      cbData.firstNamehr,
-      cbData.middleName,
-      cbData.lastNamehr,
-      cbData.bloodGroup,
-      cbData.nationality,
-    ],
-  ];
+  // const HRData = [
+  //   [
+  //     "Prefix",
+  //     "First Name",
+  //     "Middle Name",
+  //     "Last Name",
+  //     "Blood Group",
+  //     "Nationality",
+  //   ],
+  //   [
+  //     cbData.prefix,
+  //     cbData.firstNamehr,
+  //     cbData.middleName,
+  //     cbData.lastNamehr,
+  //     cbData.bloodGroup,
+  //     cbData.nationality,
+  //   ],
+  // ];
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
@@ -141,7 +141,7 @@ function BottomSection({ cData }) {
         <div className="FamilyDet">
           <h3 className="heading"> Family details For Medical Insurance</h3>
           <div className="buttons">
-            <Button
+            {/* <Button
               style={{ backgroundColor: "#7F56D9", border: "none" }}
               className="buttonss"
               onClick={handleExportCSV}
@@ -155,7 +155,7 @@ function BottomSection({ cData }) {
                 }}
               />
               Export
-            </Button>
+            </Button> */}
           </div>
         </div>
       </Container>
@@ -311,7 +311,7 @@ function BottomSection({ cData }) {
               />
               Export
             </Button> */}
-            <CSVLink
+            {/* <CSVLink
               data={[cbData]}
               headers={csvHeaders}
               filename={"PF Account_details.csv"}
@@ -331,7 +331,7 @@ function BottomSection({ cData }) {
                 />
                 Export
               </Button>
-            </CSVLink>
+            </CSVLink> */}
           </div>
         </div>
       </Container>
@@ -548,7 +548,7 @@ function BottomSection({ cData }) {
         <div className="FamilyDet">
           <h3 className="heading">Details For HROne Portal</h3>
           <div className="buttons">
-            <CSVLink
+            {/* <CSVLink
               data={HRData}
               filename={"Details_of_HROne_Portal.csv"}
               className="buttonss"
@@ -567,7 +567,7 @@ function BottomSection({ cData }) {
                 />
                 Export
               </Button>
-            </CSVLink>
+            </CSVLink> */}
           </div>
         </div>
       </Container>
