@@ -12,11 +12,12 @@ import {
 import { resendDocuments } from "../../service/allapi";
 
 
-function ResendDocument({ closeModal,onApiError,onApiSuccess }) {
+function ResendDocument({ closeModal,onApiError,onApiSuccess,id }) {
   const [checkedItems, setCheckedItems] = useState([]);
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
   const [isLoading,setIsLoading] = useState(false);
+  const email = localStorage.getItem("email")
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -48,8 +49,8 @@ function ResendDocument({ closeModal,onApiError,onApiSuccess }) {
     try {
 
       const data = {
-        from:'hr@techjays.com',
-        to:'candidate@techjays.com',
+        from:email,
+        id,
         documents:checkedItems,
         note,
         resendLink:`${CLIENT_SERVER_URL}/candidateForm`

@@ -533,6 +533,7 @@ const RecruiterForm = () => {
        <ResendDocument closeModal={closeResendModal}
        onApiError={handleResendError}
        onApiSuccess={handleResendSuccess}
+       id={id}
        />}
        <ToastContainer
        autoClose={2000}
