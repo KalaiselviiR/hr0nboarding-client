@@ -79,6 +79,7 @@ const TopForm = () => {
       ...prevData,
       id: id,
     }));
+    formik.setFieldValue("id", id);
   }, [id]);
 
   //create an object to store datas from input family details

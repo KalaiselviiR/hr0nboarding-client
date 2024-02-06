@@ -167,6 +167,7 @@
     font-size: 14px;
     border-radius: 8px;
     border-width: 1.5px;
+    height: 40px;
 }
 
 .submit-box{
@@ -200,7 +201,7 @@ margin-left: -10px;
 .InputEmail{
     flex: 1;
     height: 40px;
-    width: 350px;
+    width: 360px;
     border: none;
     outline: none;
     font-size: 14px;
@@ -210,6 +211,12 @@ margin-left: -10px;
 .InputEmail::placeholder{
     font-size: 14px;
 }
+
+.input-field::placeholder{
+    font-size: 14px;
+}
+
+
 .Frgtpass{
     font-weight: 340;
 }
@@ -235,6 +242,8 @@ margin-left: -10px;
     
 
 }
-/* .inputSize{
+.inputSize{
     height: 40px;
-} */
+}
+
+
