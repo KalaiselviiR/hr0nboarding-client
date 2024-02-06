@@ -1,11 +1,14 @@
 import React from "react";
-import { Form, Image } from "react-bootstrap";
+import { Button, Form, Image } from "react-bootstrap";
 import pdf from "../../assets/pdf-image.jpeg"
 import jpg from "../../assets/jpg-image.jpg"
 
 function CandidateFileView({ label, file,name,size }) {
+
+    
   
   return (
+    <>
     <Form.Group className="mb-3">
       <Form.Label>{label}</Form.Label>
       {file && (
@@ -43,8 +46,36 @@ function CandidateFileView({ label, file,name,size }) {
           </div>
         </div>
         </a>
+        
+        
       )}
     </Form.Group>
+    <div>
+            <Button
+              style={{
+                height: "35px",
+                fontSize: "15px",
+                marginTop: "10px",
+                backgroundColor: "white",
+                color: "rgb(147, 48, 233)",
+                borderColor: "rgb(147, 48, 233)",
+                fontWeight: "600",
+              }}
+            //   onClick={handleFileClick}
+            >
+              Reupload
+            </Button>
+            <input
+              type="file"
+              accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
+            //   ref={fileInputRef}
+              style={{ display: "none" }}
+            //   onChange={handleFileChange}
+            />
+
+            {/* {error && <div className="text-danger">{error}</div>} */}
+          </div>
+    </>
   );
 }
 

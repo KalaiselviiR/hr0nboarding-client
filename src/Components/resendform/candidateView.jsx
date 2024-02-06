@@ -449,7 +449,7 @@ const CandidateViewForm = () => {
                     }}
                     onClick={handleToggleSection}
                   >
-                    <h6 style={{fontWeight:"normal"}}>Educational Certificates</h6>
+                    <h6 style={{fontWeight:"normal", marginTop:"20px"}}>Educational Certificates</h6>
                     {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                   </div>
                   {isSectionOpen && (
