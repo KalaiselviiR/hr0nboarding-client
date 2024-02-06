@@ -472,7 +472,7 @@ const TopForm = () => {
     <>
       {isLinkValid ?
         <>
-          {/* <Navbar
+          <Navbar
             bg="white"
             variant="black"
             style={{
@@ -492,7 +492,7 @@ const TopForm = () => {
                   className="d-inline-block align-top"
                 />
               </Navbar.Brand>
-              {/* <Nav className="me-auto disabled">
+               {/* <Nav className="me-auto disabled">
                 <Nav.Link
                   href=""
                   className="d-none d-md-block"
@@ -506,8 +506,8 @@ const TopForm = () => {
                   Dashboard
                 </Nav.Link>
               </Nav> */}
-          {/* </Container>
-          </Navbar> */}
+          </Container>
+          </Navbar>
           <ToastContainer />
           <div className="container-fluid">
             <Container
