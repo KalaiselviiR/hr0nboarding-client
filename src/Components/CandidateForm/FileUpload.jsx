@@ -10,7 +10,7 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 
 // FileUpload component for handling file upload
-function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
+function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles }) {
   // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -25,7 +25,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
       setError("Please select a file");
     } else {
       // Check file type for photo
-      if (label === "Photo  - Accepted Formats: JPG or PNG ") {
+      if (label === "Photo") {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
         if (!allowedPhotoTypes.includes(selectedFile.type)) {
           setError("Only JPG and PNG files are allowed for photos");
@@ -77,7 +77,10 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
 
   return (
     <Form.Group className="mb-3">
-      <Form.Label>{label}</Form.Label>
+      <div style={{display:"flex" , flexDirection:"column"}}>
+      <Form.Label style={{fontWeight:"500"}}>{label}</Form.Label>
+      <Form.Label style={{fontSize:"13px",fontWeight:"480"}}>{instruction}</Form.Label>
+      </div>
       {!file ? (
         <div>
           <Button
@@ -95,7 +98,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
           </Button>
           <input
             type="file"
-            accept={label === "Photo  - Accepted Formats: JPG or PNG " ? ".jpg, .jpeg, .png" : ".pdf"}
+            accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -131,7 +134,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
               }}
             >
               <div className="pdf-image" style={{ height: "50px" }}>
-                <Image src={label === "Photo  - Accepted Formats: JPG or PNG " ? png : pdf} alt="PDF" width="40px" height="50px" />
+                <Image src={label === "Photo" ? png : pdf} alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
                 <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
@@ -180,7 +183,7 @@ function FileUpload({ label, onFileChange, acceptedFiles, setAcceptedFiles }) {
             </Button>
             <input
               type="file"
-              accept={label === "Photo  - Accepted Formats: JPG or PNG " ? ".jpg, .jpeg, .png" : ".pdf"}
+              accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}

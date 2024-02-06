@@ -438,7 +438,7 @@ const TopForm = () => {
 
 
 
-  const [isLinkValid, setisLinkValid] = useState(false)
+  const [isLinkValid, setisLinkValid] = useState(true)
 
 
 
@@ -843,10 +843,11 @@ const TopForm = () => {
                   </Col>
                 </Row>
                 <Row className="mt-4">
-                  <Col md={6}>
+                  <Col md={4}>
                     <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                     <FileUpload
-                      label="Photo  - Accepted Formats: JPG or PNG "
+                      label="Photo"
+                      instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}
                       setAcceptedFiles={(files) =>
@@ -862,7 +863,8 @@ const TopForm = () => {
              ) : null} */}
 
                     <FileUpload
-                      label="Aadhar Card - Accepted Formats :pdf "
+                      label="Aadhar Card "
+                      instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
                       setAcceptedFiles={(files) =>
@@ -886,13 +888,14 @@ const TopForm = () => {
                         }}
                       // onClick={handleToggleSection}
                       >
-                        <h6 style={{ fontWeight: "normal" }}>Educational Certificates - Accepted Formats: Pdf</h6>
+                        <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
                         {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
                       </div>
                       {/* {isSectionOpen && ( */}
                       <div>
                         <FileUpload
                           label="10th Marksheet"
+                          instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
                           acceptedFiles={formData.tenthMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -905,6 +908,7 @@ const TopForm = () => {
                         />
                         <FileUpload
                           label="12th Marksheet"
+                          instruction="Accepted format:pdf"
                           controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -919,6 +923,7 @@ const TopForm = () => {
                         />
                         <FileUpload
                           label="PG Degree Certificate"
+                          instruction="Accepted format:pdf"
                           controlId="PGDegreeCertificate"
                           acceptedFiles={formData.pgDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
@@ -934,6 +939,7 @@ const TopForm = () => {
                         <FileUpload
                           label="PG Marksheet"
                           controlId="PGMarksheet"
+                          instruction="Accepted format:pdf"
                           acceptedFiles={formData.pgMarksheetFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -945,6 +951,7 @@ const TopForm = () => {
                         />
                         <FileUpload
                           label="UG Degree Certificate"
+                          instruction="Accepted format:pdf"
                           controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
@@ -959,6 +966,7 @@ const TopForm = () => {
                         />
                         <FileUpload
                           label="UG Marksheet"
+                          instruction="Accepted format:pdf"
                           controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -977,7 +985,8 @@ const TopForm = () => {
              ) : null} */}
 
                     <FileUpload
-                      label="Relieving Letters from all your previous organizations  - Accepted Formats: Pdf "
+                      label="Relieving Letters from all your previous organizations"
+                      instruction="Accepted format:pdf"
                       controlId="relievingLetters"
                       acceptedFiles={formData.relievingLettersFiles}
                       setAcceptedFiles={(files) =>
@@ -993,7 +1002,8 @@ const TopForm = () => {
              ) : null} */}
 
                     <FileUpload
-                      label="3 Months Payslip - Accepted Formats: Pdf "
+                      label="3 Months Payslip "
+                      instruction="Accepted format:pdf"
                       controlId="payslip"
                       acceptedFiles={formData.payslipFiles}
                       setAcceptedFiles={(files) =>

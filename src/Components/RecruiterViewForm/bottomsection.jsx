@@ -294,7 +294,7 @@ function BottomSection({ cData }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">Details For PF</h3>
+          <h3 className="heading">Details For PF Account</h3>
           <div className="buttons">
             {/* <Button
               style={{ backgroundColor: '#7F56D9', border: 'none' }}

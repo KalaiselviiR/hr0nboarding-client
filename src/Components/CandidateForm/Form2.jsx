@@ -541,7 +541,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
         }}
       >
         <div className="FamilyDet">
-          <h3 className="heading">Details For PF</h3>
+          <h3 className="heading">Details For PF Account</h3>
         </div>
       </Container>
 
