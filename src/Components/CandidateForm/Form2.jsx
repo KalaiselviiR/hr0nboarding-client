@@ -23,7 +23,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 
-function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
+function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOutsideIndia }) {
 
   
     const [familyMembers, setFamilyMembers] = useState([{ memberName: '', relationship: '', dateOfBirth: '' }]);
@@ -577,7 +577,11 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
           </Form>
         </div>
       </Container>
-      {/* <br /> */}
+
+
+       {!isOutsideIndia && (
+        <>
+         {/* <br /> */}
       <Container
         style={{
           background: "white",
@@ -954,6 +958,10 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
           </Form>
         </div>
       </Container>
+       </>
+        )}        
+
+     
 
       <Container
         style={{

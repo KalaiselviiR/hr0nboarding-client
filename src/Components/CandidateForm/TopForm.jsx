@@ -57,6 +57,13 @@ const TopForm = () => {
   const [scrollToError, setScrollToError] = useState(null);
 
   const [id, setId] = useState(null);
+  const [isOutsideIndia, setIsOutsideIndia] = useState()
+
+
+
+
+
+
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
   const handleToggleSection = () => {
@@ -70,6 +77,7 @@ const TopForm = () => {
     const { data } = await getSingleCandidate(token);
     console.log(data);
     setId(data._id);
+    setIsOutsideIndia(data.region)
   };
   console.log(id);
 
@@ -1062,6 +1070,7 @@ const TopForm = () => {
               updateForm2Data={updateForm2Data}
               updateCandidateData={updateCandidateData}
               onFamilyDetailsChange={updateFamilyMembers}
+              isOutsideIndia={isOutsideIndia}
             />
 
             <div
