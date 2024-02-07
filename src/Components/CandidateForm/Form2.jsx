@@ -546,7 +546,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 gap: "10px",
               }} 
             >
-
+{/* 
               <Button
                
                 style={{
@@ -559,7 +559,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 }}
               >
                 Submit
-              </Button>
+              </Button> */}
               <Button
               onClick={handleSaveDraftAll}
                 style={{
@@ -928,7 +928,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 gap: "10px",
               }}
             > 
-              <Button
+              {/* <Button
             
 
                 style={{
@@ -941,7 +941,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 }}
               >
                 Submit
-              </Button>
+              </Button> */}
               <Button
               onClick={handleSaveDraft2}
                 style={{
@@ -1198,7 +1198,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               }} 
             >
 
-              <Button
+              {/* <Button
                
                 style={{
                   height: "35px",
@@ -1210,7 +1210,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 }}
               >
                 Submit
-              </Button>
+              </Button> */}
               <Button
               onClick={handleSaveDraft3}
                 style={{
