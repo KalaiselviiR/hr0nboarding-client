@@ -61,6 +61,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
     dateOfBirthAs: "",
     gender: "",
     maritalStatus: "",
+    bankName: "",
     fatherName: "",
     accountNumber: "",
     branch: "",

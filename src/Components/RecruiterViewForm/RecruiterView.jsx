@@ -491,7 +491,7 @@ const RecruiterForm = () => {
 
   <div className="deleteModalContent">
     <h3>Verify documents</h3>
-    <p>Are you sure you've completed document verification? This action is irreversible</p>
+    <p>Are you sure you have completed document verification? This action is irreversible</p>
   </div>
 
   <div className="deleteModalButtons">

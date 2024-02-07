@@ -135,6 +135,7 @@ const TopForm = () => {
     dateOfBirthAs: "",
     gender: "",
     maritalStatus: "",
+    bankName: "",
     fatherName: "",
     accountNumber: "",
     branch: "",
