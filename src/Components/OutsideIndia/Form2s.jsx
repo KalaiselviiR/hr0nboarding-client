@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./CandidateForm.css"; // Assuming you have a custom CSS file for styling
+import "./CandidateForms.css"; // Assuming you have a custom CSS file for styling
 import { CiExport, CiCalendar,CiTrash  } from "react-icons/ci";
 import {
   InputGroup,
@@ -16,14 +16,14 @@ import {
   handleFieldChange,
   initialValues,
   validationSchema,
-} from "./validation";
+} from "./validations";
 import { createCandidateDetails } from "../../service/allapi";
-import { allBanks } from "./Bank";
+import { allBanks } from "./Banks";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
 
-function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOutsideIndia }) {
+function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOutsideIndia }) {
 
   
     const [familyMembers, setFamilyMembers] = useState([{ memberName: '', relationship: '', dateOfBirth: '' }]);
@@ -1232,4 +1232,4 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
   );
 }
 
-export default Form2;
+export default Form2s;

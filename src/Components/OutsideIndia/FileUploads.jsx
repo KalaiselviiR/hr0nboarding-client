@@ -1,28 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Button, Form, Image, ProgressBar } from "react-bootstrap";
-import "./CandidateForm.css";
+import "./CandidateForms.css";
 import tick from "../../assets/tick.avif";
 import pdf from "../../assets/pdf-image.jpeg";
 import png from "../../assets/png-image.png";
 //file upload
 import axios from "axios";
 import { pdfjs } from "react-pdf";
-import PdfComp from "./PdfComp";
+import PdfComps from "./PdfComps";
 
 // FileUpload component for handling file upload
-function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles,draftFile }) {
+function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles }) {
   // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   // Reference for file input element
   const fileInputRef = useRef(null);
-
-  useEffect(() => {
-    if(draftFile){
-      setProgress(100)
-    }
-  },[draftFile])
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -87,7 +81,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
       <Form.Label style={{fontWeight:"500"}}>{label}</Form.Label>
       <Form.Label style={{fontSize:"13px",fontWeight:"480"}}>{instruction}</Form.Label>
       </div>
-      {!file && !draftFile ? (
+      {!file ? (
         <div>
           <Button
             style={{
@@ -143,10 +137,9 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
                 <Image src={label === "Photo" ? png : pdf} alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
-                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{
-                  draftFile ? draftFile?.name :  file.name}</p>
+                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
                 <p style={{ margin: "0", fontSize: "10px", marginTop: "-1px" }}>
-                  {draftFile ? (draftFile?.size / 1024).toFixed(2) : (file.size / 1024).toFixed(2)} KB
+                  {(file.size / 1024).toFixed(2)} KB
                 </p>
                 <div className="Bar">
                   <ProgressBar
@@ -204,4 +197,4 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
   );
 }
 
-export default FileUpload;
+export default FileUploads;
