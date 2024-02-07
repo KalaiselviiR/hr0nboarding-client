@@ -31,6 +31,7 @@ import { getSingleCandidate, updateStatus } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { openDB, deleteDB } from 'idb';
 
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 //   "pdfjs-dist/build/pdf.worker.min.js",
@@ -180,7 +181,25 @@ const TopForm = () => {
   };
 
 
-  const handleSaveDraft = () => {
+  const handleSaveDraft = async () => {
+
+    const db = await openDB('FilesDB', 1);
+
+    const newTaskObject = {
+       photoFiles: formData?.photoFiles,
+       aadharCardFiles:formData?.aadharCardFiles,
+       tenthMarksheetFiles:formData?.tenthMarksheetFiles,
+       twelfthMarksheetFiles:formData?.twelfthMarksheetFiles,
+       pgDegreeCertificateFiles:formData?.pgDegreeCertificateFiles,
+       pgMarksheetFiles:formData?.pgMarksheetFiles,
+       ugDegreeCertificateFiles:formData?.ugDegreeCertificateFiles,
+       ugMarksheetFiles:formData?.ugMarksheetFiles,
+       relievingLettersFiles:formData?.relievingLettersFiles,
+       payslipFiles:formData?.payslipFiles
+      };
+
+     const addedTask = await db.add('files', newTaskObject);
+
 
     // Convert the form data to a string before storing it in sessionStorage
     const formDataString = JSON.stringify({
@@ -197,35 +216,6 @@ const TopForm = () => {
       company: formData.company,
       enjoyment: formData.enjoyment,
       sneakpeek: formData.sneakpeek,
-      photoFiles: formData.photoFiles.name,
-      aadharCardFiles: aadharCardFiles
-        ? { name: aadharCardFiles.name, size: aadharCardFiles.size }
-        : null,
-      // educationCertificateFiles: null,
-      tenthMarksheetFiles: tenthMarksheetFiles
-        ? { name: tenthMarksheetFiles.name, size: tenthMarksheetFiles.size }
-        : null,
-      twelfthMarksheetFiles: twelfthMarksheetFiles
-        ? { name: twelfthMarksheetFiles.name, size: twelfthMarksheetFiles.size }
-        : null,
-      pgDegreeCertificateFiles: pgDegreeCertificateFiles
-        ? { name: pgDegreeCertificateFiles.name, size: pgDegreeCertificateFiles.size }
-        : null,
-      pgMarksheetFiles: pgMarksheetFiles
-        ? { name: pgMarksheetFiles.name, size: pgMarksheetFiles.size }
-        : null,
-      ugDegreeCertificateFiles: ugDegreeCertificateFiles
-        ? { name: ugDegreeCertificateFiles.name, size: ugDegreeCertificateFiles.size }
-        : null,
-      ugMarksheetFiles: ugMarksheetFiles
-        ? { name: ugMarksheetFiles.name, size: ugMarksheetFiles.size }
-        : null,
-      relievingLettersFiles: relievingLettersFiles
-        ? { name: relievingLettersFiles.name, size: relievingLettersFiles.size }
-        : null,
-      payslipFiles: payslipFiles
-        ? { name: payslipFiles.name, size: payslipFiles.size }
-        : null,
       id: formData.firstName,
     })
 
@@ -349,6 +339,29 @@ const TopForm = () => {
           sessionStorage.clear();
           const response = await updateStatus(userData)
           console.log(response);
+
+          const dbName = "FilesDB"
+              try {
+                await deleteDB(dbName);
+                setFormData((prev) => (
+                  {
+                    ...prev,
+                    photoFiles: null,
+                    aadharCardFiles: null,
+                    tenthMarksheetFiles: null,
+                    twelfthMarksheetFiles: null,
+                    pgDegreeCertificateFiles: null,
+                    pgMarksheetFiles: null,
+                    ugDegreeCertificateFiles: null,
+                    ugMarksheetFiles: null,
+                    relievingLettersFiles: null,
+                    payslipFiles: null,
+                  }
+                ))
+              } catch (error) {
+                console.error(`Error deleting database '${dbName}':`, error);        
+              }
+
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -430,6 +443,47 @@ const TopForm = () => {
   }, []);
 
   useEffect(() => {
+
+    const createDB = async () => {
+      const db = await openDB('FilesDB', 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains('files')) {
+            const store = db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+          }
+        },
+      });
+      const storedFiles = await db.getAll('files');
+      if(storedFiles){
+        formik.setFieldValue("photoFiles",storedFiles[storedFiles.length - 1]?.photoFiles)
+        formik.setFieldValue("aadharCardFiles",storedFiles[storedFiles.length - 1]?.aadharCardFiles)
+        formik.setFieldValue("tenthMarksheetFiles",storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles)
+        formik.setFieldValue("twelfthMarksheetFiles",storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles)
+        formik.setFieldValue("pgDegreeCertificateFiles",storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles)
+        formik.setFieldValue("pgMarksheetFiles",storedFiles[storedFiles.length - 1]?.pgMarksheetFiles)
+        formik.setFieldValue("ugDegreeCertificateFiles",storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles)
+        formik.setFieldValue("ugMarksheetFiles",storedFiles[storedFiles.length - 1]?.ugMarksheetFiles)
+        formik.setFieldValue("relievingLettersFiles",storedFiles[storedFiles.length - 1]?.relievingLettersFiles)
+        formik.setFieldValue("payslipFiles",storedFiles[storedFiles.length - 1]?.payslipFiles)
+        setFormData((prev) => (
+          {
+            ...prev,
+            photoFiles:storedFiles[storedFiles.length - 1]?.photoFiles,
+            aadharCardFiles:storedFiles[storedFiles.length - 1]?.aadharCardFiles,
+            tenthMarksheetFiles:storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles,
+            twelfthMarksheetFiles:storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles,
+            pgDegreeCertificateFiles:storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles,
+            pgMarksheetFiles:storedFiles[storedFiles.length - 1]?.pgMarksheetFiles,
+            ugDegreeCertificateFiles:storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles,
+            ugMarksheetFiles:storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
+            relievingLettersFiles:storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
+            payslipFiles:storedFiles[storedFiles.length - 1]?.payslipFiles,
+
+          }
+        ))
+
+      }
+     
+    }
     // Function to retrieve draft data from sessionStorage
     const retrieveDraftData = () => {
       const storedData = sessionStorage.getItem('draftFormData');
@@ -441,6 +495,7 @@ const TopForm = () => {
     };
 
     // Call the function when your component mounts
+    createDB();
     retrieveDraftData();
   }, []);
 
@@ -867,6 +922,7 @@ const TopForm = () => {
                         }))
                       }
                       onFileChange={(file) => FileChange(file, "photo")}
+                      draftFile={formData?.photoFiles}
                     />
                     {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
                <div className="text-danger">{formik.errors.photoFiles}</div>
@@ -884,6 +940,7 @@ const TopForm = () => {
                         }))
                       }
                       onFileChange={(file) => FileChange(file, "aadharCard")}
+                      draftFile={formData?.aadharCardFiles}
                     />
                     {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
                <div className="text-danger">{formik.errors.aadharCardFiles}</div>
@@ -915,6 +972,7 @@ const TopForm = () => {
                             }))
                           }
                           onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                          draftFile={formData?.tenthMarksheetFiles}
                         />
                         <FileUpload
                           label="12th Marksheet"
@@ -930,6 +988,7 @@ const TopForm = () => {
                           onFileChange={(file) =>
                             FileChange(file, "twelfthMarksheet")
                           }
+                          draftFile={formData?.twelfthMarksheetFiles}
                         />
                         <FileUpload
                           label="PG Degree Certificate"
@@ -945,6 +1004,7 @@ const TopForm = () => {
                           onFileChange={(file) =>
                             FileChange(file, "PGDegreeCertificate")
                           }
+                          draftFile={formData?.pgDegreeCertificateFiles}
                         />
                         <FileUpload
                           label="PG Marksheet"
@@ -958,6 +1018,7 @@ const TopForm = () => {
                             }))
                           }
                           onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                          draftFile={formData?.pgMarksheetFiles}
                         />
                         <FileUpload
                           label="UG Degree Certificate"
@@ -973,6 +1034,7 @@ const TopForm = () => {
                           onFileChange={(file) =>
                             FileChange(file, "UGDegreeCertificate")
                           }
+                          draftFile={formData?.ugDegreeCertificateFiles}
                         />
                         <FileUpload
                           label="UG Marksheet"
@@ -986,6 +1048,7 @@ const TopForm = () => {
                             }))
                           }
                           onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                          draftFile={formData?.ugMarksheetFiles}
                         />
                       </div>
                       {/* )} */}
@@ -1006,6 +1069,7 @@ const TopForm = () => {
                         }))
                       }
                       onFileChange={(file) => FileChange(file, "relievingLetters")}
+                      draftFile={formData?.relievingLettersFiles}
                     />
                     {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
                <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
@@ -1023,6 +1087,7 @@ const TopForm = () => {
                         }))
                       }
                       onFileChange={(file) => FileChange(file, "payslip")}
+                      draftFile={formData?.payslipFiles}
                     />
                     {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
                <div className="text-danger">{formik.errors.payslipFiles}</div>
