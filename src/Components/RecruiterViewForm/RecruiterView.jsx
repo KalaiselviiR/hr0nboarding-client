@@ -22,7 +22,7 @@ import ResendDocument from '../ResendDocument/ResendDocument'
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useNavigate, useParams } from "react-router-dom";
-import { getRecruterView, updateStatus } from "../../service/allapi";
+import { getRecruterView, getSingleCandidateOutside, updateStatus } from "../../service/allapi";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import { Modal } from 'react-bootstrap';
@@ -40,6 +40,7 @@ const RecruiterForm = () => {
   const [cData, setCdata] = useState([]);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
   const [isShow, setInvokeModal] = useState(false);
+  const [isOutsideIndia, setIsOutsideIndia] = useState()
 
   const navigate = useNavigate();
 
@@ -61,9 +62,21 @@ const RecruiterForm = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
   };
 
-  // param id 
-  const{id} =useParams()
-  console.log(id);
+
+    // param id 
+    const{id} =useParams()
+    // console.log(id);
+ 
+    //get details of the perticuler candidate
+    const getoneCandidatesFrom = async () => {
+      const  datas  = await getSingleCandidateOutside(id);
+      console.log(datas);
+      setIsOutsideIndia(datas.region)
+    };
+    console.log(isOutsideIndia);
+
+
+
   //get details of the perticuler Candidate
   const getoneCandidate=async()=>{
     const {data}=await getRecruterView(id)
@@ -116,7 +129,8 @@ const RecruiterForm = () => {
     });
   }
   useEffect(()=>{
- 
+    getoneCandidatesFrom() 
+     
     getoneCandidate()
    
   },[])
@@ -526,7 +540,7 @@ const RecruiterForm = () => {
 
         </Container>
 
-        <BottomSection cData={cData} />
+        <BottomSection cData={cData} isOutsideIndia={isOutsideIndia} />
       </div>
 
       {isResendModalOpen &&

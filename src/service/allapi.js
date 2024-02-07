@@ -36,6 +36,10 @@ export const addCandidate=async(body)=>{
 export const getSingleCandidate=async(token)=>{
     return await commonRequest("GET",`${BASE_URL}/api/get-singlecandidate/${token}`,"")
 }
+//Get a single Candidate from id
+export const getSingleCandidateOutside=async(id)=>{
+    return await commonRequest("GET",`${BASE_URL}/api/getSingleCandidate/${id}`,"")
+}
 
 //Edit Candidate
 export const editCandidate=async(id,body)=>{
