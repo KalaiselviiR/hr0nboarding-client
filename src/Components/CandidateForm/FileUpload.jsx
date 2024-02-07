@@ -10,13 +10,19 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 
 // FileUpload component for handling file upload
-function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles }) {
+function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles,draftFile }) {
   // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   // Reference for file input element
   const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    if(draftFile){
+      setProgress(100)
+    }
+  },[draftFile])
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -81,7 +87,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
       <Form.Label style={{fontWeight:"500"}}>{label}</Form.Label>
       <Form.Label style={{fontSize:"13px",fontWeight:"480"}}>{instruction}</Form.Label>
       </div>
-      {!file ? (
+      {!file && !draftFile ? (
         <div>
           <Button
             style={{
@@ -137,9 +143,10 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
                 <Image src={label === "Photo" ? png : pdf} alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
-                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
+                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{
+                  draftFile ? draftFile?.name :  file.name}</p>
                 <p style={{ margin: "0", fontSize: "10px", marginTop: "-1px" }}>
-                  {(file.size / 1024).toFixed(2)} KB
+                  {draftFile ? (draftFile?.size / 1024).toFixed(2) : (file.size / 1024).toFixed(2)} KB
                 </p>
                 <div className="Bar">
                   <ProgressBar
