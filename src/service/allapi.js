@@ -41,6 +41,11 @@ export const getSingleCandidateOutside=async(id)=>{
     return await commonRequest("GET",`${BASE_URL}/api/getSingleCandidate/${id}`,"")
 }
 
+//Change Status
+export const updateStatusRview=async(id)=>{
+    return await commonRequest("POST",`${BASE_URL}/api/update-statusReview/${id}`,"")
+}
+
 //Edit Candidate
 export const editCandidate=async(id,body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/edit-candidate/${id}`,body)

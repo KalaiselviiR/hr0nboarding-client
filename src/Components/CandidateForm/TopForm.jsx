@@ -27,7 +27,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
-import { getSingleCandidate, updateStatus } from "../../service/allapi";
+import { getSingleCandidate, updateStatusRview } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
@@ -248,14 +248,6 @@ const TopForm = () => {
     formik.setValues(combinedValues);
   }
 
-  //create an object to store datas from input
-  const [userData, setUser] = useState({
-    status: "Review Pending",
-    cid: id
-
-  })
-
-
 
   // handle change function for validation errors
   const handleChange = (e) => {
@@ -337,7 +329,7 @@ const TopForm = () => {
           console.log("Form data submitted successfully");
           toast.success("Form data submitted successfully");
           sessionStorage.clear();
-          const response = await updateStatus(userData)
+          const response = await updateStatusRview(id)
           console.log(response);
 
           const dbName = "FilesDB"
@@ -503,7 +495,7 @@ const TopForm = () => {
 
 
 
-  const [isLinkValid, setisLinkValid] = useState(true)
+  const [isLinkValid, setisLinkValid] = useState(false)
 
 
 
