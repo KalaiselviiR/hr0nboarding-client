@@ -12,6 +12,7 @@ import VerifyEmail from './Components/ForgetPassword/VerifyEmail';
 import UpdatePassword from './Components/ForgetPassword/UpdatePassword';
 import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
 import CandidateViewForm from './Components/resendform/candidateview';
+import TopForms from './Components/OutsideIndia/TopForms';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
         <Route path="/recruiterView/:id" element={<RecruiterForm />} />
         <Route path="/candidateView/:id" element={<CandidateViewForm />} />
         <Route path="/candidateForm/:token" element={<TopForm />} />
+        <Route path="/candidateFormOutside/:token" element={<TopForms />} />
 
        
 
