@@ -42,6 +42,44 @@ const CandidateViewForm = () => {
     const [isShow, setInvokeModal] = useState(false);
   
     const navigate = useNavigate();
+
+    const [photoFiles, setPhotoFiles] = useState([]);
+  const [aadharCardFiles, setAadharCardFiles] = useState([]);
+  // const [educationCertificateFiles, setEducationCertificateFiles] = useState(
+  //   []
+  // );
+  const [tenthMarksheetFiles, setTenthMarksheetFiles] = useState([]);
+  const [twelfthMarksheetFiles, setTwelfthMarksheetFiles] = useState([]);
+  const [pgDegreeCertificateFiles, setPgDegreeCertificateFiles] = useState([]);
+  const [pgMarksheetFiles, setPgMarksheetFiles] = useState([]);
+  const [ugDegreeCertificateFiles, setUgDegreeCertificateFiles] = useState([]);
+  const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
+
+  const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
+  const [payslipFiles, setPayslipFiles] = useState([]);
+  
+
+    //create an object to store datas from input family details
+    const [formData, setFormData] = useState({
+    
+      photoFiles: null,
+      aadharCardFiles: null,
+      // educationCertificateFiles: null,
+      tenthMarksheetFiles: null,
+      twelfthMarksheetFiles: null,
+      pgDegreeCertificateFiles: null,
+      pgMarksheetFiles: null,
+      ugDegreeCertificateFiles: null,
+      ugMarksheetFiles: null,
+      relievingLettersFiles: null,
+      payslipFiles: null,
+      // id: id,
+   
+    });
+
+ 
+
+    console.log(cData)
   
     const initModal = () => {
       setInvokeModal(!isShow);
@@ -61,7 +99,7 @@ const CandidateViewForm = () => {
       setIsSectionOpen((prevIsOpen) => !prevIsOpen);
     };
   
-    // param id 
+    // // param id 
     const{id} =useParams()
     console.log(id);
     //get details of the perticuler Candidate
@@ -115,6 +153,169 @@ const CandidateViewForm = () => {
     //     position: "top-center"
     //   });
     // }
+
+    
+  const updateFamilyMembers = (data, contact) => {
+
+    setFormData((prevData) => ({
+      ...prevData,
+      members: data,
+      contact
+    }))
+
+    const combinedValues = {
+      ...formData,
+      members: data,
+      contact
+    };
+ 
+  }
+
+
+  // handle change function for validation errors
+  const handleChange = (e) => {
+    e.preventDefault();
+    const { name, value, type, files } = e.target;
+
+    if (type === "file") {
+      // If the input is a file input, update the corresponding file name property
+      const fileNameProperty = `${name}FileName`;
+      setFormData((prevData) => ({
+        ...prevData,
+        [fileNameProperty]: files[0].name,
+      }));
+
+      // Update formik values for file input
+      // formik.setFieldValue(name, files[0]);
+    } else {
+      // Update both the form data and formik values for non-file inputs
+      const key = name;
+      const updatedValue = value;
+
+      setFormData((prevData) => ({
+        ...prevData,
+        [key]: updatedValue,
+      }));
+
+      // formik.handleChange(e);
+    }
+  };
+
+  console.log(formData);
+
+  // console.log(formData);
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   // Trigger Formik's validation
+  //   // formik.handleSubmit();
+
+  //   // Check if there are any errors in the form
+  //   if (Object.keys(formik.errors).length === 0) {
+  //     // Form is valid, proceed with form submission
+
+  //     try {
+  //       // Prepare FormData for file uploads
+  //       const formData = new FormData();
+
+  //       // Append all form fields, including file inputs      
+
+  //       for (const key in formik.values) {
+  //         if (key !== 'members' && key !== 'contact') {
+  //           formData.append(key, formik.values[key] || "");
+  //         }
+  //       }
+
+  //       formData.append('contact', JSON.stringify(formik.values.contact))
+
+  //       // Append members array
+  //       if (Array.isArray(formik.values.members)) {
+  //         formData.append('members', JSON.stringify(formik.values.members));
+  //       }
+
+  //       // Send a POST request using Axios
+  //       const response = await axios.post(
+  //         "http://localhost:4000/api/candidates",
+  //         formData,
+  //         {
+  //           headers: {
+  //             "Content-Type": "multipart/form-data",
+  //           },
+  //         }
+  //       );
+
+  //       if (response.status === 201) {
+  //         console.log("Form data submitted successfully");
+  //         toast.success("Form data submitted successfully");
+  //         sessionStorage.clear();
+  //         const response = await updateStatus(userData)
+  //         console.log(response);
+  //         // Optionally: Reset form or navigate to a success page
+  //       } else {
+  //         console.error("Failed to submit form data");
+  //       }
+  //     } catch (error) {
+  //       console.error("Error while submitting form data:", error);
+  //     }
+
+  //     // Perform any additional actions or API calls if needed
+  //   }
+  // };
+
+  const FileChange = (file, type) => {
+    switch (type) {
+      case "photo":
+        setPhotoFiles(file);
+        // formik.setFieldValue("photoFiles", file);
+        break;
+      case "aadharCard":
+        setAadharCardFiles(file);
+        // formik.setFieldValue("aadharCardFiles", file);
+        break;
+      // case "educationCertificate":
+      //   setEducationCertificateFiles(file);
+      //   formik.setFieldValue("educationCertificateFiles",file);
+      //   break;
+      case "tenthMarksheet":
+        setTenthMarksheetFiles(file);
+        // formik.setFieldValue("tenthMarksheetFiles", file);
+        break;
+      case "twelfthMarksheet":
+        setTwelfthMarksheetFiles(file);
+        // formik.setFieldValue("twelfthMarksheetFiles", file);
+        break;
+      case "PGDegreeCertificate":
+        setPgDegreeCertificateFiles(file);
+        // formik.setFieldValue("pgDegreeCertificateFiles", file);
+        break;
+      case "PGMarksheet":
+        setPgMarksheetFiles(file);
+        // formik.setFieldValue("pgMarksheetFiles", file);
+        break;
+      case "UGDegreeCertificate":
+        setUgDegreeCertificateFiles(file);
+        // formik.setFieldValue("ugDegreeCertificateFiles", file);
+        break;
+      case "UGMarksheet":
+        setUgMarksheetFiles(file);
+        // formik.setFieldValue("ugMarksheetFiles", file);
+        break;
+      case "relievingLetters":
+        setRelievingLettersFiles(file);
+        // formik.setFieldValue("relievingLettersFiles", file);
+        break;
+      case "payslip":
+        setPayslipFiles(file);
+        // formik.setFieldValue("payslipFiles", file);
+        break;
+      default:
+        break;
+    }
+  };
+
+ 
+
     useEffect(()=>{
    
       getoneCandidate()
@@ -436,37 +637,175 @@ const CandidateViewForm = () => {
             <Row className="mt-4">
               <Col md={4}>
               <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
-                <div>
-                <CandidateFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
-              <CandidateFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
-              <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      cursor:'pointer'
-                    }}
-                    onClick={handleToggleSection}
-                  >
-                    <h6 style={{fontWeight:"normal", marginTop:"20px"}}>Educational Certificates</h6>
-                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
-                  </div>
-                  {isSectionOpen && (
-                    <div>
-                      <CandidateFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"}/>
-                      <CandidateFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"}/>
-                      <CandidateFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"}/>
-                      <CandidateFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"}/>
-                      <CandidateFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"}/>
-                      <CandidateFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"}/>
-                    </div>
-                  )}
-                </div>
+              <CandidateFileView
+                      label="Photo"
+                      instruction="Accepted formats: JPG or PNG"
+                      controlId="photo"
+                      acceptedFiles={formData.photoFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          photoFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "photo")}
+                    />
+                    {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
+               <div className="text-danger">{formik.errors.photoFiles}</div>
+             ) : null} */}
 
-              <CandidateFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"}/>
-              <CandidateFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"}/>
-            </div>
+                    <CandidateFileView
+                      label="Aadhar Card "
+                      instruction="Accepted format:pdf"
+                      controlId="aadharCard"
+                      acceptedFiles={formData.aadharCardFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          aadharCardFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "aadharCard")}
+                    />
+                    {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
+               <div className="text-danger">{formik.errors.aadharCardFiles}</div>
+             ) : null} */}
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: 'pointer'
+                        }}
+                      // onClick={handleToggleSection}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
+                        {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
+                      </div>
+                      {/* {isSectionOpen && ( */}
+                      <div>
+                        <CandidateFileView
+                          label="10th Marksheet"
+                          instruction="Accepted format:pdf"
+                          controlId="tenthMarksheet"
+                          acceptedFiles={formData.tenthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              tenthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                        />
+                        <CandidateFileView
+                          label="12th Marksheet"
+                          instruction="Accepted format:pdf"
+                          controlId="twelfthMarksheet"
+                          acceptedFiles={formData.twelfthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              twelfthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "twelfthMarksheet")
+                          }
+                        />
+                        <CandidateFileView
+                          label="PG Degree Certificate"
+                          instruction="Accepted format:pdf"
+                          controlId="PGDegreeCertificate"
+                          acceptedFiles={formData.pgDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              PGDegreeCertificate: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "PGDegreeCertificate")
+                          }
+                        />
+                        <CandidateFileView
+                          label="PG Marksheet"
+                          controlId="PGMarksheet"
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.pgMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              pgMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                        />
+                        <CandidateFileView
+                          label="UG Degree Certificate"
+                          instruction="Accepted format:pdf"
+                          controlId="UGDegreeCertificate"
+                          acceptedFiles={formData.ugDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugDegreeCertificateFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "UGDegreeCertificate")
+                          }
+                        />
+                        <CandidateFileView
+                          label="UG Marksheet"
+                          instruction="Accepted format:pdf"
+                          controlId="UGMarksheet"
+                          acceptedFiles={formData.ugMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                        />
+                      </div>
+                      {/* )} */}
+                    </div>
+                    {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+               <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
+             ) : null} */}
+
+                    <CandidateFileView
+                      label="Relieving Letters from all your previous organizations"
+                      instruction="Accepted format:pdf"
+                      controlId="relievingLetters"
+                      acceptedFiles={formData.relievingLettersFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          relievingLettersFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "relievingLetters")}
+                    />
+                    {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+               <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
+             ) : null} */}
+
+                    <CandidateFileView
+                      label="3 Months Payslip "
+                      instruction="Accepted format:pdf"
+                      controlId="payslip"
+                      acceptedFiles={formData.payslipFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          payslipFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "payslip")}
+                    />
                 {/* <div className="mt-3" style={{ display: "flex", gap: "10px" }}> */}
                   {/* <Button
                     style={{
