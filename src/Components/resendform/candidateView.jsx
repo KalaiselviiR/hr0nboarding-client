@@ -642,6 +642,8 @@ const CandidateViewForm = () => {
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}
+                      
+                      prefile={cData.photoFiles} prename={"Photo.jpg"}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
                           ...prevData,
@@ -659,6 +661,7 @@ const CandidateViewForm = () => {
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
+                      prefile={cData.aadharCardFiles} prename={"adharCard.pdf"}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
                           ...prevData,
@@ -667,6 +670,9 @@ const CandidateViewForm = () => {
                       }
                       onFileChange={(file) => FileChange(file, "aadharCard")}
                     />
+                    
+
+                    
                     {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
                <div className="text-danger">{formik.errors.aadharCardFiles}</div>
              ) : null} */}
@@ -689,6 +695,7 @@ const CandidateViewForm = () => {
                           label="10th Marksheet"
                           instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
+                          prefile={cData.aadharCardFiles} prename={"10th Marksheet.pdf"}
                           acceptedFiles={formData.tenthMarksheetFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -701,6 +708,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="12th Marksheet"
                           instruction="Accepted format:pdf"
+                          prefile={cData.aadharCardFiles} prename={"12th Marksheet.pdf"}
                           controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -717,6 +725,7 @@ const CandidateViewForm = () => {
                           label="PG Degree Certificate"
                           instruction="Accepted format:pdf"
                           controlId="PGDegreeCertificate"
+                          prefile={cData.aadharCardFiles} prename={"PG Degree.pdf"}
                           acceptedFiles={formData.pgDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -731,6 +740,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="PG Marksheet"
                           controlId="PGMarksheet"
+                          prefile={cData.aadharCardFiles} prename={"PG Marksheet.pdf"}
                           instruction="Accepted format:pdf"
                           acceptedFiles={formData.pgMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -744,6 +754,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="UG Degree Certificate"
                           instruction="Accepted format:pdf"
+                          prefile={cData.aadharCardFiles} prename={"UG Degree.pdf"}
                           controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
@@ -759,6 +770,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="UG Marksheet"
                           instruction="Accepted format:pdf"
+                          prefile={cData.aadharCardFiles} prename={"UG Marksheet.pdf"}
                           controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -780,6 +792,7 @@ const CandidateViewForm = () => {
                       label="Relieving Letters from all your previous organizations"
                       instruction="Accepted format:pdf"
                       controlId="relievingLetters"
+                      prefile={cData.relievingLettersFiles} prename={"Relieving Letters.pdf"}
                       acceptedFiles={formData.relievingLettersFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
@@ -796,6 +809,7 @@ const CandidateViewForm = () => {
                     <CandidateFileView
                       label="3 Months Payslip "
                       instruction="Accepted format:pdf"
+                      prefile={cData.payslipFiles} prename={"Payslips.pdf"}
                       controlId="payslip"
                       acceptedFiles={formData.payslipFiles}
                       setAcceptedFiles={(files) =>

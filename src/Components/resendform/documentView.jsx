@@ -4,19 +4,21 @@ import "../CandidateForm/CandidateForm.css"
 import tick from "../../assets/tick.avif";
 import pdf from "../../assets/pdf-image.jpeg";
 import png from "../../assets/png-image.png";
+import PreFileView from "./prefileview";
 //file upload
 // import axios from "axios";
 // import { pdfjs } from "react-pdf";
 // import PdfComp from "./PdfComp";
 
 // FileUpload component for handling file upload
-function CandidateFileView({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles }) {
+function CandidateFileView({ label,  instruction, onFileChange, prefile,prename,presize, acceptedFiles, setAcceptedFiles }) {
   // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState(null);
   // Reference for file input element
   const fileInputRef = useRef(null);
+  console.log(prename)
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -82,7 +84,10 @@ function CandidateFileView({ label, instruction, onFileChange, acceptedFiles, se
       <Form.Label style={{fontSize:"13px",fontWeight:"480"}}>{instruction}</Form.Label>
       </div>
       {!file ? (
+        
         <div>
+          
+          <PreFileView  prefile={prefile} prename={prename} />
           <Button
             style={{
               height: "35px",
@@ -179,7 +184,7 @@ function CandidateFileView({ label, instruction, onFileChange, acceptedFiles, se
               }}
               onClick={handleFileClick}
             >
-              Upload
+              Reupload
             </Button>
             <input
               type="file"
