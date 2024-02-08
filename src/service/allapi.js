@@ -107,3 +107,9 @@ export const resendCandidateForm = async(id)=>{
 export const resendDocuments=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/resend-documents`,body)
 }
+
+//Reupload Documents
+
+export const reuploadDocuments = async (id,data) => {
+    return await commonRequest("PUT",`${BASE_URL}/api/reUpload/${id}`,data)
+}

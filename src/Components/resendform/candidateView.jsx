@@ -26,6 +26,8 @@ import { IoMdArrowDropupCircle } from "react-icons/io";
 import { Modal } from 'react-bootstrap';
 import CandidateFileView from "./documentView";
 import BottomSection from "./bottom";
+import { reuploadDocuments } from "../../service/allapi";
+
 
 
 
@@ -330,6 +332,26 @@ const CandidateViewForm = () => {
 
   }, [])
 
+
+    const handleSubmit = async () => {
+    
+     try {
+      const formValues = new FormData()
+      for (const key in formData) {
+        formValues.append(key, formData[key] || "");
+      }
+
+      const response = await reuploadDocuments(id,formValues)
+      if(response?.status === 200){
+        toast.success("Document uploaded successfully");
+      }
+      
+     } catch (error) {
+      toast.error("something went wrong");
+      console.log(`Error: ${error?.message}`)
+     }
+    }
+
   return (
     <>
       <Navbar
@@ -424,7 +446,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     type="text"
                     name="firstName"
-                    value={cData.firstName}
+                    value={cData?.firstName}
                     disabled
 
                   />
@@ -436,7 +458,7 @@ const CandidateViewForm = () => {
                   <Form.Label className="labelss">Last Name</Form.Label>
                   <Form.Control
                     type="text"
-                    value={cData.lastName}
+                    value={cData?.lastName}
                     name="lastName"
                     disabled
 
@@ -449,7 +471,7 @@ const CandidateViewForm = () => {
                   <Form.Label className="labelss">Email</Form.Label>
                   <Form.Control
                     type="email"
-                    value={cData.email}
+                    value={cData?.email}
                     name="email"
                     disabled
 
@@ -484,29 +506,29 @@ const CandidateViewForm = () => {
                     />
                   </InputGroup> */}
                   <div className="phoneDiv mt-4">
-                    <div className="labelss">
-                      <p>Phone number</p>
-                    </div>
-                    <div className="phoneInput ">
-                      <select className="country-code " disabled
-                        onChange={(e) => setCountryCode(e.target.value)}
-                      >
-                        <option selected value="+91">IN(+91)</option>
-                        <option value="+880">BD(+880)</option>
-                        <option value="+1">US(+1)</option>
-                        <option value="+20">EG(+20)</option>
-                      </select>
-                      <input
-                        className="input-field form-control "
-                        type="tel"
-                        value={cData.phoneNumber}
-                        name="emergencyContactNumber"
-                        disabled
-
-
-                      />
-                    </div>
-                  </div>
+                        <div className="labelss">
+                            <p>Phone number</p>
+                        </div>
+                        <div className="phoneInput ">
+                            <select className="country-code " disabled
+                             onChange={(e) => setCountryCode(e.target.value)}
+                            >
+                                <option selected value="+91">IN(+91)</option>
+                                <option  value="+880">BD(+880)</option>
+                                <option value="+1">US(+1)</option>
+                                <option value="+20">EG(+20)</option>
+                            </select>
+                            <input 
+                            className="input-field form-control "
+                            type="tel"
+                            value={cData?.phoneNumber}
+                                name="emergencyContactNumber"
+                                disabled
+                                
+                               
+                            />
+                        </div>
+                        </div>
 
                 </Form.Group>
               </Col>
@@ -516,7 +538,7 @@ const CandidateViewForm = () => {
                     Designation
                   </Form.Label>
                   <Form.Control type="text"
-                    value={cData.designation}
+                    value={cData?.designation}
                     name="designation"
                     disabled
                   />
@@ -532,7 +554,7 @@ const CandidateViewForm = () => {
                       <CiCalendar />
                     </InputGroup.Text>
                     <Form.Control type="date"
-                      value={moment(cData.dateOfJoining).format("yyyy-MM-DD")}
+                      value={moment(cData?.dateOfJoining).format("yyyy-MM-DD")}
                       name="dateOfJoining"
                       disabled
                     />
@@ -547,7 +569,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    value={cData.presentAddress}
+                    value={cData?.presentAddress}
                     name="presentAddress"
                     disabled
                   />
@@ -561,7 +583,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    value={cData.permanentAddress}
+                    value={cData?.permanentAddress}
                     name="permanentAddress"
                     disabled
                   />
@@ -578,7 +600,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={5}
-                    value={cData.aboutYourself}
+                    value={cData?.aboutYourself}
                     name="aboutYourself"
                     disabled
                   />
@@ -593,7 +615,7 @@ const CandidateViewForm = () => {
                     Overall Work Experience
                   </Form.Label>
                   <Form.Control type="text"
-                    value={cData.experience}
+                    value={cData?.experience}
                     name="experience"
                     disabled
 
@@ -607,7 +629,7 @@ const CandidateViewForm = () => {
                   </Form.Label>
                   <Form.Control
                     type="text"
-                    value={cData.company}
+                    value={cData?.company}
                     name="company"
                     disabled
                   />
@@ -621,7 +643,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    value={cData.enjoyment}
+                    value={cData?.enjoyment}
                     name="enjoyment"
                     disabled
                   />
@@ -635,7 +657,7 @@ const CandidateViewForm = () => {
                   <Form.Control
                     as="textarea"
                     rows={4}
-                    value={cData.sneakpeek}
+                    value={cData?.sneakpeek}
                     name="sneakpeek"
                     disabled
                   />
@@ -644,190 +666,214 @@ const CandidateViewForm = () => {
             </Row>
             <Row className="mt-4">
               <Col md={4}>
-                <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
-                <CandidateFileView
-                  label="Photo"
-                  instruction="Accepted formats: JPG or PNG"
-                  controlId="photo"
-                  acceptedFiles={formData.photoFiles}
-
-                  prefile={cData.photoFiles} prename={"Photo.jpg"}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      photoFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "photo")}
-                />
-                {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
+              <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
+              <CandidateFileView
+                      label="Photo"
+                      instruction="Accepted formats: JPG or PNG"
+                      controlId="photo"
+                      acceptedFiles={formData?.photoFiles}
+                      
+                      prefile={cData?.photoFiles} prename={"Photo.jpg"}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          photoFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "photo")}
+                    />
+                    {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
                <div className="text-danger">{formik.errors.photoFiles}</div>
              ) : null} */}
 
-                <CandidateFileView
-                  label="Aadhar Card "
-                  instruction="Accepted format:pdf"
-                  controlId="aadharCard"
-                  acceptedFiles={formData.aadharCardFiles}
-                  prefile={cData.aadharCardFiles} prename={"adharCard.pdf"}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      aadharCardFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "aadharCard")}
-                />
-
+                    <CandidateFileView
+                      label="Aadhar Card "
+                      instruction="Accepted format:pdf"
+                      controlId="aadharCard"
+                      acceptedFiles={formData?.aadharCardFiles}
+                      prefile={cData?.aadharCardFiles} prename={"adharCard.pdf"}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          aadharCardFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "aadharCard")}
+                    />
+                    
 
 
                 {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
                <div className="text-danger">{formik.errors.aadharCardFiles}</div>
              ) : null} */}
-                <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      cursor: 'pointer'
-                    }}
-                  // onClick={handleToggleSection}
-                  >
-                    <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
-                    {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
-                  </div>
-                  {/* {isSectionOpen && ( */}
-                  <div>
-                    <CandidateFileView
-                      label="10th Marksheet"
-                      instruction="Accepted format:pdf"
-                      controlId="tenthMarksheet"
-                      prefile={cData.aadharCardFiles} prename={"10th Marksheet.pdf"}
-                      acceptedFiles={formData.tenthMarksheetFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          tenthMarksheetFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) => FileChange(file, "tenthMarksheet")}
-                    />
-                    <CandidateFileView
-                      label="12th Marksheet"
-                      instruction="Accepted format:pdf"
-                      prefile={cData.aadharCardFiles} prename={"12th Marksheet.pdf"}
-                      controlId="twelfthMarksheet"
-                      acceptedFiles={formData.twelfthMarksheetFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          twelfthMarksheetFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) =>
-                        FileChange(file, "twelfthMarksheet")
-                      }
-                    />
-                    <CandidateFileView
-                      label="PG Degree Certificate"
-                      instruction="Accepted format:pdf"
-                      controlId="PGDegreeCertificate"
-                      prefile={cData.aadharCardFiles} prename={"PG Degree.pdf"}
-                      acceptedFiles={formData.pgDegreeCertificateFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          PGDegreeCertificate: files,
-                        }))
-                      }
-                      onFileChange={(file) =>
-                        FileChange(file, "PGDegreeCertificate")
-                      }
-                    />
-                    <CandidateFileView
-                      label="PG Marksheet"
-                      controlId="PGMarksheet"
-                      prefile={cData.aadharCardFiles} prename={"PG Marksheet.pdf"}
-                      instruction="Accepted format:pdf"
-                      acceptedFiles={formData.pgMarksheetFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          pgMarksheetFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) => FileChange(file, "PGMarksheet")}
-                    />
-                    <CandidateFileView
-                      label="UG Degree Certificate"
-                      instruction="Accepted format:pdf"
-                      prefile={cData.aadharCardFiles} prename={"UG Degree.pdf"}
-                      controlId="UGDegreeCertificate"
-                      acceptedFiles={formData.ugDegreeCertificateFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          ugDegreeCertificateFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) =>
-                        FileChange(file, "UGDegreeCertificate")
-                      }
-                    />
-                    <CandidateFileView
-                      label="UG Marksheet"
-                      instruction="Accepted format:pdf"
-                      prefile={cData.aadharCardFiles} prename={"UG Marksheet.pdf"}
-                      controlId="UGMarksheet"
-                      acceptedFiles={formData.ugMarksheetFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          ugMarksheetFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) => FileChange(file, "UGMarksheet")}
-                    />
-                  </div>
-                  {/* )} */}
-                </div>
-                {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
+                    <div>
+                      <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: 'pointer'
+                        }}
+                      // onClick={handleToggleSection}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
+                        {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
+                      </div>
+                      {/* {isSectionOpen && ( */}
+                      <div>
+                        <CandidateFileView
+                          label="10th Marksheet"
+                          instruction="Accepted format:pdf"
+                          controlId="tenthMarksheet"
+                          prefile={cData?.educationCertificateFiles?.tenthMarksheet} 
+                          prename={"10th Marksheet.pdf"}
+                          acceptedFiles={formData?.tenthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              tenthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                        />
+                        <CandidateFileView
+                          label="12th Marksheet"
+                          instruction="Accepted format:pdf"
+                          prefile={cData?.educationCertificateFiles?.twelfthMarksheet}
+                          prename={"12th Marksheet.pdf"}
+                          controlId="twelfthMarksheet"
+                          acceptedFiles={formData?.twelfthMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              twelfthMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "twelfthMarksheet")
+                          }
+                        />
+                        <CandidateFileView
+                          label="PG Degree Certificate"
+                          instruction="Accepted format:pdf"
+                          controlId="PGDegreeCertificate"
+                          prefile={cData?.educationCertificateFiles?.pgDegreeCertificate}
+                          prename={"PG Degree.pdf"}
+                          acceptedFiles={formData.pgDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              PGDegreeCertificate: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "PGDegreeCertificate")
+                          }
+                        />
+                        <CandidateFileView
+                          label="PG Marksheet"
+                          controlId="PGMarksheet"
+                          prefile={cData?.educationCertificateFiles?.pgMarksheet}
+                          prename={"PG Marksheet.pdf"}
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData?.pgMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              pgMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                        />
+                        <CandidateFileView
+                          label="UG Degree Certificate"
+                          instruction="Accepted format:pdf"
+                          prefile={cData?.educationCertificateFiles?.ugDegreeCertificate}
+                          prename={"UG Degree.pdf"}
+                          controlId="UGDegreeCertificate"
+                          acceptedFiles={formData?.ugDegreeCertificateFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugDegreeCertificateFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "UGDegreeCertificate")
+                          }
+                        />
+                        <CandidateFileView
+                          label="UG Marksheet"
+                          instruction="Accepted format:pdf"
+                          prefile={cData?.educationCertificateFiles?.ugMarksheet} 
+                          prename={"UG Marksheet.pdf"}
+                          controlId="UGMarksheet"
+                          acceptedFiles={formData.ugMarksheetFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              ugMarksheetFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                        />
+                      </div>
+                      {/* )} */}
+                    </div>
+                    {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
                <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
              ) : null} */}
 
-                <CandidateFileView
-                  label="Relieving Letters from all your previous organizations"
-                  instruction="Accepted format:pdf"
-                  controlId="relievingLetters"
-                  prefile={cData.relievingLettersFiles} prename={"Relieving Letters.pdf"}
-                  acceptedFiles={formData.relievingLettersFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      relievingLettersFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "relievingLetters")}
-                />
-                {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
+                    <CandidateFileView
+                      label="Relieving Letters from all your previous organizations"
+                      instruction="Accepted format:pdf"
+                      controlId="relievingLetters"
+                      prefile={cData?.relievingLettersFiles} prename={"Relieving Letters.pdf"}
+                      acceptedFiles={formData?.relievingLettersFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          relievingLettersFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "relievingLetters")}
+                    />
+                    {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
                <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
              ) : null} */}
 
-                <CandidateFileView
-                  label="3 Months Payslip "
-                  instruction="Accepted format:pdf"
-                  prefile={cData.payslipFiles} prename={"Payslips.pdf"}
-                  controlId="payslip"
-                  acceptedFiles={formData.payslipFiles}
-                  setAcceptedFiles={(files) =>
-                    setFormData((prevData) => ({
-                      ...prevData,
-                      payslipFiles: files,
-                    }))
-                  }
-                  onFileChange={(file) => FileChange(file, "payslip")}
-                />
+                    <CandidateFileView
+                      label="3 Months Payslip "
+                      instruction="Accepted format:pdf"
+                      prefile={cData?.payslipFiles} prename={"Payslips.pdf"}
+                      controlId="payslip"
+                      acceptedFiles={formData.payslipFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          payslipFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "payslip")}
+                    />
+                   
+                   <Button
+                    style={{
+                      height: "40px",
+                      width:"150px",
+                      fontSize: "15px",
+                      backgroundColor: "white",
+                      // color: "rgb(147, 48, 233)",
+                      borderColor: "rgb(147, 48, 233)",
+                      color: "#ffff",
+                      backgroundColor:"rgb(147, 48, 233)",
+                      fontWeight: "500",
+                      marginTop:"25px"
+                    }}
+                    onClick={handleSubmit}
+                  >
+                    Submit 
+                  </Button>
                 {/* <div className="mt-3" style={{ display: "flex", gap: "10px" }}> */}
                 {/* <Button
                     style={{
@@ -903,13 +949,14 @@ const CandidateViewForm = () => {
       </div>
 
       {isResendModalOpen &&
-        <ResendDocument closeModal={closeResendModal}
-          onApiError={handleResendError}
-          onApiSuccess={handleResendSuccess}
-        />}
-      <ToastContainer
-        autoClose={2000}
-      />
+       <ResendDocument closeModal={closeResendModal}
+       onApiError={handleResendError}
+       onApiSuccess={handleResendSuccess}
+       />}
+       <ToastContainer
+       position="top-center"
+       autoClose={2000}
+       />
     </>
   );
 };
