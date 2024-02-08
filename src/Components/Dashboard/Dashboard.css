@@ -267,6 +267,10 @@ body:not(.modal-open) .modal-backdrop {
     max-width: none;
     width: 95%;
   }
+  .deleteModal>.modal-dialog {
+    max-width: none;
+    width: 96%;
+  }
 
 }
 
