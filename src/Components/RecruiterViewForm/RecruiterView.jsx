@@ -136,6 +136,20 @@ const RecruiterForm = () => {
   },[])
 
 
+  function capitalizeFirstLetter(string) {
+    // Split the string into words
+    let words = string.split(' ');
+  
+    // Capitalize the first letter of each word
+    for (let i = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+  
+    // Join the words back into a single string
+    return words.join(' ');
+  }
+  
+
   return (
     <>
       <Navbar
@@ -455,14 +469,13 @@ const RecruiterForm = () => {
                     {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                   </div>
                   {isSectionOpen && (
-                    <div>
-                      <RecruiterFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"}/>
-                      <RecruiterFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"}/>
-                      <RecruiterFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"}/>
-                      <RecruiterFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"}/>
-                      <RecruiterFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"}/>
-                      <RecruiterFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"}/>
-                    </div>
+               <div>
+               {Object.entries(cData.educationCertificateFiles)
+                 .filter(([key, value]) => key !== "_id") 
+                 .map(([certificate, fileUrl]) => (
+                   <RecruiterFileView key={certificate} label={certificate} file={fileUrl} name={`${capitalizeFirstLetter(certificate.replace(/ /g, '_'))}.pdf`} />
+                 ))}
+             </div>
                   )}
                 </div>
 
