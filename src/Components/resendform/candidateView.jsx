@@ -379,7 +379,7 @@ const CandidateViewForm = () => {
             </Col>
             <Col md={2} className="d-flex justify-content-end ">
               <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
-                {isVerified ==false ? "Review Pending" : "Completed" }
+                pending
               </h6>
             </Col>
           </Row>

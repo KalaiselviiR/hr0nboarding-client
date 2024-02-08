@@ -58,11 +58,7 @@ const TopForms = () => {
 
   const [id, setId] = useState(null);
   const [isOutsideIndia, setIsOutsideIndia] = useState()
-
-
-
-
-
+  const [statusC, setStatusc] = useState()
 
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
@@ -78,6 +74,7 @@ const TopForms = () => {
     console.log(data);
     setId(data._id);
     setIsOutsideIndia(data.region)
+    setStatusc(data.status)
   };
   console.log(id);
 
@@ -538,9 +535,9 @@ const TopForms = () => {
                   </h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                  <h6 className="text-end d-none d-sm-inline-block align-top">
-                    Review Pending
-                  </h6>
+                <h6 className={`text-end d-none d-sm-inline-block align-top ${statusC === "Pending" ? 'orange' : 'blue'}`}>
+                {statusC}
+              </h6>
                 </Col>
               </Row>
             </Container>

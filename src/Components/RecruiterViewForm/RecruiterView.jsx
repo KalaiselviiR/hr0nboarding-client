@@ -41,6 +41,7 @@ const RecruiterForm = () => {
   const [isSectionOpen, setIsSectionOpen] = useState(false);
   const [isShow, setInvokeModal] = useState(false);
   const [isOutsideIndia, setIsOutsideIndia] = useState()
+  const [statusC, setStatusc] = useState()
 
   const navigate = useNavigate();
 
@@ -71,6 +72,8 @@ const RecruiterForm = () => {
   const getoneCandidatesFrom = async () => {
     const response = await getSingleCandidateOutside(id);
     setIsOutsideIndia(response.data.candidate.region)
+    setStatusc(response.data.candidate.status)
+    
   };
 
 
@@ -80,6 +83,7 @@ const RecruiterForm = () => {
   const getoneCandidate = async () => {
     const { data } = await getRecruterView(id)
     setCdata(data);
+    
 
   }
   console.log(cData);
@@ -191,8 +195,8 @@ const RecruiterForm = () => {
               </h5>
             </Col>
             <Col md={2} className="d-flex justify-content-end ">
-              <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
-                {isVerified == false ? "Review Pending" : "Completed"}
+              <h6 className={`text-end d-none d-sm-inline-block align-top ${statusC === "Completed" ? 'green' : 'blue'}`}>
+                {statusC}
               </h6>
             </Col>
           </Row>
