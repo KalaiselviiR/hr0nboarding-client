@@ -355,7 +355,8 @@ function Dashboard() {
 
                       <div className='ms-3'>
                         <p style={{ padding: "8px" }} className='fw-normal mb-1'>
-                          {i.status != "Pending" ? <a href={`/recruiterView/${i._id}`} style={{ textDecoration: "none", color: 'black' }}>
+                          {(i.status == "Review pending" || i.status == "Completed") ? 
+                          <a href={`/recruiterView/${i._id}`} style={{ textDecoration: "none", color: 'black' }}>
                             {i.fname} {i.lname}</a> : `${i.fname} ${i.lname}`}</p>
 
                       </div>

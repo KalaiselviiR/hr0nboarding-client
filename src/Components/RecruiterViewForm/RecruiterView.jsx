@@ -458,7 +458,8 @@ const RecruiterForm = () => {
                 <div>
 
                <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
-              <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
+              <RecruiterFileView label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)":"Adhar Card"} 
+              file={cData.aadharCardFiles} name={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}  />
               <div>
                   <div
                     style={{

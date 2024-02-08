@@ -864,7 +864,7 @@ const TopForms = () => {
              ) : null} */}
 
                     <FileUploads
-                      label="Aadhar Card "
+                      label="Government-issued ID Proof(Authorized)"
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
