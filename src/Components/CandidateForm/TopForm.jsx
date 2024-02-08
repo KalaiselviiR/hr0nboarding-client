@@ -32,6 +32,7 @@ import { ImMenu2 } from "react-icons/im";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { openDB, deleteDB } from 'idb';
+import { IoMdStar } from "react-icons/io";
 
 // pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 //   "pdfjs-dist/build/pdf.worker.min.js",
@@ -492,7 +493,7 @@ const TopForm = () => {
 
 
 
-  const [isLinkValid, setisLinkValid] = useState(false)
+  const [isLinkValid, setisLinkValid] = useState(true)
 
 
 
@@ -614,7 +615,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="firstName">
-                      <Form.Label className="labelss">First Name</Form.Label>
+                      <Form.Label className="labelss">First Name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="First Name"
@@ -630,7 +631,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="lastName">
-                      <Form.Label className="labelss">Last Name</Form.Label>
+                      <Form.Label className="labelss">Last Name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Last Name"
@@ -646,7 +647,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="email">
-                      <Form.Label className="labelss">Email</Form.Label>
+                      <Form.Label className="labelss">Email<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         type="email"
                         placeholder="✉️ Email"
@@ -664,7 +665,7 @@ const TopForm = () => {
                     <Form.Group className="mb-3" controlId="phoneNumber">
                       <div className="phoneDiv ">
                         <div >
-                          <p className="labelss">Phone number</p>
+                          <p className="labelss">Phone number<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></p>
                         </div>
                         <div className="phoneInput ">
                           <select
@@ -698,7 +699,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="designation">
-                      <Form.Label className="labelss">Designation</Form.Label>
+                      <Form.Label className="labelss">Designation<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Designation"
@@ -716,7 +717,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="dateOfJoining">
-                      <Form.Label className="labelss">Date of Joining</Form.Label>
+                      <Form.Label className="labelss">Date of Joining<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <InputGroup>
                         <InputGroup.Text>
                           <CiCalendar />
@@ -740,7 +741,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="presentAddress">
-                      <Form.Label className="labelss">Present Address</Form.Label>
+                      <Form.Label className="labelss">Present Address<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -761,7 +762,7 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="permanentAddress">
-                      <Form.Label className="labelss">Permanent Address</Form.Label>
+                      <Form.Label className="labelss">Permanent Address<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -800,7 +801,7 @@ const TopForm = () => {
                 <Row>
                   <Col md={12}>
                     <Form.Group className="mb-3" controlId="aboutYourself">
-                      <Form.Label className="labelss"> About yourself</Form.Label>
+                      <Form.Label className="labelss"> About yourself<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={5}
@@ -860,7 +861,7 @@ const TopForm = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="enjoyment">
                       <Form.Label className="labelss">
-                        What do you enjoy outside of your work?
+                        What do you enjoy outside of your work?<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -879,7 +880,7 @@ const TopForm = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="sneakpeek">
                       <Form.Label className="labelss">
-                        Sneak peek at your bucket list
+                        Sneak peek at your bucket list<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -901,6 +902,13 @@ const TopForm = () => {
                     <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                     <FileUpload
                       label="Photo"
+                        //  label={(
+                      //   <span style={{display:inline}}>
+                          
+                      //     Photo
+                      //     <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                      //   </span>
+                      // )}
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}

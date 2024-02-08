@@ -21,6 +21,7 @@ import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Bank";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { IoMdStar } from "react-icons/io";
 
 
 function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOutsideIndia }) {
@@ -107,9 +108,9 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
   
     sessionStorage.setItem('contact', contactDetails);
   
-    toast.success("Details Saved Successfully", {
-      position: "top-center"
-    });
+    // toast.success("Details Saved Successfully", {
+    //   position: "top-center"
+    // });
   
     console.log('Form data saved as draft.');
   };
@@ -653,7 +654,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group controlId="adharCard" className="ms mt-3">
-                  <Form.Label className="labelss  ">AADHAR CARD NO</Form.Label>
+                  <Form.Label className="labelss  ">AADHAR CARD NO<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -671,7 +672,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3" controlId="panCardNo">
-                    <Form.Label className="labelss">PAN CARD NO</Form.Label>
+                    <Form.Label className="labelss">PAN CARD NO<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Control
                       className="input-field"
                       type="text"
@@ -689,7 +690,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3 ms-1" controlId="employeeName">
                     <Form.Label className="labelss">
-                      Employee's name (As per Aadhar)
+                      Employee's name (As per Aadhar)<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                     </Form.Label>
                     <Form.Control
                       className="input-field "
@@ -711,7 +712,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3 " controlId="dateOfBirthAs">
                     <Form.Label className="labelss ms-1">
-                      Date of birth (As per the Aadhar)
+                      Date of birth (As per the Aadhar)<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                     </Form.Label>
                     <InputGroup className="ms-1">
                       <InputGroup.Text>
@@ -739,7 +740,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3" controlId="formGroupGender">
-                    <Form.Label className="labelss">Gender</Form.Label>
+                    <Form.Label className="labelss">Gender<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Select
                       className="input-field"
                       name="gender"
@@ -762,7 +763,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                     className="mt-3 ms-2"
                     controlId="formGroupMaritalStatus"
                   >
-                    <Form.Label className="labelss">Marital status</Form.Label>
+                    <Form.Label className="labelss">Marital status<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Select
                       className="input-field"
                       name="maritalStatus"
@@ -787,7 +788,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 </Col>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Father's name</Form.Label>
+                    <Form.Label className="labelss">Father's name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Control
                       className="input-field"
                       type="text"
@@ -808,7 +809,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Bank Name</Form.Label>
+                    <Form.Label className="labelss">Bank Name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Select
                       className="input-field"
                       name="bankName"
@@ -841,7 +842,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 </Col>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Bank branch</Form.Label>
+                    <Form.Label className="labelss">Bank branch<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Control
                       className="input-field"
                       type="text"
@@ -858,7 +859,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 </Col>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Bank A/C No</Form.Label>
+                    <Form.Label className="labelss">Bank A/C No<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Control
                       className="input-field"
                       type="text"
@@ -880,7 +881,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               <Row>
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
-                    <Form.Label className="labelss">Bank IFSC No</Form.Label>
+                    <Form.Label className="labelss">Bank IFSC No<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                     <Form.Control
                       className="input-field"
                       type="text"
@@ -898,7 +899,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                 <Col xs={12} md={4}>
                   <Form.Group className="mt-3" controlId=" highestQualification">
                     <Form.Label className="labelss">
-                    Highest qualification
+                    Highest qualification<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                     </Form.Label>
                     <Form.Control
                       className="input-field "
@@ -1035,7 +1036,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="firstName">
-                  <Form.Label className="labelss">First name</Form.Label>
+                  <Form.Label className="labelss">First name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -1076,7 +1077,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
             <Row>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="lastName">
-                  <Form.Label className="labelss">Last name</Form.Label>
+                  <Form.Label className="labelss">Last name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -1122,7 +1123,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="nationality">
-                  <Form.Label className="labelss">Nationality</Form.Label>
+                  <Form.Label className="labelss">Nationality<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"

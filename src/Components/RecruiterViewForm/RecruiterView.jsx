@@ -478,7 +478,7 @@ const RecruiterForm = () => {
                {Object.entries(cData.educationCertificateFiles)
                  .filter(([key, value]) => key !== "_id") 
                  .map(([certificate, fileUrl]) => (
-                   <RecruiterFileView key={certificate} label={certificate} file={fileUrl} name={`${capitalizeFirstLetter(certificate.replace(/ /g, '_'))}.pdf`} />
+                   <RecruiterFileView key={certificate} label={capitalizeFirstLetter(certificate.replace(/ /g, '_'))} file={fileUrl} name={`${capitalizeFirstLetter(certificate.replace(/ /g, '_'))}.pdf`} />
                  ))}
              </div>
                   )}
