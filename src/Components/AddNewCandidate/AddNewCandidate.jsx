@@ -61,22 +61,11 @@ function AddNewCandidate({ close, onAddData }) {
             toast.success(response.data.message);
             onAddData(response.data.newUser)
 
-            //reset all states datas
-            // setUser({
-            //     fname: "",
-            //     lname: "",
-            //     email: "",
-            //     phno: "",
-            //     dsesignation: "",
-            //     jdate: "",
-            //     region: "",
-            //     status: ""
-
-            // })
-
+    
 
         } else {
-            toast.error(response.message)
+            toast.error(response.response.data)
+            
         }
 
 

@@ -127,25 +127,25 @@ const TopForms = () => {
     // dateOfBirth: "",
     // emergencyContactNumber: "",
     // emailAddress: "",
-    epfoUan: "",
-    pfNo: "",
-    adharCard: "",
-    panCard: "",
-    employeesName: "",
-    dateOfBirthAs: "",
-    gender: "",
-    maritalStatus: "",
-    bankName: "",
-    fatherName: "",
-    accountNumber: "",
-    branch: "",
-    ifsc: "",
-    prefix: "",
-    firstNamehr: "",
-    middleName: "",
-    lastNamehr: "",
-    bloodGroup: "",
-    nationality: "",
+    // epfoUan: "",
+    // pfNo: "",
+    // adharCard: "",
+    // panCard: "",
+    // employeesName: "",
+    // dateOfBirthAs: "",
+    // gender: "",
+    // maritalStatus: "",
+    // bankName: "",
+    // fatherName: "",
+    // accountNumber: "",
+    // branch: "",
+    // ifsc: "",
+    // prefix: "",
+    // firstNamehr: "",
+    // middleName: "",
+    // lastNamehr: "",
+    // bloodGroup: "",
+    // nationality: "",
     // officialEmail: "",
     // employeeId: "",
   });
@@ -1071,7 +1071,7 @@ const TopForms = () => {
               updateForm2Data={updateForm2Data}
               updateCandidateData={updateCandidateData}
               onFamilyDetailsChange={updateFamilyMembers}
-              isOutsideIndia={isOutsideIndia}
+            
             />
 
             <div

@@ -45,7 +45,7 @@ function Dashboard() {
 
   const [deleteStatus, setDeleteStatus] = useState('')
 
-  const componentPDF = useRef(); 
+  const componentPDF = useRef();
 
 
   const openAddModal = () => {
@@ -62,12 +62,12 @@ function Dashboard() {
   }
 
   const closeEditModal = () => {
-    // getAllCandidate()
     setEditModalIsOpen(false)
-    
+    getAllCandidate()
+
   }
 
- 
+
 
   const email = localStorage.getItem('email');
   const navigate = useNavigate();
@@ -85,12 +85,12 @@ function Dashboard() {
     // Check if email and JWT token are present in local storage
     const userEmail = localStorage.getItem("email");
     const userToken = localStorage.getItem("userToken");
-  
+
     if (!userEmail && !userToken) {
       // If not available, navigate to home page
       navigate("/");
     }
-  
+
     // If available, clear local storage and perform additional logout actions if needed
     localStorage.removeItem("email");
     localStorage.removeItem("userToken");
@@ -123,11 +123,11 @@ function Dashboard() {
   }, [editModalIsOpen]);
 
 
-  const handleDeleteClick = (id,status) => {
+  const handleDeleteClick = (id, status) => {
     initModal()
     setDeleteId(id)
     setDeleteStatus(status)
-  
+
   }
 
   const cancleDelete = () => {
@@ -139,64 +139,64 @@ function Dashboard() {
 
   const confirmDelete = async () => {
 
-    if(deleteStatus!="Rejected"){
-  
-        
-        const response = await deleteCandidate(deleteId)
-    if (response.status == 200) {
-      toast.success(response.data.message);
-      getAllCandidate()
-      setInvokeModal(false)
-    
+    if (deleteStatus != "Rejected") {
 
-  } else {
-      toast.error("Its Admin Only Access")
-  }
 
+      const response = await deleteCandidate(deleteId)
+      if (response.status == 200) {
+        toast.success(response.data.message);
+        getAllCandidate()
+        setInvokeModal(false)
+
+
+      } else {
+        toast.error("Its Admin Only Access")
       }
-      
-   else{
+
+    }
+
+    else {
       const response = await ConformdeleteCandidate(deleteId)
       if (response.status == 200) {
         toast.success(response.data.message);
         // getAllCandidate()
         setInvokeModal(false)
-      
-  
-    } else {
-      toast.error("Its Admin Only Access")
-    }
-      
+
+
+      } else {
+        toast.error("Its Admin Only Access")
+      }
+
     }
 
     getAllCandidate()
- 
+
   }
-  const generatePDF=useReactToPrint({
-    content: ()=>componentPDF.current,
-    documentTitle:"user data",
+  const generatePDF = useReactToPrint({
+    content: () => componentPDF.current,
+    documentTitle: "user data",
     // onAfterPrint:()=>toast.success("Data saved in pdf")
-    
-   
+
+
   })
 
 
   const handleAddData = (newData) => {
     console.log(newData)
-    SetAllCandidate([...allcandidate, newData]); 
-};
+    SetAllCandidate([...allcandidate, newData]);
+  };
 
-function handleCSVExport(candidate) {
-  setCSVData([
-    {
-      fname: candidate.fname,
-      lname: candidate.lname,
-      jdate: candidate.jdate,
-      dsesignation: candidate.dsesignation,
-      email: candidate.email,
-    },
-  ]);
-};
+  function handleCSVExport(candidate) {
+    setCSVData([
+      {
+        fname: candidate.fname,
+        lname: candidate.lname,
+        jdate: candidate.jdate,
+        dsesignation: candidate.dsesignation,
+        email: candidate.email,
+      },
+    ]);
+  };
 
 
 
@@ -204,7 +204,7 @@ function handleCSVExport(candidate) {
 
   return (
     <div className='' style={{ backgroundColor: " rgba(250, 251, 255, 1)", position: 'relative', minHeight: "100vh" }}>
-       <Navbar
+      <Navbar
         bg="white"
         className='mb-0 n'
         variant="black"
@@ -216,7 +216,7 @@ function handleCSVExport(candidate) {
 
         }}
       >
-        <Container style={{gap:"25px"}}>
+        <Container style={{ gap: "25px" }}>
           <Navbar.Brand href="#home">
             <img
               alt="Techjays Logo"
@@ -226,28 +226,29 @@ function handleCSVExport(candidate) {
             />
           </Navbar.Brand>
           <Nav className="me-auto">
-            <Nav.Link href="/dashboard" className="d-none d-md-block" style={{ backgroundColor: " rgba(249, 250, 251, 1)" ,  
-            boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-            borderRadius:"5px",
-            fontWeight:"500"
+            <Nav.Link href="/dashboard" className="d-none d-md-block" style={{
+              backgroundColor: " rgba(249, 250, 251, 1)",
+              boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
+              borderRadius: "5px",
+              fontWeight: "500"
             }}
             >
               Dashboard
             </Nav.Link>
           </Nav>
 
-              
+
           {/* <Navbar.Brand href="http://localhost:5173/"> */}
-      {/* <IoLogOutOutline className="d-inline-block align-top" style={{
+          {/* <IoLogOutOutline className="d-inline-block align-top" style={{
         color: "#7F56D9",
         height: "30px",
         width: '30px',
         borderRadius: "200px",
         backgroundColor: " rgba(249, 245, 255, 1)"
       }} onClick={Logout} /> */}
-    {/* </Navbar.Brand> */}
-          
-         <Navbar.Brand onClick={handleUserIconClick}>
+          {/* </Navbar.Brand> */}
+
+          <Navbar.Brand onClick={handleUserIconClick}>
             <FiUser
               className="d-inline-block align-top"
               style={{
@@ -262,27 +263,27 @@ function handleCSVExport(candidate) {
           </Navbar.Brand>
 
 
-          <Modal show={showModal} 
+          <Modal show={showModal}
             onHide={handleCloseModal}
             dialogClassName="modal-responsive custom-modal"
-            style={{ marginTop:"50px",  border:'none'}}>
-            <Modal.Header closeButton style={{border:"1px solid #fff"}}>
-              
+            style={{ marginTop: "50px", border: 'none' }}>
+            <Modal.Header closeButton style={{ border: "1px solid #fff" }}>
+
             </Modal.Header>
             <Modal.Body >
-            <FiUser className='ms-4' style={{ color: '#7F56D9', fontSize:'24px', marginRight:'15px', borderRadius:'30%', backgroundColor:'AliceBlue',opacity:'2.5'}} />
+              <FiUser className='ms-4' style={{ color: '#7F56D9', fontSize: '24px', marginRight: '15px', borderRadius: '30%', backgroundColor: 'AliceBlue', opacity: '2.5' }} />
               {email}
-            
-            <Modal.Footer style={{border:"1px solid #fff"}}>
-              
-              <Button 
-                variant="primary"
-                onClick={handleLogout}
-                style={{ backgroundColor: '#7F56D9', border: '10px', alignItems:'center', width:'500px', height:'45px', marginTop:'22px' }}
+
+              <Modal.Footer style={{ border: "1px solid #fff" }}>
+
+                <Button
+                  variant="primary"
+                  onClick={handleLogout}
+                  style={{ backgroundColor: '#7F56D9', border: '10px', alignItems: 'center', width: '500px', height: '45px', marginTop: '22px' }}
                 >
-                Logout
-              </Button>
-            </Modal.Footer>
+                  Logout
+                </Button>
+              </Modal.Footer>
             </Modal.Body>
           </Modal>
 
@@ -291,71 +292,71 @@ function handleCSVExport(candidate) {
         </Container>
       </Navbar>
 
-       <Nav className='border  p-3 ' variant="black" defaultActiveKey="/home"  >
-      <Nav.Item style={{paddingLeft:"76px"}}>
-        <Nav.Link 
-         className='' eventKey="link-1"  onClick={() => setSearch('no')} style={{fontWeight:"500",color: "#344054"}}>
-          All Candidates</Nav.Link>
+      <Nav className='border  p-3 ' variant="black" defaultActiveKey="/home"  >
+        <Nav.Item style={{ paddingLeft: "76px" }}>
+          <Nav.Link
+            className='' eventKey="link-1" onClick={() => setSearch('no')} style={{ fontWeight: "500", color: "#344054" }}>
+            All Candidates</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link className='' onClick={() => setSearch('Yes')}
-           eventKey="link-2" style={{ color: "#344054",fontWeight:"500" }}>Rejected</Nav.Link>
+            eventKey="link-2" style={{ color: "#344054", fontWeight: "500" }}>Rejected</Nav.Link>
         </Nav.Item>
 
       </Nav>
       <div className={`container ${(addModalIsOpen || editModalIsOpen) ? 'blur' : ''}`}
-       style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
+        style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} >
         <div className=' d-flex mt-3   justify-content-between border bg-white'
-         style={{borderTopLeftRadius:"8px",borderTopRightRadius:"8px"}} >
+          style={{ borderTopLeftRadius: "8px", borderTopRightRadius: "8px" }} >
 
           <h5 className='float-left  mt-4 ' style={{ paddingLeft: "30px" }}>Team Members</h5>
-          {search === "no" 
-                    ?   <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
-                    onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
-                     Add new candidate
-                    </button> 
-                    :   <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }} 
-                    onClick={generatePDF} id='b' className='btn mb-4 mt-4 float-right'  >
-                     Download All
-                    </button> }
+          {search === "no"
+            ? <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }}
+              onClick={openAddModal} id='b' className='btn mb-4 mt-4 float-right'  >
+              Add new candidate
+            </button>
+            : <button style={{ backgroundColor: "#7F56D9", color: "white", marginRight: "30px" }}
+              onClick={generatePDF} id='b' className='btn mb-4 mt-4 float-right'  >
+              Download All
+            </button>}
 
 
-        
+
         </div>
 
 
-        <div ref={componentPDF} style={{width:"100%"}} >
-        <MDBTable   align='middle' border={"1px"} responsive className=' mb-0' >
-          <MDBTableHead >
+        <div ref={componentPDF} style={{ width: "100%" }} >
+          <MDBTable align='middle' border={"1px"} responsive className=' mb-0' >
+            <MDBTableHead >
 
 
-            <tr >
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }}
-               scope='col' className='text-start '>Candidate</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
-              {search=="no" ?
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
-               :""}
-              <td style={{ backgroundColor: " rgba(249, 250, 251, 1)",paddingLeft:"20px" }} scope='col '>Action</td>
-            </tr>
+              <tr >
+                <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "36px" }}
+                  scope='col' className='text-start '>Candidate</td>
+                <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Date of joining</td>
+                <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Designation</td>
+                <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Email Address</td>
+                {search == "no" ?
+                  <td style={{ backgroundColor: " rgba(249, 250, 251, 1)" }} scope='col'>Status</td>
+                  : ""}
+                <td style={{ backgroundColor: " rgba(249, 250, 251, 1)", paddingLeft: "20px" }} scope='col '>Action</td>
+              </tr>
 
-          </MDBTableHead>
-          <MDBTableBody  >
-          {records.length > 0 ? records.filter((item) => {
-            const searchTerm = search.toLowerCase();
-            const projectValue = item[filterType].toLowerCase();
-            return projectValue.includes(searchTerm);
-          }).map((i, index) => (
+            </MDBTableHead>
+            <MDBTableBody  >
+              {records.length > 0 ? records.filter((item) => {
+                const searchTerm = search.toLowerCase();
+                const projectValue = item[filterType].toLowerCase();
+                return projectValue.includes(searchTerm);
+              }).map((i, index) => (
                 <tr>
                   <td>
                     <div className='d-flex align-items-center'>
 
                       <div className='ms-3'>
                         <p style={{ padding: "8px" }} className='fw-normal mb-1'>
-                        {i.status != "Pending" ? <a href={`/recruiterView/${i._id}`} style={{textDecoration:"none",color:'black'}}>
-                            {i.fname} {i.lname}</a> :`${i.fname} ${i.lname}` }</p>
+                          {i.status != "Pending" ? <a href={`/recruiterView/${i._id}`} style={{ textDecoration: "none", color: 'black' }}>
+                            {i.fname} {i.lname}</a> : `${i.fname} ${i.lname}`}</p>
 
                       </div>
                     </div>
@@ -368,104 +369,110 @@ function handleCSVExport(candidate) {
 
                   </td>
                   <td>{i.email}</td>
-                  {search=="no" ?
+                  {search == "no" ?
+                    <td>
+
+                      <MDBBadge className={` ${i.status === "Completed" ? 'green' : ""
+                        || i.status === "Active" ? 'violet' : ""
+                          || i.status === "Pending" ? 'orange' : ""
+                            || i.status === "Review pending" ? 'blue' : ""
+                              || i.status === "Rejected" ? 'red' : ""}`} pill>
+                        {i.status}
+                      </MDBBadge>
+
+
+                    </td>
+                    : ""}
                   <td>
-                    
-                    <MDBBadge className={` ${i.status === "Completed" ? 'green' : ""
-                     || i.status === "Active" ? 'violet' : ""
-                     || i.status === "Pending" ? 'orange' : ""
-                     || i.status === "Review pending" ? 'blue' : ""
-                     || i.status === "Rejected" ? 'red' : "" }`} pill>
-                     {i.status}
-                    </MDBBadge>
-                  
+                    {search === "no"
+                      ? <LuPen style={{ color: "#7F56D9" }} onClick={() => openEditModal(i)} className="ms-1 icon" />
+                      : <CSVLink style={{ color: "#7F56D9" }}
+                        data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
+                        headers={[
+                          { label: 'Candidate First Name', key: 'fname' },
+                          { label: 'Candidate Last Name', key: 'lname' },
+                          { label: 'Date of Joining', key: 'jdate' },
+                          { label: 'Designation', key: 'dsesignation' },
+                          { label: 'Email Address', key: 'email' },
+                        ]}
+                        cursor={'pointer'}
+                        filename={`Rejected_candidate_${i.fname}.csv`}
+                        onClick={() => handleCSVExport(i)}
+                        className="icon ms-1"
+
+                      >
+                        {/* ${i.fname}_${i.lname} */}
+                        {/* <CiExport/> */}
+                        <FiDownload />
+                      </CSVLink>}
+
+                    <LuTrash2 style={{ color: "#7F56D9" }} className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id, i.status)} />
 
                   </td>
-                    :""}
-                  <td>
-                  {search === "no" 
-                    ? <LuPen style={{color:"#7F56D9"}} onClick={() => openEditModal(i)} className="ms-1 icon" /> 
-                    : <CSVLink style={{color:"#7F56D9"}}
-                    data={[{ fname: i.fname, lname: i.lname, jdate: i.jdate, dsesignation: i.dsesignation, email: i.email }]}
-                    headers={[
-                      { label: 'Candidate First Name', key: 'fname' },
-                      { label: 'Candidate Last Name', key: 'lname' },
-                      { label: 'Date of Joining', key: 'jdate' },
-                      { label: 'Designation', key: 'dsesignation' },
-                      { label: 'Email Address', key: 'email' },
-                    ]}
-                    cursor={'pointer'}  
-                    filename={`Rejected_candidate_${i.fname}.csv`}
-                    onClick={() => handleCSVExport(i) }
-                    className="icon ms-1"
-                    
-                  >
-                    {/* ${i.fname}_${i.lname} */}
-                    {/* <CiExport/> */}
-                  <FiDownload/>
-                  </CSVLink> }
-                    
-                    <LuTrash2 style={{color:"#7F56D9"}} className=" icon3" cursor='pointer' onClick={() => handleDeleteClick(i._id,i.status)}/>
 
-                  </td>
-      
                 </tr>
-                
-                )
-                ):<p className='text-danger text-center ms-5'>No Data Present</p>
-            }
+
+              )
+              ) : <p className='text-danger text-center ms-5'>No Data Present</p>
+              }
 
 
-          </MDBTableBody>
+            </MDBTableBody>
 
 
-        </MDBTable>
+          </MDBTable>
         </div>
-        <nav className='border' style={{ backgroundColor: " white",
-        borderBottomLeftRadius:"8px",borderBottomRightRadius:"8px" }}  >
-         
+        <nav className='border' style={{
+          backgroundColor: " white",
+          borderBottomLeftRadius: "8px", borderBottomRightRadius: "8px"
+        }}  >
+
           <ul className='pagination d-flex  justify-content-between p-1 mt-3' >
-            
+
             {currentPage != 1 ?
-            <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
-              <a href='#' style={{ borderRadius: "8px" }}
-               className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
+              <li className='page-item float-left ' style={{ paddingLeft: '30px' }} >
+                <a href='#' style={{ borderRadius: "8px" }}
+                  className='page-link bg-white  text-dark border index ' onClick={prePage}> Previous</a>
 
-            </li>: <li className='page-item float-left disabled' style={{ paddingLeft: '30px' }} >
-              <a href='#' style={{ borderRadius: "8px",
-              borderColor:"rgba(234,236,240,1)",color:"rgba(234,236,240,1)" }}
-               className='page-link bg-white   border index ' onClick={prePage}> Previous</a>
+              </li> : <li className='page-item float-left disabled' style={{ paddingLeft: '30px' }} >
+                <a href='#' style={{
+                  borderRadius: "8px",
+                  borderColor: "rgba(234,236,240,1)", color: "rgba(234,236,240,1)"
+                }}
+                  className='page-link bg-white   border index ' onClick={prePage}> Previous</a>
 
-            </li> }
- 
-               <div className='page-item d-flex'>
-               {
-              numbers.map((n, i) => (
-                <li className="ms-2" key={i} >
-                  <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`} 
-                  onClick={() => changeCpage(n)}>{n}</a>
-                </li>
-                  ))
-                }
-                </div>
+              </li>}
+
+            <div className='page-item d-flex'>
+              {
+                numbers.map((n, i) => (
+                  <li className="ms-2" key={i} >
+                    <a className={`page-link float-center one ${currentPage === n ? 'active' : ''}`}
+                      onClick={() => changeCpage(n)}>{n}</a>
+                  </li>
+                ))
+              }
+            </div>
 
 
-                {currentPage != npages ?
-            <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
-              <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index' 
-              onClick={nextPage}>Next </a>
+            {currentPage != npages ?
+              <li className='page-item float-right ' style={{ paddingRight: '30px' }} >
+                <a href='#' style={{ borderRadius: "8px" }} className='page-link bg-white text-dark  index'
+                  onClick={nextPage}>Next </a>
 
-            </li>
-            :  <li  className='page-item float-right disabled '
-             style={{ paddingRight: '30px' }} >
-            <a href='#' style={{ borderRadius: "8px",
-            borderColor:"rgba(234,236,240,1)",color:"rgba(234,236,240,1)" }} className='page-link bg-white   index' 
-            onClick={nextPage}>Next </a>
+              </li>
+              : <li className='page-item float-right disabled '
+                style={{ paddingRight: '30px' }} >
+                <a href='#' style={{
+                  borderRadius: "8px",
+                  borderColor: "rgba(234,236,240,1)", color: "rgba(234,236,240,1)"
+                }} className='page-link bg-white   index'
+                  onClick={nextPage}>Next </a>
 
-          </li> }
+              </li>}
 
           </ul>
-          
+
         </nav>
         <Modal className='deleteModal' show={isShow} onHide={initModal}>
 
@@ -493,7 +500,7 @@ function handleCSVExport(candidate) {
 
       {addModalIsOpen &&
         <div className='addCandidateModal'>
-          <AddNewCandidate close={closeAddModal} onAddData={handleAddData}  />
+          <AddNewCandidate close={closeAddModal} onAddData={handleAddData} />
         </div>
       }
 

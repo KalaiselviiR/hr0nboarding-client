@@ -30,7 +30,7 @@ import { Modal } from 'react-bootstrap';
 
 
 const RecruiterForm = () => {
-  
+
 
   const [isResendModalOpen, setIsResendModalOpen] = useState(false)
 
@@ -50,7 +50,7 @@ const RecruiterForm = () => {
 
   const cancleVerify = () => {
     setInvokeModal(false)
-   
+
   }
 
   const handleClick = () => {
@@ -63,48 +63,47 @@ const RecruiterForm = () => {
   };
 
 
-    // param id 
-    const{id} =useParams()
-    // console.log(id);
- 
-    //get details of the perticuler candidate
-    const getoneCandidatesFrom = async () => {
-      const  datas  = await getSingleCandidateOutside(id);
-      console.log(datas);
-      setIsOutsideIndia(datas.region)
-    };
-    console.log(isOutsideIndia);
+  // param id 
+  const { id } = useParams()
+  // console.log(id);
+
+  //get details of the perticuler candidate
+  const getoneCandidatesFrom = async () => {
+    const response = await getSingleCandidateOutside(id);
+    setIsOutsideIndia(response.data.candidate.region)
+  };
+
 
 
 
   //get details of the perticuler Candidate
-  const getoneCandidate=async()=>{
-    const {data}=await getRecruterView(id)
+  const getoneCandidate = async () => {
+    const { data } = await getRecruterView(id)
     setCdata(data);
-      
+
   }
   console.log(cData);
-  
-      //create an object to store datas from input
-      const [userData, setUser] = useState({
-        status: "Completed",
-        cid: id
-    
-      })
 
-   // Function to handle the click on "Verify Documents" button
-   const handleVerify = async () => {
+  //create an object to store datas from input
+  const [userData, setUser] = useState({
+    status: "Completed",
+    cid: id
+
+  })
+
+  // Function to handle the click on "Verify Documents" button
+  const handleVerify = async () => {
     // Perform verification logic
     // Assume verification is successful for demonstration purposes
     cancleVerify()
     const response = await updateStatus(userData)
     console.log(response);
-    
+
     setIsVerified(true);
     toast.success("Document verified Successfully", {
       position: "top-center"
     });
-    
+
   };
 
   const openResendModal = () => {
@@ -128,12 +127,12 @@ const RecruiterForm = () => {
       position: "top-center"
     });
   }
-  useEffect(()=>{
-    getoneCandidatesFrom() 
-     
+  useEffect(() => {
+    getoneCandidatesFrom()
+
     getoneCandidate()
-   
-  },[])
+
+  }, [])
 
 
   return (
@@ -165,7 +164,7 @@ const RecruiterForm = () => {
               borderRadius: "5px",
               fontWeight: "600"
             }}
-            onClick={handleClick} 
+              onClick={handleClick}
             >
               Dashboard
             </Nav.Link>
@@ -188,12 +187,12 @@ const RecruiterForm = () => {
           <Row>
             <Col md={10}>
               <h5 style={{ gap: "20px" }}>
-                <GoArrowLeft style={{cursor:"pointer",display:"inline-block"}} onClick={handleClick} /> Candidate Info
+                <GoArrowLeft style={{ cursor: "pointer", display: "inline-block" }} onClick={handleClick} /> Candidate Info
               </h5>
             </Col>
             <Col md={2} className="d-flex justify-content-end ">
               <h6 className={`text-end d-none d-sm-inline-block align-top ${isVerified === true ? 'green' : 'blue'}`}>
-                {isVerified ==false ? "Review Pending" : "Completed" }
+                {isVerified == false ? "Review Pending" : "Completed"}
               </h6>
             </Col>
           </Row>
@@ -287,28 +286,28 @@ const RecruiterForm = () => {
                     />
                   </InputGroup> */}
                   <div className="phoneDiv mt-4">
-                        <div className="labelss">
-                            <p>Phone number</p>
-                        </div>
-                        <div className="phoneInput ">
-                            <select className="country-code "
-                             onChange={(e) => setCountryCode(e.target.value)}
-                            >
-                                <option selected value="+91">IN(+91)</option>
-                                <option  value="+880">BD(+880)</option>
-                                <option value="+1">US(+1)</option>
-                                <option value="+20">EG(+20)</option>
-                            </select>
-                            <input 
-                            className="input-field form-control "
-                            type="tel"
-                            value={cData.phoneNumber}
-                                name="emergencyContactNumber"
-                                
-                               
-                            />
-                        </div>
-                        </div>
+                    <div className="labelss">
+                      <p>Phone number</p>
+                    </div>
+                    <div className="phoneInput ">
+                      <select className="country-code "
+                        onChange={(e) => setCountryCode(e.target.value)}
+                      >
+                        <option selected value="+91">IN(+91)</option>
+                        <option value="+880">BD(+880)</option>
+                        <option value="+1">US(+1)</option>
+                        <option value="+20">EG(+20)</option>
+                      </select>
+                      <input
+                        className="input-field form-control "
+                        type="tel"
+                        value={cData.phoneNumber}
+                        name="emergencyContactNumber"
+
+
+                      />
+                    </div>
+                  </div>
 
                 </Form.Group>
               </Col>
@@ -437,38 +436,38 @@ const RecruiterForm = () => {
             </Row>
             <Row className="mt-4">
               <Col md={4}>
-              <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
+                <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
-               <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
-              <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
-              <div>
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      cursor:'pointer'
-                    }}
-                    onClick={handleToggleSection}
-                  >
-                    <h6 style={{fontWeight:"normal"}}>Educational Certificates</h6>
-                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
-                  </div>
-                  {isSectionOpen && (
-                    <div>
-                      <RecruiterFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"}/>
-                      <RecruiterFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"}/>
-                      <RecruiterFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"}/>
-                      <RecruiterFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"}/>
-                      <RecruiterFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"}/>
-                      <RecruiterFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"}/>
+                  <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+                  <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        cursor: 'pointer'
+                      }}
+                      onClick={handleToggleSection}
+                    >
+                      <h6 style={{ fontWeight: "normal" }}>Educational Certificates</h6>
+                      {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                     </div>
-                  )}
-                </div>
+                    {isSectionOpen && (
+                      <div>
+                        <RecruiterFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"} />
+                        <RecruiterFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"} />
+                        <RecruiterFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"} />
+                        <RecruiterFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"} />
+                        <RecruiterFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"} />
+                        <RecruiterFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"} />
+                      </div>
+                    )}
+                  </div>
 
-              <RecruiterFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"}/>
-              <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"}/>
-            </div>
+                  <RecruiterFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"} />
+                  <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"} />
+                </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button
                     style={{
@@ -488,7 +487,7 @@ const RecruiterForm = () => {
                     style={{
                       height: "35px",
                       fontSize: "15px",
-                      
+
                       backgroundColor: "white",
                       color: "black",
                       borderColor: "black",
@@ -501,22 +500,22 @@ const RecruiterForm = () => {
                   </Button>
                   <Modal className='deleteModal' show={isShow} onHide={initModal}>
 
-<div className="deleteModalBody">
+                    <div className="deleteModalBody">
 
-  <div className="deleteModalContent">
-    <h3>Verify documents</h3>
-    <p>Are you sure you have completed document verification? This action is irreversible</p>
-  </div>
+                      <div className="deleteModalContent">
+                        <h3>Verify documents</h3>
+                        <p>Are you sure you have completed document verification? This action is irreversible</p>
+                      </div>
 
-  <div className="deleteModalButtons">
-    <button onClick={cancleVerify} className='deleteButtonNo'>No</button>
-    <button onClick={handleVerify} className='deleteButtonYes'>Yes</button>
-  </div>
+                      <div className="deleteModalButtons">
+                        <button onClick={cancleVerify} className='deleteButtonNo'>No</button>
+                        <button onClick={handleVerify} className='deleteButtonYes'>Yes</button>
+                      </div>
 
-</div>
+                    </div>
 
 
-</Modal>
+                  </Modal>
                 </div>
                 <div className="mt-5 mb-3">
                   <Button
@@ -526,7 +525,7 @@ const RecruiterForm = () => {
                       backgroundColor: "rgb(236, 236, 237)",
                       color: "rgb(147, 48, 233)",
                       fontWeight: "500",
-                     opacity: isVerified ? "1" : "0.5",
+                      opacity: isVerified ? "1" : "0.5",
                       borderColor: "white"
                     }}
                     disabled={!isVerified && !isResent}
@@ -544,14 +543,14 @@ const RecruiterForm = () => {
       </div>
 
       {isResendModalOpen &&
-       <ResendDocument closeModal={closeResendModal}
-       onApiError={handleResendError}
-       onApiSuccess={handleResendSuccess}
-       id={id}
-       />}
-       <ToastContainer
-       autoClose={2000}
-       />
+        <ResendDocument closeModal={closeResendModal}
+          onApiError={handleResendError}
+          onApiSuccess={handleResendSuccess}
+          id={id}
+        />}
+      <ToastContainer
+        autoClose={2000}
+      />
     </>
   );
 };
