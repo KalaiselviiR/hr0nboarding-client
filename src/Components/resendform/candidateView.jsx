@@ -689,11 +689,11 @@ const CandidateViewForm = () => {
              ) : null} */}
 
                     <CandidateFileView
-                      label="Aadhar Card "
+                      label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)":"Adhar Card"} 
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData?.aadharCardFiles}
-                      prefile={cData?.aadharCardFiles} prename={"adharCard.pdf"}
+                      prefile={cData?.aadharCardFiles} prename={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
                           ...prevData,
