@@ -139,6 +139,20 @@ const RecruiterForm = () => {
   }, [])
 
 
+  function capitalizeFirstLetter(string) {
+    // Split the string into words
+    let words = string.split(' ');
+  
+    // Capitalize the first letter of each word
+    for (let i = 0; i < words.length; i++) {
+      words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
+    }
+  
+    // Join the words back into a single string
+    return words.join(' ');
+  }
+  
+
   return (
     <>
       <Navbar
@@ -442,7 +456,33 @@ const RecruiterForm = () => {
               <Col md={4}>
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
-                  <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+
+               <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+              <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
+              <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      cursor:'pointer'
+                    }}
+                    onClick={handleToggleSection}
+                  >
+                    <h6 style={{fontWeight:"normal"}}>Educational Certificates</h6>
+                    {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
+                  </div>
+                  {isSectionOpen && (
+               <div>
+               {Object.entries(cData.educationCertificateFiles)
+                 .filter(([key, value]) => key !== "_id") 
+                 .map(([certificate, fileUrl]) => (
+                   <RecruiterFileView key={certificate} label={certificate} file={fileUrl} name={`${capitalizeFirstLetter(certificate.replace(/ /g, '_'))}.pdf`} />
+                 ))}
+             </div>
+                  )}
+                </div>
+                  {/* <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
                   <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
                   <div>
                     <div
@@ -468,9 +508,10 @@ const RecruiterForm = () => {
                       </div>
                     )}
                   </div>
+*/}
 
                   <RecruiterFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"} />
-                  <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"} />
+                  <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"} /> 
                 </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button

@@ -332,6 +332,8 @@ const CandidateViewForm = () => {
 
   }, [])
 
+    
+
 
     const handleSubmit = async () => {
     
@@ -939,6 +941,19 @@ const CandidateViewForm = () => {
                     Good to go
                   </Button>
                 </div> */}
+
+                    {/* <Button
+                        style={{
+                          height: "35px",
+                          fontSize: "15px",
+                          backgroundColor: "rgb(210, 164, 250)",
+                          color: "white",
+                          borderColor: "rgb(210, 164, 250)",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Submit
+                      </Button> */}
               </Col>
             </Row>
           </Form>
