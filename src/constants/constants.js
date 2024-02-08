@@ -1,7 +1,7 @@
 const PHOTO = "Photo";
 const AADHAR_CARD = "Aadhar Card";
-const TENTH_MARKSHEET = "Tenth Marksheet";
-const TWELFTH_MARKSHEET = "Twelfth Marksheet";
+const TENTH_MARKSHEET = "10 th Marksheet";
+const TWELFTH_MARKSHEET = "12 th Marksheet";
 const PGDEGREE_CERTIFICATE = "PG Degree Certificate";
 const UGDEGREE_CERTIFICATE = "UG Degree Certificate";
 const UGMARK_SHEET = "UG Marksheet";
