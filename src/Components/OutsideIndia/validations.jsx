@@ -41,20 +41,20 @@ export const initialValues = {
     relationToEmergencyContact:''
   },
   //bottom-2
-  epfoUan: "",
-  pfNo: "",
-  adharCard: "",
-  panCard: "",
-  employeesName: "",
-  dateOfBirthAs: "",
-  gender: "",
-  maritalStatus: "",
-  fatherName: "",
-  bankName: "",
-  accountNumber: "",
-  branch: "",
-  ifsc: "",
-  highestQualification:"",
+  // epfoUan: "",
+  // pfNo: "",
+  // adharCard: "",
+  // panCard: "",
+  // employeesName: "",
+  // dateOfBirthAs: "",
+  // gender: "",
+  // maritalStatus: "",
+  // fatherName: "",
+  // bankName: "",
+  // accountNumber: "",
+  // branch: "",
+  // ifsc: "",
+  // highestQualification:"",
   //bottom-3
   prefix: "",
   firstNamehr: "",
@@ -151,47 +151,47 @@ export const validationSchema = Yup.object().shape({
           
 
   // bottomForm-2
-  epfoUan: Yup.string()
-  .matches(/^\d{10}$/, "It contains 10 digits"),
-  // .required("EPFO UAN is required"),
-pfNo: Yup.string()
-.matches(/^\d{10}$/, "It contains 10 digits"),
-//   .required("PF NO is required"),
-  adharCard: Yup.string()
-    .matches(/^\d{13}$/, "Invalid AdharCard Number(It contains 13 digit)")
-    .required("AdharCard Number is required"),
-  panCard: Yup.string()
-    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid PanCard Number")
-    .required("PanCard Number is required"),
-  employeesName: Yup.string()
-    .matches(/^[^\d]+$/, "employee Name should not contain numbers")
-    .required("employee Name is required"),
+//   epfoUan: Yup.string()
+//   .matches(/^\d{10}$/, "It contains 10 digits"),
+//   // .required("EPFO UAN is required"),
+// pfNo: Yup.string()
+// .matches(/^\d{10}$/, "It contains 10 digits"),
+// //   .required("PF NO is required"),
+//   adharCard: Yup.string()
+//     .matches(/^\d{13}$/, "Invalid AdharCard Number(It contains 13 digit)")
+//     .required("AdharCard Number is required"),
+//   panCard: Yup.string()
+//     .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid PanCard Number")
+//     .required("PanCard Number is required"),
+//   employeesName: Yup.string()
+//     .matches(/^[^\d]+$/, "employee Name should not contain numbers")
+//     .required("employee Name is required"),
 
-  dateOfBirthAs: Yup.string().required("Date of Birth"),
-  gender: Yup.string()
-    .matches(/^[^\d]+$/, "Gender should not contain numbers")
-    .required("Gender is Required"),
-  maritalStatus: Yup.string()
-    .matches(/^[^\d]+$/, "Marital status should not contain numbers")
-    .required("Marital Status is Required"),
-  fatherName: Yup.string()
-    .matches(/^[^\d]+$/, "Father Name should not contain numbers")
-    .required("Father Name is required"),
-  bankName: Yup.string()
-    .matches(/^[^\d]+$/, "Bank Name should not contain numbers")
-    .required("Bank Name is required"),  
-  accountNumber: Yup.string()
-    .matches(/^\+?[0-9]+$/, "Invalid Account Number")
-    .required("Account Number is required"),
-  branch: Yup.string()
-    .matches(/^[^\d]+$/, "Branch should not contain numbers")
-    .required("Branch Name is required"),
-  ifsc: Yup.string()
-    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
-    .required("IFSC code is required"),
-    highestQualification:Yup.string()
-    .matches(/^[^\d]+$/, "Highest Qualification should not contain numbers")
-    .required("Highest Qualification is required"),
+//   dateOfBirthAs: Yup.string().required("Date of Birth"),
+//   gender: Yup.string()
+//     .matches(/^[^\d]+$/, "Gender should not contain numbers")
+//     .required("Gender is Required"),
+//   maritalStatus: Yup.string()
+//     .matches(/^[^\d]+$/, "Marital status should not contain numbers")
+//     .required("Marital Status is Required"),
+//   fatherName: Yup.string()
+//     .matches(/^[^\d]+$/, "Father Name should not contain numbers")
+//     .required("Father Name is required"),
+//   bankName: Yup.string()
+//     .matches(/^[^\d]+$/, "Bank Name should not contain numbers")
+//     .required("Bank Name is required"),  
+//   accountNumber: Yup.string()
+//     .matches(/^\+?[0-9]+$/, "Invalid Account Number")
+//     .required("Account Number is required"),
+//   branch: Yup.string()
+//     .matches(/^[^\d]+$/, "Branch should not contain numbers")
+//     .required("Branch Name is required"),
+//   ifsc: Yup.string()
+//     .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
+//     .required("IFSC code is required"),
+//     highestQualification:Yup.string()
+//     .matches(/^[^\d]+$/, "Highest Qualification should not contain numbers")
+//     .required("Highest Qualification is required"),
   //bottomForm-3
   // prefix: Yup.string()
   //   .matches(/^[^\d]+$/, "Prefix should not contain numbers")
@@ -290,45 +290,45 @@ export const handleFieldChange = (formik, e) => {
       }
       break;
 
-    case "epfoUan":
-      // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\d{10}$/.test(value)) {
-        formik.setFieldError(name, "Invalid EpfoUan");
-      } else {
-        formik.setFieldError(name, "");
-      }
-      break;
+    // case "epfoUan":
+    //   // epfoUan validation logic(it contains 12 digit number)
+    //   if (!/^\d{10}$/.test(value)) {
+    //     formik.setFieldError(name, "Invalid EpfoUan");
+    //   } else {
+    //     formik.setFieldError(name, "");
+    //   }
+    //   break;
 
-      case "pfNo":
-        // PF Number validation logic (first two capitalized letters, remaining numbers)
-        if (!/^[A-Z]{2}\d+$/.test(value)) {
-          formik.setFieldError(name, "Invalid PF Number");
-        } else {
-          formik.setFieldError(name, "");
-        }
-        break;
+    //   case "pfNo":
+    //     // PF Number validation logic (first two capitalized letters, remaining numbers)
+    //     if (!/^[A-Z]{2}\d+$/.test(value)) {
+    //       formik.setFieldError(name, "Invalid PF Number");
+    //     } else {
+    //       formik.setFieldError(name, "");
+    //     }
+    //     break;
       
 
-    case "adharCard":
-      // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\d{12}$/.test(value)) {
-        formik.setFieldError(
-          name,
-          "Invalid Number(Adhar contains 12 digit number)"
-        );
-      } else {
-        formik.setFieldError(name, "");
-      }
-      break;
+    // case "adharCard":
+    //   // epfoUan validation logic(it contains 12 digit number)
+    //   if (!/^\d{12}$/.test(value)) {
+    //     formik.setFieldError(
+    //       name,
+    //       "Invalid Number(Adhar contains 12 digit number)"
+    //     );
+    //   } else {
+    //     formik.setFieldError(name, "");
+    //   }
+    //   break;
 
-    case "panCard":
-      // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\+?[a-zA-Z0-9]+$/.test(value)) {
-        formik.setFieldError(name, "Invalid Number(Invalid PAN number)");
-      } else {
-        formik.setFieldError(name, "");
-      }
-      break;
+    // case "panCard":
+    //   // epfoUan validation logic(it contains 12 digit number)
+    //   if (!/^\+?[a-zA-Z0-9]+$/.test(value)) {
+    //     formik.setFieldError(name, "Invalid Number(Invalid PAN number)");
+    //   } else {
+    //     formik.setFieldError(name, "");
+    //   }
+    //   break;
 
     case "designation":
     case "dateOfJoining":
@@ -340,7 +340,7 @@ export const handleFieldChange = (formik, e) => {
     case "company":
     case "enjoyment":
     case "sneakpeek":
-    case "ifsc":
+    // case "ifsc":
     case "bloodGroup":
     case "employeeId":
       // Example: Check if the value is not empty

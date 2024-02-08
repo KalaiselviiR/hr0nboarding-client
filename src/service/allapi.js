@@ -40,6 +40,9 @@ export const getSingleCandidate=async(token)=>{
 export const getSingleCandidateOutside=async(id)=>{
     return await commonRequest("GET",`${BASE_URL}/api/getSingleCandidate/${id}`,"")
 }
+export const getSingleCandidateById=async(id)=>{
+    return await commonRequest("GET",`${BASE_URL}/api/getSingleCandidate/${id}`,"")
+}
 
 //Change Status
 export const updateStatusRview=async(id)=>{
