@@ -376,7 +376,7 @@ const CandidateViewForm = () => {
               className="d-inline-block align-top"
             />
           </Navbar.Brand>
-          <Nav className="me-auto">
+          {/* <Nav className="me-auto">
             <Nav.Link href="/dashboard" className="d-none d-md-block" style={{
               background: "rgb(242, 249, 251)",
               boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
@@ -387,7 +387,7 @@ const CandidateViewForm = () => {
             >
               Dashboard
             </Nav.Link>
-          </Nav>
+          </Nav> */}
         </Container>
       </Navbar>
       <div className="container-fluid">
@@ -406,7 +406,7 @@ const CandidateViewForm = () => {
           <Row>
             <Col md={10}>
               <h5 style={{ gap: "20px" }}>
-                <GoArrowLeft style={{ cursor: "pointer", display: "inline-block" }} onClick={handleClick} /> Candidate Info
+               Candidate Info
               </h5>
             </Col>
             <Col md={2} className="d-flex justify-content-end ">
@@ -860,12 +860,10 @@ const CandidateViewForm = () => {
                     />
                    
                    <Button
-                    style={{
-                      height: "40px",
-                      width:"150px",
+                    style={{  
                       fontSize: "15px",
                       backgroundColor: "white",
-                      // color: "rgb(147, 48, 233)",
+                      color: "rgb(147, 48, 233)",
                       borderColor: "rgb(147, 48, 233)",
                       color: "#ffff",
                       backgroundColor:"rgb(147, 48, 233)",
