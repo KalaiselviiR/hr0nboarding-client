@@ -5,9 +5,15 @@ import {
   PHOTO,
   AADHAR_CARD,
   PAYSLIP,
-  EDUCATIONAL_CERTIFICATE,
+  // EDUCATIONAL_CERTIFICATE,
   RELIEVING_LETTERS,
   CLIENT_SERVER_URL,
+  TENTH_MARKSHEET,
+  TWELFTH_MARKSHEET,
+  PGDEGREE_CERTIFICATE,
+  PGMARK_SHEET,
+  UGMARK_SHEET,
+  UGDEGREE_CERTIFICATE,
 } from "../../constants/constants";
 import { resendDocuments } from "../../service/allapi";
 
@@ -122,12 +128,78 @@ function ResendDocument({ closeModal,onApiError,onApiSuccess,id }) {
                 type="checkbox"
                 name=""
                 id="certificates"
+                value={TENTH_MARKSHEET}
+                checked={checkedItems.includes(TENTH_MARKSHEET)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{TENTH_MARKSHEET} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
+                value={TWELFTH_MARKSHEET}
+                checked={checkedItems.includes(TWELFTH_MARKSHEET)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{TWELFTH_MARKSHEET} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
+                value={PGDEGREE_CERTIFICATE}
+                checked={checkedItems.includes(PGDEGREE_CERTIFICATE)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{PGDEGREE_CERTIFICATE} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
+                value={PGMARK_SHEET}
+                checked={checkedItems.includes(PGMARK_SHEET)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{PGMARK_SHEET} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
+                value={UGDEGREE_CERTIFICATE}
+                checked={checkedItems.includes(UGDEGREE_CERTIFICATE)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{UGDEGREE_CERTIFICATE} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
+                value={UGMARK_SHEET}
+                checked={checkedItems.includes(UGMARK_SHEET)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="certificates">{UGMARK_SHEET} </label>
+            </div>
+            {/* <div>
+              <input
+                type="checkbox"
+                name=""
+                id="certificates"
                 value={EDUCATIONAL_CERTIFICATE}
                 checked={checkedItems.includes(EDUCATIONAL_CERTIFICATE)}
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="certificates">{EDUCATIONAL_CERTIFICATE} </label>
-            </div>
+            </div> */}
             <div>
               <input
                 type="checkbox"
