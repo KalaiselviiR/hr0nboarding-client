@@ -20,12 +20,20 @@ function CandidateFileView({ label,  instruction, onFileChange, prefile,prename,
   const fileInputRef = useRef(null);
   console.log(prename)
 
+
+
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-
+  
     if (!selectedFile) {
       setError("Please select a file");
     } else {
+      // Check file size
+      if (selectedFile.size > 204800) { 
+        setError("File size exceeds the limit (200KB)");
+        return;
+      }
+  
       // Check file type for photo
       if (label === "Photo") {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
@@ -40,7 +48,7 @@ function CandidateFileView({ label,  instruction, onFileChange, prefile,prename,
           return;
         }
       }
-
+  
       setError(null);
       setFile(selectedFile);
       uploadFile(selectedFile);
@@ -48,6 +56,7 @@ function CandidateFileView({ label,  instruction, onFileChange, prefile,prename,
       setAcceptedFiles(selectedFile);
     }
   };
+  
 
   // Event handler for triggering file input click
   const handleFileClick = (e) => {
@@ -87,7 +96,7 @@ function CandidateFileView({ label,  instruction, onFileChange, prefile,prename,
         
         <div>
           
-          <PreFileView  prefile={prefile} prename={prename} />
+          <PreFileView presize={presize} prefile={prefile} prename={prename} />
           <Button
             style={{
               height: "35px",

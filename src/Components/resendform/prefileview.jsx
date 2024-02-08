@@ -38,7 +38,7 @@ function PreFileView({  prefile,prename,presize }) {
          
             <p style={{ margin: "0" }}>{prename}</p>
             <p style={{ margin: "0", fontSize: "10px" }}>
-              {(presize / 1024).toFixed(2)} KB
+              {(presize / 1024)} kb
             </p>
           </div>
         </div>

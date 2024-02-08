@@ -674,7 +674,7 @@ const CandidateViewForm = () => {
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData?.photoFiles}
-                      
+                      presize={204800} 
                       prefile={cData?.photoFiles} prename={"Photo.jpg"}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
@@ -692,6 +692,7 @@ const CandidateViewForm = () => {
                       label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)":"Adhar Card"} 
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
+                      presize={204800} 
                       acceptedFiles={formData?.aadharCardFiles}
                       prefile={cData?.aadharCardFiles} prename={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}
                       setAcceptedFiles={(files) =>
@@ -727,6 +728,7 @@ const CandidateViewForm = () => {
                           label="10th Marksheet"
                           instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.tenthMarksheet} 
                           prename={"10th Marksheet.pdf"}
                           acceptedFiles={formData?.tenthMarksheetFiles}
@@ -741,6 +743,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="12th Marksheet"
                           instruction="Accepted format:pdf"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.twelfthMarksheet}
                           prename={"12th Marksheet.pdf"}
                           controlId="twelfthMarksheet"
@@ -759,6 +762,7 @@ const CandidateViewForm = () => {
                           label="PG Degree Certificate"
                           instruction="Accepted format:pdf"
                           controlId="PGDegreeCertificate"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.pgDegreeCertificate}
                           prename={"PG Degree.pdf"}
                           acceptedFiles={formData.pgDegreeCertificateFiles}
@@ -775,6 +779,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="PG Marksheet"
                           controlId="PGMarksheet"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.pgMarksheet}
                           prename={"PG Marksheet.pdf"}
                           instruction="Accepted format:pdf"
@@ -790,6 +795,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="UG Degree Certificate"
                           instruction="Accepted format:pdf"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.ugDegreeCertificate}
                           prename={"UG Degree.pdf"}
                           controlId="UGDegreeCertificate"
@@ -807,6 +813,7 @@ const CandidateViewForm = () => {
                         <CandidateFileView
                           label="UG Marksheet"
                           instruction="Accepted format:pdf"
+                          presize={204800} 
                           prefile={cData?.educationCertificateFiles?.ugMarksheet} 
                           prename={"UG Marksheet.pdf"}
                           controlId="UGMarksheet"
@@ -829,6 +836,7 @@ const CandidateViewForm = () => {
                     <CandidateFileView
                       label="Relieving Letters from all your previous organizations"
                       instruction="Accepted format:pdf"
+                      presize={204800} 
                       controlId="relievingLetters"
                       prefile={cData?.relievingLettersFiles} prename={"Relieving Letters.pdf"}
                       acceptedFiles={formData?.relievingLettersFiles}
@@ -846,6 +854,7 @@ const CandidateViewForm = () => {
 
                     <CandidateFileView
                       label="3 Months Payslip "
+                      presize={204800} 
                       instruction="Accepted format:pdf"
                       prefile={cData?.payslipFiles} prename={"Payslips.pdf"}
                       controlId="payslip"

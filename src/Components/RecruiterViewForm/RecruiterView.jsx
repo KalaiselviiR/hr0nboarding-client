@@ -457,10 +457,10 @@ const RecruiterForm = () => {
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
 
-               <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
+               <RecruiterFileView label={"photo"} size={204800} file={cData.photoFiles} name={"Photo.jpg"} />
               <RecruiterFileView label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)":"Adhar Card"} 
-              file={cData.aadharCardFiles} name={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}  />
-              <div>
+              file={cData.aadharCardFiles} size={204800}  name={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}  />
+              {/* <div>
                   <div
                     style={{
                       display: "flex",
@@ -482,10 +482,8 @@ const RecruiterForm = () => {
                  ))}
              </div>
                   )}
-                </div>
-                  {/* <RecruiterFileView label={"photo"} file={cData.photoFiles} name={"Photo.jpg"} />
-                  <RecruiterFileView label={"Adhar Card"} file={cData.aadharCardFiles} name={"Adharcard.pdf"} />
-                  <div>
+                </div> */}
+                 <div>
                     <div
                       style={{
                         display: "flex",
@@ -495,24 +493,23 @@ const RecruiterForm = () => {
                       }}
                       onClick={handleToggleSection}
                     >
-                      <h6 style={{ fontWeight: "normal" }}>Educational Certificates</h6>
+                      <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
                       {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />}
                     </div>
                     {isSectionOpen && (
                       <div>
-                        <RecruiterFileView label={"10th Marksheet"} file={cData.aadharCardFiles} name={"10th Marksheet.pdf"} />
-                        <RecruiterFileView label={"12th Marksheet"} file={cData.aadharCardFiles} name={"12th Marksheet.pdf"} />
-                        <RecruiterFileView label={"PG Degree Certificate"} file={cData.aadharCardFiles} name={"PG Degree.pdf"} />
-                        <RecruiterFileView label={"PG Marksheet"} file={cData.aadharCardFiles} name={"PG Marksheet.pdf"} />
-                        <RecruiterFileView label={"UG Degree Certificate"} file={cData.aadharCardFiles} name={"UG Degree.pdf"} />
-                        <RecruiterFileView label={"UG Marksheet"} file={cData.aadharCardFiles} name={"UG Marksheet.pdf"} />
+                        <RecruiterFileView label={"10th Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.tenthMarksheet}  name={"10th Marksheet.pdf"} />
+                        <RecruiterFileView label={"12th Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.twelfthMarksheet} name={"12th Marksheet.pdf"} />
+                        <RecruiterFileView label={"PG Degree Certificate"} size={204800}  file={cData?.educationCertificateFiles?.pgDegreeCertificate} name={"PG Degree.pdf"} />
+                        <RecruiterFileView label={"PG Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.pgMarksheet} name={"PG Marksheet.pdf"} />
+                        <RecruiterFileView label={"UG Degree Certificate"} size={204800}  file={cData?.educationCertificateFiles?.ugDegreeCertificate} name={"UG Degree.pdf"} />
+                        <RecruiterFileView label={"UG Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.ugMarksheet}  name={"UG Marksheet.pdf"} />
                       </div>
                     )}
                   </div>
-*/}
 
-                  <RecruiterFileView label={"Relieving Letters"} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"} />
-                  <RecruiterFileView label={"Payslips"} file={cData.payslipFiles} name={"Payslips.pdf"} /> 
+                  <RecruiterFileView label={"Relieving Letters"} size={204800} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"} />
+                  <RecruiterFileView label={"Payslips"} size={204800}  file={cData.payslipFiles} name={"Payslips.pdf"} /> 
                 </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button

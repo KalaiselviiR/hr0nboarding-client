@@ -7,7 +7,7 @@ function RecruiterFileView({ label, file,name,size }) {
   
   return (
     <Form.Group className="mb-3">
-      <Form.Label>{label}</Form.Label>
+      <Form.Label style={{fontWeight:"500"}}>{label}</Form.Label>
       {file && (
          <a href={file} target="pdf-frame" style={{textDecoration:"none",color:"black"}}>
         <div
@@ -37,8 +37,8 @@ function RecruiterFileView({ label, file,name,size }) {
           <div className="file-info">
          
             <p style={{ margin: "0" }}>{name}</p>
-            <p style={{ margin: "0", fontSize: "10px" }}>
-              {(size / 1024).toFixed(2)} KB
+            <p style={{ margin: "0", fontSize: "10px" ,fontWeight:"400px" }}>
+              {(size / 1024)} kb
             </p>
           </div>
         </div>

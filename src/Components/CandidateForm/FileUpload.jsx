@@ -26,10 +26,16 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-
+  
     if (!selectedFile) {
       setError("Please select a file");
     } else {
+      // Check file size
+      if (selectedFile.size > 204800) { 
+        setError("File size exceeds the limit (200kb)");
+        return;
+      }
+  
       // Check file type for photo
       if (label === "Photo") {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
@@ -44,7 +50,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
           return;
         }
       }
-
+  
       setError(null);
       setFile(selectedFile);
       uploadFile(selectedFile);
@@ -52,6 +58,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
       setAcceptedFiles(selectedFile);
     }
   };
+  
 
   // Event handler for triggering file input click
   const handleFileClick = (e) => {
