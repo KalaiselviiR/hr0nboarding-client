@@ -871,8 +871,6 @@ const CandidateViewForm = () => {
                    <Button
                     style={{  
                       fontSize: "15px",
-                      backgroundColor: "white",
-                      color: "rgb(147, 48, 233)",
                       borderColor: "rgb(147, 48, 233)",
                       color: "#ffff",
                       backgroundColor:"rgb(147, 48, 233)",
