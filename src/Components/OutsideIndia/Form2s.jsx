@@ -620,7 +620,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
             <Row>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="prefix">
-                  <Form.Label className="labelss">Prefix</Form.Label>
+                  <Form.Label className="labelss">Prefix<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Select
                     className="input-field"
                     name="prefix"
