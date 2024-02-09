@@ -326,7 +326,9 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
     // Call the function when your component mounts
     retrieveDraftData();
   }, []);
-  
+
+  const isNameInvalid = (name) => /\d/.test(name);
+
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
@@ -381,8 +383,14 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                     name="memberName"
                     onChange={(e) => handleFamilyDetailsChange(index,e.target.name,e.target.value)}
                     onBlur={formik.handleBlur}
-                    value={familyMembers[index]?.memberName ? familyMembers[index]?.memberName:familyMembers?.memberName}                   
+                    value={familyMembers[index]?.memberName ? familyMembers[index]?.memberName:familyMembers?.memberName}
+                    isInvalid={isNameInvalid(familyMembers[index]?.memberName)}                   
                   />
+                  {isNameInvalid(familyMembers[index]?.memberName) && (
+                  <Form.Control.Feedback type="invalid">
+                    Name should not contain numbers.
+                  </Form.Control.Feedback>
+                )}
                   {/* {formik.touched.memberName && formik.errors.memberName ? (
                     <div className="text-danger">
                       {formik.errors.memberName}
@@ -531,7 +539,13 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
                      ))}
                     onBlur={formik.handleBlur}
                     value={contact?.relationToEmergencyContact}
+                    isInvalid={isNameInvalid(contact?.relationToEmergencyContact)}
                   />
+                  {isNameInvalid(contact?.relationToEmergencyContact) && (
+                  <Form.Control.Feedback type="invalid">
+                    Name should not contain numbers.
+                  </Form.Control.Feedback>
+                )}
                   {/* {formik.touched.emailAddress && formik.errors.emailAddress ? (
                     <div className="text-danger">
                       {formik.errors.emailAddress}
