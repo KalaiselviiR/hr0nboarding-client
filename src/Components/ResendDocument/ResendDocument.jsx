@@ -1,6 +1,6 @@
 import styles from "./ResendDocument.module.css";
 import closeIcon from "../../assets/closeIcon.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   PHOTO,
   AADHAR_CARD,
@@ -12,17 +12,20 @@ import {
   UGDEGREE_CERTIFICATE,
   UGMARK_SHEET,
   PGMARK_SHEET,
-  PGDEGREE_CERTIFICATE
+  PGDEGREE_CERTIFICATE,
+  GOVERNMENT_ISSUED_ID
 } from "../../constants/constants";
 import { resendDocuments } from "../../service/allapi";
 
 
-function ResendDocument({ closeModal,onApiError,onApiSuccess,id }) {
+function ResendDocument({ closeModal, onApiError, onApiSuccess, id, isOutsideIndia }) {
   const [checkedItems, setCheckedItems] = useState([]);
   const [note, setNote] = useState("");
   const [error, setError] = useState("");
-  const [isLoading,setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const email = localStorage.getItem("email")
+
+  const idProof = isOutsideIndia ? GOVERNMENT_ISSUED_ID : AADHAR_CARD
 
   const handleCheckboxChange = (event) => {
     const { value, checked } = event.target;
@@ -49,34 +52,34 @@ function ResendDocument({ closeModal,onApiError,onApiSuccess,id }) {
       return;
     }
 
-    setIsLoading(true); 
-    
+    setIsLoading(true);
+
     try {
 
       const data = {
-        from:email,
+        from: email,
         id,
-        documents:checkedItems,
+        documents: checkedItems,
         note,
-        resendLink:`${CLIENT_SERVER_URL}/candidateForm`
-  
+        resendLink: `${CLIENT_SERVER_URL}/candidateForm`
+
       }
       const response = await resendDocuments(data)
-      
+
       if (response.status !== 200) {
         throw new Error('something went wrong');
       }
 
-      if(response){
+      if (response) {
         onApiSuccess(response.data.message)
       }
-      
+
     } catch (error) {
       onApiError(error.message)
-    }finally{
+    } finally {
       setIsLoading(false);
     }
-    
+
     setError("");
 
     closeModal();
@@ -115,11 +118,11 @@ function ResendDocument({ closeModal,onApiError,onApiSuccess,id }) {
                 type="checkbox"
                 name=""
                 id="aadhar"
-                value={AADHAR_CARD}
-                checked={checkedItems.includes(AADHAR_CARD)}
+                value={idProof}
+                checked={checkedItems.includes(idProof)}
                 onChange={handleCheckboxChange}
               />
-              <label htmlFor="aadhar">{AADHAR_CARD} </label>
+              <label htmlFor="aadhar">{idProof} </label>
             </div>
             <div>
               <input
