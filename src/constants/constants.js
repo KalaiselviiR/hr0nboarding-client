@@ -9,6 +9,7 @@ const PGMARK_SHEET = "PG Marksheet";
 const RELIEVING_LETTERS = "Relieving Letters from all your previous organization";
 const PAYSLIP = "3 Month PaySlip";
 const CLIENT_SERVER_URL = "http://localhost:5173";
+const GOVERNMENT_ISSUED_ID = "Government-issued ID"
 
 export {
   PHOTO,
@@ -21,5 +22,6 @@ export {
   TWELFTH_MARKSHEET,
   RELIEVING_LETTERS,
   PAYSLIP,
-  CLIENT_SERVER_URL
+  CLIENT_SERVER_URL,
+  GOVERNMENT_ISSUED_ID
 };

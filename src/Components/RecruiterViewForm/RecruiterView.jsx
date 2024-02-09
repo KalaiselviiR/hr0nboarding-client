@@ -73,7 +73,7 @@ const RecruiterForm = () => {
     const response = await getSingleCandidateOutside(id);
     setIsOutsideIndia(response.data.candidate.region)
     setStatusc(response.data.candidate.status)
-    
+
   };
 
 
@@ -83,7 +83,7 @@ const RecruiterForm = () => {
   const getoneCandidate = async () => {
     const { data } = await getRecruterView(id)
     setCdata(data);
-    
+
 
   }
   console.log(cData);
@@ -142,16 +142,16 @@ const RecruiterForm = () => {
   function capitalizeFirstLetter(string) {
     // Split the string into words
     let words = string.split(' ');
-  
+
     // Capitalize the first letter of each word
     for (let i = 0; i < words.length; i++) {
       words[i] = words[i].charAt(0).toUpperCase() + words[i].slice(1);
     }
-  
+
     // Join the words back into a single string
     return words.join(' ');
   }
-  
+
 
   return (
     <>
@@ -457,10 +457,10 @@ const RecruiterForm = () => {
                 <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                 <div>
 
-               <RecruiterFileView label={"photo"} size={204800} file={cData.photoFiles} name={"Photo.jpg"} />
-              <RecruiterFileView label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)":"Adhar Card"} 
-              file={cData.aadharCardFiles} size={204800}  name={isOutsideIndia == true ? "Government-issued ID.pdf":"Adhar Card.pdf"}  />
-              {/* <div>
+                  <RecruiterFileView label={"photo"} size={204800} file={cData.photoFiles} name={"Photo.jpg"} />
+                  <RecruiterFileView label={isOutsideIndia == true ? "Government-issued ID Proof(Authorized)" : "Adhar Card"}
+                    file={cData.aadharCardFiles} size={204800} name={isOutsideIndia == true ? "Government-issued ID.pdf" : "Adhar Card.pdf"} />
+                  {/* <div>
                   <div
                     style={{
                       display: "flex",
@@ -483,7 +483,7 @@ const RecruiterForm = () => {
              </div>
                   )}
                 </div> */}
-                 <div>
+                  <div>
                     <div
                       style={{
                         display: "flex",
@@ -498,18 +498,18 @@ const RecruiterForm = () => {
                     </div>
                     {isSectionOpen && (
                       <div>
-                        <RecruiterFileView label={"10th Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.tenthMarksheet}  name={"10th Marksheet.pdf"} />
-                        <RecruiterFileView label={"12th Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.twelfthMarksheet} name={"12th Marksheet.pdf"} />
-                        <RecruiterFileView label={"PG Degree Certificate"} size={204800}  file={cData?.educationCertificateFiles?.pgDegreeCertificate} name={"PG Degree.pdf"} />
-                        <RecruiterFileView label={"PG Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.pgMarksheet} name={"PG Marksheet.pdf"} />
-                        <RecruiterFileView label={"UG Degree Certificate"} size={204800}  file={cData?.educationCertificateFiles?.ugDegreeCertificate} name={"UG Degree.pdf"} />
-                        <RecruiterFileView label={"UG Marksheet"} size={204800}  file={cData?.educationCertificateFiles?.ugMarksheet}  name={"UG Marksheet.pdf"} />
+                        <RecruiterFileView label={"10th Marksheet"} size={204800} file={cData?.educationCertificateFiles?.tenthMarksheet} name={"10th Marksheet.pdf"} />
+                        <RecruiterFileView label={"12th Marksheet"} size={204800} file={cData?.educationCertificateFiles?.twelfthMarksheet} name={"12th Marksheet.pdf"} />
+                        <RecruiterFileView label={"PG Degree Certificate"} size={204800} file={cData?.educationCertificateFiles?.pgDegreeCertificate} name={"PG Degree.pdf"} />
+                        <RecruiterFileView label={"PG Marksheet"} size={204800} file={cData?.educationCertificateFiles?.pgMarksheet} name={"PG Marksheet.pdf"} />
+                        <RecruiterFileView label={"UG Degree Certificate"} size={204800} file={cData?.educationCertificateFiles?.ugDegreeCertificate} name={"UG Degree.pdf"} />
+                        <RecruiterFileView label={"UG Marksheet"} size={204800} file={cData?.educationCertificateFiles?.ugMarksheet} name={"UG Marksheet.pdf"} />
                       </div>
                     )}
                   </div>
 
                   <RecruiterFileView label={"Relieving Letters"} size={204800} file={cData.relievingLettersFiles} name={"Relieving Letters.pdf"} />
-                  <RecruiterFileView label={"Payslips"} size={204800}  file={cData.payslipFiles} name={"Payslips.pdf"} /> 
+                  <RecruiterFileView label={"Payslips"} size={204800} file={cData.payslipFiles} name={"Payslips.pdf"} />
                 </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>
                   <Button
@@ -590,6 +590,7 @@ const RecruiterForm = () => {
           onApiError={handleResendError}
           onApiSuccess={handleResendSuccess}
           id={id}
+          isOutsideIndia={isOutsideIndia}
         />}
       <ToastContainer
         autoClose={2000}
