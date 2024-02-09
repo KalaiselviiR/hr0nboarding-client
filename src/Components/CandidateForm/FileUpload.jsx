@@ -10,7 +10,14 @@ import { pdfjs } from "react-pdf";
 import PdfComp from "./PdfComp";
 
 // FileUpload component for handling file upload
-function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles,draftFile }) {
+function FileUpload({
+  label,
+  instruction,
+  onFileChange,
+  acceptedFiles,
+  setAcceptedFiles,
+  draftFile,
+}) {
   // State variables for file, upload progress, and error messages
   const [file, setFile] = useState(null);
   const [progress, setProgress] = useState(0);
@@ -19,25 +26,28 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    if(draftFile){
-      setProgress(100)
+    if (draftFile) {
+      setProgress(100);
     }
-  },[draftFile])
+  }, [draftFile]);
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-  
+
     if (!selectedFile) {
       setError("Please select a file");
     } else {
       // Check file size
-      if (selectedFile.size > 204800) { 
+      if (selectedFile.size > 204800) {
         setError("File size exceeds the limit (200kb)");
         return;
       }
-  
+      // Extract text from the label prop
+      let labelText = label.props.children;
+
+     
       // Check file type for photo
-      if (label === "Photo") {
+      if (labelText && labelText.includes("Photo")) {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
         if (!allowedPhotoTypes.includes(selectedFile.type)) {
           setError("Only JPG and PNG files are allowed for photos");
@@ -50,7 +60,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
           return;
         }
       }
-  
+
       setError(null);
       setFile(selectedFile);
       uploadFile(selectedFile);
@@ -58,7 +68,6 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
       setAcceptedFiles(selectedFile);
     }
   };
-  
 
   // Event handler for triggering file input click
   const handleFileClick = (e) => {
@@ -90,9 +99,11 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
 
   return (
     <Form.Group className="mb-3">
-      <div style={{display:"flex" , flexDirection:"column"}}>
-      <Form.Label style={{fontWeight:"500"}}>{label}</Form.Label>
-      <Form.Label style={{fontSize:"13px",fontWeight:"480"}}>{instruction}</Form.Label>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Form.Label style={{ fontWeight: "500" }}>{label}</Form.Label>
+        <Form.Label style={{ fontSize: "13px", fontWeight: "480" }}>
+          {instruction}
+        </Form.Label>
       </div>
       {!file && !draftFile ? (
         <div>
@@ -111,7 +122,7 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
           </Button>
           <input
             type="file"
-            accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
+            accept={label && label.props && label.props.children && label.props.children.includes("Photo") ? ".jpg, .jpeg, .png" : ".pdf"}
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -147,13 +158,25 @@ function FileUpload({ label, instruction, onFileChange, acceptedFiles, setAccept
               }}
             >
               <div className="pdf-image" style={{ height: "50px" }}>
-                <Image src={label === "Photo" ? png : pdf} alt="PDF" width="40px" height="50px" />
+                <Image
+                  src={label && label.props && label.props.children && label.props.children.includes("Photo")  ? png : pdf}
+                  alt="PDF"
+                  width="40px"
+                  height="50px"
+                />
               </div>
               <div className="file-info  ">
-                <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{
-                  draftFile ? draftFile?.name :  file.name}</p>
+                <p
+                  className="fileName"
+                  style={{ margin: "0", marginTop: "10px" }}
+                >
+                  {draftFile ? draftFile?.name : file.name}
+                </p>
                 <p style={{ margin: "0", fontSize: "10px", marginTop: "-1px" }}>
-                  {draftFile ? (draftFile?.size / 1024).toFixed(2) : (file.size / 1024).toFixed(2)} KB
+                  {draftFile
+                    ? (draftFile?.size / 1024).toFixed(2)
+                    : (file.size / 1024).toFixed(2)}{" "}
+                  KB
                 </p>
                 <div className="Bar">
                   <ProgressBar
