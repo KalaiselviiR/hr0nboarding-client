@@ -901,14 +901,14 @@ const TopForm = () => {
                   <Col md={4}>
                     <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                     <FileUpload
-                      label="Photo"
-                        //  label={(
-                      //   <span style={{display:inline}}>
+                      // label="Photo"
+                         label={(
+                        <span style={{display:"inline"}}>
                           
-                      //     Photo
-                      //     <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
-                      //   </span>
-                      // )}
+                          Photo
+                          <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                        </span>
+                      )}
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}
@@ -926,7 +926,14 @@ const TopForm = () => {
              ) : null} */}
 
                     <FileUpload
-                      label="Aadhar Card "
+
+                      label={(
+                        <span style={{display:"inline"}}>
+                          
+                          Aadhar Card 
+                          <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                        </span>
+                      )}
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
@@ -958,7 +965,14 @@ const TopForm = () => {
                       {/* {isSectionOpen && ( */}
                       <div>
                         <FileUpload
-                          label="10th Marksheet"
+                          // label="10th Marksheet"
+                          label={(
+                            <span style={{display:"inline"}}>
+                              
+                              10th Marksheet
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
                           acceptedFiles={formData.tenthMarksheetFiles}
@@ -972,7 +986,14 @@ const TopForm = () => {
                           draftFile={formData?.tenthMarksheetFiles}
                         />
                         <FileUpload
-                          label="12th Marksheet"
+                          // label="12th Marksheet"
+                          label={(
+                            <span style={{display:"inline"}}>
+                              
+                              12th Marksheet
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
@@ -1018,7 +1039,14 @@ const TopForm = () => {
                           draftFile={formData?.pgMarksheetFiles}
                         />
                         <FileUpload
-                          label="UG Degree Certificate"
+                          // label="UG Degree Certificate"
+                          label={(
+                            <span style={{display:"inline"}}>
+                              
+                              UG Degree Certificate
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
@@ -1034,7 +1062,14 @@ const TopForm = () => {
                           draftFile={formData?.ugDegreeCertificateFiles}
                         />
                         <FileUpload
-                          label="UG Marksheet"
+                          // label="UG Marksheet"
+                          label={(
+                            <span style={{display:"inline"}}>
+                              
+                              UG Marksheet
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}

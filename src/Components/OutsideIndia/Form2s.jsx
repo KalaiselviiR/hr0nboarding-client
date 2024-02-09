@@ -21,6 +21,7 @@ import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Banks";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { IoMdStar } from "react-icons/io";
 
 
 function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) {
@@ -371,7 +372,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
           <Col xs={12} md={4} className="mt-">
           <Form.Group controlId="formGroupEmail">
                   <Form.Label className="labelss mt-4">
-                    Family member name {index+1}
+                    Family member name {index+1}<IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
                   </Form.Label>
                   <Form.Control
                     className="input-field"
@@ -391,7 +392,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="relationship">
-                  <Form.Label className="labelss mt-4">Relationship</Form.Label>
+                  <Form.Label className="labelss mt-4">Relationship<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Select
                     className="input-field"
                     name="relationship"
@@ -415,7 +416,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="dateOfBirth">
-                  <Form.Label className="labelss mt-4">Date of Birth</Form.Label>
+                  <Form.Label className="labelss mt-4">Date of Birth<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
                       <CiCalendar />
@@ -479,7 +480,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
           <Form.Group controlId="EmergencyPhoneNumber">               
                    <div className="phoneDiv mt-4">
                         <div className="labelss">
-                            <p>Emergency contact number</p>
+                            <p>Emergency contact number<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></p>
                         </div>
                         <div className="phoneInput ">
                             <select className="country-code "
@@ -516,7 +517,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="emailAddress">
-                  <Form.Label className="labelss mt-4">Relation to emergency contact</Form.Label>
+                  <Form.Label className="labelss mt-4">Relation to emergency contact<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -547,19 +548,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
               }} 
             >
 
-              <Button
-               
-                style={{
-                  height: "35px",
-                  fontSize: "15px",
-                  backgroundColor: "rgb(210, 164, 250)",
-                  color: "white",
-                  borderColor: "rgb(210, 164, 250)",
-                  fontWeight: "500",
-                }}
-              >
-                Submit
-              </Button>
+         
               <Button
               onClick={handleSaveDraftAll}
                 style={{
@@ -653,7 +642,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="firstName">
-                  <Form.Label className="labelss">First name</Form.Label>
+                  <Form.Label className="labelss">First name<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -694,7 +683,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
             <Row>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="lastName">
-                  <Form.Label className="labelss">Last name</Form.Label>
+                  <Form.Label className="labelss">Last name<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -713,7 +702,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="bloodGroup">
-                  <Form.Label className="labelss">Blood group</Form.Label>
+                  <Form.Label className="labelss">Blood group<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Select
                     className="input-field"
                     name="bloodGroup"
@@ -740,7 +729,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="nationality">
-                  <Form.Label className="labelss">Nationality</Form.Label>
+                  <Form.Label className="labelss">Nationality<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -816,7 +805,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
               }} 
             >
 
-              <Button
+              {/* <Button
                
                 style={{
                   height: "35px",
@@ -828,7 +817,7 @@ function Form2s({ updateForm2Data, updateCandidateData,onFamilyDetailsChange }) 
                 }}
               >
                 Submit
-              </Button>
+              </Button> */}
               <Button
               onClick={handleSaveDraft3}
                 style={{

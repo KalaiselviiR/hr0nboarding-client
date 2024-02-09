@@ -372,7 +372,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
           <Col xs={12} md={4} className="mt-">
           <Form.Group controlId="formGroupEmail">
                   <Form.Label className="labelss mt-4">
-                    Family member name {index+1}
+                    Family member name {index+1}<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
                   </Form.Label>
                   <Form.Control
                     className="input-field"
@@ -392,7 +392,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="relationship">
-                  <Form.Label className="labelss mt-4">Relationship</Form.Label>
+                  <Form.Label className="labelss mt-4">Relationship<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Select
                     className="input-field"
                     name="relationship"
@@ -416,7 +416,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="dateOfBirth">
-                  <Form.Label className="labelss mt-4">Date of Birth</Form.Label>
+                  <Form.Label className="labelss mt-4">Date of Birth<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <InputGroup>
                     <InputGroup.Text>
                       <CiCalendar />
@@ -480,7 +480,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
           <Form.Group controlId="EmergencyPhoneNumber">               
                    <div className="phoneDiv mt-4">
                         <div className="labelss">
-                            <p>Emergency contact number</p>
+                            <p>Emergency contact number<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></p>
                         </div>
                         <div className="phoneInput ">
                             <select className="country-code "
@@ -517,7 +517,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
           </Col>
           <Col xs={12} md={4}>
           <Form.Group controlId="emailAddress">
-                  <Form.Label className="labelss mt-4">Relation to emergency contact</Form.Label>
+                  <Form.Label className="labelss mt-4">Relation to emergency contact<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Control
                     className="input-field"
                     type="text"
@@ -1096,7 +1096,7 @@ function Form2({ updateForm2Data, updateCandidateData,onFamilyDetailsChange,isOu
               </Col>
               <Col xs={12} md={4}>
                 <Form.Group className="mb-3" controlId="bloodGroup">
-                  <Form.Label className="labelss">Blood group</Form.Label>
+                  <Form.Label className="labelss">Blood group<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
                   <Form.Select
                     className="input-field"
                     name="bloodGroup"

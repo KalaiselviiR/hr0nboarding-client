@@ -15,7 +15,7 @@ import "./CandidateForms.css";
 import { CiCalendar } from "react-icons/ci";
 import FileUploads from "./FileUploads";
 import { useFormik } from "formik";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
+import { IoMdArrowDropdownCircle, IoMdStar } from "react-icons/io";
 import { IoMdArrowDropupCircle } from "react-icons/io";
 import {
   handleFieldChange,
@@ -561,7 +561,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="firstName">
-                      <Form.Label className="labelss">First Name</Form.Label>
+                      <Form.Label className="labelss">First Name<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="First Name"
@@ -577,7 +577,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="lastName">
-                      <Form.Label className="labelss">Last Name</Form.Label>
+                      <Form.Label className="labelss">Last Name<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Last Name"
@@ -593,7 +593,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="email">
-                      <Form.Label className="labelss">Email</Form.Label>
+                      <Form.Label className="labelss">Email<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         type="email"
                         placeholder="✉️ Email"
@@ -611,7 +611,7 @@ const TopForms = () => {
                     <Form.Group className="mb-3" controlId="phoneNumber">
                       <div className="phoneDiv ">
                         <div >
-                          <p className="labelss">Phone number</p>
+                          <p className="labelss">Phone number<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></p>
                         </div>
                         <div className="phoneInput ">
                           <select
@@ -645,7 +645,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="designation">
-                      <Form.Label className="labelss">Designation</Form.Label>
+                      <Form.Label className="labelss">Designation<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Designation"
@@ -663,7 +663,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="dateOfJoining">
-                      <Form.Label className="labelss">Date of Joining</Form.Label>
+                      <Form.Label className="labelss">Date of Joining<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <InputGroup>
                         <InputGroup.Text>
                           <CiCalendar />
@@ -687,7 +687,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="presentAddress">
-                      <Form.Label className="labelss">Present Address</Form.Label>
+                      <Form.Label className="labelss">Present Address<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -708,7 +708,7 @@ const TopForms = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="permanentAddress">
-                      <Form.Label className="labelss">Permanent Address</Form.Label>
+                      <Form.Label className="labelss">Permanent Address<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -747,7 +747,7 @@ const TopForms = () => {
                 <Row>
                   <Col md={12}>
                     <Form.Group className="mb-3" controlId="aboutYourself">
-                      <Form.Label className="labelss"> About yourself</Form.Label>
+                      <Form.Label className="labelss"> About yourself<IoMdStar style={{color:"red" ,fontSize:"7px"}}/></Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={5}
@@ -807,7 +807,7 @@ const TopForms = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="enjoyment">
                       <Form.Label className="labelss">
-                        What do you enjoy outside of your work?
+                        What do you enjoy outside of your work?<IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -826,7 +826,7 @@ const TopForms = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="sneakpeek">
                       <Form.Label className="labelss">
-                        Sneak peek at your bucket list
+                        Sneak peek at your bucket list<IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -847,7 +847,13 @@ const TopForms = () => {
                   <Col md={4}>
                     <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
                     <FileUploads
-                      label="Photo"
+                         label={(
+                          <span style={{display:"inline"}}>
+                            
+                            Photo
+                            <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                          </span>
+                        )}
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}
@@ -864,7 +870,14 @@ const TopForms = () => {
              ) : null} */}
 
                     <FileUploads
-                      label="Government-issued ID Proof(Authorized)"
+                      // label="Government-issued ID Proof(Authorized)"
+                      label={(
+                        <span style={{display:"inline"}}>
+                          
+                          Government-issued ID Proof(Authorized)
+                          <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                        </span>
+                      )}
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
@@ -895,7 +908,13 @@ const TopForms = () => {
                       {/* {isSectionOpen && ( */}
                       <div>
                         <FileUploads
-                          label="10th Marksheet"
+                          label={(
+                            <span style={{display:"inline"}}>
+                              
+                              10th Marksheet
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
                           acceptedFiles={formData.tenthMarksheetFiles}
@@ -908,7 +927,13 @@ const TopForms = () => {
                           onFileChange={(file) => FileChange(file, "tenthMarksheet")}
                         />
                         <FileUploads
-                          label="12th Marksheet"
+                         label={(
+                          <span style={{display:"inline"}}>
+                            
+                            12th Marksheet
+                            <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                          </span>
+                        )}
                           instruction="Accepted format:pdf"
                           controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
@@ -951,7 +976,13 @@ const TopForms = () => {
                           onFileChange={(file) => FileChange(file, "PGMarksheet")}
                         />
                         <FileUploads
-                          label="UG Degree Certificate"
+                           label={(
+                            <span style={{display:"inline"}}>
+                              
+                              UG Degree Certificate
+                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                            </span>
+                          )}
                           instruction="Accepted format:pdf"
                           controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
@@ -966,7 +997,13 @@ const TopForms = () => {
                           }
                         />
                         <FileUploads
-                          label="UG Marksheet"
+                            label={(
+                              <span style={{display:"inline"}}>
+                                
+                                UG Marksheet
+                                <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                              </span>
+                            )}
                           instruction="Accepted format:pdf"
                           controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}
@@ -1027,18 +1064,7 @@ const TopForms = () => {
                         gap: "10px",
                       }}
                     >
-                      <Button
-                        style={{
-                          height: "35px",
-                          fontSize: "15px",
-                          backgroundColor: "rgb(210, 164, 250)",
-                          color: "white",
-                          borderColor: "rgb(210, 164, 250)",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Submit
-                      </Button>
+                     
                       <Button
                         onClick={handleSaveDraft}
                         style={{
