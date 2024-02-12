@@ -493,7 +493,7 @@ const TopForm = () => {
 
 
 
-  const [isLinkValid, setisLinkValid] = useState(true)
+  const [isLinkValid, setisLinkValid] = useState(false)
 
 
 
