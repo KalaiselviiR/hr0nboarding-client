@@ -33,7 +33,8 @@ function Login() {
       setPasswordError('');
     }
   };
-
+  
+//login and register functions 
   const handleLogin = async () => {
     validateEmail();
     validatePassword();

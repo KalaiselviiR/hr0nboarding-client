@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../CandidateForm/CandidateForm.css"; // Assuming you have a custom CSS file for styling
+import "../CandidateForm/CandidateForm.css";
 import { CiExport, CiCalendar } from "react-icons/ci";
 import {
   InputGroup,
@@ -44,13 +44,13 @@ const Bottomdata = {
 function BottomSection({ cData, isOutsideIndia }) {
   const [cbData, setCbData] = useState(Bottomdata);
   const [familyMembers, setFamilyMembers] = useState([]);
-  const [contact, setEmergencyContact] = useState('');
+  const [contact, setEmergencyContact] = useState("");
 
   useEffect(() => {
     if (cData) {
       setCbData(cData);
-      setFamilyMembers(cData.members)
-      setEmergencyContact(cData?.contact)
+      setFamilyMembers(cData.members);
+      setEmergencyContact(cData?.contact);
     } else {
       setCbData(Bottomdata);
     }
@@ -60,12 +60,8 @@ function BottomSection({ cData, isOutsideIndia }) {
   const handleExportCSV = () => {
     // Prepare data for CSV export
     const csvData = [
-      [
-        "Family member name",
-        "Relationship",
-        "Date of Birth",
-      ],
-      ...familyMembers?.map(member => [
+      ["Family member name", "Relationship", "Date of Birth"],
+      ...familyMembers?.map((member) => [
         member.memberName,
         member.relationship,
         moment(member.dateOfBirth).format("YYYY-MM-DD"),
@@ -73,8 +69,6 @@ function BottomSection({ cData, isOutsideIndia }) {
     ];
 
     const csvFileName = "family_details.csv";
-    // const csvHeaders = { headers: ["Content-Disposition"]: `attachment; filename=${csvFileName}` };
-
     const csvLink = document.createElement("a");
     csvLink.href = encodeURI(
       `data:text/csv;charset=utf-8,${csvData
@@ -123,8 +117,7 @@ function BottomSection({ cData, isOutsideIndia }) {
 
   return (
     <div className=" margin-mobile" style={{ width: "100%" }}>
-      {
-        familyMembers?.length > 0 &&
+      {familyMembers?.length > 0 && (
         <Container
           style={{
             background: "white",
@@ -159,7 +152,7 @@ function BottomSection({ cData, isOutsideIndia }) {
             </div>
           </div>
         </Container>
-      }
+      )}
       <Container
         className="mt"
         style={{
@@ -172,64 +165,62 @@ function BottomSection({ cData, isOutsideIndia }) {
         {/* Family details form */}
         <div>
           <Form className="forms">
-            {
-              familyMembers?.length > 0 ? (
-                familyMembers?.map((member, index) => (
-                  <Row className="mb-3" key={member?._id}>
-                    <Col xs={12} md={4}>
-                      <Form.Group controlId="formGroupEmail" className="mt-3">
-                        <Form.Label className="labelss">
-                          Family member name
-                        </Form.Label>
+            {familyMembers?.length > 0 ? (
+              familyMembers?.map((member, index) => (
+                <Row className="mb-3" key={member?._id}>
+                  <Col xs={12} md={4}>
+                    <Form.Group controlId="formGroupEmail" className="mt-3">
+                      <Form.Label className="labelss">
+                        Family member name
+                      </Form.Label>
+                      <Form.Control
+                        className="input-field"
+                        type="text"
+                        value={member?.memberName}
+                        name="memberName"
+                      />
+                    </Form.Group>
+                  </Col>
+
+                  <Col xs={12} md={4}>
+                    <Form.Group controlId="realtionShip" className="mt-3">
+                      <Form.Label className="labelss">Relationship</Form.Label>
+                      <Form.Control
+                        className="input-field"
+                        type="text"
+                        name="relationship"
+                        value={member?.relationship}
+                      />
+                    </Form.Group>
+                  </Col>
+
+                  <Col xs={12} md={4}>
+                    <Form.Group controlId="dateOfBirth" className="mt-3">
+                      <Form.Label className="labelss">Date of Birth</Form.Label>
+                      <InputGroup>
+                        <InputGroup.Text>
+                          <CiCalendar />
+                        </InputGroup.Text>
                         <Form.Control
                           className="input-field"
-                          type="text"
-                          value={member?.memberName}
-                          name="memberName"
+                          type="date"
+                          value={moment(member?.dateOfBirth).format(
+                            "yyyy-MM-DD"
+                          )}
+                          name="dateOfBirth"
                         />
-                      </Form.Group>
-                    </Col>
-
-                    <Col xs={12} md={4}>
-                      <Form.Group controlId="realtionShip" className="mt-3">
-                        <Form.Label className="labelss">Relationship</Form.Label>
-                        <Form.Control
-                          className="input-field"
-                          type="text"
-                          name="relationship"
-                          value={member?.relationship}
-                        />
-                      </Form.Group>
-                    </Col>
-
-                    <Col xs={12} md={4}>
-                      <Form.Group controlId="dateOfBirth" className="mt-3">
-                        <Form.Label className="labelss">Date of Birth</Form.Label>
-                        <InputGroup>
-                          <InputGroup.Text>
-                            <CiCalendar />
-                          </InputGroup.Text>
-                          <Form.Control
-                            className="input-field"
-                            type="date"
-                            value={moment(member?.dateOfBirth).format("yyyy-MM-DD")}
-                            name="dateOfBirth"
-                          />
-                        </InputGroup>
-                      </Form.Group>
-                    </Col>
-                  </Row>
-                ))
-              )
-                : (
-                  <h4 className="heading text-center mt-2 mb-2">
-                    No Family Members Added for Medical Insurance
-                  </h4>
-                )
-            }
+                      </InputGroup>
+                    </Form.Group>
+                  </Col>
+                </Row>
+              ))
+            ) : (
+              <h4 className="heading text-center mt-2 mb-2">
+                No Family Members Added for Medical Insurance
+              </h4>
+            )}
             <Row>
-              {
-                contact?.emergencyContactNumber &&
+              {contact?.emergencyContactNumber && (
                 <Col xs={12} md={4}>
                   <Form.Group controlId="EmergencyPhoneNumber" className="mt-3">
                     <div className="phoneDiv mt-4">
@@ -259,13 +250,13 @@ function BottomSection({ cData, isOutsideIndia }) {
                     </div>
                   </Form.Group>
                 </Col>
-
-              }
-              {
-                contact?.relationToEmergencyContact &&
+              )}
+              {contact?.relationToEmergencyContact && (
                 <Col xs={12} md={4}>
                   <Form.Group controlId="emailAddress" className="mt-4">
-                    <Form.Label className="labelss">Relation to emergency contact</Form.Label>
+                    <Form.Label className="labelss">
+                      Relation to emergency contact
+                    </Form.Label>
                     <Form.Control
                       className="input-field"
                       type="email"
@@ -274,22 +265,20 @@ function BottomSection({ cData, isOutsideIndia }) {
                     />
                   </Form.Group>
                 </Col>
-              }
+              )}
             </Row>
           </Form>
         </div>
       </Container>
       {/* <br /> */}
 
-      {!isOutsideIndia &&
+      {!isOutsideIndia && (
         <>
           <Container
             style={{
               background: "white",
-
               marginBottom: "10px",
               marginTop: "20px",
-
               width: "100%",
               boxSizing: "border-box",
               boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
@@ -299,16 +288,6 @@ function BottomSection({ cData, isOutsideIndia }) {
             <div className="FamilyDet">
               <h3 className="heading">Details For PF Account</h3>
               <div className="buttons">
-                {/* <Button
-               style={{ backgroundColor: '#7F56D9', border: 'none' }}
-               className='buttonss'
-             >
-               <CiExport
-                 className='me-2 icon'
-                 style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
-               />
-               Export
-             </Button> */}
                 <CSVLink
                   data={[cbData]}
                   headers={csvHeaders}
@@ -333,7 +312,6 @@ function BottomSection({ cData, isOutsideIndia }) {
               </div>
             </div>
           </Container>
-
 
           <Container
             className="mt"
@@ -374,7 +352,9 @@ function BottomSection({ cData, isOutsideIndia }) {
                   </Col>
                   <Col xs={12} md={4}>
                     <Form.Group controlId="adharCard" className="ms mt-3">
-                      <Form.Label className="labelss">AADHAR CARD NO</Form.Label>
+                      <Form.Label className="labelss">
+                        AADHAR CARD NO
+                      </Form.Label>
                       <Form.Control
                         className="input-field"
                         type="text"
@@ -396,7 +376,10 @@ function BottomSection({ cData, isOutsideIndia }) {
                       </Form.Group>
                     </Col>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3 ms-1" controlId="employeeName">
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="employeeName"
+                      >
                         <Form.Label className="labelss">
                           Employee's name (As per Aadhar)
                         </Form.Label>
@@ -442,8 +425,13 @@ function BottomSection({ cData, isOutsideIndia }) {
                       </Form.Group>
                     </Col>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3 ms-2" controlId="formGroupEmail">
-                        <Form.Label className="labelss">Marital status</Form.Label>
+                      <Form.Group
+                        className="mt-3 ms-2"
+                        controlId="formGroupEmail"
+                      >
+                        <Form.Label className="labelss">
+                          Marital status
+                        </Form.Label>
                         <Form.Control
                           className="input-field"
                           type="text"
@@ -453,8 +441,13 @@ function BottomSection({ cData, isOutsideIndia }) {
                       </Form.Group>
                     </Col>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
-                        <Form.Label className="labelss">Father's name</Form.Label>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="formGroupEmail"
+                      >
+                        <Form.Label className="labelss">
+                          Father's name
+                        </Form.Label>
                         <Form.Control
                           className="input-field"
                           type="text"
@@ -467,7 +460,10 @@ function BottomSection({ cData, isOutsideIndia }) {
 
                   <Row>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mb-3 ms-1" controlId="formGroupEmail">
+                      <Form.Group
+                        className="mb-3 ms-1"
+                        controlId="formGroupEmail"
+                      >
                         <Form.Label className="labelss">Bank Name</Form.Label>
                         <Form.Control
                           className="input-field"
@@ -479,7 +475,10 @@ function BottomSection({ cData, isOutsideIndia }) {
                     </Col>
 
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="formGroupEmail"
+                      >
                         <Form.Label className="labelss">Bank branch</Form.Label>
                         <Form.Control
                           className="input-field"
@@ -501,8 +500,13 @@ function BottomSection({ cData, isOutsideIndia }) {
                       </Form.Group>
                     </Col>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3 ms-1" controlId="formGroupEmail">
-                        <Form.Label className="labelss">Bank IFSC No</Form.Label>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="formGroupEmail"
+                      >
+                        <Form.Label className="labelss">
+                          Bank IFSC No
+                        </Form.Label>
                         <Form.Control
                           className="input-field"
                           type="text"
@@ -513,15 +517,11 @@ function BottomSection({ cData, isOutsideIndia }) {
                     </Col>
                   </Row>
                 </Row>
-                {/* Continue adding more rows and columns as needed */}
               </Form>
             </div>
           </Container>
-
         </>
-      }
-
-
+      )}
 
       <Container
         style={{
@@ -572,22 +572,6 @@ function BottomSection({ cData, isOutsideIndia }) {
           boxSizing: "border-box",
         }}
       >
-        {/* <div className='FamilyDet'>
-        <h3 className='heading'>Details of HROne</h3>
-        <div className='buttons'>
-          <Button
-            style={{ backgroundColor: '#7F56D9', border: 'none' }}
-            className='buttonss'
-          >
-            <CiExport
-              className='me-2 icon'
-              style={{ color: 'white', fontSize: '19px', fontWeight: 'bolder' }}
-            />
-            Export
-          </Button>
-        </div>
-      </div> */}
-
         {/* HROne details form */}
         <div>
           <Form className="forms">
@@ -662,37 +646,6 @@ function BottomSection({ cData, isOutsideIndia }) {
                 </Form.Group>
               </Col>
             </Row>
-
-            {/* <Row> */}
-            {/* <Col xs={12} md={4}>
-          <Form.Group className="mb-3" controlId="officialEmailAddress">
-            <Form.Label className='labelss'>Official email address</Form.Label>
-            <InputGroup> */}
-            {/* <InputGroup.Text>
-                <MdOutlineMail  />
-              </InputGroup.Text> */}
-            {/* <Form.Control className='input-field' type="email"
-               placeholder="✉️ olivia@untitleedui.com" 
-               name='officialEmail'
-            
-               />
-            </InputGroup>
-           
-          </Form.Group>
-        </Col> */}
-            {/* <Col xs={12} md={4}>
-          <Form.Group className="mb-3" controlId="employeeId">
-            <Form.Label className='labelss'>Employee ID</Form.Label>
-            <Form.Control className='input-field' type="text"
-             placeholder="olivia"
-             name='employeeId'
-             
-           />
-          
-          </Form.Group>
-        </Col>
-      
-      </Row> */}
           </Form>
         </div>
       </Container>

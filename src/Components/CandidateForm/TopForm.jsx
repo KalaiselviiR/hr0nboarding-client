@@ -10,13 +10,10 @@ import {
   InputGroup,
   Dropdown,
 } from "react-bootstrap";
-import { GoArrowLeft } from "react-icons/go";
 import "./CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
 import FileUpload from "./FileUpload";
 import { useFormik } from "formik";
-import { IoMdArrowDropdownCircle } from "react-icons/io";
-import { IoMdArrowDropupCircle } from "react-icons/io";
 import {
   handleFieldChange,
   initialValues,
@@ -25,42 +22,27 @@ import {
 import Form2 from "./Form2";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { pdfjs } from "react-pdf";
-import PdfComp from "./PdfComp";
 import { getSingleCandidate, updateStatusRview } from "../../service/allapi";
-import { ImMenu2 } from "react-icons/im";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { openDB, deleteDB } from 'idb';
+import { openDB, deleteDB } from "idb";
 import { IoMdStar } from "react-icons/io";
-
-// pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-//   "pdfjs-dist/build/pdf.worker.min.js",
-//   import.meta.url
-// ).toString();
-
 const TopForm = () => {
   //State management for document upload
   const [photoFiles, setPhotoFiles] = useState([]);
   const [aadharCardFiles, setAadharCardFiles] = useState([]);
-  // const [educationCertificateFiles, setEducationCertificateFiles] = useState(
-  //   []
-  // );
   const [tenthMarksheetFiles, setTenthMarksheetFiles] = useState([]);
   const [twelfthMarksheetFiles, setTwelfthMarksheetFiles] = useState([]);
   const [pgDegreeCertificateFiles, setPgDegreeCertificateFiles] = useState([]);
   const [pgMarksheetFiles, setPgMarksheetFiles] = useState([]);
   const [ugDegreeCertificateFiles, setUgDegreeCertificateFiles] = useState([]);
   const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
-
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
   const [payslipFiles, setPayslipFiles] = useState([]);
 
-  const [scrollToError, setScrollToError] = useState(null);
-
   const [id, setId] = useState(null);
-  const [isOutsideIndia, setIsOutsideIndia] = useState()
-  const [statusC, setStatusc] = useState()
+  const [isOutsideIndia, setIsOutsideIndia] = useState();
+  const [statusC, setStatusc] = useState();
 
   const [isSectionOpen, setIsSectionOpen] = useState(false);
 
@@ -75,8 +57,8 @@ const TopForm = () => {
     const { data } = await getSingleCandidate(token);
     console.log(data);
     setId(data._id);
-    setIsOutsideIndia(data.region)
-    setStatusc(data.status)
+    setIsOutsideIndia(data.region);
+    setStatusc(data.status);
   };
   console.log(id);
 
@@ -106,7 +88,6 @@ const TopForm = () => {
     sneakpeek: "",
     photoFiles: null,
     aadharCardFiles: null,
-    // educationCertificateFiles: null,
     tenthMarksheetFiles: null,
     twelfthMarksheetFiles: null,
     pgDegreeCertificateFiles: null,
@@ -117,15 +98,10 @@ const TopForm = () => {
     payslipFiles: null,
     id: id,
     members: [],
-    contact: {}
+    contact: {},
   });
 
   const [form2Data, setForm2Data] = useState({
-    // memberName: "",
-    // relationship: "",
-    // dateOfBirth: "",
-    // emergencyContactNumber: "",
-    // emailAddress: "",
     epfoUan: "",
     pfNo: "",
     adharCard: "",
@@ -145,8 +121,6 @@ const TopForm = () => {
     lastNamehr: "",
     bloodGroup: "",
     nationality: "",
-    // officialEmail: "",
-    // employeeId: "",
   });
 
   //input form validation using formk and yup library
@@ -178,26 +152,23 @@ const TopForm = () => {
     }));
   };
 
-
   const handleSaveDraft = async () => {
-
-    const db = await openDB('FilesDB', 1);
+    const db = await openDB("FilesDB", 1);
 
     const newTaskObject = {
-       photoFiles: formData?.photoFiles,
-       aadharCardFiles:formData?.aadharCardFiles,
-       tenthMarksheetFiles:formData?.tenthMarksheetFiles,
-       twelfthMarksheetFiles:formData?.twelfthMarksheetFiles,
-       pgDegreeCertificateFiles:formData?.pgDegreeCertificateFiles,
-       pgMarksheetFiles:formData?.pgMarksheetFiles,
-       ugDegreeCertificateFiles:formData?.ugDegreeCertificateFiles,
-       ugMarksheetFiles:formData?.ugMarksheetFiles,
-       relievingLettersFiles:formData?.relievingLettersFiles,
-       payslipFiles:formData?.payslipFiles
-      };
+      photoFiles: formData?.photoFiles,
+      aadharCardFiles: formData?.aadharCardFiles,
+      tenthMarksheetFiles: formData?.tenthMarksheetFiles,
+      twelfthMarksheetFiles: formData?.twelfthMarksheetFiles,
+      pgDegreeCertificateFiles: formData?.pgDegreeCertificateFiles,
+      pgMarksheetFiles: formData?.pgMarksheetFiles,
+      ugDegreeCertificateFiles: formData?.ugDegreeCertificateFiles,
+      ugMarksheetFiles: formData?.ugMarksheetFiles,
+      relievingLettersFiles: formData?.relievingLettersFiles,
+      payslipFiles: formData?.payslipFiles,
+    };
 
-     const addedTask = await db.add('files', newTaskObject);
-
+    const addedTask = await db.add("files", newTaskObject);
 
     // Convert the form data to a string before storing it in sessionStorage
     const formDataString = JSON.stringify({
@@ -215,37 +186,33 @@ const TopForm = () => {
       enjoyment: formData.enjoyment,
       sneakpeek: formData.sneakpeek,
       id: formData.firstName,
-    })
+    });
 
     // Store the form data string in sessionStorage
-    sessionStorage.setItem('draftFormData', formDataString);
+    sessionStorage.setItem("draftFormData", formDataString);
 
     toast.success("Details Saved Successfully", {
-      position: "top-center"
+      position: "top-center",
     });
 
     // You can also display a message or perform other actions if needed
-    console.log('Form data saved as draft.');
+    console.log("Form data saved as draft.");
   };
 
-
-
   const updateFamilyMembers = (data, contact) => {
-
     setFormData((prevData) => ({
       ...prevData,
       members: data,
-      contact
-    }))
+      contact,
+    }));
 
     const combinedValues = {
       ...formik.values,
       members: data,
-      contact
+      contact,
     };
     formik.setValues(combinedValues);
-  }
-
+  };
 
   // handle change function for validation errors
   const handleChange = (e) => {
@@ -297,19 +264,19 @@ const TopForm = () => {
         // Prepare FormData for file uploads
         const formData = new FormData();
 
-        // Append all form fields, including file inputs      
+        // Append all form fields, including file inputs
 
         for (const key in formik.values) {
-          if (key !== 'members' && key !== 'contact') {
+          if (key !== "members" && key !== "contact") {
             formData.append(key, formik.values[key] || "");
           }
         }
 
-        formData.append('contact', JSON.stringify(formik.values.contact))
+        formData.append("contact", JSON.stringify(formik.values.contact));
 
         // Append members array
         if (Array.isArray(formik.values.members)) {
-          formData.append('members', JSON.stringify(formik.values.members));
+          formData.append("members", JSON.stringify(formik.values.members));
         }
 
         // Send a POST request using Axios
@@ -327,30 +294,28 @@ const TopForm = () => {
           console.log("Form data submitted successfully");
           toast.success("Form data submitted successfully");
           sessionStorage.clear();
-          const response = await updateStatusRview(id)
+          const response = await updateStatusRview(id);
           console.log(response);
 
-          const dbName = "FilesDB"
-              try {
-                await deleteDB(dbName);
-                setFormData((prev) => (
-                  {
-                    ...prev,
-                    photoFiles: null,
-                    aadharCardFiles: null,
-                    tenthMarksheetFiles: null,
-                    twelfthMarksheetFiles: null,
-                    pgDegreeCertificateFiles: null,
-                    pgMarksheetFiles: null,
-                    ugDegreeCertificateFiles: null,
-                    ugMarksheetFiles: null,
-                    relievingLettersFiles: null,
-                    payslipFiles: null,
-                  }
-                ))
-              } catch (error) {
-                console.error(`Error deleting database '${dbName}':`, error);        
-              }
+          const dbName = "FilesDB";
+          try {
+            await deleteDB(dbName);
+            setFormData((prev) => ({
+              ...prev,
+              photoFiles: null,
+              aadharCardFiles: null,
+              tenthMarksheetFiles: null,
+              twelfthMarksheetFiles: null,
+              pgDegreeCertificateFiles: null,
+              pgMarksheetFiles: null,
+              ugDegreeCertificateFiles: null,
+              ugMarksheetFiles: null,
+              relievingLettersFiles: null,
+              payslipFiles: null,
+            }));
+          } catch (error) {
+            console.error(`Error deleting database '${dbName}':`, error);
+          }
 
           // Optionally: Reset form or navigate to a success page
         } else {
@@ -374,10 +339,6 @@ const TopForm = () => {
         setAadharCardFiles(file);
         formik.setFieldValue("aadharCardFiles", file);
         break;
-      // case "educationCertificate":
-      //   setEducationCertificateFiles(file);
-      //   formik.setFieldValue("educationCertificateFiles",file);
-      //   break;
       case "tenthMarksheet":
         setTenthMarksheetFiles(file);
         formik.setFieldValue("tenthMarksheetFiles", file);
@@ -417,11 +378,10 @@ const TopForm = () => {
 
   const handleSameAsPresentAddressChange = (e) => {
     const isChecked = e.target.checked;
-
     // If checkbox is checked, update permanentAddress with presentAddress
     // If checkbox is unchecked, leave permanentAddress unchanged
     formik.setValues({
-      ...formik.values, // Spread other form values
+      ...formik.values,
       permanentAddress: isChecked
         ? formik.values.presentAddress
         : formik.values.permanentAddress,
@@ -433,50 +393,84 @@ const TopForm = () => {
   }, []);
 
   useEffect(() => {
-
     const createDB = async () => {
-      const db = await openDB('FilesDB', 1, {
+      const db = await openDB("FilesDB", 1, {
         upgrade(db) {
-          if (!db.objectStoreNames.contains('files')) {
-            const store = db.createObjectStore('files', { keyPath: 'id', autoIncrement: true });
+          if (!db.objectStoreNames.contains("files")) {
+            const store = db.createObjectStore("files", {
+              keyPath: "id",
+              autoIncrement: true,
+            });
           }
         },
       });
-      const storedFiles = await db.getAll('files');
-      if(storedFiles){
-        formik.setFieldValue("photoFiles",storedFiles[storedFiles.length - 1]?.photoFiles)
-        formik.setFieldValue("aadharCardFiles",storedFiles[storedFiles.length - 1]?.aadharCardFiles)
-        formik.setFieldValue("tenthMarksheetFiles",storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles)
-        formik.setFieldValue("twelfthMarksheetFiles",storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles)
-        formik.setFieldValue("pgDegreeCertificateFiles",storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles)
-        formik.setFieldValue("pgMarksheetFiles",storedFiles[storedFiles.length - 1]?.pgMarksheetFiles)
-        formik.setFieldValue("ugDegreeCertificateFiles",storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles)
-        formik.setFieldValue("ugMarksheetFiles",storedFiles[storedFiles.length - 1]?.ugMarksheetFiles)
-        formik.setFieldValue("relievingLettersFiles",storedFiles[storedFiles.length - 1]?.relievingLettersFiles)
-        formik.setFieldValue("payslipFiles",storedFiles[storedFiles.length - 1]?.payslipFiles)
-        setFormData((prev) => (
-          {
-            ...prev,
-            photoFiles:storedFiles[storedFiles.length - 1]?.photoFiles,
-            aadharCardFiles:storedFiles[storedFiles.length - 1]?.aadharCardFiles,
-            tenthMarksheetFiles:storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles,
-            twelfthMarksheetFiles:storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles,
-            pgDegreeCertificateFiles:storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles,
-            pgMarksheetFiles:storedFiles[storedFiles.length - 1]?.pgMarksheetFiles,
-            ugDegreeCertificateFiles:storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles,
-            ugMarksheetFiles:storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
-            relievingLettersFiles:storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
-            payslipFiles:storedFiles[storedFiles.length - 1]?.payslipFiles,
-
-          }
-        ))
-
+      const storedFiles = await db.getAll("files");
+      if (storedFiles) {
+        formik.setFieldValue(
+          "photoFiles",
+          storedFiles[storedFiles.length - 1]?.photoFiles
+        );
+        formik.setFieldValue(
+          "aadharCardFiles",
+          storedFiles[storedFiles.length - 1]?.aadharCardFiles
+        );
+        formik.setFieldValue(
+          "tenthMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles
+        );
+        formik.setFieldValue(
+          "twelfthMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles
+        );
+        formik.setFieldValue(
+          "pgDegreeCertificateFiles",
+          storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles
+        );
+        formik.setFieldValue(
+          "pgMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.pgMarksheetFiles
+        );
+        formik.setFieldValue(
+          "ugDegreeCertificateFiles",
+          storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles
+        );
+        formik.setFieldValue(
+          "ugMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.ugMarksheetFiles
+        );
+        formik.setFieldValue(
+          "relievingLettersFiles",
+          storedFiles[storedFiles.length - 1]?.relievingLettersFiles
+        );
+        formik.setFieldValue(
+          "payslipFiles",
+          storedFiles[storedFiles.length - 1]?.payslipFiles
+        );
+        setFormData((prev) => ({
+          ...prev,
+          photoFiles: storedFiles[storedFiles.length - 1]?.photoFiles,
+          aadharCardFiles: storedFiles[storedFiles.length - 1]?.aadharCardFiles,
+          tenthMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles,
+          twelfthMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles,
+          pgDegreeCertificateFiles:
+            storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles,
+          pgMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.pgMarksheetFiles,
+          ugDegreeCertificateFiles:
+            storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles,
+          ugMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
+          relievingLettersFiles:
+            storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
+          payslipFiles: storedFiles[storedFiles.length - 1]?.payslipFiles,
+        }));
       }
-     
-    }
+    };
     // Function to retrieve draft data from sessionStorage
     const retrieveDraftData = () => {
-      const storedData = sessionStorage.getItem('draftFormData');
+      const storedData = sessionStorage.getItem("draftFormData");
       if (storedData) {
         const formDataFromStorage = JSON.parse(storedData);
         // Set the formData in your state
@@ -489,42 +483,29 @@ const TopForm = () => {
     retrieveDraftData();
   }, []);
 
-
-
-
-
-  const [isLinkValid, setisLinkValid] = useState(false)
-
-
+  const [isLinkValid, setisLinkValid] = useState(false);
 
   useEffect(() => {
-
     const verifyToken = async () => {
-
       try {
-        const response = await axios.get(`http://localhost:4000/api/verifyToken/${token}`)
-        console.log(response)
-        if (response.data.status === 'success') {
-          setisLinkValid(true)
-
-
+        const response = await axios.get(
+          `http://localhost:4000/api/verifyToken/${token}`
+        );
+        console.log(response);
+        if (response.data.status === "success") {
+          setisLinkValid(true);
         }
-
+      } catch (error) {
+        console.log(error);
       }
-      catch (error) {
-        console.log(error)
-      }
+    };
 
-    }
-
-    verifyToken()
-  }, [])
-
-
+    verifyToken();
+  }, []);
 
   return (
     <>
-      {isLinkValid ?
+      {isLinkValid ? (
         <>
           <Navbar
             bg="white"
@@ -546,21 +527,7 @@ const TopForm = () => {
                   className="d-inline-block align-top"
                 />
               </Navbar.Brand>
-               {/* <Nav className="me-auto disabled">
-                <Nav.Link
-                  href=""
-                  className="d-none d-md-block"
-                  style={{
-                    background: "rgb(242, 249, 251)",
-                    boxShadow: "0 0 1px 1px rgba(0,0,0,0.1)",
-                    borderRadius: "5px",
-                    fontWeight: "600",
-                  }}
-                >
-                  Dashboard
-                </Nav.Link>
-              </Nav> */}
-          </Container>
+            </Container>
           </Navbar>
           <ToastContainer />
           <div className="container-fluid">
@@ -578,14 +545,16 @@ const TopForm = () => {
             >
               <Row>
                 <Col md={10}>
-                  <h5 style={{ gap: "20px" }}>
-                    Candidate Info
-                  </h5>
+                  <h5 style={{ gap: "20px" }}>Candidate Info</h5>
                 </Col>
                 <Col md={2} className="d-flex justify-content-end">
-                <h6 className={`text-end d-none d-sm-inline-block align-top ${statusC === "Pending" ? 'orange' : 'blue'}`}>
-                {statusC}
-              </h6>
+                  <h6
+                    className={`text-end d-none d-sm-inline-block align-top ${
+                      statusC === "Pending" ? "orange" : "blue"
+                    }`}
+                  >
+                    {statusC}
+                  </h6>
                 </Col>
               </Row>
             </Container>
@@ -615,46 +584,69 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="firstName">
-                      <Form.Label className="labelss">First Name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        First Name
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="First Name"
                         name="firstName"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.firstName ? formData.firstName : formik.values.firstName}
+                        value={
+                          formData.firstName
+                            ? formData.firstName
+                            : formik.values.firstName
+                        }
                       />
                       {formik.touched.firstName && formik.errors.firstName ? (
-                        <div className="text-danger">{formik.errors.firstName}</div>
+                        <div className="text-danger">
+                          {formik.errors.firstName}
+                        </div>
                       ) : null}
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="lastName">
-                      <Form.Label className="labelss">Last Name<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Last Name
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Last Name"
                         name="lastName"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.lastName ? formData.lastName : formik.values.lastName}
+                        value={
+                          formData.lastName
+                            ? formData.lastName
+                            : formik.values.lastName
+                        }
                       />
                       {formik.touched.lastName && formik.errors.lastName ? (
-                        <div className="text-danger">{formik.errors.lastName}</div>
+                        <div className="text-danger">
+                          {formik.errors.lastName}
+                        </div>
                       ) : null}
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="email">
-                      <Form.Label className="labelss">Email<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Email
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         type="email"
                         placeholder="✉️ Email"
                         name="email"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.email ? formData.email : formik.values.email}
+                        value={
+                          formData.email ? formData.email : formik.values.email
+                        }
                       />
                       {formik.touched.email && formik.errors.email ? (
                         <div className="text-danger">{formik.errors.email}</div>
@@ -664,8 +656,13 @@ const TopForm = () => {
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="phoneNumber">
                       <div className="phoneDiv ">
-                        <div >
-                          <p className="labelss">Phone number<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></p>
+                        <div>
+                          <p className="labelss">
+                            Phone number
+                            <IoMdStar
+                              style={{ color: "red", fontSize: "7px" }}
+                            />
+                          </p>
                         </div>
                         <div className="phoneInput ">
                           <select
@@ -686,10 +683,15 @@ const TopForm = () => {
                             name="phoneNumber"
                             onChange={handleChange}
                             onBlur={formik.handleBlur}
-                            value={formData.phoneNumber ? formData.phoneNumber : formik.values.phoneNumber}
+                            value={
+                              formData.phoneNumber
+                                ? formData.phoneNumber
+                                : formik.values.phoneNumber
+                            }
                           />
                         </div>
-                        {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+                        {formik.touched.phoneNumber &&
+                        formik.errors.phoneNumber ? (
                           <div className="text-danger">
                             {formik.errors.phoneNumber}
                           </div>
@@ -699,16 +701,24 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="designation">
-                      <Form.Label className="labelss">Designation<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Designation
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Designation"
                         name="designation"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.designation ? formData.designation : formik.values.designation}
+                        value={
+                          formData.designation
+                            ? formData.designation
+                            : formik.values.designation
+                        }
                       />
-                      {formik.touched.designation && formik.errors.designation ? (
+                      {formik.touched.designation &&
+                      formik.errors.designation ? (
                         <div className="text-danger">
                           {formik.errors.designation}
                         </div>
@@ -717,7 +727,10 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="dateOfJoining">
-                      <Form.Label className="labelss">Date of Joining<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Date of Joining
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <InputGroup>
                         <InputGroup.Text>
                           <CiCalendar />
@@ -728,11 +741,15 @@ const TopForm = () => {
                           name="dateOfJoining"
                           onChange={handleChange}
                           onBlur={formik.handleBlur}
-                          value={formData.dateOfJoining ? formData.dateOfJoining : formik.values.dateOfJoining}
+                          value={
+                            formData.dateOfJoining
+                              ? formData.dateOfJoining
+                              : formik.values.dateOfJoining
+                          }
                         />
                       </InputGroup>
                       {formik.touched.dateOfJoining &&
-                        formik.errors.dateOfJoining ? (
+                      formik.errors.dateOfJoining ? (
                         <div className="text-danger">
                           {formik.errors.dateOfJoining}
                         </div>
@@ -741,7 +758,10 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="presentAddress">
-                      <Form.Label className="labelss">Present Address<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Present Address
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -749,11 +769,15 @@ const TopForm = () => {
                         name="presentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.presentAddress ? formData.presentAddress : formik.values.presentAddress}
+                        value={
+                          formData.presentAddress
+                            ? formData.presentAddress
+                            : formik.values.presentAddress
+                        }
                       />
 
                       {formik.touched.presentAddress &&
-                        formik.errors.presentAddress ? (
+                      formik.errors.presentAddress ? (
                         <div className="text-danger">
                           {formik.errors.presentAddress}
                         </div>
@@ -762,7 +786,10 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="permanentAddress">
-                      <Form.Label className="labelss">Permanent Address<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        Permanent Address
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={4}
@@ -770,7 +797,11 @@ const TopForm = () => {
                         name="permanentAddress"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.permanentAddress ? formData.permanentAddress : formik.values.permanentAddress}
+                        value={
+                          formData.permanentAddress
+                            ? formData.permanentAddress
+                            : formik.values.permanentAddress
+                        }
                         disabled={formik.values.sameAsPresentAddress}
                       />
                       <Form.Check
@@ -790,7 +821,7 @@ const TopForm = () => {
                         }}
                       />
                       {formik.touched.permanentAddress &&
-                        formik.errors.permanentAddress ? (
+                      formik.errors.permanentAddress ? (
                         <div className="text-danger">
                           {formik.errors.permanentAddress}
                         </div>
@@ -801,7 +832,11 @@ const TopForm = () => {
                 <Row>
                   <Col md={12}>
                     <Form.Group className="mb-3" controlId="aboutYourself">
-                      <Form.Label className="labelss"> About yourself<IoMdStar style={{color:"red" ,fontSize:"7px"}} /></Form.Label>
+                      <Form.Label className="labelss">
+                        {" "}
+                        About yourself
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
                       <Form.Control
                         as="textarea"
                         rows={5}
@@ -809,10 +844,14 @@ const TopForm = () => {
                         name="aboutYourself"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.aboutYourself ? formData.aboutYourself : formik.values.aboutYourself}
+                        value={
+                          formData.aboutYourself
+                            ? formData.aboutYourself
+                            : formik.values.aboutYourself
+                        }
                       />
                       {formik.touched.aboutYourself &&
-                        formik.errors.aboutYourself ? (
+                      formik.errors.aboutYourself ? (
                         <div className="text-danger">
                           {formik.errors.aboutYourself}
                         </div>
@@ -833,7 +872,11 @@ const TopForm = () => {
                         name="experience"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.experience ? formData.experience : formik.values.experience}
+                        value={
+                          formData.experience
+                            ? formData.experience
+                            : formik.values.experience
+                        }
                       />
                       {formik.touched.experience && formik.errors.experience ? (
                         <div className="text-danger">
@@ -844,24 +887,33 @@ const TopForm = () => {
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="company">
-                      <Form.Label className="labelss">Previous Company</Form.Label>
+                      <Form.Label className="labelss">
+                        Previous Company
+                      </Form.Label>
                       <Form.Control
                         type="text"
                         placeholder="Enter your previous company name"
                         name="company"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.company ? formData.company : formik.values.company}
+                        value={
+                          formData.company
+                            ? formData.company
+                            : formik.values.company
+                        }
                       />
                       {formik.touched.company && formik.errors.company ? (
-                        <div className="text-danger">{formik.errors.company}</div>
+                        <div className="text-danger">
+                          {formik.errors.company}
+                        </div>
                       ) : null}
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="enjoyment">
                       <Form.Label className="labelss">
-                        What do you enjoy outside of your work?<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
+                        What do you enjoy outside of your work?
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -870,17 +922,24 @@ const TopForm = () => {
                         name="enjoyment"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.enjoyment ? formData.enjoyment : formik.values.enjoyment}
+                        value={
+                          formData.enjoyment
+                            ? formData.enjoyment
+                            : formik.values.enjoyment
+                        }
                       />
                       {formik.touched.enjoyment && formik.errors.enjoyment ? (
-                        <div className="text-danger">{formik.errors.enjoyment}</div>
+                        <div className="text-danger">
+                          {formik.errors.enjoyment}
+                        </div>
                       ) : null}
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
                     <Form.Group className="mb-3" controlId="sneakpeek">
                       <Form.Label className="labelss">
-                        Sneak peek at your bucket list<IoMdStar style={{color:"red" ,fontSize:"7px"}} />
+                        Sneak peek at your bucket list
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
                       </Form.Label>
                       <Form.Control
                         as="textarea"
@@ -889,26 +948,33 @@ const TopForm = () => {
                         name="sneakpeek"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
-                        value={formData.sneakpeek ? formData.sneakpeek : formik.values.sneakpeek}
+                        value={
+                          formData.sneakpeek
+                            ? formData.sneakpeek
+                            : formik.values.sneakpeek
+                        }
                       />
                     </Form.Group>
                     {formik.touched.sneakpeek && formik.errors.sneakpeek ? (
-                      <div className="text-danger">{formik.errors.sneakpeek}</div>
+                      <div className="text-danger">
+                        {formik.errors.sneakpeek}
+                      </div>
                     ) : null}
                   </Col>
                 </Row>
                 <Row className="mt-4">
                   <Col md={4}>
-                    <Form.Label style={{ fontWeight: "500" }}>Documents</Form.Label>
+                    <Form.Label style={{ fontWeight: "500" }}>
+                      Documents
+                    </Form.Label>
                     <FileUpload
                       // label="Photo"
-                         label={(
-                        <span style={{display:"inline"}}>
-                          
+                      label={
+                        <span style={{ display: "inline" }}>
                           Photo
-                          <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
                         </span>
-                      )}
+                      }
                       instruction="Accepted formats: JPG or PNG"
                       controlId="photo"
                       acceptedFiles={formData.photoFiles}
@@ -921,19 +987,13 @@ const TopForm = () => {
                       onFileChange={(file) => FileChange(file, "photo")}
                       draftFile={formData?.photoFiles}
                     />
-                    {/* {formik.touched.photoFiles && formik.errors.photoFiles ? (
-               <div className="text-danger">{formik.errors.photoFiles}</div>
-             ) : null} */}
-
                     <FileUpload
-
-                      label={(
-                        <span style={{display:"inline"}}>
-                          
-                          Aadhar Card 
-                          <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                      label={
+                        <span style={{ display: "inline" }}>
+                          Aadhar Card
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
                         </span>
-                      )}
+                      }
                       instruction="Accepted format:pdf"
                       controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
@@ -946,33 +1006,29 @@ const TopForm = () => {
                       onFileChange={(file) => FileChange(file, "aadharCard")}
                       draftFile={formData?.aadharCardFiles}
                     />
-                    {/* {formik.touched.aadharCardFiles && formik.errors.aadharCardFiles ? (
-               <div className="text-danger">{formik.errors.aadharCardFiles}</div>
-             ) : null} */}
                     <div>
                       <div
                         style={{
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
-                          cursor: 'pointer'
+                          cursor: "pointer",
                         }}
-                      // onClick={handleToggleSection}
                       >
-                        <h6 style={{ fontWeight: "500" }}>Educational Certificates</h6>
-                        {/* {isSectionOpen ? <IoMdArrowDropupCircle size={20} /> : <IoMdArrowDropdownCircle size={20} />} */}
+                        <h6 style={{ fontWeight: "500" }}>
+                          Educational Certificates
+                        </h6>
                       </div>
-                      {/* {isSectionOpen && ( */}
                       <div>
                         <FileUpload
-                          // label="10th Marksheet"
-                          label={(
-                            <span style={{display:"inline"}}>
-                              
+                          label={
+                            <span style={{ display: "inline" }}>
                               10th Marksheet
-                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                              <IoMdStar
+                                style={{ color: "red", fontSize: "7px" }}
+                              />
                             </span>
-                          )}
+                          }
                           instruction="Accepted format:pdf"
                           controlId="tenthMarksheet"
                           acceptedFiles={formData.tenthMarksheetFiles}
@@ -982,18 +1038,20 @@ const TopForm = () => {
                               tenthMarksheetFiles: files,
                             }))
                           }
-                          onFileChange={(file) => FileChange(file, "tenthMarksheet")}
+                          onFileChange={(file) =>
+                            FileChange(file, "tenthMarksheet")
+                          }
                           draftFile={formData?.tenthMarksheetFiles}
                         />
                         <FileUpload
-                          // label="12th Marksheet"
-                          label={(
-                            <span style={{display:"inline"}}>
-                              
+                          label={
+                            <span style={{ display: "inline" }}>
                               12th Marksheet
-                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                              <IoMdStar
+                                style={{ color: "red", fontSize: "7px" }}
+                              />
                             </span>
-                          )}
+                          }
                           instruction="Accepted format:pdf"
                           controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
@@ -1035,18 +1093,20 @@ const TopForm = () => {
                               pgMarksheetFiles: files,
                             }))
                           }
-                          onFileChange={(file) => FileChange(file, "PGMarksheet")}
+                          onFileChange={(file) =>
+                            FileChange(file, "PGMarksheet")
+                          }
                           draftFile={formData?.pgMarksheetFiles}
                         />
                         <FileUpload
-                          // label="UG Degree Certificate"
-                          label={(
-                            <span style={{display:"inline"}}>
-                              
+                          label={
+                            <span style={{ display: "inline" }}>
                               UG Degree Certificate
-                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                              <IoMdStar
+                                style={{ color: "red", fontSize: "7px" }}
+                              />
                             </span>
-                          )}
+                          }
                           instruction="Accepted format:pdf"
                           controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
@@ -1062,14 +1122,14 @@ const TopForm = () => {
                           draftFile={formData?.ugDegreeCertificateFiles}
                         />
                         <FileUpload
-                          // label="UG Marksheet"
-                          label={(
-                            <span style={{display:"inline"}}>
-                              
+                          label={
+                            <span style={{ display: "inline" }}>
                               UG Marksheet
-                              <IoMdStar style={{color:"red" ,fontSize:"7px"}}/>
+                              <IoMdStar
+                                style={{ color: "red", fontSize: "7px" }}
+                              />
                             </span>
-                          )}
+                          }
                           instruction="Accepted format:pdf"
                           controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}
@@ -1079,16 +1139,13 @@ const TopForm = () => {
                               ugMarksheetFiles: files,
                             }))
                           }
-                          onFileChange={(file) => FileChange(file, "UGMarksheet")}
+                          onFileChange={(file) =>
+                            FileChange(file, "UGMarksheet")
+                          }
                           draftFile={formData?.ugMarksheetFiles}
                         />
                       </div>
-                      {/* )} */}
                     </div>
-                    {/* {formik.touched.educationCertificateFiles && formik.errors.educationCertificateFiles ? (
-               <div className="text-danger">{formik.errors.educationCertificateFiles}</div>
-             ) : null} */}
-
                     <FileUpload
                       label="Relieving Letters from all your previous organizations"
                       instruction="Accepted format:pdf"
@@ -1100,13 +1157,11 @@ const TopForm = () => {
                           relievingLettersFiles: files,
                         }))
                       }
-                      onFileChange={(file) => FileChange(file, "relievingLetters")}
+                      onFileChange={(file) =>
+                        FileChange(file, "relievingLetters")
+                      }
                       draftFile={formData?.relievingLettersFiles}
                     />
-                    {/* {formik.touched.relievingLettersFiles && formik.errors.relievingLettersFiles ? (
-               <div className="text-danger">{formik.errors.relievingLettersFiles}</div>
-             ) : null} */}
-
                     <FileUpload
                       label="3 Months Payslip "
                       instruction="Accepted format:pdf"
@@ -1121,10 +1176,6 @@ const TopForm = () => {
                       onFileChange={(file) => FileChange(file, "payslip")}
                       draftFile={formData?.payslipFiles}
                     />
-                    {/* {formik.touched.payslipFiles && formik.errors.payslipFiles ? (
-               <div className="text-danger">{formik.errors.payslipFiles}</div>
-             ) : null} */}
-
                     <div
                       style={{
                         display: "flex",
@@ -1133,18 +1184,6 @@ const TopForm = () => {
                         gap: "10px",
                       }}
                     >
-                      {/* <Button
-                        style={{
-                          height: "35px",
-                          fontSize: "15px",
-                          backgroundColor: "rgb(210, 164, 250)",
-                          color: "white",
-                          borderColor: "rgb(210, 164, 250)",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Submit
-                      </Button> */}
                       <Button
                         onClick={handleSaveDraft}
                         style={{
@@ -1170,7 +1209,6 @@ const TopForm = () => {
               onFamilyDetailsChange={updateFamilyMembers}
               isOutsideIndia={isOutsideIndia}
             />
-
             <div
               style={{
                 display: "flex",
@@ -1198,32 +1236,51 @@ const TopForm = () => {
             </div>
           </div>
         </>
+      ) : (
+        <div
+          style={{
+            minHeight: "100vh",
+            width: "100%",
+            backgroundColor: "#0000002e",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              width: "80%",
+              height: "60vh",
+              backgroundColor: "white",
+              boxShadow: "rgb(16 24 40 / 30%) 1px 1px 10px 2px",
+              borderRadius: "10px",
+              padding: "8px 14px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              flexDirection: "column",
+            }}
+          >
+            <p
+              style={{
+                fontSize: "36px",
+                letterSpacing: "3px",
+                color: "rgb(102 98 98)",
+                textAlign: "center",
+              }}
+            >
+              Oops! It seems you've reached an expired link.
+            </p>
 
-        :
-        <div style={{ minHeight: '100vh', width: '100%', backgroundColor: '#0000002e', display: "flex", justifyContent: 'center', alignItems: "center" }}>
-
-          <div style={{
-            width: '80%',
-            height: '60vh',
-            backgroundColor: 'white',
-            boxShadow: 'rgb(16 24 40 / 30%) 1px 1px 10px 2px',
-            borderRadius: '10px',
-            padding: '8px 14px',
-            display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: "column"
-          }}>
-
-            <p style={{ fontSize: '36px', letterSpacing: '3px', color: 'rgb(102 98 98)', textAlign: 'center' }}>Oops! It seems you've reached an expired link.</p>
-
-            <p style={{ fontSize: '18px', letterSpacing: '3px', color: 'gray' }}>Please reach out to your HR representative</p>
+            <p
+              style={{ fontSize: "18px", letterSpacing: "3px", color: "gray" }}
+            >
+              Please reach out to your HR representative
+            </p>
           </div>
-
-
         </div>
-      }
-
+      )}
     </>
-
-
   );
 };
 

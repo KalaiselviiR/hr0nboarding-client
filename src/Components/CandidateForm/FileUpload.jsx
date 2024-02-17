@@ -4,10 +4,6 @@ import "./CandidateForm.css";
 import tick from "../../assets/tick.avif";
 import pdf from "../../assets/pdf-image.jpeg";
 import png from "../../assets/png-image.png";
-//file upload
-import axios from "axios";
-import { pdfjs } from "react-pdf";
-import PdfComp from "./PdfComp";
 
 // FileUpload component for handling file upload
 function FileUpload({
@@ -45,7 +41,6 @@ function FileUpload({
       // Extract text from the label prop
       let labelText = label.props.children;
 
-     
       // Check file type for photo
       if (labelText && labelText.includes("Photo")) {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
@@ -122,7 +117,14 @@ function FileUpload({
           </Button>
           <input
             type="file"
-            accept={label && label.props && label.props.children && label.props.children.includes("Photo") ? ".jpg, .jpeg, .png" : ".pdf"}
+            accept={
+              label &&
+              label.props &&
+              label.props.children &&
+              label.props.children.includes("Photo")
+                ? ".jpg, .jpeg, .png"
+                : ".pdf"
+            }
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -159,7 +161,14 @@ function FileUpload({
             >
               <div className="pdf-image" style={{ height: "50px" }}>
                 <Image
-                  src={label && label.props && label.props.children && label.props.children.includes("Photo")  ? png : pdf}
+                  src={
+                    label &&
+                    label.props &&
+                    label.props.children &&
+                    label.props.children.includes("Photo")
+                      ? png
+                      : pdf
+                  }
                   alt="PDF"
                   width="40px"
                   height="50px"
