@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import BASE_URL from "../../service/baseurl";
 import {
   Container,
   Row,
@@ -325,7 +326,7 @@ const TopForms = () => {
 
         // Send a POST request using Axios
         const response = await axios.post(
-          "http://localhost:4000/api/candidates",
+          `${BASE_URL}/api/candidates`,
           formData,
           {
             headers: {
@@ -439,7 +440,7 @@ const TopForms = () => {
 
 
 
-  const [isLinkValid, setisLinkValid] = useState()
+  const [isLinkValid, setisLinkValid] = useState(false)
 
 
 
@@ -448,7 +449,7 @@ const TopForms = () => {
     const verifyToken = async () => {
 
       try {
-        const response = await axios.get(`http://localhost:4000/api/verifyToken/${token}`)
+        const response = await axios.get(`${BASE_URL}/api/verifyToken/${token}`)
         console.log(response)
         if (response.data.status === 'success') {
           setisLinkValid(true)

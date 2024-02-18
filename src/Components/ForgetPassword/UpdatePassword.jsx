@@ -9,6 +9,7 @@ import email_icon from '../../assets/gmail.jpg'
 import password_icon from '../../assets/password.png'
 import Logo from '../../assets/techjays.png'
 import axios from 'axios';
+import BASE_URL from '../../service/baseurl';
 
 
 // const items = JSON.parse(localStorage.getItem('userId'));
@@ -77,7 +78,7 @@ const handleSubmit = async (e) => {
 
     console.log(userData);
     //api call
-    const response = axios.put(`http://localhost:4000/api/changePassword/${id}`, { password: newPassword }) 
+    const response = axios.put(`${BASE_URL}/api/changePassword/${id}`, { password: newPassword }) 
     .then(response => {
       console.log(response.data);
       console.log(response.status);
