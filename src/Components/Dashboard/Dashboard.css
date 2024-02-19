@@ -10,10 +10,6 @@ p {
   font-size: 17px;
   border-radius: 8px;
 
-  /* background-color: #7F56D9; */
-  /* color: white;
-  margin-right: 30px; */
-
 }
 
 #b:hover {
@@ -291,12 +287,6 @@ body:not(.modal-open) .modal-backdrop {
 }
 
 
-/* .modal-responsive {
-  display: flex !important;
-  align-items: flex-start !important;
-  justify-content: flex-end !important;
-} */
-
 .custom-modal {
 
   width: 97%;
@@ -309,47 +299,17 @@ body:not(.modal-open) .modal-backdrop {
   cursor: pointer;
   background-color: 
   #7F56D9;
-
-  /* border-radius: 8px;
-  
-  border: none;
-  padding: 10px;
-  padding-left: 10px;
-  padding-right: 20px;
-  width:400px ;
-  margin-top: 34px;
-  font-size: 18px;
-  font-weight: 450; */
   align-items: center;
-
-
 }
 
 .icon1{
 
- 
-  /* font-weight: bold; */
-  /* transform: scale(1.2); */
   padding-top: 10px;
-  /* background-color: #7F56D9;
-  border-radius: 5px;
-  padding-bottom: 3px;
-  padding-top: 1px;
-  padding-left: 3px;
-  padding-right: 3px;
-  font-weight: 700;
-  border-width: 70px; */
-  
 
-  /* background-color: #7F56D9; */
-  
 }
 
 .icon3 {
-  margin-left: 15px;
-  /* color: rgb(180, 63, 63); */
- 
-
+  margin-left: 15px
 }
 .icon3:hover{
   transform: scale(1.2);
