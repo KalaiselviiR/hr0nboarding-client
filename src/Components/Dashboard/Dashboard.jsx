@@ -237,17 +237,6 @@ function Dashboard() {
             </Nav.Link>
           </Nav>
 
-
-          {/* <Navbar.Brand href="http://localhost:5173/"> */}
-          {/* <IoLogOutOutline className="d-inline-block align-top" style={{
-        color: "#7F56D9",
-        height: "30px",
-        width: '30px',
-        borderRadius: "200px",
-        backgroundColor: " rgba(249, 245, 255, 1)"
-      }} onClick={Logout} /> */}
-          {/* </Navbar.Brand> */}
-
           <Navbar.Brand onClick={handleUserIconClick}>
             <FiUser
               className="d-inline-block align-top"
@@ -402,8 +391,7 @@ function Dashboard() {
                         className="icon ms-1"
 
                       >
-                        {/* ${i.fname}_${i.lname} */}
-                        {/* <CiExport/> */}
+                   
                         <FiDownload />
                       </CSVLink>}
 

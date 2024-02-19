@@ -63,7 +63,7 @@ const RecruiterForm = () => {
 
   // param id
   const { id } = useParams();
-  // console.log(id);
+ 
 
   //get details of the perticuler candidate
   const getoneCandidatesFrom = async () => {

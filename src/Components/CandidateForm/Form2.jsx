@@ -179,8 +179,6 @@ function Form2({
     const updatedMembers = [...familyMembers];
     updatedMembers[index][key] = value;
     setFamilyMembers(updatedMembers);
-
-    // formik.setFieldValue(`members[${index}].${key}`, value);
   };
 
   const handleRemoveMember = (index) => {

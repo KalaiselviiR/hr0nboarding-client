@@ -113,32 +113,7 @@ const TopForms = () => {
   });
 
   const [form2Data, setForm2Data] = useState({
-    // memberName: "",
-    // relationship: "",
-    // dateOfBirth: "",
-    // emergencyContactNumber: "",
-    // emailAddress: "",
-    // epfoUan: "",
-    // pfNo: "",
-    // adharCard: "",
-    // panCard: "",
-    // employeesName: "",
-    // dateOfBirthAs: "",
-    // gender: "",
-    // maritalStatus: "",
-    // bankName: "",
-    // fatherName: "",
-    // accountNumber: "",
-    // branch: "",
-    // ifsc: "",
-    // prefix: "",
-    // firstNamehr: "",
-    // middleName: "",
-    // lastNamehr: "",
-    // bloodGroup: "",
-    // nationality: "",
-    // officialEmail: "",
-    // employeeId: "",
+    
   });
 
   //input form validation using formk and yup library
@@ -354,10 +329,6 @@ const TopForms = () => {
         setAadharCardFiles(file);
         formik.setFieldValue("aadharCardFiles", file);
         break;
-      // case "educationCertificate":
-      //   setEducationCertificateFiles(file);
-      //   formik.setFieldValue("educationCertificateFiles",file);
-      //   break;
       case "tenthMarksheet":
         setTenthMarksheetFiles(file);
         formik.setFieldValue("tenthMarksheetFiles", file);
