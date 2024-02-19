@@ -229,7 +229,14 @@ function FileUpload({
             </Button>
             <input
               type="file"
-              accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
+              accept={
+                label &&
+                label.props &&
+                label.props.children &&
+                label.props.children.includes("Photo")
+                  ? ".jpg, .jpeg, .png"
+                  : ".pdf"
+              }
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}

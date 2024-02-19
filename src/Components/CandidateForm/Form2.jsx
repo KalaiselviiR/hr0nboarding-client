@@ -17,7 +17,6 @@ import {
   initialValues,
   validationSchema,
 } from "./validation";
-import { createCandidateDetails } from "../../service/allapi";
 import { allBanks } from "./Bank";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -199,45 +198,6 @@ function Form2({
   useEffect(() => {
     onFamilyDetailsChange(familyMembers, contact);
   }, [familyMembers, contact]);
-
-  const handleSubmitBottom = async (e) => {
-    e.preventDefault();
-    formik.handleSubmit();
-    //api call
-    const response = await createCandidateDetails(candidateData);
-
-    if (response.status == 200) {
-      toast.success(response.data.message);
-
-      //reset all states datas
-      setCandidate({
-        epfoUan: "",
-        pfNo: "",
-        adharCard: "",
-        panCard: "",
-        employeesName: "",
-        dateOfBirthAs: "",
-        gender: "",
-        maritalStatus: "",
-        fatherName: "",
-        bankName: "",
-        accountNumber: "",
-        branch: "",
-        ifsc: "",
-        highestQualification: "",
-        prefix: "",
-        firstNamehr: "",
-        middleName: "",
-        lastNamehr: "",
-        bloodGroup: "",
-        nationality: "",
-        officialEmail: "",
-        employeeId: "",
-      });
-    } else {
-      toast.error(response.data.message);
-    }
-  };
 
   //save as draft for medical insurance information
 

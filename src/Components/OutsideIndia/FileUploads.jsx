@@ -4,10 +4,7 @@ import "./CandidateForms.css";
 import tick from "../../assets/tick.avif";
 import pdf from "../../assets/pdf-image.jpeg";
 import png from "../../assets/png-image.png";
-//file upload
-import axios from "axios";
-import { pdfjs } from "react-pdf";
-import PdfComps from "./PdfComps";
+
 
 // FileUpload component for handling file upload
 function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAcceptedFiles }) {
@@ -24,8 +21,16 @@ function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAccep
     if (!selectedFile) {
       setError("Please select a file");
     } else {
+      // Check file size
+      if (selectedFile.size > 204800) {
+        setError("File size exceeds the limit (200kb)");
+        return;
+      }
+      // Extract text from the label prop
+      let labelText = label.props.children;
+
       // Check file type for photo
-      if (label === "Photo") {
+      if (labelText && labelText.includes("Photo")) {
         const allowedPhotoTypes = ["image/jpeg", "image/png"];
         if (!allowedPhotoTypes.includes(selectedFile.type)) {
           setError("Only JPG and PNG files are allowed for photos");
@@ -98,7 +103,14 @@ function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAccep
           </Button>
           <input
             type="file"
-            accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
+            accept={
+              label &&
+              label.props &&
+              label.props.children &&
+              label.props.children.includes("Photo")
+                ? ".jpg, .jpeg, .png"
+                : ".pdf"
+            }
             ref={fileInputRef}
             style={{ display: "none" }}
             onChange={handleFileChange}
@@ -134,7 +146,14 @@ function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAccep
               }}
             >
               <div className="pdf-image" style={{ height: "50px" }}>
-                <Image src={label === "Photo" ? png : pdf} alt="PDF" width="40px" height="50px" />
+                <Image   src={
+                    label &&
+                    label.props &&
+                    label.props.children &&
+                    label.props.children.includes("Photo")
+                      ? png
+                      : pdf
+                  } alt="PDF" width="40px" height="50px" />
               </div>
               <div className="file-info  ">
                 <p className="fileName" style={{ margin: "0", marginTop: "10px" }}>{file.name}</p>
@@ -183,7 +202,14 @@ function FileUploads({ label, instruction, onFileChange, acceptedFiles, setAccep
             </Button>
             <input
               type="file"
-              accept={label === "Photo" ? ".jpg, .jpeg, .png" : ".pdf"}
+              accept={
+                label &&
+                label.props &&
+                label.props.children &&
+                label.props.children.includes("Photo")
+                  ? ".jpg, .jpeg, .png"
+                  : ".pdf"
+              }
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}
