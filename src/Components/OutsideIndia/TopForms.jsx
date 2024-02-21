@@ -145,6 +145,8 @@ const TopForms = () => {
     }));
   };
 
+  console.log(formData)
+
   const handleSaveDraft = () => {
     // Convert the form data to a string before storing it in sessionStorage
     const formDataString = JSON.stringify({
@@ -161,41 +163,6 @@ const TopForms = () => {
       company: formData.company,
       enjoyment: formData.enjoyment,
       sneakpeek: formData.sneakpeek,
-      photoFiles: formData.photoFiles.name,
-      aadharCardFiles: aadharCardFiles
-        ? { name: aadharCardFiles.name, size: aadharCardFiles.size }
-        : null,
-      // educationCertificateFiles: null,
-      tenthMarksheetFiles: tenthMarksheetFiles
-        ? { name: tenthMarksheetFiles.name, size: tenthMarksheetFiles.size }
-        : null,
-      twelfthMarksheetFiles: twelfthMarksheetFiles
-        ? { name: twelfthMarksheetFiles.name, size: twelfthMarksheetFiles.size }
-        : null,
-      pgDegreeCertificateFiles: pgDegreeCertificateFiles
-        ? {
-            name: pgDegreeCertificateFiles.name,
-            size: pgDegreeCertificateFiles.size,
-          }
-        : null,
-      pgMarksheetFiles: pgMarksheetFiles
-        ? { name: pgMarksheetFiles.name, size: pgMarksheetFiles.size }
-        : null,
-      ugDegreeCertificateFiles: ugDegreeCertificateFiles
-        ? {
-            name: ugDegreeCertificateFiles.name,
-            size: ugDegreeCertificateFiles.size,
-          }
-        : null,
-      ugMarksheetFiles: ugMarksheetFiles
-        ? { name: ugMarksheetFiles.name, size: ugMarksheetFiles.size }
-        : null,
-      relievingLettersFiles: relievingLettersFiles
-        ? { name: relievingLettersFiles.name, size: relievingLettersFiles.size }
-        : null,
-      payslipFiles: payslipFiles
-        ? { name: payslipFiles.name, size: payslipFiles.size }
-        : null,
       id: formData.firstName,
     });
 
