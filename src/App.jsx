@@ -11,7 +11,7 @@ import Login from './Components/Login/Login';
 import VerifyEmail from './Components/ForgetPassword/VerifyEmail';
 import UpdatePassword from './Components/ForgetPassword/UpdatePassword';
 import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
-import CandidateViewForm from './Components/resendform/candidateview';
+import CandidateViewForm from './Components/resendform/candidateView';
 import TopForms from './Components/OutsideIndia/TopForms';
 
 
