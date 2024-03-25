@@ -1,3 +1,3 @@
-const BASE_URL='https://35.154.36.17'
+const BASE_URL='https://onboarding-api.techjays.com'
 
 export default BASE_URL
