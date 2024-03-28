@@ -8,6 +8,8 @@ export const registerHr=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/hr-register`,body)
 }
 
+
+
 //login
 export const loginHr=async(body)=>{
     return await commonRequest("POST",`${BASE_URL}/api/hr-login`,body)

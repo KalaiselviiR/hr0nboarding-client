@@ -10,6 +10,7 @@ import {
   Button,
   InputGroup,
   Dropdown,
+  Spinner,
 } from "react-bootstrap";
 import { GoArrowLeft } from "react-icons/go";
 import "../CandidateForm/CandidateForm.css";
@@ -41,7 +42,12 @@ const CandidateViewForm = () => {
   const [cData, setCdata] = useState([]);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
   const [isShow, setInvokeModal] = useState(false);
+// form modal and loading
+const [showModal, setShowModal] = useState(false);
+const [loading, setLoading] = useState(false);
 
+const handleOpenModal = () => setShowModal(true);
+const handleCloseModal = () => setShowModal(false);
   const navigate = useNavigate();
 
   const [photoFiles, setPhotoFiles] = useState([]);
@@ -194,15 +200,20 @@ const CandidateViewForm = () => {
   }, []);
 
   const handleSubmit = async () => {
+    setLoading(true);
     try {
       const formValues = new FormData();
       for (const key in formData) {
         formValues.append(key, formData[key] || "");
       }
-
+     
       const response = await reuploadDocuments(id, formValues);
       if (response?.status === 200) {
+        handleCloseModal();
         toast.success("Document uploaded successfully");
+        setTimeout(()=>{
+          navigate("/formsubmitted")
+        },2000)
       }
     } catch (error) {
       toast.error("something went wrong");
@@ -681,10 +692,37 @@ const CandidateViewForm = () => {
                     fontWeight: "500",
                     marginTop: "25px",
                   }}
-                  onClick={handleSubmit}
+                  onClick={handleOpenModal}
                 >
                   Submit
                 </Button>
+                <Modal
+              show={showModal}
+              onHide={handleCloseModal}
+              className="form-modal"
+            >
+              <div className="form-modal-body">
+                {loading ? ( 
+                  <div className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                    <p>Submitting form...</p>
+                  </div>
+                ) : (
+                  <div className="form-modal-content">
+                    <h3>Final Confirmation</h3>
+                    <p>Submitting this form is irreversible. Proceed?</p>
+                  </div>
+                )}
+                <div className="form-modal-buttons">
+                  <button onClick={handleCloseModal} className="form-button-no">
+                    No
+                  </button>
+                  <button onClick={handleSubmit} className="form-button-yes">
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </Modal>
               </Col>
             </Row>
           </Form>

@@ -87,16 +87,16 @@ export const validationSchema = Yup.object().shape({
     "12th marksheet is required",
     (value) => value && value.size > 0
   ),
-  relievingLettersFiles: Yup.mixed().test(
-    "fileRequired",
-    "Relieving Letters are required",
-    (value) => value && value.size > 0
-  ),
-  payslipFiles: Yup.mixed().test(
-    "fileRequired",
-    "Payslip is required",
-    (value) => value && value.size > 0
-  ),
+  // relievingLettersFiles: Yup.mixed().test(
+  //   "fileRequired",
+  //   "Relieving Letters are required",
+  //   (value) => value && value.size > 0
+  // ),
+  // payslipFiles: Yup.mixed().test(
+  //   "fileRequired",
+  //   "Payslip is required",
+  //   (value) => value && value.size > 0
+  // ),
 
   firstNamehr: Yup.string()
     .matches(/^[^\d]+$/, "First Name should not contain numbers")

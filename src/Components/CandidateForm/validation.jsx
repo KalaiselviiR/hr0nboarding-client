@@ -96,16 +96,16 @@ export const validationSchema = Yup.object().shape({
     "12th marksheet is required",
     (value) => value && value.size > 0
   ),
-  relievingLettersFiles: Yup.mixed().test(
-    "fileRequired",
-    "Relieving Letters are required",
-    (value) => value && value.size > 0
-  ),
-  payslipFiles: Yup.mixed().test(
-    "fileRequired",
-    "Payslip is required",
-    (value) => value && value.size > 0
-  ),
+  // relievingLettersFiles: Yup.mixed().test(
+  //   "fileRequired",
+  //   "Relieving Letters are required",
+  //   (value) => value && value.size > 0
+  // ),
+  // payslipFiles: Yup.mixed().test(
+  //   "fileRequired",
+  //   "Payslip is required",
+  //   (value) => value && value.size > 0
+  // ),
 
   // bottomForm-2
   epfoUan: Yup.string().matches(/^\d{10}$/, "It contains 10 digits"),

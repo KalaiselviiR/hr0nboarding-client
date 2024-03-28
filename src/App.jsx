@@ -13,6 +13,7 @@ import UpdatePassword from './Components/ForgetPassword/UpdatePassword';
 import RecruiterForm from './Components/RecruiterViewForm/RecruiterView';
 import CandidateViewForm from './Components/resendform/candidateView';
 import TopForms from './Components/OutsideIndia/TopForms';
+import FormSubmissionSuccess from './Components/CandidateForm/form-submission';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
         <Route path="/edit" element={<EditNewCandidate />} />
         <Route path="/add" element={<AddNewCandidate />} />
         <Route path="/candidateForm" element={<TopForm />} />
+        <Route path="/formSubmitted" element={<FormSubmissionSuccess />} />
         {/* Route for the candidate Form Recruiter View*/}
         <Route path="/recruiterView/:id" element={<RecruiterForm />} />
         <Route path="/candidateView/:id" element={<CandidateViewForm />} />

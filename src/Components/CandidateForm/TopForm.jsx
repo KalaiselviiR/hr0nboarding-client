@@ -10,6 +10,8 @@ import {
   Button,
   InputGroup,
   Dropdown,
+  Modal,
+  Spinner,
 } from "react-bootstrap";
 import "./CandidateForm.css";
 import { CiCalendar } from "react-icons/ci";
@@ -21,7 +23,7 @@ import {
   validationSchema,
 } from "./validation";
 import Form2 from "./Form2";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { getSingleCandidate, updateStatusRview } from "../../service/allapi";
 import { toast, ToastContainer } from "react-toastify";
@@ -46,6 +48,15 @@ const TopForm = () => {
   const [statusC, setStatusc] = useState();
 
   const [isSectionOpen, setIsSectionOpen] = useState(false);
+  // form modal and loading
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleOpenModal = () => setShowModal(true);
+  const handleCloseModal = () => setShowModal(false);
+
+  //navigation
+  const navigate = useNavigate()
 
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
@@ -256,6 +267,7 @@ const TopForm = () => {
 
     // Trigger Formik's validation
     formik.handleSubmit();
+    setLoading(true);
 
     // Check if there are any errors in the form
     if (Object.keys(formik.errors).length === 0) {
@@ -290,10 +302,14 @@ const TopForm = () => {
             },
           }
         );
-
+        handleCloseModal();
         if (response.status === 201) {
           console.log("Form data submitted successfully");
+          setLoading(false);
           toast.success("Form data submitted successfully");
+          setTimeout(()=>{
+            navigate("/formsubmitted")
+          },2000)
           sessionStorage.clear();
           const response = await updateStatusRview(id);
           console.log(response);
@@ -484,7 +500,7 @@ const TopForm = () => {
     retrieveDraftData();
   }, []);
 
-  const [isLinkValid, setisLinkValid] = useState(false);
+  const [isLinkValid, setisLinkValid] = useState(true);
 
   useEffect(() => {
     const verifyToken = async () => {
@@ -495,12 +511,14 @@ const TopForm = () => {
         console.log(response);
         if (response.data.status === "success") {
           setisLinkValid(true);
+        } else {
+          setisLinkValid(false);
         }
       } catch (error) {
         console.log(error);
+        setisLinkValid(false);
       }
     };
-
     verifyToken();
   }, []);
 
@@ -1068,7 +1086,11 @@ const TopForm = () => {
                           draftFile={formData?.twelfthMarksheetFiles}
                         />
                         <FileUpload
-                          label="PG Degree Certificate"
+                          label={
+                            <span style={{ display: "inline" }}>
+                              PG Degree Certificate
+                            </span>
+                          }
                           instruction="Accepted format:pdf"
                           controlId="PGDegreeCertificate"
                           acceptedFiles={formData.pgDegreeCertificateFiles}
@@ -1084,7 +1106,11 @@ const TopForm = () => {
                           draftFile={formData?.pgDegreeCertificateFiles}
                         />
                         <FileUpload
-                          label="PG Marksheet"
+                          label={
+                            <span style={{ display: "inline" }}>
+                              PG Marksheet
+                            </span>
+                          }
                           controlId="PGMarksheet"
                           instruction="Accepted format:pdf"
                           acceptedFiles={formData.pgMarksheetFiles}
@@ -1148,7 +1174,11 @@ const TopForm = () => {
                       </div>
                     </div>
                     <FileUpload
-                      label="Relieving Letters from all your previous organizations"
+                      label={
+                        <span style={{ display: "inline" }}>
+                          Relieving Letters from all your previous organizations
+                        </span>
+                      }
                       instruction="Accepted format:pdf"
                       controlId="relievingLetters"
                       acceptedFiles={formData.relievingLettersFiles}
@@ -1164,7 +1194,11 @@ const TopForm = () => {
                       draftFile={formData?.relievingLettersFiles}
                     />
                     <FileUpload
-                      label="3 Months Payslip "
+                      label={
+                        <span style={{ display: "inline" }}>
+                          3 Months Payslip
+                        </span>
+                      }
                       instruction="Accepted format:pdf"
                       controlId="payslip"
                       acceptedFiles={formData.payslipFiles}
@@ -1218,14 +1252,14 @@ const TopForm = () => {
               }}
             >
               <Button
-                onClick={handleSubmit}
+                onClick={handleOpenModal}
                 disabled={!formik.isValid}
                 style={{
                   marginTop: "-10px",
                   height: "45px",
                   width: "95px",
                   fontSize: "15px",
-                  backgroundColor: " rgb(149, 89, 201)",
+                  backgroundColor: "rgb(149, 89, 201)",
                   color: "white",
                   borderColor: "rgb(210, 164, 250)",
                   fontWeight: "500",
@@ -1235,6 +1269,35 @@ const TopForm = () => {
                 Submit
               </Button>
             </div>
+
+            {/* Custom modal for confirmation */}
+            <Modal
+              show={showModal}
+              onHide={handleCloseModal}
+              className="form-modal"
+            >
+              <div className="form-modal-body">
+                {loading ? ( 
+                  <div className="text-center">
+                    <Spinner animation="border" variant="primary" />
+                    <p>Submitting form...</p>
+                  </div>
+                ) : (
+                  <div className="form-modal-content">
+                    <h3>Final Confirmation</h3>
+                    <p>Submitting this form is irreversible. Proceed?</p>
+                  </div>
+                )}
+                <div className="form-modal-buttons">
+                  <button onClick={handleCloseModal} className="form-button-no">
+                    No
+                  </button>
+                  <button onClick={handleSubmit} className="form-button-yes">
+                    Yes
+                  </button>
+                </div>
+              </div>
+            </Modal>
           </div>
         </>
       ) : (
