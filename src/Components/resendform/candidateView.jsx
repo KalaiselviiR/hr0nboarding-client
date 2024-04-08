@@ -589,7 +589,7 @@ const handleCloseModal = () => setShowModal(false);
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
                           ...prevData,
-                          PGDegreeCertificate: files,
+                          pgDegreeCertificateFiles: files,
                         }))
                       }
                       onFileChange={(file) =>
