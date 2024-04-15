@@ -1,9 +1,11 @@
 .text-end {
   width: fit-content;
+  width: -moz-fit-content;
   border-radius: 12px;
   padding: 5px;
   font-size: 13px;
 }
+
 
 .custom-width-datepicker {
   width: 100%;

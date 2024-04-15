@@ -89,6 +89,7 @@ const TopForm = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
+    countryCode:"",
     designation: "",
     dateOfJoining: null,
     presentAddress: "",
@@ -189,6 +190,7 @@ const TopForm = () => {
       email: formData.email,
       phoneNumber: formData.phoneNumber,
       designation: formData.designation,
+      countryCode: formData.countryCode,
       dateOfJoining: formData.dateOfJoining,
       presentAddress: formData.presentAddress,
       permanentAddress: formData.permanentAddress,
@@ -602,7 +604,7 @@ const TopForm = () => {
                     <h5>Basic Information</h5>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="firstName">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         First Name
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -627,7 +629,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="lastName">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Last Name
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -652,7 +654,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="email">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Email
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -673,7 +675,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="phoneNumber">
+                    <Form.Group className="mb-3" >
                       <div className="phoneDiv ">
                         <div>
                           <p className="labelss">
@@ -686,7 +688,10 @@ const TopForm = () => {
                         <div className="phoneInput ">
                           <select
                             className="country-code  "
-                            onChange={(e) => setCountryCode(e.target.value)}
+                            onChange={handleChange}
+                            title="Select your country code"
+                            name="countryCode"
+                            value={formData.countryCode}
                           >
                             <option selected value="+91">
                               IN(+91)
@@ -719,7 +724,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="designation">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Designation
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -745,7 +750,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="dateOfJoining">
+                    <Form.Group className="mb-3">
                       <Form.Label className="labelss">
                         Date of Joining
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -776,7 +781,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="presentAddress">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Present Address
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -804,7 +809,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="permanentAddress">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Permanent Address
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -850,7 +855,7 @@ const TopForm = () => {
                 </Row>
                 <Row>
                   <Col md={12}>
-                    <Form.Group className="mb-3" controlId="aboutYourself">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         {" "}
                         About yourself
@@ -881,7 +886,7 @@ const TopForm = () => {
 
                 <Row className="mt-4">
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="experience">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Overall Work Experience
                       </Form.Label>
@@ -905,7 +910,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="company">
+                    <Form.Group className="mb-3">
                       <Form.Label className="labelss">
                         Previous Company
                       </Form.Label>
@@ -929,7 +934,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="enjoyment">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         What do you enjoy outside of your work?
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -955,7 +960,7 @@ const TopForm = () => {
                     </Form.Group>
                   </Col>
                   <Col md={6} xs={12}>
-                    <Form.Group className="mb-3" controlId="sneakpeek">
+                    <Form.Group className="mb-3" >
                       <Form.Label className="labelss">
                         Sneak peek at your bucket list
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -995,7 +1000,6 @@ const TopForm = () => {
                         </span>
                       }
                       instruction="Accepted formats: JPG or PNG"
-                      controlId="photo"
                       acceptedFiles={formData.photoFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
@@ -1014,7 +1018,6 @@ const TopForm = () => {
                         </span>
                       }
                       instruction="Accepted format:pdf"
-                      controlId="aadharCard"
                       acceptedFiles={formData.aadharCardFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
@@ -1049,7 +1052,6 @@ const TopForm = () => {
                             </span>
                           }
                           instruction="Accepted format:pdf"
-                          controlId="tenthMarksheet"
                           acceptedFiles={formData.tenthMarksheetFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -1072,7 +1074,6 @@ const TopForm = () => {
                             </span>
                           }
                           instruction="Accepted format:pdf"
-                          controlId="twelfthMarksheet"
                           acceptedFiles={formData.twelfthMarksheetFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -1092,7 +1093,6 @@ const TopForm = () => {
                             </span>
                           }
                           instruction="Accepted format:pdf"
-                          controlId="PGDegreeCertificate"
                           acceptedFiles={formData.pgDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -1111,7 +1111,6 @@ const TopForm = () => {
                               PG Marksheet
                             </span>
                           }
-                          controlId="PGMarksheet"
                           instruction="Accepted format:pdf"
                           acceptedFiles={formData.pgMarksheetFiles}
                           setAcceptedFiles={(files) =>
@@ -1135,7 +1134,6 @@ const TopForm = () => {
                             </span>
                           }
                           instruction="Accepted format:pdf"
-                          controlId="UGDegreeCertificate"
                           acceptedFiles={formData.ugDegreeCertificateFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -1158,7 +1156,6 @@ const TopForm = () => {
                             </span>
                           }
                           instruction="Accepted format:pdf"
-                          controlId="UGMarksheet"
                           acceptedFiles={formData.ugMarksheetFiles}
                           setAcceptedFiles={(files) =>
                             setFormData((prevData) => ({
@@ -1180,7 +1177,7 @@ const TopForm = () => {
                         </span>
                       }
                       instruction="Accepted format:pdf"
-                      controlId="relievingLetters"
+                     
                       acceptedFiles={formData.relievingLettersFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
@@ -1200,7 +1197,7 @@ const TopForm = () => {
                         </span>
                       }
                       instruction="Accepted format:pdf"
-                      controlId="payslip"
+                    
                       acceptedFiles={formData.payslipFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({

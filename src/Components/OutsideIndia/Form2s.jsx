@@ -18,7 +18,7 @@ import {
   validationSchema,
 } from "./validations";
 import { createCandidateDetails } from "../../service/allapi";
-import { allBanks } from "./Banks";
+import {allBanks} from "./Banks"
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { IoMdStar } from "react-icons/io";
@@ -108,6 +108,31 @@ function Form2s({
     handleSaveDraft1();
     handleSaveDraftContact();
   };
+  //save as draft for pf account
+  const handleSaveDraft2 = () => {
+    const bankAccount = JSON.stringify({
+      governmentIssuedID: candidateData.adharCard,
+      taxPayerIdentificationNumber: candidateData.panCard,
+      employeesName: candidateData.employeesName,
+      dateOfBirthAs: candidateData.dateOfBirthAs,
+      gender: candidateData.gender,
+      maritalStatus: candidateData.maritalStatus,
+      fatherName: candidateData.fatherName,
+      accountNumber: candidateData.accountNumber,
+      branch: candidateData.branch,
+      routingNumber: candidateData.ifsc,
+      highestQualification: candidateData.highestQualification,
+    });
+
+    sessionStorage.setItem("bankAccount", bankAccount);
+
+    toast.success("Details Saved Successfully", {
+      position: "top-center",
+    });
+
+    console.log("Form data saved as draft.");
+  };
+
   //save as draft for hrone details
   const handleSaveDraft3 = () => {
     const hrOneDetails = JSON.stringify({
@@ -118,6 +143,8 @@ function Form2s({
       bloodGroup: candidateData.bloodGroup,
       nationality: candidateData.nationality,
     });
+
+    console.log(allBanks)
 
     sessionStorage.setItem("hrOneDetails", hrOneDetails);
 
@@ -210,10 +237,10 @@ function Form2s({
   useEffect(() => {
     // Function to retrieve draft data from sessionStorage
     const retrieveDraftData = () => {
-      const pfData = sessionStorage.getItem("pfAccount");
-      if (pfData) {
-        const pfAccountDetails = JSON.parse(pfData);
-        setCandidate((prevData) => ({ ...prevData, ...pfAccountDetails }));
+      const bankData = sessionStorage.getItem("bankAccount");
+      if (bankData) {
+        const AccountDetails = JSON.parse(bankData);
+        setCandidate((prevData) => ({ ...prevData, ...AccountDetails }));
       }
     };
     // Call the function when your component mounts
@@ -239,263 +266,439 @@ function Form2s({
     <div className=" margin-mobile" style={{ width: "100%" }}>
       <ToastContainer />
       <Container
-        style={{
-          background: "white",
+            style={{
+              background: "white",
 
-          marginBottom: "10px",
-          marginTop: "20px",
+              marginBottom: "10px",
+              marginTop: "20px",
 
-          width: "100%",
-          boxSizing: "border-box",
-          boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
-          borderRadius: "5px 5px 0px 0px",
-        }}
-      >
-        <div className="FamilyDet">
-          <h3 className="heading"> Family Details For Medical Insurance</h3>
-        </div>
-      </Container>
-      <Container
-        className="mt"
-        style={{
-          background: "white",
-          borderRadius: "0px 0px 5px 5px",
-          boxShadow: "0 0px 0px 2px rgba(0,0,0,0.1)",
-          boxSizing: "border-box",
-        }}
-      >
-        {/* Family details form */}
-        <div>
-          <Form
-            className="forms"
-            onSubmit={formik.handleSubmit}
-            onReset={formik.handleReset}
+              width: "100%",
+              boxSizing: "border-box",
+              boxShadow: "0 0px 2px 2px rgba(0,0,0,0.1)",
+              borderRadius: "5px 5px 0px 0px",
+            }}
           >
-            {/* Mapping over familyMembers array */}
-            {familyMembers.map((member, index) => (
-              <>
-                <Row key={index} className="mb-3">
-                  {/* Render input fields for each family member */}
-                  <Col xs={12} md={4} className="mt-">
-                    <Form.Group controlId="formGroupEmail">
-                      <Form.Label className="labelss mt-4">
-                        Family member name {index + 1}
+            <div className="FamilyDet">
+              <h3 className="heading">Bank Account Details</h3>
+            </div>
+          </Container>
+
+          {/* Details of PF */}
+          <Container
+            className="mt"
+            style={{
+              background: "white",
+              borderRadius: "0px 0px 5px 5px",
+              boxShadow: "0 1px 2px 2px rgba(0,0,0,0.1)",
+              boxSizing: "border-box",
+            }}
+          >
+            {/* PF details form */}
+            <div>
+              <Form className="forms">
+                <Row className="mb-3">
+                  <Row>
+                  <Col xs={12} md={4}>
+                    <Form.Group controlId="adharCard" className="ms mt-3">
+                      <Form.Label className="labelss  ">
+                      Government-issued ID Proof
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
                       </Form.Label>
                       <Form.Control
                         className="input-field"
                         type="text"
-                        placeholder="Name"
-                        name="memberName"
-                        onChange={(e) =>
-                          handleFamilyDetailsChange(
-                            index,
-                            e.target.name,
-                            e.target.value
-                          )
-                        }
+                        placeholder="XXXX XXXX XXXX XXXX"
+                        name="adharCard"
+                        onChange={handleChange}
                         onBlur={formik.handleBlur}
                         value={
-                          familyMembers[index]?.memberName
-                            ? familyMembers[index]?.memberName
-                            : familyMembers?.memberName
+                          candidateData.adharCard
+                            ? candidateData.adharCard
+                            : formik.values.adharCard
                         }
                       />
+                      {formik.touched.adharCard && formik.errors.adharCard ? (
+                        <div className="text-danger">
+                          {formik.errors.adharCard}
+                        </div>
+                      ) : null}
                     </Form.Group>
                   </Col>
-                  <Col xs={12} md={4}>
-                    <Form.Group controlId="relationship">
-                      <Form.Label className="labelss mt-4">
-                        Relationship
-                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
-                      </Form.Label>
-                      <Form.Select
-                        className="input-field"
-                        name="relationship"
-                        onChange={(e) =>
-                          handleFamilyDetailsChange(
-                            index,
-                            e.target.name,
-                            e.target.value
-                          )
-                        }
-                        onBlur={formik.handleBlur}
-                        value={
-                          familyMembers[index]?.relationship
-                            ? familyMembers[index]?.relationship
-                            : familyMembers?.relationship
-                        }
-                      >
-                        <option value="" label="Select Relationship" />
-                        <option value="Father" label="Father" />
-                        <option value="Mother" label="Mother" />
-                        <option value="Spouse" label="Spouse" />
-                        <option value="Child1" label="Child 1" />
-                        <option value="Child2" label="Child 2" />
-                      </Form.Select>
-                    </Form.Group>
-                  </Col>
-                  <Col xs={12} md={4}>
-                    <Form.Group controlId="dateOfBirth">
-                      <Form.Label className="labelss mt-4">
-                        Date of Birth
-                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
-                      </Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <CiCalendar />
-                        </InputGroup.Text>
+                    <Col xs={12} md={4}>
+                      <Form.Group className="mt-3" controlId="panCardNo">
+                        <Form.Label className="labelss">
+                        Taxpayer Identification Number (TIN)
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
                         <Form.Control
-                          type="date"
                           className="input-field"
-                          placeholder="Date"
-                          name="dateOfBirth"
-                          onChange={(e) =>
-                            handleFamilyDetailsChange(
-                              index,
-                              e.target.name,
-                              e.target.value
-                            )
-                          }
+                          type="text"
+                          placeholder="Taxpayer Identification Number"
+                          name="panCard"
+                          onChange={handleChange}
                           onBlur={formik.handleBlur}
                           value={
-                            familyMembers[index]?.dateOfBirth
-                              ? familyMembers[index]?.dateOfBirth
-                              : familyMembers?.dateOfBirth
+                            candidateData.panCard
+                              ? candidateData.panCard
+                              : formik.values.panCard
                           }
                         />
-                      </InputGroup>
-                    </Form.Group>
-                  </Col>
-                  <Row>
-                    <Col className="d-flex justify-content-between mt-3">
-                      <Button
-                        onClick={addFamilyMember}
-                        style={{
-                          marginTop: "10px",
-                          marginBottom: "10px",
-                          height: "35px",
-                          fontSize: "15px",
-                          backgroundColor: "white",
-                          color: "rgb(147, 48, 233)",
-                          borderColor: "rgb(147, 48, 233)",
-                          fontWeight: "500",
-                        }}
+                        {formik.touched.panCard && formik.errors.panCard ? (
+                          <div className="text-danger">
+                            {formik.errors.panCard}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="employeeName"
                       >
-                        + Add
-                      </Button>
-                      {index !== 0 && (
-                        <CiTrash
-                          onClick={() => handleRemoveMember(index)}
-                          style={{
-                            marginTop: "10px",
-                            marginBottom: "10px",
-                            marginRight: "-20px",
-                            height: "35px",
-                            fontSize: "22px",
-                            color: "rgb(147, 48, 233)",
-                            cursor: "pointer",
-                          }}
+                        <Form.Label className="labelss">
+                          Employee's name (As per ID Proof)
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field "
+                          type="text"
+                          placeholder="Employee's Name"
+                          name="employeesName"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.employeesName
+                              ? candidateData.employeesName
+                              : formik.values.employeesName
+                          }
                         />
-                      )}
+                        {formik.touched.employeesName &&
+                        formik.errors.employeesName ? (
+                          <div className="text-danger">
+                            {formik.errors.employeesName}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    
+                  </Row>
+                  <Row>
+                  <Col xs={12} md={4}>
+                      <Form.Group className="mt-3 " controlId="dateOfBirthAs">
+                        <Form.Label className="labelss ms-1">
+                          Date of birth (As per the ID Proof)
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <InputGroup className="ms-1">
+                          <InputGroup.Text>
+                            <CiCalendar />
+                          </InputGroup.Text>
+                          <Form.Control
+                            className="input-field"
+                            type="date"
+                            placeholder="Date"
+                            name="dateOfBirthAs"
+                            onChange={handleChange}
+                            onBlur={formik.handleBlur}
+                            value={
+                              candidateData.dateOfBirthAs
+                                ? candidateData.dateOfBirthAs
+                                : formik.values.dateOfBirthAs
+                            }
+                          />
+                        </InputGroup>
+                        {formik.touched.dateOfBirthAs &&
+                        formik.errors.dateOfBirthAs ? (
+                          <div className="text-danger">
+                            {formik.errors.dateOfBirthAs}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group className="mt-3" controlId="formGroupGender">
+                        <Form.Label className="labelss">
+                          Gender
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Select
+                          className="input-field"
+                          name="gender"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.gender
+                              ? candidateData.gender
+                              : formik.values.gender
+                          }
+                          title="Select your gender"
+
+                        >
+                          <option value="" label="Select Gender" />
+                          <option value="Male" label="Male" />
+                          <option value="Female" label="Female" />
+                          <option value="Other" label="Other" />
+                        </Form.Select>
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3 ms-2"
+                        controlId="formGroupMaritalStatus"
+                      >
+                        <Form.Label className="labelss">
+                          Marital status
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Select
+                          className="input-field"
+                          name="maritalStatus"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.maritalStatus
+                              ? candidateData.maritalStatus
+                              : formik.values.maritalStatus
+                          }
+                          title="Select marital status"
+
+                        >
+                          <option value="" label="Select Marital Status" />
+                          <option value="unmarried">Unmarried</option>
+                          <option value="married">Married</option>
+                          <option value="divorced">Divorced</option>
+
+                          <option value="separated">Separated</option>
+                        </Form.Select>
+                        {formik.touched.maritalStatus &&
+                        formik.errors.maritalStatus ? (
+                          <div className="text-danger">
+                            {formik.errors.maritalStatus}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    
+                  </Row>
+                  <Row>
+                  <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                       
+                      >
+                        <Form.Label className="labelss">
+                          Father's name
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field"
+                          type="text"
+                          placeholder="Father's Name"
+                          name="fatherName"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.fatherName
+                              ? candidateData.fatherName
+                              : formik.values.fatherName
+                          }
+                        />
+                        {formik.touched.fatherName &&
+                        formik.errors.fatherName ? (
+                          <div className="text-danger">
+                            {formik.errors.fatherName}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group className="mt-3">
+                        <Form.Label className="labelss">
+                          Bank Name
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Select
+                          className="input-field"
+                          name="bankName"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.bankName
+                              ? candidateData.bankName
+                              : formik.values.bankName
+                          }
+                          title="Select your bank"
+                        >
+                          <option value="" label="Select Bank" />
+                          {allBanks
+                            .filter((bank) =>
+                              bank
+                                .toLowerCase()
+                                .includes(formik.values.bankName.toLowerCase())
+                            )
+                            .map((filteredBank) => (
+                              <option
+                                key={filteredBank}
+                                value={filteredBank}
+                                label={filteredBank}
+                                
+                              />
+                            ))}
+                        </Form.Select>
+
+                        {formik.touched.bankName && formik.errors.bankName && (
+                          <div className="text-danger">
+                            {formik.errors.bankName}
+                          </div>
+                        )}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                  
+                      >
+                        <Form.Label className="labelss">
+                          Bank Branch Name
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field"
+                          type="text"
+                          placeholder="Branch"
+                          name="branch"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.branch
+                              ? candidateData.branch
+                              : formik.values.branch
+                          }
+                        />
+                        {formik.touched.branch && formik.errors.branch ? (
+                          <div className="text-danger">
+                            {formik.errors.branch}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    
+                  </Row>
+                  <Row>
+                  <Col xs={12} md={4}>
+                      <Form.Group className="mt-3" >
+                        <Form.Label className="labelss">
+                          Bank A/C No
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field"
+                          type="text"
+                          placeholder="Account Number"
+                          name="accountNumber"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.accountNumber
+                              ? candidateData.accountNumber
+                              : formik.values.accountNumber
+                          }
+                        />
+                        {formik.touched.accountNumber &&
+                        formik.errors.accountNumber ? (
+                          <div className="text-danger">
+                            {formik.errors.accountNumber}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3 ms-1"
+                        controlId="formGroupEmail"
+                      >
+                        <Form.Label className="labelss">
+                        Routing Number
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field"
+                          type="text"
+                          placeholder="Routing Number"
+                          name="ifsc"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.ifsc
+                              ? candidateData.ifsc
+                              : formik.values.ifsc
+                          }
+                        />
+                        {formik.touched.ifsc && formik.errors.ifsc ? (
+                          <div className="text-danger">
+                            {formik.errors.ifsc}
+                          </div>
+                        ) : null}
+                      </Form.Group>
+                    </Col>
+                    <Col xs={12} md={4}>
+                      <Form.Group
+                        className="mt-3"
+                        controlId=" highestQualification"
+                      >
+                        <Form.Label className="labelss">
+                          Highest qualification
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </Form.Label>
+                        <Form.Control
+                          className="input-field "
+                          type="text"
+                          placeholder="Highest qualification"
+                          name="highestQualification"
+                          onChange={handleChange}
+                          onBlur={formik.handleBlur}
+                          value={
+                            candidateData.highestQualification
+                              ? candidateData.highestQualification
+                              : formik.values.highestQualification
+                          }
+                        />
+                        {formik.touched.highestQualification &&
+                        formik.errors.highestQualification ? (
+                          <div className="text-danger">
+                            {formik.errors.highestQualification}
+                          </div>
+                        ) : null}
+                      </Form.Group>
                     </Col>
                   </Row>
                 </Row>
-              </>
-            ))}
-            <Row>
-              <Col xs={12} md={4}>
-                <Form.Group controlId="EmergencyPhoneNumber">
-                  <div className="phoneDiv mt-4">
-                    <div className="labelss">
-                      <p>
-                        Emergency contact number
-                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
-                      </p>
-                    </div>
-                    <div className="phoneInput ">
-                      <select
-                        className="country-code "
-                        onChange={(e) =>
-                          setEmergencyContact((prev) => ({
-                            ...prev,
-                            countryCode: e.target.value,
-                          }))
-                        }
-                      >
-                        <option selected value="+91">
-                          IN(+91)
-                        </option>
-                        <option value="+880">BD(+880)</option>
-                        <option value="+1">US(+1)</option>
-                        <option value="+20">EG(+20)</option>
-                      </select>
-                      <input
-                        className="input-field form-control phoneNumberSize "
-                        type="tel"
-                        placeholder="(555) 000-0000"
-                        name="emergencyContactNumber"
-                        onChange={(e) =>
-                          setEmergencyContact((prev) => ({
-                            ...prev,
-                            emergencyContactNumber: e.target.value,
-                          }))
-                        }
-                        onBlur={formik.handleBlur}
-                        value={contact?.emergencyContactNumber}
-                      />
-                    </div>
-                  </div>
-                </Form.Group>
-              </Col>
-              <Col xs={12} md={4}>
-                <Form.Group controlId="emailAddress">
-                  <Form.Label className="labelss mt-4">
-                    Relation to emergency contact
-                    <IoMdStar style={{ color: "red", fontSize: "7px" }} />
-                  </Form.Label>
-                  <Form.Control
-                    className="input-field"
-                    type="text"
-                    placeholder="Relation"
-                    name="relation"
-                    onChange={(e) =>
-                      setEmergencyContact((prev) => ({
-                        ...prev,
-                        relationToEmergencyContact: e.target.value,
-                      }))
-                    }
-                    onBlur={formik.handleBlur}
-                    value={contact?.relationToEmergencyContact}
-                  />
-                </Form.Group>
-              </Col>
-              <div
-                style={{
-                  display: "flex",
-                  marginTop: "50px",
-                  marginBottom: "25px",
-                  gap: "10px",
-                }}
-              >
-                <Button
-                  onClick={handleSaveDraftAll}
+
+                <div
                   style={{
-                    height: "35px",
-                    fontSize: "15px",
-                    backgroundColor: "white",
-                    color: "rgb(147, 48, 233)",
-                    borderColor: "rgb(147, 48, 233)",
-                    fontWeight: "500",
+                    display: "flex",
+                    marginTop: "50px",
+                    marginBottom: "25px",
+                    gap: "10px",
                   }}
                 >
-                  Save as draft
-                </Button>
-              </div>
-            </Row>
-          </Form>
-        </div>
-      </Container>
+                  <Button
+                    onClick={handleSaveDraft2}
+                    style={{
+                      height: "35px",
+                      fontSize: "15px",
+                      backgroundColor: "white",
+                      color: "rgb(147, 48, 233)",
+                      borderColor: "rgb(147, 48, 233)",
+                      fontWeight: "500",
+                    }}
+                  >
+                    Save as draft
+                  </Button>
+                </div>
+              </Form>
+            </div>
+          </Container>
 
       <Container
         style={{

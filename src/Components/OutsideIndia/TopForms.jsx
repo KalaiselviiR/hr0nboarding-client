@@ -35,6 +35,7 @@ import {
 } from "../../service/allapi";
 import { ImMenu2 } from "react-icons/im";
 import { toast, ToastContainer } from "react-toastify";
+import { openDB, deleteDB } from "idb";
 import "react-toastify/dist/ReactToastify.css";
 
 const TopForms = () => {
@@ -100,6 +101,7 @@ const TopForms = () => {
     lastName: "",
     email: "",
     phoneNumber: "",
+    countryCode:"",
     designation: "",
     dateOfJoining: null,
     presentAddress: "",
@@ -107,6 +109,8 @@ const TopForms = () => {
     aboutYourself: "",
     experience: "",
     company: "",
+    emergencyContactNumber:"",
+    relation:"",
     enjoyment: "",
     sneakpeek: "",
     photoFiles: null,
@@ -159,13 +163,31 @@ const TopForms = () => {
 
   console.log(formData)
 
-  const handleSaveDraft = () => {
+  const handleSaveDraft = async () => {
+    const db = await openDB("FilesDB", 1);
+
+    const newTaskObject = {
+      photoFiles: formData?.photoFiles,
+      aadharCardFiles: formData?.aadharCardFiles,
+      tenthMarksheetFiles: formData?.tenthMarksheetFiles,
+      twelfthMarksheetFiles: formData?.twelfthMarksheetFiles,
+      pgDegreeCertificateFiles: formData?.pgDegreeCertificateFiles,
+      pgMarksheetFiles: formData?.pgMarksheetFiles,
+      ugDegreeCertificateFiles: formData?.ugDegreeCertificateFiles,
+      ugMarksheetFiles: formData?.ugMarksheetFiles,
+      relievingLettersFiles: formData?.relievingLettersFiles,
+      payslipFiles: formData?.payslipFiles,
+    };
+
+    const addedTask = await db.add("files", newTaskObject);
+
     // Convert the form data to a string before storing it in sessionStorage
     const formDataString = JSON.stringify({
       firstName: formData.firstName,
       lastName: formData.lastName,
       email: formData.email,
       phoneNumber: formData.phoneNumber,
+      countryCode: formData.countryCode,
       designation: formData.designation,
       dateOfJoining: formData.dateOfJoining,
       presentAddress: formData.presentAddress,
@@ -173,6 +195,8 @@ const TopForms = () => {
       aboutYourself: formData.aboutYourself,
       experience: formData.experience,
       company: formData.company,
+      emergencyContactNumber: formData.emergencyContactNumber,
+      relation:formData.relation,
       enjoyment: formData.enjoyment,
       sneakpeek: formData.sneakpeek,
       id: formData.firstName,
@@ -290,6 +314,26 @@ const TopForms = () => {
           sessionStorage.clear();
           const response = await updateStatusRview(id);
           console.log(response);
+        const dbName = "FilesDB";
+          try {
+            await deleteDB(dbName);
+            setFormData((prev) => ({
+              ...prev,
+              photoFiles: null,
+              aadharCardFiles: null,
+              tenthMarksheetFiles: null,
+              twelfthMarksheetFiles: null,
+              pgDegreeCertificateFiles: null,
+              pgMarksheetFiles: null,
+              ugDegreeCertificateFiles: null,
+              ugMarksheetFiles: null,
+              relievingLettersFiles: null,
+              payslipFiles: null,
+            }));
+          } catch (error) {
+            console.error(`Error deleting database '${dbName}':`, error);
+          }
+
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
@@ -298,9 +342,9 @@ const TopForms = () => {
         console.error("Error while submitting form data:", error);
       }
 
-      // Perform any additional actions or API calls if needed
     }
   };
+
 
   const FileChange = (file, type) => {
     switch (type) {
@@ -366,7 +410,84 @@ const TopForms = () => {
     getoneCandidate();
   }, []);
 
+  
+
   useEffect(() => {
+    const createDB = async () => {
+      const db = await openDB("FilesDB", 1, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains("files")) {
+            const store = db.createObjectStore("files", {
+              keyPath: "id",
+              autoIncrement: true,
+            });
+          }
+        },
+      });
+      const storedFiles = await db.getAll("files");
+      if (storedFiles) {
+        formik.setFieldValue(
+          "photoFiles",
+          storedFiles[storedFiles.length - 1]?.photoFiles
+        );
+        formik.setFieldValue(
+          "aadharCardFiles",
+          storedFiles[storedFiles.length - 1]?.aadharCardFiles
+        );
+        formik.setFieldValue(
+          "tenthMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles
+        );
+        formik.setFieldValue(
+          "twelfthMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles
+        );
+        formik.setFieldValue(
+          "pgDegreeCertificateFiles",
+          storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles
+        );
+        formik.setFieldValue(
+          "pgMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.pgMarksheetFiles
+        );
+        formik.setFieldValue(
+          "ugDegreeCertificateFiles",
+          storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles
+        );
+        formik.setFieldValue(
+          "ugMarksheetFiles",
+          storedFiles[storedFiles.length - 1]?.ugMarksheetFiles
+        );
+        formik.setFieldValue(
+          "relievingLettersFiles",
+          storedFiles[storedFiles.length - 1]?.relievingLettersFiles
+        );
+        formik.setFieldValue(
+          "payslipFiles",
+          storedFiles[storedFiles.length - 1]?.payslipFiles
+        );
+        setFormData((prev) => ({
+          ...prev,
+          photoFiles: storedFiles[storedFiles.length - 1]?.photoFiles,
+          aadharCardFiles: storedFiles[storedFiles.length - 1]?.aadharCardFiles,
+          tenthMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles,
+          twelfthMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.twelfthMarksheetFiles,
+          pgDegreeCertificateFiles:
+            storedFiles[storedFiles.length - 1]?.pgDegreeCertificateFiles,
+          pgMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.pgMarksheetFiles,
+          ugDegreeCertificateFiles:
+            storedFiles[storedFiles.length - 1]?.ugDegreeCertificateFiles,
+          ugMarksheetFiles:
+            storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
+          relievingLettersFiles:
+            storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
+          payslipFiles: storedFiles[storedFiles.length - 1]?.payslipFiles,
+        }));
+      }
+    };
     // Function to retrieve draft data from sessionStorage
     const retrieveDraftData = () => {
       const storedData = sessionStorage.getItem("draftFormData");
@@ -378,6 +499,7 @@ const TopForms = () => {
     };
 
     // Call the function when your component mounts
+    createDB();
     retrieveDraftData();
   }, []);
 
@@ -568,7 +690,9 @@ const TopForms = () => {
                         <div className="phoneInput ">
                           <select
                             className="country-code  "
-                            onChange={(e) => setCountryCode(e.target.value)}
+                            onChange={handleChange}
+                            name="countryCode"
+                            value={formData.countryCode}
                           >
                             <option selected value="+91">
                               IN(+91)
@@ -729,6 +853,79 @@ const TopForms = () => {
                       ) : null}
                     </Form.Group>
                   </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="emergencyContactNumber">
+                      <div className="phoneDiv ">
+                        <div>
+                          <p className="labelss">
+                          Emergency contact number
+                            <IoMdStar
+                              style={{ color: "red", fontSize: "7px" }}
+                            />
+                          </p>
+                        </div>
+                        <div className="phoneInput ">
+                          <select
+                            className="country-code"
+                            onChange={handleChange}
+                            name="countryCode"
+                            value={formData.countryCode}
+                          >
+                            <option selected value="+91">
+                              IN(+91)
+                            </option>
+                            <option value="+880">BD(+880)</option>
+                            <option value="+1">US(+1)</option>
+                            <option value="+20">EG(+20)</option>
+                          </select>
+                          <input
+                            type="text"
+                            className=" form-control"
+                            placeholder="(555) 000-0000"
+                            name="emergencyContactNumber"
+                            onChange={handleChange}
+                            onBlur={formik.handleBlur}
+                            value={
+                              formData.emergencyContactNumber
+                                ? formData.emergencyContactNumber
+                                : formik.values.emergencyContactNumber
+                            }
+                          />
+                        </div>
+                        {formik.touched.emergencyContactNumber &&
+                        formik.errors.emergencyContactNumber ? (
+                          <div className="text-danger">
+                            {formik.errors.emergencyContactNumber}
+                          </div>
+                        ) : null}
+                      </div>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="relation">
+                      <Form.Label className="labelss">
+                      Relation to emergency contact
+                        <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        placeholder="Relation to emergency contact"
+                        name="relation"
+                        onChange={handleChange}
+                        onBlur={formik.handleBlur}
+                        value={
+                          formData.relation
+                            ? formData.relation
+                            : formik.values.relation
+                        }
+                      />
+                      {formik.touched.relation && formik.errors.relation ? (
+                        <div className="text-danger">
+                          {formik.errors.relation}
+                        </div>
+                      ) : null}
+                    </Form.Group>
+                  </Col>
                 </Row>
                 <Row>
                   <Col md={12}>
@@ -862,6 +1059,7 @@ const TopForms = () => {
                       </div>
                     ) : null}
                   </Col>
+                  
                 </Row>
                 <Row className="mt-4">
                   <Col md={4}>

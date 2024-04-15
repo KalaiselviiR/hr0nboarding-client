@@ -115,8 +115,10 @@ function FileUpload({
           >
             Upload
           </Button>
+          <label for="document"></label>
           <input
             type="file"
+            title="select your file"
             accept={
               label &&
               label.props &&

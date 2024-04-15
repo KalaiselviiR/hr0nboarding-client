@@ -63,7 +63,6 @@ const RecruiterForm = () => {
 
   // param id
   const { id } = useParams();
- 
 
   //get details of the perticuler candidate
   const getoneCandidatesFrom = async () => {
@@ -270,6 +269,7 @@ const RecruiterForm = () => {
                       <select
                         className="country-code "
                         onChange={(e) => setCountryCode(e.target.value)}
+                        value={cData.countryCode}
                       >
                         <option selected value="+91">
                           IN(+91)
@@ -335,6 +335,54 @@ const RecruiterForm = () => {
                   />
                 </Form.Group>
               </Col>
+              {isOutsideIndia && (
+                <>
+                  <Col md={6} xs={12}>
+                    <Form.Group
+                      className="mb-3"
+                      controlId="emergencyContactNumber"
+                    >
+                      <div className="phoneDiv mt-4">
+                        <div className="labelss">
+                          <p>Emergency Contact Number</p>
+                        </div>
+                        <div className="phoneInput ">
+                          <select
+                            className="country-code "
+                            onChange={(e) => setCountryCode(e.target.value)}
+                            value={cData.countryCode}
+                          >
+                            <option selected value="+91">
+                              IN(+91)
+                            </option>
+                            <option value="+880">BD(+880)</option>
+                            <option value="+1">US(+1)</option>
+                            <option value="+20">EG(+20)</option>
+                          </select>
+                          <input
+                            className="input-field form-control "
+                            type="tel"
+                            value={cData.emergencyContactNumber}
+                            name="emergencyContactNumber"
+                          />
+                        </div>
+                      </div>
+                    </Form.Group>
+                  </Col>
+                  <Col md={6} xs={12}>
+                    <Form.Group className="mb-3" controlId="relation">
+                      <Form.Label className="labelss">
+                        Relation To Emergency Contact
+                      </Form.Label>
+                      <Form.Control
+                        type="text"
+                        value={cData.relation}
+                        name="relation"
+                      />
+                    </Form.Group>
+                  </Col>
+                </>
+              )}
             </Row>
             <Row>
               <Col md={12}>

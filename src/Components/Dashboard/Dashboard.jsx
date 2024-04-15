@@ -338,7 +338,7 @@ function Dashboard() {
                 const projectValue = item[filterType].toLowerCase();
                 return projectValue.includes(searchTerm);
               }).map((i, index) => (
-                <tr>
+                <tr key={index}>
                   <td>
                     <div className='d-flex align-items-center'>
 

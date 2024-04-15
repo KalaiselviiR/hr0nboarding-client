@@ -15,6 +15,8 @@ export const initialValues = {
   aboutYourself: "",
   experience: "",
   company: "",
+  emergencyContactNumber:"",
+  relation:"",
   enjoyment: "",
   sneakpeek: "",
   photoFiles: null,
@@ -33,6 +35,19 @@ export const initialValues = {
     emergencyContactNumber: "",
     relationToEmergencyContact: "",
   },
+
+  adharCard: "",
+  panCard: "",
+  employeesName: "",
+  dateOfBirthAs: "",
+  gender: "",
+  maritalStatus: "",
+  fatherName: "",
+  bankName: "",
+  accountNumber: "",
+  branch: "",
+  ifsc: "",
+  highestQualification: "",
 
   //bottom-3
   prefix: "",
@@ -62,7 +77,12 @@ export const validationSchema = Yup.object().shape({
   presentAddress: Yup.string().required("Present Address is required"),
   permanentAddress: Yup.string().required("Permanent Address is required"),
   aboutYourself: Yup.string().required("About yourself is required"),
-
+  relation: Yup.string()
+  .matches(/^[^\d]+$/, "Name should not contain numbers")
+  .required("Relation to emergency contact is required"),
+  emergencyContactNumber: Yup.string()
+    .matches(/^\+?[0-9]+$/, "Invalid phone number")
+    .required("Phone Number is required"),
   enjoyment: Yup.string().required("Enjoyment is required"),
   sneakpeek: Yup.string().required("Sneak peek is required"),
 
@@ -98,6 +118,42 @@ export const validationSchema = Yup.object().shape({
   //   (value) => value && value.size > 0
   // ),
 
+  adharCard: Yup.string()
+    .matches(/^\d{13}$/, "Invalid NID Number(It contains 13 digit)")
+    .required("NID Number is required"),
+  panCard: Yup.string()
+    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid TIN Number")
+    .required("TIN Number is required"),
+  employeesName: Yup.string()
+    .matches(/^[^\d]+$/, "employee Name should not contain numbers")
+    .required("employee Name is required"),
+
+  dateOfBirthAs: Yup.string().required("Date of Birth"),
+  gender: Yup.string()
+    .matches(/^[^\d]+$/, "Gender should not contain numbers")
+    .required("Gender is Required"),
+  maritalStatus: Yup.string()
+    .matches(/^[^\d]+$/, "Marital status should not contain numbers")
+    .required("Marital Status is Required"),
+  fatherName: Yup.string()
+    .matches(/^[^\d]+$/, "Father Name should not contain numbers")
+    .required("Father Name is required"),
+  bankName: Yup.string()
+    .matches(/^[^\d]+$/, "Bank Name should not contain numbers")
+    .required("Bank Name is required"),
+  accountNumber: Yup.string()
+    .matches(/^\+?[0-9]+$/, "Invalid Account Number")
+    .required("Account Number is required"),
+  branch: Yup.string()
+    .matches(/^[^\d]+$/, "Branch should not contain numbers")
+    .required("Branch Name is required"),
+  ifsc: Yup.string()
+    .matches(/^\+?[a-zA-Z0-9]+$/, "Invalid IFSC Code")
+    .required("IFSC code is required"),
+  highestQualification: Yup.string()
+    .matches(/^[^\d]+$/, "Highest Qualification should not contain numbers")
+    .required("Highest Qualification is required"),
+
   firstNamehr: Yup.string()
     .matches(/^[^\d]+$/, "First Name should not contain numbers")
     .required("First Name is required"),
@@ -121,6 +177,7 @@ export const handleFieldChange = (formik, e) => {
     case "firstName":
     case "lastName":
     case "memberName":
+    case "relation":  
     case "relationship":
     case "employeesName":
     case "fatherName":
@@ -190,6 +247,14 @@ export const handleFieldChange = (formik, e) => {
         formik.setFieldError(name, "");
       }
       break;
+   case "adharCard":
+        // epfoUan validation logic(it contains 12 digit number)
+        if (!/^\d{12}$/.test(value)) {
+          formik.setFieldError(
+            name,
+            "Invalid Number(Adhar contains 12 digit number)"
+          );
+        }  
 
     default:
       break;

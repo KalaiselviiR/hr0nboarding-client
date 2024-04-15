@@ -303,7 +303,7 @@ function Form2({
                 <Row key={index} className="mb-3">
                   {/* Render input fields for each family member */}
                   <Col xs={12} md={4} className="mt-">
-                    <Form.Group controlId="formGroupEmail">
+                    <Form.Group >
                       <Form.Label className="labelss mt-4">
                         Family member name {index + 1}
                         <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -359,6 +359,7 @@ function Form2({
                             ? familyMembers[index]?.relationship
                             : familyMembers?.relationship
                         }
+                        title="Select relationship"
                       >
                         <option value="" label="Select Relationship" />
                         <option value="Father" label="Father" />
@@ -456,6 +457,7 @@ function Form2({
                             countryCode: e.target.value,
                           }))
                         }
+                        title="Select your country code"
                       >
                         <option selected value="+91">
                           IN(+91)
@@ -752,6 +754,8 @@ function Form2({
                               ? candidateData.gender
                               : formik.values.gender
                           }
+                          title="Select your gender"
+
                         >
                           <option value="" label="Select Gender" />
                           <option value="Male" label="Male" />
@@ -779,6 +783,8 @@ function Form2({
                               ? candidateData.maritalStatus
                               : formik.values.maritalStatus
                           }
+                          title="Select marital status"
+
                         >
                           <option value="" label="Select Marital Status" />
                           <option value="unmarried">Unmarried</option>
@@ -798,7 +804,7 @@ function Form2({
                     <Col xs={12} md={4}>
                       <Form.Group
                         className="mt-3 ms-1"
-                        controlId="formGroupEmail"
+                       
                       >
                         <Form.Label className="labelss">
                           Father's name
@@ -828,7 +834,7 @@ function Form2({
                   </Row>
                   <Row>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3" controlId="formGroupEmail">
+                      <Form.Group className="mt-3">
                         <Form.Label className="labelss">
                           Bank Name
                           <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -843,6 +849,7 @@ function Form2({
                               ? candidateData.bankName
                               : formik.values.bankName
                           }
+                          title="Select your bank"
                         >
                           <option value="" label="Select Bank" />
                           {allBanks
@@ -856,6 +863,7 @@ function Form2({
                                 key={filteredBank}
                                 value={filteredBank}
                                 label={filteredBank}
+                                
                               />
                             ))}
                         </Form.Select>
@@ -870,7 +878,7 @@ function Form2({
                     <Col xs={12} md={4}>
                       <Form.Group
                         className="mt-3 ms-1"
-                        controlId="formGroupEmail"
+                  
                       >
                         <Form.Label className="labelss">
                           Bank branch
@@ -897,7 +905,7 @@ function Form2({
                       </Form.Group>
                     </Col>
                     <Col xs={12} md={4}>
-                      <Form.Group className="mt-3" controlId="formGroupEmail">
+                      <Form.Group className="mt-3" >
                         <Form.Label className="labelss">
                           Bank A/C No
                           <IoMdStar style={{ color: "red", fontSize: "7px" }} />
@@ -1062,6 +1070,7 @@ function Form2({
                         ? candidateData.prefix
                         : formik.values.prefix
                     }
+                    title="Select your prefix"
                   >
                     <option value="">Select Prefix</option>
                     <option value="Mr.">Mr.</option>
@@ -1166,6 +1175,7 @@ function Form2({
                         ? candidateData.bloodGroup
                         : formik.values.bloodGroup
                     }
+                    title="Select your blood group"
                   >
                     <option value="" label="Select Blood Group" />
                     <option value="A+" label="A+" />
