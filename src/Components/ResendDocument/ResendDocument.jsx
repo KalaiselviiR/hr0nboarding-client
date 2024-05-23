@@ -13,7 +13,8 @@ import {
   UGMARK_SHEET,
   PGMARK_SHEET,
   PGDEGREE_CERTIFICATE,
-  GOVERNMENT_ISSUED_ID
+  GOVERNMENT_ISSUED_ID,
+  DECLARATION_FORM
 } from "../../constants/constants";
 import { resendDocuments } from "../../service/allapi";
 
@@ -211,6 +212,17 @@ function ResendDocument({ closeModal, onApiError, onApiSuccess, id, isOutsideInd
                 onChange={handleCheckboxChange}
               />
               <label htmlFor="payslip">{PAYSLIP} </label>
+            </div>
+            <div>
+              <input
+                type="checkbox"
+                name=""
+                id="declaration"
+                value={DECLARATION_FORM}
+                checked={checkedItems.includes(DECLARATION_FORM)}
+                onChange={handleCheckboxChange}
+              />
+              <label htmlFor="declaration">{DECLARATION_FORM} </label>
             </div>
           </div>
 

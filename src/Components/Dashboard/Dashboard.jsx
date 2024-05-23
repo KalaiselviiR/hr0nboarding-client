@@ -220,7 +220,7 @@ function Dashboard() {
           <Navbar.Brand href="#home">
             <img
               alt="Techjays Logo"
-              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+              src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg"
               height="40"
               className="d-inline-block align-top"
             />

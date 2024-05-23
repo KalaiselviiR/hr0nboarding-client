@@ -38,6 +38,7 @@ const RecruiterForm = () => {
 
   const [cData, setCdata] = useState([]);
   const [isSectionOpen, setIsSectionOpen] = useState(false);
+  const [isSectionPayslip, setIsSectionPayslip] = useState(false);
   const [isShow, setInvokeModal] = useState(false);
   const [isOutsideIndia, setIsOutsideIndia] = useState();
   const [statusC, setStatusc] = useState();
@@ -59,6 +60,10 @@ const RecruiterForm = () => {
 
   const handleToggleSection = () => {
     setIsSectionOpen((prevIsOpen) => !prevIsOpen);
+  };
+
+  const handlePayslipSection = () => {
+    setIsSectionPayslip((prevIsOpen) => !prevIsOpen);
   };
 
   // param id
@@ -153,7 +158,7 @@ const RecruiterForm = () => {
           <Navbar.Brand href="#home">
             <img
               alt="Techjays Logo"
-              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+              src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg"
               height="40"
               className="d-inline-block align-top"
             />
@@ -472,6 +477,20 @@ const RecruiterForm = () => {
                         : "Adhar Card.pdf"
                     }
                   />
+                   <RecruiterFileView
+                    label={
+                      isOutsideIndia == true
+                        ? ""
+                        : "PAN Card"
+                    }
+                    file={cData.panCardFiles}
+                    size={204800}
+                    name={
+                      isOutsideIndia == true
+                        ? ""
+                        : "PAN Card.pdf"
+                    }
+                  />
                   <div>
                     <div
                       style={{
@@ -542,6 +561,54 @@ const RecruiterForm = () => {
                       </div>
                     )}
                   </div>
+                  <div>
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        cursor: "pointer",
+                      }}
+                      onClick={handlePayslipSection}
+                    >
+                      <h6 style={{ fontWeight: "500" }}>
+                        3 Months payslips
+                      </h6>
+                      {isSectionPayslip ? (
+                        <IoMdArrowDropupCircle size={20} />
+                      ) : (
+                        <IoMdArrowDropdownCircle size={20} />
+                      )}
+                    </div>
+                    {isSectionPayslip && (
+                      <div>
+                        <RecruiterFileView
+                          label={"Payslip - Month 1"}
+                          size={204800}
+                          file={
+                            cData?.payslipFiles?.payslipOne
+                          }
+                          name={"Payslip one.pdf"}
+                        />
+                          <RecruiterFileView
+                          label={"Payslip - Month 2"}
+                          size={204800}
+                          file={
+                            cData?.payslipFiles?.payslipTwo
+                          }
+                          name={"Payslip Two.pdf"}
+                        />
+                          <RecruiterFileView
+                          label={"Payslip - Month 3"}
+                          size={204800}
+                          file={
+                            cData?.payslipFiles?.payslipThree
+                          }
+                          name={"Payslip Three.pdf"}
+                        />
+                      </div>
+                    )}
+                  </div>
                   <RecruiterFileView
                     label={"Relieving Letters"}
                     size={204800}
@@ -549,10 +616,10 @@ const RecruiterForm = () => {
                     name={"Relieving Letters.pdf"}
                   />
                   <RecruiterFileView
-                    label={"Payslips"}
+                    label={"Declaration"}
                     size={204800}
-                    file={cData.payslipFiles}
-                    name={"Payslips.pdf"}
+                    file={cData.declarationFiles}
+                    name={"Declaration.pdf"}
                   />
                 </div>
                 <div className="mt-3" style={{ display: "flex", gap: "10px" }}>

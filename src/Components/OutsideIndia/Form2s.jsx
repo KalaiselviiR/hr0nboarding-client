@@ -674,7 +674,7 @@ function Form2s({
                   </Row>
                 </Row>
 
-                <div
+                {/* <div
                   style={{
                     display: "flex",
                     marginTop: "50px",
@@ -695,7 +695,7 @@ function Form2s({
                   >
                     Save as draft
                   </Button>
-                </div>
+                </div> */}
               </Form>
             </div>
           </Container>
@@ -891,7 +891,7 @@ function Form2s({
                 </Form.Group>
               </Col>
             </Row>
-            <div
+            {/* <div
               style={{
                 display: "flex",
                 marginTop: "50px",
@@ -912,7 +912,7 @@ function Form2s({
               >
                 Save as draft
               </Button>
-            </div>
+            </div> */}
           </Form>
         </div>
       </Container>

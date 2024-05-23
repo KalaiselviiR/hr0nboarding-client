@@ -48,9 +48,11 @@ const TopForms = () => {
   const [pgMarksheetFiles, setPgMarksheetFiles] = useState([]);
   const [ugDegreeCertificateFiles, setUgDegreeCertificateFiles] = useState([]);
   const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
-
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
-  const [payslipFiles, setPayslipFiles] = useState([]);
+  const [payslipFileOne, setPayslipFileOne] = useState([]);
+  const [payslipFileTwo, setPayslipFileTwo] = useState([]);
+  const [payslipFileThree, setPayslipFileThree] = useState([]);
+  const [declarationFiles, setDeclarationFiles] = useState([]);
 
   const [scrollToError, setScrollToError] = useState(null);
 
@@ -122,7 +124,10 @@ const TopForms = () => {
     ugDegreeCertificateFiles: null,
     ugMarksheetFiles: null,
     relievingLettersFiles: null,
-    payslipFiles: null,
+    payslipFileOne: null,
+    payslipFileTwo: null,
+    payslipFileThree: null,
+    declarationFiles: null,
     id: id,
     members: [],
     contact: {},
@@ -176,7 +181,10 @@ const TopForms = () => {
       ugDegreeCertificateFiles: formData?.ugDegreeCertificateFiles,
       ugMarksheetFiles: formData?.ugMarksheetFiles,
       relievingLettersFiles: formData?.relievingLettersFiles,
-      payslipFiles: formData?.payslipFiles,
+      payslipFileOne: formData?.payslipFileOne,
+      payslipFileTwo: formData?.payslipFileTwo,
+      payslipFileThree: formData?.payslipFileThree,
+      declarationFiles: formData?.declarationFiles,
     };
 
     const addedTask = await db.add("files", newTaskObject);
@@ -328,7 +336,10 @@ const TopForms = () => {
               ugDegreeCertificateFiles: null,
               ugMarksheetFiles: null,
               relievingLettersFiles: null,
-              payslipFiles: null,
+              payslipFileOne: null,
+              payslipFileTwo: null,
+              payslipFileThree: null,
+              declarationFiles: null
             }));
           } catch (error) {
             console.error(`Error deleting database '${dbName}':`, error);
@@ -384,10 +395,22 @@ const TopForms = () => {
         setRelievingLettersFiles(file);
         formik.setFieldValue("relievingLettersFiles", file);
         break;
-      case "payslip":
-        setPayslipFiles(file);
-        formik.setFieldValue("payslipFiles", file);
+      case "payslipOne":
+        setPayslipFileOne(file);
+        formik.setFieldValue("payslipFileOne", file);
         break;
+      case "payslipTwo":
+        setPayslipFileTwo(file);
+        formik.setFieldValue("payslipFileTwo", file);
+        break;
+      case "payslipThree":
+        setPayslipFileThree(file);
+        formik.setFieldValue("payslipFileThree", file);
+        break;  
+      case "declarationFiles":
+        setDeclarationFiles(file);
+        formik.setFieldValue("declarationFiles", file);
+        break;  
       default:
         break;
     }
@@ -463,8 +486,20 @@ const TopForms = () => {
           storedFiles[storedFiles.length - 1]?.relievingLettersFiles
         );
         formik.setFieldValue(
-          "payslipFiles",
-          storedFiles[storedFiles.length - 1]?.payslipFiles
+          "payslipFileOne",
+          storedFiles[storedFiles.length - 1]?.payslipFileOne
+        );
+        formik.setFieldValue(
+          "payslipFileTwo",
+          storedFiles[storedFiles.length - 1]?.payslipFileTwo
+        );
+        formik.setFieldValue(
+          "payslipFileThree",
+          storedFiles[storedFiles.length - 1]?.payslipFileThree
+        );
+        formik.setFieldValue(
+          "declarationFiles",
+          storedFiles[storedFiles.length - 1]?.declarationFiles
         );
         setFormData((prev) => ({
           ...prev,
@@ -484,7 +519,10 @@ const TopForms = () => {
             storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
           relievingLettersFiles:
             storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
-          payslipFiles: storedFiles[storedFiles.length - 1]?.payslipFiles,
+            payslipFileOne: storedFiles[storedFiles.length - 1]?.payslipFileOne,
+            payslipFileTwo: storedFiles[storedFiles.length - 1]?.payslipFileTwo,
+            payslipFileThree: storedFiles[storedFiles.length - 1]?.payslipFileThree,
+            declarationFiles:storedFiles[storedFiles.length - 1]?.declarationFiles,
         }));
       }
     };
@@ -493,8 +531,14 @@ const TopForms = () => {
       const storedData = sessionStorage.getItem("draftFormData");
       if (storedData) {
         const formDataFromStorage = JSON.parse(storedData);
-        // Set the formData in your state
-        setFormData(formDataFromStorage);
+        formik.setValues({
+          ...formik.values,
+          ...formDataFromStorage
+        });
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          ...formDataFromStorage
+        }));
       }
     };
 
@@ -545,7 +589,7 @@ const TopForms = () => {
               <Navbar.Brand href="#home">
                 <img
                   alt="Techjays Logo"
-                  src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+                  src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg"
                   height="40"
                   className="d-inline-block align-top"
                 />
@@ -1265,24 +1309,114 @@ const TopForms = () => {
                         FileChange(file, "relievingLetters")
                       }
                     />
-                    <FileUploads
-                     label={
-                      <span style={{ display: "inline" }}>
-                      3 Months Payslip
-                      </span>
-                    }
-                      instruction="Accepted format:pdf"
-                      controlId="payslip"
-                      acceptedFiles={formData.payslipFiles}
-                      setAcceptedFiles={(files) =>
-                        setFormData((prevData) => ({
-                          ...prevData,
-                          payslipFiles: files,
-                        }))
-                      }
-                      onFileChange={(file) => FileChange(file, "payslip")}
-                    />
-                    <div
+                  <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>
+                        3 Months Payslip
+                        </h6>
+                      </div>
+                      <div>
+                        <FileUploads
+                         label={
+                          <span style={{ display: "inline" }}>
+                            Payslip - Month 1
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileOne}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileOne: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipOne")
+                          }
+                          draftFile={formData?.payslipFileOne}
+                        />
+                         <FileUploads
+                         label={
+                          <span style={{ display: "inline" }}>
+                            Payslip - Month 2
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileTwo}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileTwo: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipTwo")
+                          }
+                          draftFile={formData?.payslipFileTwo}
+                        />
+                         <FileUploads
+                         label={
+                          <span style={{ display: "inline" }}>
+                            Payslip - Month 3
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileThree}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileThree: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipThree")
+                          }
+                          draftFile={formData?.payslipFileThree}
+                        />
+                        </div>
+                        <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>
+                        Candidate Declaration Form
+                        </h6>
+                      </div>
+                      <div>
+                        <FileUploads
+                         label={
+                          <span style={{ display: "inline" }}>
+                          Declaration Form
+                            <IoMdStar
+                              style={{ color: "red", fontSize: "7px" }}
+                            />
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.declarationFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              declarationFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "declarationFiles")
+                          }
+                          draftFile={formData?.declarationFiles}
+                        />
+                        </div>
+                    {/* <div
                       style={{
                         display: "flex",
                         marginTop: "50px",
@@ -1303,7 +1437,7 @@ const TopForms = () => {
                       >
                         Save as draft
                       </Button>
-                    </div>
+                    </div> */}
                   </Col>
                 </Row>
               </Form>
@@ -1356,7 +1490,7 @@ const TopForms = () => {
                 ) : (
                   <div className="form-modal-content">
                     <h3>Final Confirmation</h3>
-                    <p>Submitting this form is irreversible. Proceed?</p>
+                    <p>Submitting this form is irreversible. It will take some time to upload all your documents, so please wait.</p>
                   </div>
                 )}
                 <div className="form-modal-buttons">

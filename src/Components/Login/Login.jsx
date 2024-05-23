@@ -93,7 +93,7 @@ function Login() {
   return (
     <div className='header1'>
       <div className='Logo '>
-        <img className='logo-img' src={Logo} alt="Logo" />
+        <img className='logo-img' src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg" alt="Logo" />
       </div>
       <div className={`header2 ${hasErrors ? 'has-errors' : ''}`} style={{ height: containerHeight }}>
         <div className="subhead "><b>Log in to HR Portal</b></div>

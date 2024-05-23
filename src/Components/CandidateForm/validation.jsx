@@ -18,6 +18,7 @@ export const initialValues = {
   sneakpeek: "",
   photoFiles: null,
   aadharCardFiles: null,
+  panCardFiles: null,
   tenthMarksheetFiles: null,
   twelfthMarksheetFiles: null,
   pgDegreeCertificateFiles: null,
@@ -25,7 +26,10 @@ export const initialValues = {
   ugDegreeCertificateFiles: null,
   ugMarksheetFiles: null,
   relievingLettersFiles: null,
-  payslipFiles: null,
+  payslipFileOne: null,
+  payslipFileTwo: null,
+  payslipFileThree: null,
+  declarationFiles: null,
   contact: {
     countryCode: "",
     emergencyContactNumber: "",
@@ -86,6 +90,11 @@ export const validationSchema = Yup.object().shape({
     "Aadhar Card is required",
     (value) => value && value.size > 0
   ),
+  panCardFiles: Yup.mixed().test(
+    "fileRequired",
+    "PAN Card is required",
+    (value) => value && value.size > 0
+  ),
   tenthMarksheetFiles: Yup.mixed().test(
     "fileRequired",
     "10th marksheet is required",
@@ -94,6 +103,11 @@ export const validationSchema = Yup.object().shape({
   twelfthMarksheetFiles: Yup.mixed().test(
     "fileRequired",
     "12th marksheet is required",
+    (value) => value && value.size > 0
+  ),
+  declarationFiles: Yup.mixed().test(
+    "fileRequired",
+    "Declaration file is required",
     (value) => value && value.size > 0
   ),
   // relievingLettersFiles: Yup.mixed().test(
@@ -187,8 +201,12 @@ export const handleFieldChange = (formik, e) => {
 
     case "photoFiles":
     case "aadharCardFiles":
+    case "panCardFiles":
+    case "declarationFiles":    
     case "relievingLettersFiles":
-    case "payslipFiles":
+    case "payslipFileOne":
+    case "payslipFileTwo":
+    case "payslipFileThree": 
       // Check if files are selected
       if (files && files.length > 0) {
         formik.setFieldError(name, "");

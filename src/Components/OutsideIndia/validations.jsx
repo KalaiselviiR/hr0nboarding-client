@@ -28,7 +28,10 @@ export const initialValues = {
   ugDegreeCertificateFiles: null,
   ugMarksheetFiles: null,
   relievingLettersFiles: null,
-  payslipFiles: null,
+  payslipFileOne: null,
+  payslipFileTwo: null,
+  payslipFileThree: null,
+  declarationFiles: null,
 
   contact: {
     countryCode: "",
@@ -105,6 +108,11 @@ export const validationSchema = Yup.object().shape({
   twelfthMarksheetFiles: Yup.mixed().test(
     "fileRequired",
     "12th marksheet is required",
+    (value) => value && value.size > 0
+  ),
+  declarationFiles: Yup.mixed().test(
+    "fileRequired",
+    "Declaration file is required",
     (value) => value && value.size > 0
   ),
   // relievingLettersFiles: Yup.mixed().test(
@@ -201,7 +209,10 @@ export const handleFieldChange = (formik, e) => {
     case "photoFiles":
     case "aadharCardFiles":
     case "relievingLettersFiles":
-    case "payslipFiles":
+    case "payslipFileOne":
+    case "payslipFileTwo":
+    case "payslipFileThree":  
+    case "declarationFiles":      
       // Check if files are selected
       if (files && files.length > 0) {
         formik.setFieldError(name, "");

@@ -52,6 +52,7 @@ const handleCloseModal = () => setShowModal(false);
 
   const [photoFiles, setPhotoFiles] = useState([]);
   const [aadharCardFiles, setAadharCardFiles] = useState([]);
+  const [panCardFiles, setPanCardFiles] = useState([]);
   const [tenthMarksheetFiles, setTenthMarksheetFiles] = useState([]);
   const [twelfthMarksheetFiles, setTwelfthMarksheetFiles] = useState([]);
   const [pgDegreeCertificateFiles, setPgDegreeCertificateFiles] = useState([]);
@@ -60,12 +61,16 @@ const handleCloseModal = () => setShowModal(false);
   const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
 
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
-  const [payslipFiles, setPayslipFiles] = useState([]);
+  const [payslipFileOne, setPayslipFileOne] = useState([]);
+  const [payslipFileTwo, setPayslipFileTwo] = useState([]);
+  const [payslipFileThree, setPayslipFileThree] = useState([]);
+  const [declarationFiles, setDeclarationFiles] = useState([]);
 
   //create an object to store datas from input family details
   const [formData, setFormData] = useState({
     photoFiles: null,
     aadharCardFiles: null,
+    panCardFiles: null,
     tenthMarksheetFiles: null,
     twelfthMarksheetFiles: null,
     pgDegreeCertificateFiles: null,
@@ -73,7 +78,10 @@ const handleCloseModal = () => setShowModal(false);
     ugDegreeCertificateFiles: null,
     ugMarksheetFiles: null,
     relievingLettersFiles: null,
-    payslipFiles: null,
+    payslipFileOne: null,
+    payslipFileTwo: null,
+    payslipFileThree: null,
+    declarationFiles: null,
     // id: id,
   });
   const initModal = () => {
@@ -165,6 +173,9 @@ const handleCloseModal = () => setShowModal(false);
       case "aadharCard":
         setAadharCardFiles(file);
         break;
+      case "panCard":
+        setPanCardFiles(file);
+        break;
       case "tenthMarksheet":
         setTenthMarksheetFiles(file);
         break;
@@ -186,8 +197,17 @@ const handleCloseModal = () => setShowModal(false);
       case "relievingLetters":
         setRelievingLettersFiles(file);
         break;
-      case "payslip":
-        setPayslipFiles(file);
+      case "payslipOne":
+        setPayslipFileOne(file);
+        break;
+      case "payslipTwo":
+        setPayslipFileTwo(file);
+        break; 
+      case "payslipThree":
+        setPayslipFileThree(file);
+        break;   
+      case "declarationFiles": 
+        setDeclarationFiles(file);
         break;
       default:
         break;
@@ -198,6 +218,7 @@ const handleCloseModal = () => setShowModal(false);
     getoneCandidate();
     getRegion();
   }, []);
+console.log(formData)
 
   const handleSubmit = async () => {
     setLoading(true);
@@ -238,7 +259,7 @@ const handleCloseModal = () => setShowModal(false);
           <Navbar.Brand href="#home">
             <img
               alt="Techjays Logo"
-              src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+              src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg"
               height="40"
               className="d-inline-block align-top"
             />
@@ -524,6 +545,30 @@ const handleCloseModal = () => setShowModal(false);
                   }
                   onFileChange={(file) => FileChange(file, "aadharCard")}
                 />
+                    <CandidateFileView
+                  label={
+                    isOutsideIndia == true
+                      ? ""
+                      : "PAN Card"
+                  }
+                  instruction="Accepted format:pdf"
+                  controlId="panCard"
+                  presize={204800}
+                  acceptedFiles={formData?.panCardFiles}
+                  prefile={cData?.panCardFiles}
+                  prename={
+                    isOutsideIndia == true
+                      ? ""
+                      : "PAN Card.pdf"
+                  }
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      panCardFiles: files,
+                    }))
+                  }
+                  onFileChange={(file) => FileChange(file, "panCard")}
+                />
                 <div>
                   <div
                     style={{
@@ -579,17 +624,17 @@ const handleCloseModal = () => setShowModal(false);
                     <CandidateFileView
                       label="PG Degree Certificate"
                       instruction="Accepted format:pdf"
-                      controlId="PGDegreeCertificate"
                       presize={204800}
                       prefile={
                         cData?.educationCertificateFiles?.pgDegreeCertificate
                       }
                       prename={"PG Degree.pdf"}
-                      acceptedFiles={formData.pgDegreeCertificateFiles}
+                      controlId="PGDegreeCertificate"
+                      acceptedFiles={formData?.pgDegreeCertificateFiles}
                       setAcceptedFiles={(files) =>
                         setFormData((prevData) => ({
                           ...prevData,
-                          PGDegreeCertificate: files,
+                          pgDegreeCertificateFiles: files,
                         }))
                       }
                       onFileChange={(file) =>
@@ -650,6 +695,70 @@ const handleCloseModal = () => setShowModal(false);
                     />
                   </div>
                 </div>
+                <div>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      cursor: "pointer",
+                    }}
+                  >
+                    <h6 style={{ fontWeight: "500" }}>
+                    3 Months payslip
+                    </h6>
+                  </div>
+                  <div>
+                  <CandidateFileView
+                  label="Payslip One"
+                  presize={204800}
+                  instruction="Accepted format:pdf"
+                  prefile={cData?.payslipFiles?.payslipOne}
+                  prename={"PayslipOne.pdf"}
+                  controlId="payslip"
+                  acceptedFiles={formData.payslipFileOne}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payslipFileOne: files,
+                    }))
+                  }
+                  onFileChange={(file) => FileChange(file, "payslipOne")}
+                />
+                       <CandidateFileView
+                  label="Payslip Two"
+                  presize={204800}
+                  instruction="Accepted format:pdf"
+                  prefile={cData?.payslipFiles?.payslipTwo}
+                  prename={"PayslipTwo.pdf"}
+                  controlId="payslip"
+                  acceptedFiles={formData.payslipFileTwo}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payslipFileTwo: files,
+                    }))
+                  }
+                  onFileChange={(file) => FileChange(file, "payslipTwo")}
+                />
+                <CandidateFileView
+                  label="Payslip Three"
+                  presize={204800}
+                  instruction="Accepted format:pdf"
+                  prefile={cData?.payslipFiles?.payslipThree}
+                  prename={"PayslipThree.pdf"}
+                  controlId="payslip"
+                  acceptedFiles={formData.payslipFileThree}
+                  setAcceptedFiles={(files) =>
+                    setFormData((prevData) => ({
+                      ...prevData,
+                      payslipFileThree: files,
+                    }))
+                  }
+                  onFileChange={(file) => FileChange(file, "payslipThree")}
+                />
+                  </div>
+                </div>
                 <CandidateFileView
                   label="Relieving Letters from all your previous organizations"
                   instruction="Accepted format:pdf"
@@ -666,23 +775,22 @@ const handleCloseModal = () => setShowModal(false);
                   }
                   onFileChange={(file) => FileChange(file, "relievingLetters")}
                 />
-                <CandidateFileView
-                  label="3 Months Payslip "
-                  presize={204800}
+                 <CandidateFileView
+                  label="Declaration"
                   instruction="Accepted format:pdf"
-                  prefile={cData?.payslipFiles}
-                  prename={"Payslips.pdf"}
-                  controlId="payslip"
-                  acceptedFiles={formData.payslipFiles}
+                  presize={204800}
+                  controlId="declarationFiles"
+                  prefile={cData?.declarationFiles}
+                  prename={"Declaration.pdf"}
+                  acceptedFiles={formData?.declarationFiles}
                   setAcceptedFiles={(files) =>
                     setFormData((prevData) => ({
                       ...prevData,
-                      payslipFiles: files,
+                      declarationFiles: files,
                     }))
                   }
-                  onFileChange={(file) => FileChange(file, "payslip")}
+                  onFileChange={(file) => FileChange(file, "declarationFiles")}
                 />
-
                 <Button
                   style={{
                     fontSize: "15px",
@@ -710,7 +818,7 @@ const handleCloseModal = () => setShowModal(false);
                 ) : (
                   <div className="form-modal-content">
                     <h3>Final Confirmation</h3>
-                    <p>Submitting this form is irreversible. Proceed?</p>
+                    <p>Submitting this form is irreversible. It will take some time to upload all your documents, so please wait.</p>
                   </div>
                 )}
                 <div className="form-modal-buttons">

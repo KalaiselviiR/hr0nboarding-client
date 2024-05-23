@@ -34,6 +34,7 @@ const TopForm = () => {
   //State management for document upload
   const [photoFiles, setPhotoFiles] = useState([]);
   const [aadharCardFiles, setAadharCardFiles] = useState([]);
+  const [panCardFiles, setPanCardFiles] = useState([]);
   const [tenthMarksheetFiles, setTenthMarksheetFiles] = useState([]);
   const [twelfthMarksheetFiles, setTwelfthMarksheetFiles] = useState([]);
   const [pgDegreeCertificateFiles, setPgDegreeCertificateFiles] = useState([]);
@@ -41,7 +42,10 @@ const TopForm = () => {
   const [ugDegreeCertificateFiles, setUgDegreeCertificateFiles] = useState([]);
   const [ugMarksheetFiles, setUgMarksheetFiles] = useState([]);
   const [relievingLettersFiles, setRelievingLettersFiles] = useState([]);
-  const [payslipFiles, setPayslipFiles] = useState([]);
+  const [payslipFileOne, setPayslipFileOne] = useState([]);
+  const [payslipFileTwo, setPayslipFileTwo] = useState([]);
+  const [payslipFileThree, setPayslipFileThree] = useState([]);
+  const [declarationFiles, setDeclarationFiles] = useState([]);
 
   const [id, setId] = useState(null);
   const [isOutsideIndia, setIsOutsideIndia] = useState();
@@ -101,6 +105,7 @@ const TopForm = () => {
     sneakpeek: "",
     photoFiles: null,
     aadharCardFiles: null,
+    panCardFiles: null,
     tenthMarksheetFiles: null,
     twelfthMarksheetFiles: null,
     pgDegreeCertificateFiles: null,
@@ -108,7 +113,10 @@ const TopForm = () => {
     ugDegreeCertificateFiles: null,
     ugMarksheetFiles: null,
     relievingLettersFiles: null,
-    payslipFiles: null,
+    payslipFileOne: null,
+    payslipFileTwo: null,
+    payslipFileThree: null,
+    declarationFiles: null,
     id: id,
     members: [],
     contact: {},
@@ -154,6 +162,7 @@ const TopForm = () => {
     };
     formik.setValues(combinedValues);
     setForm2Data(data);
+     // sessionStorage.setItem('form2Data', JSON.stringify(data));
   };
 
   // Function to update candidate data from Form2
@@ -165,12 +174,26 @@ const TopForm = () => {
     }));
   };
 
+  //Retrive form2 data from localStorage
+    // useEffect(() => {
+  //   // Retrieve form2Data from session storage
+  //   const storedForm2Data = sessionStorage.getItem('form2Data');
+  //   if (storedForm2Data) {
+  //     // Parse the stored JSON string back to an object
+  //     const parsedForm2Data = JSON.parse(storedForm2Data);
+  //     // Update the state and formik values with the retrieved data
+  //     setForm2Data(parsedForm2Data);
+  //     formik.setValues(parsedForm2Data);
+  //   }
+  // }, []);
+
   const handleSaveDraft = async () => {
     const db = await openDB("FilesDB", 1);
 
     const newTaskObject = {
       photoFiles: formData?.photoFiles,
       aadharCardFiles: formData?.aadharCardFiles,
+      panCardFiles: formData?.panCardFiles,
       tenthMarksheetFiles: formData?.tenthMarksheetFiles,
       twelfthMarksheetFiles: formData?.twelfthMarksheetFiles,
       pgDegreeCertificateFiles: formData?.pgDegreeCertificateFiles,
@@ -178,7 +201,10 @@ const TopForm = () => {
       ugDegreeCertificateFiles: formData?.ugDegreeCertificateFiles,
       ugMarksheetFiles: formData?.ugMarksheetFiles,
       relievingLettersFiles: formData?.relievingLettersFiles,
-      payslipFiles: formData?.payslipFiles,
+      payslipFileOne: formData?.payslipFileOne,
+      payslipFileTwo: formData?.payslipFileTwo,
+      payslipFileThree: formData?.payslipFileThree,
+      declarationFiles: formData?.declarationFiles
     };
 
     const addedTask = await db.add("files", newTaskObject);
@@ -323,6 +349,7 @@ const TopForm = () => {
               ...prev,
               photoFiles: null,
               aadharCardFiles: null,
+              panCardFiles: null,
               tenthMarksheetFiles: null,
               twelfthMarksheetFiles: null,
               pgDegreeCertificateFiles: null,
@@ -330,7 +357,10 @@ const TopForm = () => {
               ugDegreeCertificateFiles: null,
               ugMarksheetFiles: null,
               relievingLettersFiles: null,
-              payslipFiles: null,
+              payslipFileOne: null,
+              payslipFileTwo: null,
+              payslipFileThree: null,
+              declarationFiles: null
             }));
           } catch (error) {
             console.error(`Error deleting database '${dbName}':`, error);
@@ -358,6 +388,10 @@ const TopForm = () => {
         setAadharCardFiles(file);
         formik.setFieldValue("aadharCardFiles", file);
         break;
+      case "panCard":
+        setPanCardFiles(file);
+         formik.setFieldValue("panCardFiles", file);
+        break;  
       case "tenthMarksheet":
         setTenthMarksheetFiles(file);
         formik.setFieldValue("tenthMarksheetFiles", file);
@@ -386,10 +420,22 @@ const TopForm = () => {
         setRelievingLettersFiles(file);
         formik.setFieldValue("relievingLettersFiles", file);
         break;
-      case "payslip":
-        setPayslipFiles(file);
-        formik.setFieldValue("payslipFiles", file);
+      case "payslipOne":
+        setPayslipFileOne(file);
+        formik.setFieldValue("payslipFileOne", file);
         break;
+      case "payslipTwo":
+        setPayslipFileTwo(file);
+        formik.setFieldValue("payslipFileTwo", file);
+        break;
+      case "payslipThree":
+        setPayslipFileThree(file);
+        formik.setFieldValue("payslipFileThree", file);
+        break;  
+      case "declarationFiles":
+        setDeclarationFiles(file);
+        formik.setFieldValue("declarationFiles", file);
+        break;  
       default:
         break;
     }
@@ -434,6 +480,10 @@ const TopForm = () => {
           storedFiles[storedFiles.length - 1]?.aadharCardFiles
         );
         formik.setFieldValue(
+          "panCardFiles",
+          storedFiles[storedFiles.length - 1]?.panCardFiles
+        );
+        formik.setFieldValue(
           "tenthMarksheetFiles",
           storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles
         );
@@ -462,13 +512,26 @@ const TopForm = () => {
           storedFiles[storedFiles.length - 1]?.relievingLettersFiles
         );
         formik.setFieldValue(
-          "payslipFiles",
-          storedFiles[storedFiles.length - 1]?.payslipFiles
+          "payslipFileOne",
+          storedFiles[storedFiles.length - 1]?.payslipFileOne
+        );
+        formik.setFieldValue(
+          "payslipFileTwo",
+          storedFiles[storedFiles.length - 1]?.payslipFileTwo
+        );
+        formik.setFieldValue(
+          "payslipFileThree",
+          storedFiles[storedFiles.length - 1]?.payslipFileThree
+        );
+        formik.setFieldValue(
+          "declarationFiles",
+          storedFiles[storedFiles.length - 1]?.declarationFiles
         );
         setFormData((prev) => ({
           ...prev,
           photoFiles: storedFiles[storedFiles.length - 1]?.photoFiles,
           aadharCardFiles: storedFiles[storedFiles.length - 1]?.aadharCardFiles,
+          panCardFiles: storedFiles[storedFiles.length - 1]?.panCardFiles,
           tenthMarksheetFiles:
             storedFiles[storedFiles.length - 1]?.tenthMarksheetFiles,
           twelfthMarksheetFiles:
@@ -483,7 +546,10 @@ const TopForm = () => {
             storedFiles[storedFiles.length - 1]?.ugMarksheetFiles,
           relievingLettersFiles:
             storedFiles[storedFiles.length - 1]?.relievingLettersFiles,
-          payslipFiles: storedFiles[storedFiles.length - 1]?.payslipFiles,
+          payslipFileOne: storedFiles[storedFiles.length - 1]?.payslipFileOne,
+          payslipFileTwo: storedFiles[storedFiles.length - 1]?.payslipFileTwo,
+          payslipFileThree: storedFiles[storedFiles.length - 1]?.payslipFileThree,
+          declarationFiles:storedFiles[storedFiles.length - 1]?.declarationFiles,
         }));
       }
     };
@@ -492,8 +558,14 @@ const TopForm = () => {
       const storedData = sessionStorage.getItem("draftFormData");
       if (storedData) {
         const formDataFromStorage = JSON.parse(storedData);
-        // Set the formData in your state
-        setFormData(formDataFromStorage);
+        formik.setValues({
+          ...formik.values,
+          ...formDataFromStorage
+        });
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          ...formDataFromStorage
+        }));
       }
     };
 
@@ -543,7 +615,7 @@ const TopForm = () => {
               <Navbar.Brand href="#home">
                 <img
                   alt="Techjays Logo"
-                  src="https://www.thenewstuff.in/sites/default/files/inline-images/download.png"
+                  src="https://assets-global.website-files.com/65f2a5372687678051645610/65fbd8daab4f9c13e1513bb7_Techjays%20logo%20full-black.svg"
                   height="40"
                   className="d-inline-block align-top"
                 />
@@ -1028,6 +1100,24 @@ const TopForm = () => {
                       onFileChange={(file) => FileChange(file, "aadharCard")}
                       draftFile={formData?.aadharCardFiles}
                     />
+                          <FileUpload
+                      label={
+                        <span style={{ display: "inline" }}>
+                          PAN Card
+                          <IoMdStar style={{ color: "red", fontSize: "7px" }} />
+                        </span>
+                      }
+                      instruction="Accepted format:pdf"
+                      acceptedFiles={formData.panCardFiles}
+                      setAcceptedFiles={(files) =>
+                        setFormData((prevData) => ({
+                          ...prevData,
+                          panCardFiles: files,
+                        }))
+                      }
+                      onFileChange={(file) => FileChange(file, "panCard")}
+                      draftFile={formData?.panCardFiles}
+                    />
                     <div>
                       <div
                         style={{
@@ -1190,7 +1280,114 @@ const TopForm = () => {
                       }
                       draftFile={formData?.relievingLettersFiles}
                     />
-                    <FileUpload
+                    <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>
+                        3 Months Payslip
+                        </h6>
+                      </div>
+                      <div>
+                        <FileUpload
+                         label={
+                          <span style={{ display: "inline" }}>
+                            Payslip - Month 1
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileOne}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileOne: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipOne")
+                          }
+                          draftFile={formData?.payslipFileOne}
+                        />
+                         <FileUpload
+                         label={
+                          <span style={{ display: "inline" }}>
+                          Payslip - Month 2
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileTwo}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileTwo: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipTwo")
+                          }
+                          draftFile={formData?.payslipFileTwo}
+                        />
+                         <FileUpload
+                         label={
+                          <span style={{ display: "inline" }}>
+                           Payslip - Month 3
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.payslipFileThree}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              payslipFileThree: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "payslipThree")
+                          }
+                          draftFile={formData?.payslipFileThree}
+                        />
+                        </div>
+                        <div
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                          cursor: "pointer",
+                        }}
+                      >
+                        <h6 style={{ fontWeight: "500" }}>
+                        Candidate Declaration Form
+                        </h6>
+                      </div>
+                      <div>
+                        <FileUpload
+                         label={
+                          <span style={{ display: "inline" }}>
+                            Declaration Form
+                            <IoMdStar
+                              style={{ color: "red", fontSize: "7px" }}
+                            />
+                          </span>
+                        }
+                          instruction="Accepted format:pdf"
+                          acceptedFiles={formData.declarationFiles}
+                          setAcceptedFiles={(files) =>
+                            setFormData((prevData) => ({
+                              ...prevData,
+                              declarationFiles: files,
+                            }))
+                          }
+                          onFileChange={(file) =>
+                            FileChange(file, "declarationFiles")
+                          }
+                          draftFile={formData?.declarationFiles}
+                        />
+                        </div>
+                    {/* <FileUpload
                       label={
                         <span style={{ display: "inline" }}>
                           3 Months Payslip
@@ -1207,8 +1404,8 @@ const TopForm = () => {
                       }
                       onFileChange={(file) => FileChange(file, "payslip")}
                       draftFile={formData?.payslipFiles}
-                    />
-                    <div
+                    /> */}
+                    {/* <div
                       style={{
                         display: "flex",
                         marginTop: "50px",
@@ -1229,7 +1426,7 @@ const TopForm = () => {
                       >
                         Save as draft
                       </Button>
-                    </div>
+                    </div> */}
                   </Col>
                 </Row>
               </Form>
@@ -1282,7 +1479,7 @@ const TopForm = () => {
                 ) : (
                   <div className="form-modal-content">
                     <h3>Final Confirmation</h3>
-                    <p>Submitting this form is irreversible. Proceed?</p>
+                    <p>Submitting this form is irreversible. It will take some time to upload all your documents, so please wait.</p>
                   </div>
                 )}
                 <div className="form-modal-buttons">

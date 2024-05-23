@@ -9,7 +9,8 @@ const PGMARK_SHEET = "PG Marksheet";
 const RELIEVING_LETTERS = "Relieving Letters from all your previous organization";
 const PAYSLIP = "3 Month PaySlip";
 const CLIENT_SERVER_URL = "http://localhost:5173";
-const GOVERNMENT_ISSUED_ID = "Government-issued ID"
+const GOVERNMENT_ISSUED_ID = "Government-issued ID";
+const DECLARATION_FORM ="Declaration"
 
 export {
   PHOTO,
@@ -23,5 +24,6 @@ export {
   RELIEVING_LETTERS,
   PAYSLIP,
   CLIENT_SERVER_URL,
-  GOVERNMENT_ISSUED_ID
+  GOVERNMENT_ISSUED_ID,
+  DECLARATION_FORM
 };
