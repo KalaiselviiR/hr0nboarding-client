@@ -37,7 +37,7 @@ function FileUpload({
       if (selectedFile.size > 204800) {
         setError("File size exceeds the limit (200kb)");
         return;
-      }
+    }
       // Extract text from the label prop
       let labelText = label.props.children;
 
