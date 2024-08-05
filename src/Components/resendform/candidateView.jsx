@@ -47,7 +47,10 @@ const [showModal, setShowModal] = useState(false);
 const [loading, setLoading] = useState(false);
 
 const handleOpenModal = () => setShowModal(true);
-const handleCloseModal = () => setShowModal(false);
+const handleCloseModal = () => {
+  setLoading(false)
+  setShowModal(false);
+}
   const navigate = useNavigate();
 
   const [photoFiles, setPhotoFiles] = useState([]);
@@ -239,6 +242,7 @@ console.log(formData)
     } catch (error) {
       toast.error("something went wrong");
       console.log(`Error: ${error?.message}`);
+      setLoading(false)
     }
   };
 
