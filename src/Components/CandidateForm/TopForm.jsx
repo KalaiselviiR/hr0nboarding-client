@@ -57,7 +57,10 @@ const TopForm = () => {
   const [loading, setLoading] = useState(false);
 
   const handleOpenModal = () => setShowModal(true);
-  const handleCloseModal = () => setShowModal(false);
+  const handleCloseModal = () => {
+    setLoading(false)
+    setShowModal(false);
+  }
 
   //navigation
   const navigate = useNavigate()
@@ -369,9 +372,11 @@ const TopForm = () => {
           // Optionally: Reset form or navigate to a success page
         } else {
           console.error("Failed to submit form data");
+          setLoading(false)
         }
       } catch (error) {
         console.error("Error while submitting form data:", error);
+        setLoading(false)
       }
 
       // Perform any additional actions or API calls if needed
