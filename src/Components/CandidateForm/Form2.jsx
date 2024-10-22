@@ -583,7 +583,7 @@ function Form2({
                       <Form.Control
                         className="input-field"
                         type="text"
-                        placeholder="XXXXXXXXXX"
+                        placeholder="XXXXXXXXXXXXX"
                         name="epfoUan"
                         onChange={handleChange}
                         onBlur={formik.handleBlur}
