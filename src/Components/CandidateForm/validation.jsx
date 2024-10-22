@@ -122,7 +122,7 @@ export const validationSchema = Yup.object().shape({
   // ),
 
   // bottomForm-2
-  epfoUan: Yup.string().matches(/^\d{10}$/, "It contains 10 digits"),
+  epfoUan: Yup.string().matches(/^\d{13}$/, "It contains 13 digits"),
   pfNo: Yup.string().matches(/^\d{10}$/, "It contains 10 digits"),
   adharCard: Yup.string()
     .matches(/^\d{12}$/, "Invalid AdharCard Number(It contains 12 digit)")
@@ -234,7 +234,7 @@ export const handleFieldChange = (formik, e) => {
 
     case "epfoUan":
       // epfoUan validation logic(it contains 12 digit number)
-      if (!/^\d{10}$/.test(value)) {
+      if (!/^\d{13}$/.test(value)) {
         formik.setFieldError(name, "Invalid EpfoUan");
       } else {
         formik.setFieldError(name, "");
